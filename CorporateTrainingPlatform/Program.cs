@@ -1,20 +1,37 @@
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
+
 namespace CorporateTrainingPlatform;
 
-public class Program
+public static class Program
 {
-    public static void Main(string[] args)
+    public async static Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Add services to the container.
         builder.Services.AddAuthorization();
-
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen((SwaggerGenOptions swagger) =>
+        {
+            swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
+            {
+                Version = "v1",
+                Title = "CorporateTrainingPlatform"
+            });
+        });
 
         var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-
+        app.UseHttpsRedirection();
         app.UseAuthorization();
+
+        app.UseSwagger();
+        app.UseSwaggerUI((SwaggerUIOptions swagger) =>
+        {
+            swagger.SwaggerEndpoint(
+                url: "/swagger/v1/swagger.json",
+                name: "CorporateTrainingPlatform");
+        });
 
         var summaries = new[]
         {
@@ -34,6 +51,6 @@ public class Program
             return forecast;
         });
 
-        app.Run();
+        await app.RunAsync();
     }
 }
