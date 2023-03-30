@@ -1,1 +1,1 @@
-# CorporateTrainingPlatform
+# GarageGenius
