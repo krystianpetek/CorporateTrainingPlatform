@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CorporateTrainingPlatform.Controllers;
+namespace GarageGenius.Controllers;
 
 [ApiController]
 [Route("api/weather")]
@@ -18,7 +18,7 @@ public class WeatherController
     [HttpGet]
     public IEnumerable<WeatherForecast> GetWeathers()
     {
-        var forecast = Enumerable.Range(1, 5).Select((int index) =>
+        var forecast = Enumerable.Range(1, 5).Select((index) =>
         new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),

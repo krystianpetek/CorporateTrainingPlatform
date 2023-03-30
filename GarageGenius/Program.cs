@@ -3,7 +3,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace CorporateTrainingPlatform;
+namespace GarageGenius;
 
 public static class Program
 {
@@ -12,7 +12,7 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen((SwaggerGenOptions swagger) =>
+        builder.Services.AddSwaggerGen((swagger) =>
         {
             swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
             {
@@ -27,7 +27,7 @@ public static class Program
         app.UseAuthorization();
 
         app.UseSwagger();
-        app.UseSwaggerUI((SwaggerUIOptions swagger) =>
+        app.UseSwaggerUI((swagger) =>
         {
             swagger.SwaggerEndpoint(
                 url: "/swagger/v1/swagger.json",

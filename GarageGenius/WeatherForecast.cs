@@ -1,4 +1,4 @@
-namespace CorporateTrainingPlatform;
+namespace GarageGenius;
 
 public class WeatherForecast
 {
