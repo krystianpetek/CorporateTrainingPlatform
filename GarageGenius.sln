@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius", "GarageGenius\GarageGenius.csproj", "{CCB49FB0-8AE3-46A7-A327-CE75157989DE}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "GarageGenius.WebUI", "GarageGenius.WebUI\GarageGenius.WebUI.esproj", "{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{CCB49FB0-8AE3-46A7-A327-CE75157989DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCB49FB0-8AE3-46A7-A327-CE75157989DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCB49FB0-8AE3-46A7-A327-CE75157989DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
