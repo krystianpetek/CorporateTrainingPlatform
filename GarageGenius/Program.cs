@@ -1,7 +1,4 @@
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace GarageGenius;
 
@@ -17,7 +14,7 @@ public static class Program
             swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
             {
                 Version = "v1",
-                Title = "CorporateTrainingPlatform"
+                Title = "GeniusGarage"
             });
         });
         builder.Services.AddControllers();
@@ -31,7 +28,7 @@ public static class Program
         {
             swagger.SwaggerEndpoint(
                 url: "/swagger/v1/swagger.json",
-                name: "CorporateTrainingPlatform");
+                name: "GeniusGarage");
         });
 
         app.MapControllers();
