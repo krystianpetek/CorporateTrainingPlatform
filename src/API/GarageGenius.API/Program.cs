@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace GarageGenius;
+namespace GarageGenius.API;
 
 public static class Program
 {

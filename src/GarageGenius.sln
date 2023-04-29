@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.API", "API\GarageGenius.API\GarageGenius.API.csproj", "{CCB49FB0-8AE3-46A7-A327-CE75157989DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Api", "Api\GarageGenius.Api\GarageGenius.Api.csproj", "{CCB49FB0-8AE3-46A7-A327-CE75157989DE}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "GarageGenius.WebUI", "WebUI\GarageGenius.WebUI\GarageGenius.WebUI.esproj", "{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{B22B888F-CB88-4F46-99EB-61E1715478A4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{A67D1DBA-8494-4DFE-BF48-FD9526DE1B92}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{A67D1DBA-8494-4DFE-BF48-FD9526DE1B92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0B497FBF-235F-43E5-81A8-F1100AB0AAA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{516CBDC4-9D3D-484D-B502-DFDD8D6E262A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Users.Core", "Modules\Users\GarageGenius.Modules.Users.Core\GarageGenius.Modules.Users.Core.csproj", "{C634E0E7-FD8B-4438-B523-9EA2D9352960}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Users.Api", "Modules\Users\GarageGenius.Modules.Users.Api\GarageGenius.Modules.Users.Api.csproj", "{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{0F3A7E4B-4DAF-4201-9721-8651EA358315}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +37,14 @@ Global
 		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C634E0E7-FD8B-4438-B523-9EA2D9352960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C634E0E7-FD8B-4438-B523-9EA2D9352960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C634E0E7-FD8B-4438-B523-9EA2D9352960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C634E0E7-FD8B-4438-B523-9EA2D9352960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +52,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CCB49FB0-8AE3-46A7-A327-CE75157989DE} = {A67D1DBA-8494-4DFE-BF48-FD9526DE1B92}
 		{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6} = {B22B888F-CB88-4F46-99EB-61E1715478A4}
+		{C634E0E7-FD8B-4438-B523-9EA2D9352960} = {0F3A7E4B-4DAF-4201-9721-8651EA358315}
+		{CD38A3DC-AE1D-440F-A1DF-3F56F2C112B2} = {0F3A7E4B-4DAF-4201-9721-8651EA358315}
+		{0F3A7E4B-4DAF-4201-9721-8651EA358315} = {516CBDC4-9D3D-484D-B502-DFDD8D6E262A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {189A71AE-347A-4505-BF66-B684A21B9A4B}
