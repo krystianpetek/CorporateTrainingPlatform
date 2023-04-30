@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Users.Core\GarageGenius.Modules.Users.Core.csproj" />
+  </ItemGroup>
+
 </Project>

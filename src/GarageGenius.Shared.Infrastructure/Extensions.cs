@@ -7,7 +7,7 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure;
 public static class Extensions
 {
-    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IReadOnlyCollection<Assembly> assemblies)
+    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IList<Assembly> assemblies)
     {
         services.AddEventHandlers(assemblies);
         services.AddCommandHandlers(assemblies);
