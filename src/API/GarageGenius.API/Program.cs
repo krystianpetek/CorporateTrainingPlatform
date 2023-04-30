@@ -1,5 +1,7 @@
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.DependencyInjection;
+using GarageGenius.Shared.Infrastructure;
+using System.Reflection;
+using System.Collections.Immutable;
 
 namespace GarageGenius.API;
 
@@ -19,6 +21,9 @@ public static class Program
             });
         });
         builder.Services.AddControllers();
+
+        IReadOnlyCollection<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies().ToImmutableList();
+        builder.Services.AddSharedInfrastructure(assemblies);
         
         WebApplication? app = builder.Build();
         app.UseHttpsRedirection();
