@@ -11,7 +11,7 @@ internal class EventDispatcher : IEventDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public async Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent
+    public async Task PublishAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent
     {
         using IServiceScope? serviceScope = _serviceProvider.CreateScope();
         IEnumerable<IEventHandler<IEvent>> eventHandlers = serviceScope.ServiceProvider.GetServices<IEventHandler<IEvent>>();
