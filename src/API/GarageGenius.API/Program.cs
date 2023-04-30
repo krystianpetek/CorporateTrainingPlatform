@@ -2,6 +2,7 @@ using Microsoft.OpenApi.Models;
 using GarageGenius.Shared.Infrastructure;
 using System.Reflection;
 using System.Collections.Immutable;
+using GarageGenius.Shared.Abstractions.Modules;
 
 namespace GarageGenius.API;
 
@@ -22,9 +23,16 @@ public static class Program
         });
         builder.Services.AddControllers();
 
-        IReadOnlyCollection<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies().ToImmutableList();
-        builder.Services.AddSharedInfrastructure(assemblies);
+        IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
+        IEnumerable<IModule> modules = assemblies.LoadModules();
         
+        builder.Services.AddSharedInfrastructure(assemblies);
+        foreach(IModule module in modules)
+        {
+            module.Register(builder.Services);
+        }
+
+
         WebApplication? app = builder.Build();
         app.UseHttpsRedirection();
         app.UseAuthorization();
@@ -40,5 +48,27 @@ public static class Program
         app.MapControllers();
 
         await app.RunAsync();
+    }
+
+    public static IList<IModule> LoadModules(this IEnumerable<Assembly> assemblies)
+        => assemblies
+            .SelectMany(x => x.GetTypes())
+            .Where(x => typeof(IModule).IsAssignableFrom(x) && !x.IsInterface)
+            .OrderBy(x => x.Name)
+            .Select(Activator.CreateInstance)
+            .Cast<IModule>()
+            .ToList();
+
+    public static IList<Assembly> LoadAssemblies(IConfiguration configuration, string modulePart)
+    {
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+        var locations = assemblies.Where(x => !x.IsDynamic).Select(x => x.Location).ToArray();
+        var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
+            .Where(x => !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
+            .ToList();
+
+        files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
+
+        return assemblies;
     }
 }
