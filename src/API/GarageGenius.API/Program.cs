@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.API;
 
@@ -6,7 +7,7 @@ public static class Program
 {
     public async static Task Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen((swagger) =>
@@ -18,8 +19,8 @@ public static class Program
             });
         });
         builder.Services.AddControllers();
-
-        var app = builder.Build();
+        
+        WebApplication? app = builder.Build();
         app.UseHttpsRedirection();
         app.UseAuthorization();
 
