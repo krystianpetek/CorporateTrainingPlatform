@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Users.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{0F3A7E4B-4DAF-4201-9721-8651EA358315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Shared.Abstractions", "GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj", "{1993174B-6F87-4410-A456-80938AF7249C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Shared.Abstractions", "Shared\GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj", "{1993174B-6F87-4410-A456-80938AF7249C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Shared.Infrastructure", "GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj", "{9FE93002-3883-4EFF-899D-1BE490AC9F10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Shared.Infrastructure", "Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj", "{9FE93002-3883-4EFF-899D-1BE490AC9F10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
