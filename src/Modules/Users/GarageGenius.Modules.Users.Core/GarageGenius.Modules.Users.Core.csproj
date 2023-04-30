@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistance\DbContexts\" />
+    <Folder Include="Persistance\Migrations\" />
+    <Folder Include="Persistance\Configurations\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
