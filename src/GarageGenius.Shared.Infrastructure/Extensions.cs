@@ -1,4 +1,5 @@
-﻿using GarageGenius.Shared.Infrastructure.Events;
+﻿using GarageGenius.Shared.Infrastructure.Commands;
+using GarageGenius.Shared.Infrastructure.Events;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -7,7 +8,8 @@ public static class Extensions
 {
     public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        services.AddEvents(assemblies);
+        services.AddEventHandlers(assemblies);
+        services.AddCommandHandlers(assemblies);
         return services;
     }
 }
