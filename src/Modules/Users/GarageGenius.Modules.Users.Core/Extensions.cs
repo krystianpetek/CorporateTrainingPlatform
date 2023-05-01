@@ -1,7 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
+﻿using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 using GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
-using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
+using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GarageGenius.Modules.Users.Api")]
 namespace GarageGenius.Modules.Users.Core;

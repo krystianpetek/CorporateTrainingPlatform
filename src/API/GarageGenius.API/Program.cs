@@ -1,8 +1,8 @@
-using Microsoft.OpenApi.Models;
-using GarageGenius.Shared.Infrastructure;
-using System.Reflection;
-using System.Collections.Immutable;
 using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Infrastructure;
+using Microsoft.OpenApi.Models;
+using System.Collections.Immutable;
+using System.Reflection;
 
 namespace GarageGenius.API;
 
@@ -15,6 +15,8 @@ public static class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen((swagger) =>
         {
+            swagger.EnableAnnotations();
+            swagger.CustomSchemaIds(x => x.FullName);
             swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
             {
                 Version = "v1",
@@ -25,9 +27,9 @@ public static class Program
 
         IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
         IEnumerable<IModule> modules = assemblies.LoadModules();
-        
+
         builder.Services.AddSharedInfrastructure(assemblies);
-        foreach(IModule module in modules)
+        foreach (IModule module in modules)
         {
             module.Register(builder.Services);
         }

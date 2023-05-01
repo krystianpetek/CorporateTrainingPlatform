@@ -15,7 +15,7 @@ internal class EventDispatcher : IEventDispatcher
     {
         using IServiceScope? serviceScope = _serviceProvider.CreateScope();
         IEnumerable<IEventHandler<IEvent>> eventHandlers = serviceScope.ServiceProvider.GetServices<IEventHandler<IEvent>>();
-        
+
         IEnumerable<Task> tasks = eventHandlers.Select(eventToHandle => eventToHandle.HandleAsync(@event, cancellationToken));
         await Task.WhenAll(tasks);
     }

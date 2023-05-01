@@ -4,23 +4,23 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public forecasts?: WeatherForecast[];
+  public work?: string;
 
   constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+    http.get<Response>('api/Account/health-check').subscribe(
+      (result: Response) => {
+        this.work = result.message;
+      },
+      (error) => console.error(error)
+    );
   }
 
   title = 'GarageGenius.WebUI';
 }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+type Response = {
+  message: string;
+};

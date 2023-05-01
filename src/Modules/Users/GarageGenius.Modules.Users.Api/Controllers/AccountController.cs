@@ -20,4 +20,11 @@ public class AccountController : BaseController
         await _dispatcher.SendAsync(signUpCommand);
         return NoContent();
     }
+
+    [HttpGet("health-check")]
+    public async Task<ActionResult<string>> HealthCheck()
+    {
+        var json = new { message = "Users module - I'm alive." };
+        return Ok(json);
+    }
 }

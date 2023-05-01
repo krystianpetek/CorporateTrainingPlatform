@@ -1,6 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Events;
-using GarageGenius.Shared.Abstractions.Queries;
-using GarageGenius.Shared.Infrastructure.Events;
+﻿using GarageGenius.Shared.Abstractions.Queries;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 

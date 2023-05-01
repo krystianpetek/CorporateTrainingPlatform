@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Shared.Abstractions.Exceptions;
-using System.Net;
 
 namespace GarageGenius.Modules.Users.Core.Exceptions;
 internal class InvalidEmailException : GarageGeniusException

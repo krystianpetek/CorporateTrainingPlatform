@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using GarageGenius.Shared.Abstractions.Commands;
+﻿using GarageGenius.Shared.Abstractions.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.Commands;
 internal class CommandDispatcher : ICommandDispatcher

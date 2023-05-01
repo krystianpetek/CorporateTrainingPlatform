@@ -6,12 +6,12 @@ internal sealed record Email : IEquatable<Email>
     public string Value { get; }
     public Email(string value)
     {
-        if(string.IsNullOrWhiteSpace(value))
+        if (string.IsNullOrWhiteSpace(value))
         {
             throw new InvalidEmailException(value);
         }
 
-        if(value.Length > 100)
+        if (value.Length > 100)
         {
             throw new InvalidEmailException(value);
         }
