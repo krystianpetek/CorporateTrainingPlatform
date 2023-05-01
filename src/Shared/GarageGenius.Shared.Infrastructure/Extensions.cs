@@ -12,6 +12,7 @@ public static class Extensions
         services.AddEventHandlers(assemblies);
         services.AddCommandHandlers(assemblies);
         services.AddQueryHandlers(assemblies);
+        services.AddHostedService<DbContextWorker>();
         return services;
     }
 }
