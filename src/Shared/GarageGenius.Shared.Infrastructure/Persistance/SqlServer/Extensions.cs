@@ -10,9 +10,9 @@ public static class Extensions
     {
         using ServiceProvider? serviceProvider = services.BuildServiceProvider();
         IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-        SqlServerConnection connection = configuration.GetRequiredSection("ConnectionStrings").GetRequiredSection("SqlServerConnection").Get<SqlServerConnection>();
+        string connection = configuration.GetConnectionString("SqlServerConnection");
 
-        services.AddDbContext<T>(x => x.UseSqlServer(connection.ConnectionString));
+        services.AddDbContext<T>(x => x.UseSqlServer(connection));
 
         return services;
     }
