@@ -5,7 +5,6 @@ using GarageGenius.Shared.Infrastructure.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
-using static System.Formats.Asn1.AsnWriter;
 
 [assembly: InternalsVisibleTo("GarageGenius.Modules.Users.Api")]
 namespace GarageGenius.Modules.Users.Core;

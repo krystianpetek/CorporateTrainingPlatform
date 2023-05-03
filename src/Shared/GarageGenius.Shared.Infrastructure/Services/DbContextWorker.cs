@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+namespace GarageGenius.Shared.Infrastructure.Services;
+
 public class DbContextWorker : IHostedService
 {
     private readonly IServiceProvider _serviceProvider;
@@ -22,9 +24,7 @@ public class DbContextWorker : IHostedService
         {
             var dbContext = scope.ServiceProvider.GetService(dbContextType) as DbContext;
             if (dbContext is null)
-            {
                 continue;
-            }
 
             await dbContext.Database.MigrateAsync(cancellationToken);
         }

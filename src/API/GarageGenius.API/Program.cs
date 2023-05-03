@@ -34,7 +34,6 @@ public static class Program
             module.Register(builder.Services);
         }
 
-
         WebApplication? app = builder.Build();
         app.UseSharedInfrastructure();
 
