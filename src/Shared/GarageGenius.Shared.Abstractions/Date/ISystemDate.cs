@@ -1,4 +1,4 @@
-﻿namespace GarageGenius.Shared.Infrastructure.Date;
+﻿namespace GarageGenius.Shared.Abstractions.Date;
 public interface ISystemDate
 {
     DateTime GetCurrentDate();

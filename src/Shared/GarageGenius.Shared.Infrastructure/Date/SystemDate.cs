@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GarageGenius.Shared.Abstractions.Date;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.Date;
 internal class SystemDate : ISystemDate
@@ -8,7 +9,6 @@ internal class SystemDate : ISystemDate
         return DateTime.UtcNow;
     }
 }
-
 
 public static class Extensions
 {

@@ -36,6 +36,8 @@ public static class Program
 
 
         WebApplication? app = builder.Build();
+        app.UseSharedInfrastructure();
+
         app.UseHttpsRedirection();
         app.UseAuthorization();
 
@@ -48,7 +50,6 @@ public static class Program
         });
 
         app.MapControllers();
-
         await app.RunAsync();
     }
 
