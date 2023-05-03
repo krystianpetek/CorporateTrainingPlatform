@@ -1,11 +1,12 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
+using GarageGenius.Modules.Users.Core.Events;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authorization;
 using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.Date;
+using GarageGenius.Shared.Infrastructure.MessageBroker;
 using Microsoft.Extensions.Logging;
-using System.IO;
 
 namespace GarageGenius.Modules.Users.Core.Commands.SignUp;
 internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
@@ -15,19 +16,22 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
     private readonly IRoleRepository _roleRepository;
     private readonly ISystemDate _systemDate;
     private readonly IPasswordManager _passwordManager;
+    private readonly IMessageBroker _messageBroker;
 
     public SignUpCommandHandler(
         ILogger<SignUpCommandHandler> logger,
         IUserRepository userRepository,
         IRoleRepository roleRepository,
         ISystemDate systemDate,
-        IPasswordManager passwordManager)
+        IPasswordManager passwordManager,
+        IMessageBroker messageBroker)
     {
         _logger = logger;
         _userRepository = userRepository;
         _roleRepository = roleRepository;
         _systemDate = systemDate;
         _passwordManager = passwordManager;
+        _messageBroker = messageBroker;
     }
 
     public async Task HandleAsync(SignUpCommand command, CancellationToken cancellationToken = default)
@@ -71,5 +75,6 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         };
         await _userRepository.AddAsync(user);
         _logger.LogInformation($"User with ID: '{user.Id}' has signed up.");
+        await _messageBroker.PublishAsync(new UserCreated(user.Id,user.Email));
     }
 }
