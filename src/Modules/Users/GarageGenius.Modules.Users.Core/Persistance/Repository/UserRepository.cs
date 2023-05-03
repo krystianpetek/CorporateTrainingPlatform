@@ -8,7 +8,7 @@ internal class UserRepository : IUserRepository
 {
     private readonly UsersDbContext _usersDbContext;
 
-    internal UserRepository(UsersDbContext usersDbContext)
+    public UserRepository(UsersDbContext usersDbContext)
     {
         _usersDbContext = usersDbContext;
     }
@@ -34,7 +34,7 @@ internal class UserRepository : IUserRepository
         return _usersDbContext.Users.Include(x => x.Role).SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<User> GetAsync(string email)
+    public Task<User> GetByEmailAsync(string email)
     {
         return _usersDbContext.Users.Include(x => x.Role).SingleOrDefaultAsync(x => x.Email == email);
     }

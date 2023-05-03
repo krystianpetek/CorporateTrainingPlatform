@@ -9,7 +9,7 @@ internal record User
     public string Password { get; set; }
     public Role Role { get; set; }
     public UserState State { get; set; }
-    //public DateTime CreatedDate { get; private set; }
+    public DateTime CreatedDate { get; set; }
 }
 
 

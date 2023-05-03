@@ -1,11 +1,6 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Shared.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 internal class UsersDbContextSeeder : IDbContextSeeder
@@ -38,9 +33,9 @@ internal class UsersDbContextSeeder : IDbContextSeeder
             Name = "admin",
             Permissions = _permissions
         });
+
         await _usersDbContext.Roles.AddAsync(new Role
-        {
-            
+        {            
             Name = "user",
             Permissions = new List<string>()
         });
