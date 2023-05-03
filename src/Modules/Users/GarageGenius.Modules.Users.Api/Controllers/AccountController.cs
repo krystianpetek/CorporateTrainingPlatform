@@ -1,5 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.Commands.SignIn;
-using GarageGenius.Modules.Users.Core.Commands.SignUp;
+﻿using GarageGenius.Modules.Users.Core.Commands.SignUp;
+using GarageGenius.Modules.Users.Core.Queries.SignIn;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,9 +33,9 @@ public class AccountController : BaseController
     [HttpPost("sign-in")]
     [AllowAnonymous]
     [SwaggerOperation("Sign in")]
-    public async Task<ActionResult> SignInAsync(SignInCommand signInCommand)
+    public async Task<ActionResult<string>> SignInAsync(SignInQuery signInQuery)
     {
-        await _dispatcher.SendAsync<SignInCommand>(signInCommand);
-        return Ok();
+        string token = await _dispatcher.QueryAsync<string>(signInQuery);
+        return Ok(token);
     }
 }

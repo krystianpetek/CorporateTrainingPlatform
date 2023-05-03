@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core;
 using GarageGenius.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Users.Api;

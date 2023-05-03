@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+  </ItemGroup>
+
 </Project>

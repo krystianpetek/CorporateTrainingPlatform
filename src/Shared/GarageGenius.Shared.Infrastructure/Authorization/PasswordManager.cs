@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GarageGenius.Shared.Abstractions.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarageGenius.Shared.Abstractions.Authorization;
+namespace GarageGenius.Shared.Infrastructure.Authorization;
 internal class PasswordManager : IPasswordManager
 {
     private readonly IPasswordHasher<object> _passwordHasher;
