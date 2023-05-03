@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Shared.Abstractions.Dispatcher;
 using GarageGenius.Shared.Infrastructure.Commands;
+using GarageGenius.Shared.Infrastructure.Date;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
 using GarageGenius.Shared.Infrastructure.Queries;
@@ -16,6 +17,7 @@ public static class Extensions
         services.AddCommandHandlers(assemblies);
         services.AddQueryHandlers(assemblies);
         services.AddHostedService<DbContextWorker>();
+        services.AddSystemDate();
         return services;
     }
 }
