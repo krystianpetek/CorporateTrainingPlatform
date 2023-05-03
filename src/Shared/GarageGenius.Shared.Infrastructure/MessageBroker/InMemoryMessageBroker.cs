@@ -7,12 +7,12 @@ namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
 internal sealed class InMemoryMessageBroker : IMessageBroker
 {
-    private readonly IAsyncEventDispatcher _asyncEventDispatcher;
+    private readonly IEventChannel _eventChannel;
     private readonly ILogger<InMemoryMessageBroker> _logger;
 
-    public InMemoryMessageBroker(IAsyncEventDispatcher asyncEventDispatcher, ILogger<InMemoryMessageBroker> logger)
+    public InMemoryMessageBroker(IEventChannel eventChannel, ILogger<InMemoryMessageBroker> logger)
     {
-        _asyncEventDispatcher = asyncEventDispatcher;
+        _eventChannel = eventChannel;
         _logger = logger;
     }
 
@@ -20,6 +20,6 @@ internal sealed class InMemoryMessageBroker : IMessageBroker
     {
         var name = @event.GetType().Name;
         _logger.LogInformation("Publishing an event: {Name}...", name);
-        await _asyncEventDispatcher.PublishAsync(@event, cancellationToken);
+        await _eventChannel.Writer.WriteAsync(@event, cancellationToken);
     }
 }
