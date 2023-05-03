@@ -3,7 +3,7 @@ using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authorization;
 using GarageGenius.Shared.Abstractions.Commands;
-using GarageGenius.Shared.Infrastructure.Date;
+using GarageGenius.Shared.Abstractions.Date;
 using Microsoft.Extensions.Logging;
 using System.IO;
 

@@ -10,7 +10,7 @@ export class AppComponent {
   public work?: string;
 
   constructor(http: HttpClient) {
-    http.get<Response>('api/Account/health-check').subscribe(
+    http.get<Response>('users-module/Account/health-check').subscribe(
       (result: Response) => {
         this.work = result.message;
       },

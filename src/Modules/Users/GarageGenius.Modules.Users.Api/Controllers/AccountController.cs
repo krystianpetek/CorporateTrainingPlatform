@@ -10,6 +10,13 @@ public class AccountController : BaseController
 {
     private readonly IDispatcher _dispatcher;
 
+    [HttpGet("health-check")]
+    public ActionResult<string> HealthCheck()
+    {
+        var response = new { message = "Users module - I'm alive." };
+        return Ok(response);
+    }
+
     public AccountController(IDispatcher dispatcher)
     {
         _dispatcher = dispatcher;
@@ -30,12 +37,5 @@ public class AccountController : BaseController
     {
         await _dispatcher.SendAsync<SignInCommand>(signInCommand);
         return Ok();
-    }
-
-    [HttpGet("health-check")]
-    public async Task<ActionResult<string>> HealthCheck()
-    {
-        var json = new { message = "Users module - I'm alive." };
-        return Ok(json);
     }
 }

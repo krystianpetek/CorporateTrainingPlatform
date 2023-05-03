@@ -3,5 +3,5 @@
 namespace GarageGenius.Modules.Users.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route($"{UsersModule.BasePath}/[controller]")]
 public abstract class BaseController : ControllerBase { }
