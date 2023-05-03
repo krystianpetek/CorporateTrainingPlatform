@@ -12,10 +12,10 @@ public static class Extensions
 {
     public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IList<Assembly> assemblies)
     {
-        services.AddInMemoryDispatcher();
         services.AddEventHandlers(assemblies);
         services.AddCommandHandlers(assemblies);
         services.AddQueryHandlers(assemblies);
+        services.AddInMemoryDispatcher();
         services.AddSystemDate();
         services.AddPasswordManager();
         services.AddHostedService<DbContextWorker>();

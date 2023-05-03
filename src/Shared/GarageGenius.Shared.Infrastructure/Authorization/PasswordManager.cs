@@ -1,6 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Dispatcher;
-using GarageGenius.Shared.Infrastructure.Dispatchers;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Abstractions.Authorization;
@@ -29,6 +27,7 @@ public static class Extensions
 {
     public static IServiceCollection AddPasswordManager(this IServiceCollection services)
     {
+        services.AddSingleton<IPasswordHasher<object>, PasswordHasher<object>>();
         services.AddSingleton<IPasswordManager, PasswordManager>();
         return services;
     }

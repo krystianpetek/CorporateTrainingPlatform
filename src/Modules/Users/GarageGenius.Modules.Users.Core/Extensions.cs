@@ -1,4 +1,6 @@
 ﻿using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
+using GarageGenius.Modules.Users.Core.Persistance.Repository;
+using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Infrastructure.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +14,8 @@ internal static class Extensions
 {
     public static async Task<IServiceCollection> AddUsersModuleCore(this IServiceCollection services)
     {
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddSqlServerDbContext<UsersDbContext>();
         services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
 
