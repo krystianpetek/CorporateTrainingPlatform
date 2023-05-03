@@ -4,6 +4,7 @@ using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Date;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
+using GarageGenius.Shared.Infrastructure.MessageBroker;
 using GarageGenius.Shared.Infrastructure.Middleware.ErrorHandling;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
@@ -24,6 +25,7 @@ public static class Extensions
         services.AddSystemDate();
         services.AddPasswordManager();
         services.AddErrorHandling();
+        services.AddMessageBroker();
         services.AddHostedService<DbContextWorker>();
         services.AddSingleton<IJwtSettings,JwtSettings>();
         services.AddTransient<IJwtTokenService, JwtTokenService>();

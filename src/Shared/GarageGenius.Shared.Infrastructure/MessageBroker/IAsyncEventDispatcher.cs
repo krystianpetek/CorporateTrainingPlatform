@@ -1,6 +1,6 @@
 ﻿using GarageGenius.Shared.Abstractions.Events;
 
-namespace GarageGenius.Shared.Infrastructure.Messaging;
+namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
 internal interface IAsyncEventDispatcher
 {

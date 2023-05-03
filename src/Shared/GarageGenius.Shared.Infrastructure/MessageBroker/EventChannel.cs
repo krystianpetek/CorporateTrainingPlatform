@@ -1,7 +1,7 @@
 ﻿using System.Threading.Channels;
 using GarageGenius.Shared.Abstractions.Events;
 
-namespace GarageGenius.Shared.Infrastructure.Messaging;
+namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
 internal sealed class EventChannel : IEventChannel
 {
