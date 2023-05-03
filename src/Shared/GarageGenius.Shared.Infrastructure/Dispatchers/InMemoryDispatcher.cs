@@ -2,6 +2,7 @@ using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using GarageGenius.Shared.Abstractions.Events;
 using GarageGenius.Shared.Abstractions.Queries;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.Dispatchers;
 
@@ -27,4 +28,13 @@ internal sealed class InMemoryDispatcher : IDispatcher
 
     public Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
         => _queryDispatcher.QueryAsync(query, cancellationToken);
+}
+
+public static class Extensions
+{
+    public static IServiceCollection AddInMemoryDispatcher(this IServiceCollection services)
+    {
+        services.AddSingleton<IDispatcher, InMemoryDispatcher>();
+        return services;
+    }
 }
