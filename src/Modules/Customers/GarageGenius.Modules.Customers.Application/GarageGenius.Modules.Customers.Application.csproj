@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GarageGenius.Modules.Customers.Core\GarageGenius.Modules.Customers.Core.csproj" />
+  </ItemGroup>
+
 </Project>
