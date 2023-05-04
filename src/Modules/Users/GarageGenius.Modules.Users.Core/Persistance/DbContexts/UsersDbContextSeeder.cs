@@ -1,5 +1,5 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
-using GarageGenius.Shared.Infrastructure.Persistance;
+using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageGenius.Modules.Users.Core.Persistance.DbContexts;
