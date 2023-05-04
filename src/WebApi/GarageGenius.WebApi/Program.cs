@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using System.Collections.Immutable;
 using System.Reflection;
 
-namespace GarageGenius.API;
+namespace GarageGenius.WebApi;
 
 public static class Program
 {

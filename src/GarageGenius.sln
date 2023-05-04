@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Api", "Api\GarageGenius.Api\GarageGenius.Api.csproj", "{CCB49FB0-8AE3-46A7-A327-CE75157989DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.WebApi", "WebApi\GarageGenius.WebApi\GarageGenius.WebApi.csproj", "{CCB49FB0-8AE3-46A7-A327-CE75157989DE}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "GarageGenius.WebUI", "WebUI\GarageGenius.WebUI\GarageGenius.WebUI.esproj", "{7A2D68B9-A1E3-4C6E-95A4-A234E8F4B5E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{B22B888F-CB88-4F46-99EB-61E1715478A4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{A67D1DBA-8494-4DFE-BF48-FD9526DE1B92}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{A67D1DBA-8494-4DFE-BF48-FD9526DE1B92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0B497FBF-235F-43E5-81A8-F1100AB0AAA5}"
 EndProject
