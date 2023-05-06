@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GarageGenius.Modules.Customers.Api")]
-namespace GarageGenius.Modules.Customers.Core;
+namespace GarageGenius.Modules.Customers.Infrastructure;
 
 internal static class Extensions
 {
