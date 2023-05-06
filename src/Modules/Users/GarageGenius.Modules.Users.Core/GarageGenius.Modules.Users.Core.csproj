@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Users.Shared\GarageGenius.Modules.Users.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
