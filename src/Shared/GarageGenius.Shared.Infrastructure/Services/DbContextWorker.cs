@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -26,7 +27,8 @@ public class DbContextWorker : IHostedService
             if (dbContext is null)
                 continue;
 
-            await dbContext.Database.MigrateAsync(cancellationToken);
+            if (dbContext.Database.IsRelational())
+                await dbContext.Database.MigrateAsync(cancellationToken);
         }
     }
     public Task StopAsync(CancellationToken cancellationToken)

@@ -10,8 +10,12 @@ public static class Extensions
         using ServiceProvider? serviceProvider = services.BuildServiceProvider();
         IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
         string connection = configuration.GetConnectionString("SqlServerConnection");
+        bool inMemoryDatabase = configuration.GetValue<bool>("InMemoryDatabase");
 
-        services.AddDbContext<T>(x => x.UseSqlServer(connection));
+        if (inMemoryDatabase)
+            services.AddDbContext<T>(x => x.UseInMemoryDatabase("connection"));
+        else
+            services.AddDbContext<T>(x => x.UseSqlServer(connection));
 
         return services;
     }
