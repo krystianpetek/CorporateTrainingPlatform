@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Customers\GarageGenius.Modules.Customers.Api\GarageGenius.Modules.Customers.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Users\GarageGenius.Modules.Users.Api\GarageGenius.Modules.Users.Api.csproj" />
     <ProjectReference Include="..\..\Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
   </ItemGroup>
