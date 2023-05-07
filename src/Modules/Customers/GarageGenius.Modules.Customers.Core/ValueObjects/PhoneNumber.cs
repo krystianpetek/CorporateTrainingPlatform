@@ -1,13 +1,8 @@
 ﻿using GarageGenius.Modules.Customers.Core.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace GarageGenius.Modules.Customers.Core.ValueObjects;
-public class PhoneNumber
+internal sealed class PhoneNumber : IEquatable<PhoneNumber>
 {
     public string Value { get; }
 
@@ -40,5 +35,24 @@ public class PhoneNumber
     public override string ToString()
     {
         return Value;
+    }
+
+    public bool Equals(PhoneNumber? other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == this.GetType() && Equals((PhoneNumber?)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value is not null ? Value.GetHashCode() : 0;
     }
 }
