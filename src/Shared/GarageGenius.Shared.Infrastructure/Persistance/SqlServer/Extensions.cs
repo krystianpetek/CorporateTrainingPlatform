@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,11 +10,13 @@ public static class Extensions
     {
         using ServiceProvider? serviceProvider = services.BuildServiceProvider();
         IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+        services.AddScoped<AuditableEntitySaveChangesInterceptor>();
+
         string connection = configuration.GetConnectionString("SqlServerConnection");
         bool inMemoryDatabase = configuration.GetValue<bool>("InMemoryDatabase");
 
         if (inMemoryDatabase)
-            services.AddDbContext<T>(x => x.UseInMemoryDatabase("connection"));
+            services.AddDbContext<T>(x => x.UseInMemoryDatabase(connection));
         else
             services.AddDbContext<T>(x => x.UseSqlServer(connection));
 
