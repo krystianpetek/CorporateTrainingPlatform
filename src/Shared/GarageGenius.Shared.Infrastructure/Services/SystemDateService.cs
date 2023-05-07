@@ -1,8 +1,8 @@
-﻿using GarageGenius.Shared.Abstractions.Date;
+﻿using GarageGenius.Shared.Abstractions.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarageGenius.Shared.Infrastructure.Date;
-internal class SystemDate : ISystemDate
+namespace GarageGenius.Shared.Infrastructure.Services;
+internal class SystemDateService : ISystemDateService
 {
     public DateTime GetCurrentDate()
     {
@@ -14,7 +14,7 @@ public static class Extensions
 {
     public static IServiceCollection AddSystemDate(this IServiceCollection services)
     {
-        services.AddSingleton<ISystemDate, SystemDate>();
+        services.AddSingleton<ISystemDateService, SystemDateService>();
         return services;
     }
 }

@@ -21,4 +21,10 @@ internal class Customer : AuditableEntity
         PhoneNumber = phoneNumber;
         EmailAddress = emailAddress; // validation email
     }
+
+    public Customer(UserId userId, EmailAddress emailAddress)
+    {
+        UserId = userId;
+        EmailAddress = emailAddress;
+    }
 }

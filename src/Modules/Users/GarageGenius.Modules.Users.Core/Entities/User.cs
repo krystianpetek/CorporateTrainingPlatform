@@ -1,15 +1,33 @@
 ﻿using GarageGenius.Modules.Users.Core.ValueObjects;
+using GarageGenius.Shared.Abstractions.Common;
 
 namespace GarageGenius.Modules.Users.Core.Entities;
-internal record User
+internal sealed class User : AuditableEntity
 {
-    public Guid Id { get; set; }
-    public Guid RoleId { get; set; }
-    public Email Email { get; set; }
-    public string Password { get; set; }
-    public Role Role { get; set; }
-    public UserState State { get; set; }
-    public DateTime CreatedDate { get; set; }
+    public Guid Id { get; private set; }
+    public Email Email { get; private set; }
+    public string Password { get; private set; }
+    public Role Role { get; private set; }
+    public UserState State { get; private set; }
+
+    public User(Email email, string password, Role role, UserState state)
+    {
+        Id = Guid.NewGuid();
+        Email = email;
+        Password = password;
+        Role = role;
+        State = state;
+    }
+
+    internal void Deactivate()
+    {
+        State = UserState.Unactive;
+    }
+
+    internal void Activate()
+    {
+        State = UserState.Active;
+    }
 }
 
 
