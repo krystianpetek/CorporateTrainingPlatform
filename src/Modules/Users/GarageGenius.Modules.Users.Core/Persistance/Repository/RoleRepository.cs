@@ -26,6 +26,7 @@ internal class RoleRepository : IRoleRepository
 
     public async Task<Role> GetAsync(string name)
     {
-        return await _usersDbContext.Roles.SingleOrDefaultAsync(role => role.Name == name);
+        return await _usersDbContext.Roles
+            .SingleOrDefaultAsync(role => role.Name == name);
     }
 }

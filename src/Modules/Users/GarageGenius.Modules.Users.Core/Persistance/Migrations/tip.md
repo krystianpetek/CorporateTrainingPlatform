@@ -3,8 +3,9 @@
 ## Create
 
 ```powershell
-cd .\Api\GarageGenius.Api\
-dotnet ef migrations add Initial --context UsersDbContext --project ..\..\Modules\Users\GarageGenius.Modules.Users.Core\
+cd .\WebApi\GarageGenius.WebApi\
+dotnet ef migrations add Initial --verbose --context UsersDbContext --project ..\..\Modules\Users\GarageGenius.Modules.Users.Core\ --output-dir Persistance\Migrations
+dotnet ef database update
 ```
 
 ## Remove

@@ -10,5 +10,6 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(index => index.Email).IsUnique();
         builder.Property(property => property.Email).IsRequired().HasMaxLength(100).HasConversion(email => email.Value, newEmail => new ValueObjects.Email(newEmail));
         builder.Property(password => password.Password).IsRequired().HasMaxLength(100);
+        builder.Property(role => role.Role).HasConversion(convert => convert.Name, x => new Role(x, new List<string>()));
     }
 }

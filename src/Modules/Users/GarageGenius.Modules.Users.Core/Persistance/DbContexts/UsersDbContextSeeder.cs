@@ -30,7 +30,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
     {
         await _usersDbContext.Roles.AddAsync(new Role("admin", _permissions));
         await _usersDbContext.Roles.AddAsync(new Role("user", new List<string>()));
-        
+
         await _usersDbContext.SaveChangesAsync();
     }
 }
