@@ -10,16 +10,16 @@ public class AccountController : BaseController
 {
     private readonly IDispatcher _dispatcher;
 
+    public AccountController(IDispatcher dispatcher)
+    {
+        _dispatcher = dispatcher;
+    }
+
     [HttpGet("health-check")]
     public ActionResult<string> HealthCheck()
     {
         var response = new { message = "Users module - I'm alive." };
         return Ok(response);
-    }
-
-    public AccountController(IDispatcher dispatcher)
-    {
-        _dispatcher = dispatcher;
     }
 
     [HttpPost("sign-up")]

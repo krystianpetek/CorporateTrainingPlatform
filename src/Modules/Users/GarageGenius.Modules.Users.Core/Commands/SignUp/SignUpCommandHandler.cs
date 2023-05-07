@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
-using GarageGenius.Modules.Users.Core.Events;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
+using GarageGenius.Modules.Users.Shared.Events;
 using GarageGenius.Shared.Abstractions.Authorization;
 using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.Date;
