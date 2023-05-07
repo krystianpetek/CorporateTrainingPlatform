@@ -24,7 +24,7 @@ internal class UserRepository : IUserRepository
         User? user = await _usersDbContext.Users.FindAsync(id);
         if (user is not null)
         {
-            user.State = UserState.Unactive;
+            user.Deactivate();
             await _usersDbContext.SaveChangesAsync();
         }
     }

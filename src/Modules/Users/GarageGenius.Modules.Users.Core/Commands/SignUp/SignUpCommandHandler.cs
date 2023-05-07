@@ -4,7 +4,6 @@ using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Shared.Events;
 using GarageGenius.Shared.Abstractions.Authorization;
 using GarageGenius.Shared.Abstractions.Commands;
-using GarageGenius.Shared.Abstractions.Date;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
 using Microsoft.Extensions.Logging;
 
@@ -14,7 +13,6 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
     private readonly ILogger<SignUpCommandHandler> _logger;
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
-    private readonly ISystemDate _systemDate;
     private readonly IPasswordManager _passwordManager;
     private readonly IMessageBroker _messageBroker;
 
@@ -22,14 +20,12 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         ILogger<SignUpCommandHandler> logger,
         IUserRepository userRepository,
         IRoleRepository roleRepository,
-        ISystemDate systemDate,
         IPasswordManager passwordManager,
         IMessageBroker messageBroker)
     {
         _logger = logger;
         _userRepository = userRepository;
         _roleRepository = roleRepository;
-        _systemDate = systemDate;
         _passwordManager = passwordManager;
         _messageBroker = messageBroker;
     }
@@ -56,25 +52,17 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 
         string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLowerInvariant();
         Role role = await _roleRepository.GetAsync(roleName);
-        if (role is null)
+        if (role == default)
         {
             throw new RoleNotFoundException(roleName);
         }
 
-        DateTime now = _systemDate.GetCurrentDate();
         string password = _passwordManager.Generate(command.Password);
 
-        user = new User
-        {
-            Id = command.UserId,
-            Email = email,
-            Password = password,
-            Role = role,
-            CreatedDate = now,
-            State = UserState.Active,
-        };
+        user = new User(email, password, role, UserState.Active);
         await _userRepository.AddAsync(user);
+
         _logger.LogInformation($"User with ID: '{user.Id}' has signed up.");
-        await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email));
+        await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email), cancellationToken);
     }
 }

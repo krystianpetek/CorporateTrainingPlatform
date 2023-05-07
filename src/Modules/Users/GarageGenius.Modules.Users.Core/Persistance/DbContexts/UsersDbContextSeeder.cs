@@ -28,18 +28,9 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
     private async Task AddRolesAsync()
     {
-        await _usersDbContext.Roles.AddAsync(new Role
-        {
-            Name = "admin",
-            Permissions = _permissions
-        });
-
-        await _usersDbContext.Roles.AddAsync(new Role
-        {            
-            Name = "user",
-            Permissions = new List<string>()
-        });
-
+        await _usersDbContext.Roles.AddAsync(new Role("admin", _permissions));
+        await _usersDbContext.Roles.AddAsync(new Role("user", new List<string>()));
+        
         await _usersDbContext.SaveChangesAsync();
     }
 }
