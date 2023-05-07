@@ -1,0 +1,8 @@
+﻿namespace GarageGenius.Shared.Abstractions.Common;
+public record AuditableEntity
+{
+    public string CreatedBy { get; set; }
+    public DateTime CreationDate { get; set; }
+    public string ModifiedBy { get; set; }
+    public DateTime? ModifiedDate { get; set; }
+}
