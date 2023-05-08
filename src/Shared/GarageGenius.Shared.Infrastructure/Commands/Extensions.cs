@@ -9,7 +9,6 @@ public static class Extensions
     {
         services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
 
-
         IEnumerable<Type> types = assemblies.SelectMany(x => x.GetTypes().Where(t => t.GetInterfaces().Any(any => any.IsGenericType && any.GetGenericTypeDefinition() == typeof(ICommandHandler<>))));
         foreach (var type in types)
         {
