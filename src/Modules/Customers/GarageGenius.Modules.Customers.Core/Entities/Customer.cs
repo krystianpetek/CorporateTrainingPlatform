@@ -7,9 +7,9 @@ internal sealed class Customer : AuditableEntity
 {
     public CustomerId Id { get; private set; }
     public UserId UserId { get; private set; }
-    public string FirstName { get; private set; }
-    public string LastName { get; private set; }
-    public PhoneNumber PhoneNumber { get; private set; }
+    public string? FirstName { get; private set; }
+    public string? LastName { get; private set; }
+    public PhoneNumber? PhoneNumber { get; private set; }
     public EmailAddress EmailAddress { get; private set; }
 
     private Customer() { }
@@ -26,6 +26,7 @@ internal sealed class Customer : AuditableEntity
 
     public Customer(UserId userId, EmailAddress emailAddress)
     {
+        Id = new CustomerId(Guid.NewGuid());
         UserId = userId;
         EmailAddress = emailAddress;
     }

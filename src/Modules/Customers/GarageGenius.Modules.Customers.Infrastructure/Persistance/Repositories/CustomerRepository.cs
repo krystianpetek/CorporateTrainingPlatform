@@ -1,12 +1,21 @@
 ﻿using GarageGenius.Modules.Customers.Core.Entities;
 using GarageGenius.Modules.Customers.Core.Repositories;
+using GarageGenius.Modules.Customers.Infrastructure.Persistance.DbContexts;
 
 namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Repositories;
 internal class CustomerRepository : ICustomerRepository
 {
-    public Task AddAsync(Customer customer)
+    private readonly CustomersDbContext _customersDbContext;
+
+    public CustomerRepository(CustomersDbContext customersDbContext)
     {
-        throw new NotImplementedException();
+        _customersDbContext = customersDbContext;
+    }
+
+    public async Task AddAsync(Customer customer)
+    {
+        await _customersDbContext.Customers.AddAsync(customer);
+        await _customersDbContext.SaveChangesAsync();
     }
 
     public Task<Customer> GetAsync(Guid id)
