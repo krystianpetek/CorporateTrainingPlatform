@@ -7,18 +7,18 @@ internal sealed class User : AuditableEntity
     public Guid Id { get; private set; }
     public string RoleId { get; init; }
     public Role Role { get; private set; }
-    public Email Email { get; private set; }
+    public EmailAddress Email { get; private set; }
     public string Password { get; private set; }
     public UserState State { get; private set; }
 
-    public User(Email email, string password, Role role, UserState state)
+    public User(EmailAddress email, string password, Role role)
     {
         Id = Guid.NewGuid();
         Email = email;
         Password = password;
         Role = role;
         RoleId = role.Name;
-        State = state;
+        this.Activate();
     }
 
     private User() { }

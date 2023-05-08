@@ -59,7 +59,7 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 
         string password = _passwordManager.Generate(command.Password);
 
-        user = new User(email, password, role, UserState.Active);
+        user = new User(email, password, role);
         await _userRepository.AddAsync(user);
 
         _logger.LogInformation($"User with ID: '{user.Id}' has signed up.");

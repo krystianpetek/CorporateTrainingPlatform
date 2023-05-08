@@ -8,6 +8,8 @@ internal sealed class Role : AuditableEntity
     public string Name { get; private set; }
     public IEnumerable<string> Permissions { get; private set; }
 
+    private Role() { }
+
     public Role(string name, IEnumerable<string> permissions)
     {
         Name = name;

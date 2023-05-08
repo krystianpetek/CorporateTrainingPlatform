@@ -3,7 +3,7 @@ using GarageGenius.Modules.Customers.Core.ValueObjects;
 using GarageGenius.Shared.Abstractions.Common;
 
 namespace GarageGenius.Modules.Customers.Core.Entities;
-internal class Customer : AuditableEntity
+internal sealed class Customer : AuditableEntity
 {
     public CustomerId Id { get; private set; }
     public UserId UserId { get; private set; }
@@ -13,6 +13,7 @@ internal class Customer : AuditableEntity
     public EmailAddress EmailAddress { get; private set; }
 
     private Customer() { }
+
     public Customer(UserId userId, string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
     {
         UserId = userId;
