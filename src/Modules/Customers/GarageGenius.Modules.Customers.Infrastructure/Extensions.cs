@@ -1,4 +1,5 @@
-﻿using GarageGenius.Shared.Abstractions.Persistance;
+﻿using GarageGenius.Modules.Customers.Infrastructure.Persistance.DbContexts;
+using GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 
@@ -9,6 +10,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddCustomersModuleInfrastructure(this IServiceCollection services)
     {
+        services.AddSqlServerDbContext<CustomersDbContext>();
 
         return services;
     }

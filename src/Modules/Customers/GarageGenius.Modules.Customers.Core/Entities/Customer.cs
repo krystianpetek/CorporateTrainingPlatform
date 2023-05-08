@@ -16,6 +16,7 @@ internal sealed class Customer : AuditableEntity
 
     public Customer(UserId userId, string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
     {
+        Id = new CustomerId(Guid.NewGuid());
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;
