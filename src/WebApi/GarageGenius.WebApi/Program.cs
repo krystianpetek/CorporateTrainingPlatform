@@ -1,6 +1,8 @@
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
 using System.Collections.Immutable;
 using System.Reflection;
 
@@ -8,48 +10,68 @@ namespace GarageGenius.WebApi;
 
 public static class Program
 {
-    public async static Task Main(string[] args)
+    public async static Task<int> Main(string[] args)
     {
-        WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
-        builder.Services.AddAuthorization();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen((swagger) =>
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
+
+        try
         {
-            swagger.EnableAnnotations();
-            swagger.CustomSchemaIds(x => x.FullName);
-            swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
+            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAuthorization();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen((swagger) =>
             {
-                Version = "v1",
-                Title = "GeniusGarage"
+                swagger.EnableAnnotations();
+                swagger.CustomSchemaIds(x => x.FullName);
+                swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "GeniusGarage"
+                });
             });
-        });
-        builder.Services.AddControllers();
+            builder.Services.AddControllers();
 
-        IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
-        IEnumerable<IModule> modules = assemblies.LoadModules();
+            IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
+            IEnumerable<IModule> modules = assemblies.LoadModules();
 
-        builder.Services.AddSharedInfrastructure(assemblies);
-        foreach (IModule module in modules)
-        {
-            module.Register(builder.Services);
+            builder.Services.AddSharedInfrastructure(assemblies);
+            foreach (IModule module in modules)
+            {
+                module.Register(builder.Services);
+            }
+
+            WebApplication? app = builder.Build();
+            app.UseSharedInfrastructure();
+
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI((swagger) =>
+            {
+                swagger.SwaggerEndpoint(
+                    url: "/swagger/v1/swagger.json",
+                    name: "GeniusGarage");
+            });
+
+            app.MapControllers();
+            await app.RunAsync();
         }
-
-        WebApplication? app = builder.Build();
-        app.UseSharedInfrastructure();
-
-        app.UseHttpsRedirection();
-        app.UseAuthorization();
-
-        app.UseSwagger();
-        app.UseSwaggerUI((swagger) =>
+        catch (Exception ex)
         {
-            swagger.SwaggerEndpoint(
-                url: "/swagger/v1/swagger.json",
-                name: "GeniusGarage");
-        });
-
-        app.MapControllers();
-        await app.RunAsync();
+            Log.Fatal(ex, "Host terminated unexpectedly");
+            return 1;
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
+        return 0;
     }
 
     public static IList<IModule> LoadModules(this IEnumerable<Assembly> assemblies)
@@ -73,4 +95,5 @@ public static class Program
 
         return assemblies;
     }
+
 }
