@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20230507200607_UserStateUpdate")]
-    partial class UserStateUpdate
+    [Migration("20230510151102_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

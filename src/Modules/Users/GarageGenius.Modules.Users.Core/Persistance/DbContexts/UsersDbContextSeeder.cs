@@ -19,9 +19,10 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
     public async Task SeedDatabaseAsync()
     {
-        //await _usersDbContext.Database.EnsureCreatedAsync();
+        if(_usersDbContext.Database.GetPendingMigrations().Any())
+            await _usersDbContext.Database.MigrateAsync();
 
-        if(await _usersDbContext.Roles.AnyAsync())
+        if (await _usersDbContext.Roles.AnyAsync())
         {
             return;
         }

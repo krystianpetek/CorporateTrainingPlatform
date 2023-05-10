@@ -37,10 +37,10 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    RoleName = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    State = table.Column<int>(type: "int", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -50,8 +50,8 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Roles_RoleName",
-                        column: x => x.RoleName,
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalSchema: "users",
                         principalTable: "Roles",
                         principalColumn: "Name",
@@ -66,10 +66,10 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_RoleName",
+                name: "IX_Users_RoleId",
                 schema: "users",
                 table: "Users",
-                column: "RoleName");
+                column: "RoleId");
         }
 
         /// <inheritdoc />

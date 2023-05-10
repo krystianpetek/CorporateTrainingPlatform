@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(CustomersDbContext))]
-    [Migration("20230508193820_Initial")]
+    [Migration("20230510151238_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -43,7 +43,6 @@ namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -54,12 +53,10 @@ namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 

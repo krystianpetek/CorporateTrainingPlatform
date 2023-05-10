@@ -21,9 +21,9 @@ namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),

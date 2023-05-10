@@ -5,8 +5,8 @@ namespace GarageGenius.Modules.Users.Core.Entities;
 internal sealed class User : AuditableEntity
 {
     public Guid Id { get; private set; }
-    public string RoleId { get; init; }
     public Role Role { get; private set; }
+    public string RoleId { get; private set; }
     public EmailAddress Email { get; private set; }
     public string Password { get; private set; }
     public UserState State { get; private set; }
