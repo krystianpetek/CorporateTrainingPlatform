@@ -1,6 +1,6 @@
-﻿using GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
+﻿using GarageGenius.Modules.Customers.Core.Entities;
+using GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
 using Microsoft.EntityFrameworkCore;
-using GarageGenius.Modules.Customers.Core.Entities;
 
 namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.DbContexts;
 internal class CustomersDbContext : DbContext
@@ -19,7 +19,7 @@ internal class CustomersDbContext : DbContext
         optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
         base.OnConfiguring(optionsBuilder);
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("customers");

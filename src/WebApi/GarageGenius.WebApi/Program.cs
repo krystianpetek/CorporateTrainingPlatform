@@ -3,7 +3,6 @@ using GarageGenius.Shared.Infrastructure;
 using GarageGenius.WebApi.Middlewares.ErrorHandling;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using Serilog.AspNetCore;
 using Serilog.Events;
 using System.Collections.Immutable;
 using System.Reflection;
@@ -29,7 +28,7 @@ public static class Program
             builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) => loggerConfiguration
                 .ReadFrom.Configuration(hostBuilderContext.Configuration)
                 .ReadFrom.Services(serviceProvider)
-                .Enrich.FromLogContext(), 
+                .Enrich.FromLogContext(),
                 preserveStaticLogger: true);
 
             builder.Services.AddGlobalErrorHandling();

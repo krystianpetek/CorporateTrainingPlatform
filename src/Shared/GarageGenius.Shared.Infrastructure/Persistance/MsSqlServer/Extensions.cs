@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
+namespace GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 public static class Extensions
 {
-    public static IServiceCollection AddSqlServerDbContext<T>(this IServiceCollection services) where T : DbContext
+    public static IServiceCollection AddMsSqlServerDbContext<T>(this IServiceCollection services) where T : DbContext
     {
         using ServiceProvider? serviceProvider = services.BuildServiceProvider();
         IConfiguration configuration = serviceProvider.GetService<IConfiguration>();

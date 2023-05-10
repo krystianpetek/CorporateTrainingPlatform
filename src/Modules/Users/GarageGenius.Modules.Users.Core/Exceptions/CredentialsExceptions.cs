@@ -8,7 +8,7 @@ internal class MissingPasswordException : GarageGeniusException
 
 internal class InvalidCredentialsException : GarageGeniusException
 {
-    public InvalidCredentialsException() : base("Invalid credentials.") {}
+    public InvalidCredentialsException() : base("Invalid credentials.") { }
 }
 
 internal class InvalidEmailException : GarageGeniusException

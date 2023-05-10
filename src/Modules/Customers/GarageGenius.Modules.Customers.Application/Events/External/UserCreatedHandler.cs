@@ -7,7 +7,7 @@ namespace GarageGenius.Modules.Customers.Application.Events.External;
 internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
 {
     private readonly ICustomerRepository _customerRepository;
-    
+
     public UserCreatedHandler(ICustomerRepository customerRepository)
     {
         _customerRepository = customerRepository;

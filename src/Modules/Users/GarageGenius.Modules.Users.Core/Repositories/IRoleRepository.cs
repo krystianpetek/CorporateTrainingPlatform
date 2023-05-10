@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace GarageGenius.Modules.Users.Core.Repositories;
 internal interface IRoleRepository

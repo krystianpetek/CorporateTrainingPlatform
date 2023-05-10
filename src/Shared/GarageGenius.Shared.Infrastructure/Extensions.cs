@@ -24,7 +24,7 @@ public static class Extensions
         services.AddPasswordManager();
         services.AddMessageBroker();
         services.AddHostedService<DbContextWorker>();
-        services.AddSingleton<IJwtSettings,JwtSettings>();
+        services.AddSingleton<IJwtSettings, JwtSettings>();
         services.AddTransient<IJwtTokenService, JwtTokenService>();
         //services.Configure<JwtSettings>(jwtSettings => configuration.GetRequiredSection("JwtSecret").Bind(jwtSettings));
 

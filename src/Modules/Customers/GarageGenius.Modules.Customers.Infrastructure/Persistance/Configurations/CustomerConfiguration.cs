@@ -14,7 +14,7 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasMaxLength(100)
             .HasConversion(x => x.Value, x => new EmailAddress(x));
-        
+
         builder.Property(x => x.PhoneNumber)
             .HasMaxLength(12)
             .HasConversion(x => x.Value, x => new PhoneNumber(x));

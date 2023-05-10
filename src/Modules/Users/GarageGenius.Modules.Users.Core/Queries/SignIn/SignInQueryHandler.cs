@@ -1,8 +1,8 @@
 ﻿using GarageGenius.Modules.Users.Core.Exceptions;
-using GarageGenius.Shared.Abstractions.Queries;
 using GarageGenius.Modules.Users.Core.Repositories;
-using Microsoft.Extensions.Logging;
 using GarageGenius.Shared.Abstractions.Authorization;
+using GarageGenius.Shared.Abstractions.Queries;
+using Microsoft.Extensions.Logging;
 
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
 internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
@@ -47,7 +47,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
         {
             ["permissions"] = user.Role.Permissions
         };
-        
+
         string token = _jwtTokenService.GenerateToken(user.Email.Value);
 
         _logger.LogInformation($"User with ID: '{user.Id}' has signed in.");

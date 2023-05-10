@@ -1,5 +1,5 @@
-﻿using System.Threading.Channels;
-using GarageGenius.Shared.Abstractions.Events;
+﻿using GarageGenius.Shared.Abstractions.Events;
+using System.Threading.Channels;
 
 namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
