@@ -23,6 +23,7 @@ public class AccountController : BaseController
     }
 
     [HttpPost("sign-up")]
+    [AllowAnonymous]
     [SwaggerOperation("Sign up")]
     public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
     {

@@ -1,0 +1,23 @@
+@url = https://localhost:7283
+
+###
+GET {{url}}/users-module/account/health-check
+
+###
+POST {{url}}/users-module/account/sign-up
+Content-Type: application/json
+
+{
+    "email": "krystianpetek2@gmail.com",
+    "password": "Password!23",
+    "role":"admin"
+}
+
+###
+POST {{url}}/users-module/account/sign-in
+Content-Type: application/json
+
+{
+    "email": "krystianpetek2@gmail.com",
+    "password": "Password!23"
+}
