@@ -2,7 +2,7 @@
 using GarageGenius.Modules.Users.Core.Persistance.Repository;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Persistance;
-using GarageGenius.Shared.Infrastructure.Persistance.SqlServer;
+using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
 
@@ -11,11 +11,11 @@ namespace GarageGenius.Modules.Users.Core;
 
 internal static class Extensions
 {
-    public static async Task<IServiceCollection> AddUsersModuleCore(this IServiceCollection services)
+    public static async Task<IServiceCollection> AddUsersCore(this IServiceCollection services)
     {
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddSqlServerDbContext<UsersDbContext>();
+        services.AddMsSqlServerDbContext<UsersDbContext>();
         services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
 
         using IServiceScope? serviceScope = services.BuildServiceProvider().CreateScope();

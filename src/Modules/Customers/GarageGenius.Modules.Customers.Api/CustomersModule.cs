@@ -10,21 +10,17 @@ internal class CustomersModule : IModule
 {
     public const string BasePath = "customers-module";
     public string Name => "Customers";
-
-    public IEnumerable<string>? Policies { get; } = new string[]
-    {
-        "customers"
-    };
+    public IEnumerable<string>? Policies { get; } = new string[] { "customers" };
 
     public void Register(IServiceCollection services)
     {
-        services.AddCustomersModuleCore();
-        services.AddCustomersModuleApplication();
-        services.AddCustomersModuleInfrastructure();
+        services.AddCustomersCore();
+        services.AddCustomersApplication();
+        services.AddCustomersInfrastructure();
     }
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseHealthChecks($"/health/{Name}");
+        app.UseHealthChecks($"/health/{BasePath}");
     }
 }

@@ -1,7 +1,6 @@
 ﻿using GarageGenius.Modules.Users.Core;
 using GarageGenius.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Users.Api;
@@ -13,11 +12,11 @@ internal class UsersModule : IModule
 
     public void Register(IServiceCollection services)
     {
-        services.AddUsersModuleCore().GetAwaiter().GetResult();
+        services.AddUsersCore().GetAwaiter().GetResult();
     }
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseHealthChecks($"/health/{Name}");
+        app.UseHealthChecks($"/health/{BasePath}");
     }
 }

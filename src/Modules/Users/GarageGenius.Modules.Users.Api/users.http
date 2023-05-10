@@ -1,7 +1,7 @@
 @url = https://localhost:7283
 
 ### Health check
-GET {{url}}/health/users
+GET {{url}}/health/users-module
 
 ### Sign up user
 POST {{url}}/users-module/account/sign-up
