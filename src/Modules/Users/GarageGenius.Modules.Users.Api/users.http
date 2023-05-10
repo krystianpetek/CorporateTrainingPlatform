@@ -1,9 +1,9 @@
 @url = https://localhost:7283
 
-###
-GET {{url}}/users-module/account/health-check
+### Health check
+GET {{url}}/health/users
 
-###
+### Sign up user
 POST {{url}}/users-module/account/sign-up
 Content-Type: application/json
 
@@ -13,7 +13,7 @@ Content-Type: application/json
     "role":"admin"
 }
 
-###
+### Sign in user
 POST {{url}}/users-module/account/sign-in
 Content-Type: application/json
 

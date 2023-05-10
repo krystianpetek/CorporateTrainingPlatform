@@ -18,5 +18,6 @@ internal class UsersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseHealthChecks($"/health/{Name}");
     }
 }

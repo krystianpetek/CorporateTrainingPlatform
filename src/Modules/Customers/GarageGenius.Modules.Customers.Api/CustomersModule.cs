@@ -25,6 +25,6 @@ internal class CustomersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
-
+        app.UseHealthChecks($"/health/{Name}");
     }
 }

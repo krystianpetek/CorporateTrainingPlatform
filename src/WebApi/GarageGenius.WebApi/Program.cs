@@ -43,6 +43,7 @@ public static class Program
                 });
             });
             builder.Services.AddControllers();
+            builder.Services.AddHealthChecks();
 
             IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
             IEnumerable<IModule> modules = assemblies.LoadModules();
@@ -59,6 +60,12 @@ public static class Program
             {
                 requestLoggingOptions.MessageTemplate = "HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000} ms";
             });
+
+            foreach (IModule module in modules)
+            {
+                module.Use(app);
+                Log.Information($"Mapped registered services for module: {module.Name}");
+            }
 
             app.UseSharedInfrastructure();
 

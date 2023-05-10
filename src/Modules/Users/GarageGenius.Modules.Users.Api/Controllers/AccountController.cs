@@ -15,13 +15,6 @@ public class AccountController : BaseController
         _dispatcher = dispatcher;
     }
 
-    [HttpGet("health-check")]
-    public ActionResult<string> HealthCheck()
-    {
-        var response = new { message = "Users module - I'm alive." };
-        return Ok(response);
-    }
-
     [HttpPost("sign-up")]
     [AllowAnonymous]
     [SwaggerOperation("Sign up")]
