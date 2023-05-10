@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties notifications_1settings_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GarageGenius.Modules.Notifications.Core\GarageGenius.Modules.Notifications.Core.csproj" />
+  </ItemGroup>
+
 </Project>
