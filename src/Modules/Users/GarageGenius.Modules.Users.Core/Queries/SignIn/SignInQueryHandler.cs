@@ -1,18 +1,18 @@
-﻿using GarageGenius.Modules.Users.Core.Exceptions;
+﻿using GarageGenius.Modules.Users.Core.Entities;
+using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authorization;
 using GarageGenius.Shared.Abstractions.Queries;
-using Microsoft.Extensions.Logging;
 
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
 internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
 {
     private readonly IUserRepository _userRepository;
-    private readonly ILogger<SignInQueryHandler> _logger;
+    private readonly Serilog.ILogger _logger;
     private readonly IPasswordManager _passwordManager;
     private readonly IJwtTokenService _jwtTokenService;
 
-    public SignInQueryHandler(IJwtTokenService jwtTokenService, IPasswordManager passwordManager, ILogger<SignInQueryHandler> logger, IUserRepository userRepository)
+    public SignInQueryHandler(IJwtTokenService jwtTokenService, IPasswordManager passwordManager, Serilog.ILogger logger, IUserRepository userRepository)
     {
         _jwtTokenService = jwtTokenService;
         _passwordManager = passwordManager;
@@ -32,25 +32,21 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
             throw new MissingPasswordException();
         }
 
-        var user = await _userRepository.GetByEmailAsync(query.Email.ToLowerInvariant());
-        if (user is null)
-        {
-            throw new InvalidCredentialsException();
-        }
+        User user = await _userRepository.GetByEmailAsync(query.Email.ToLowerInvariant()) ?? throw new InvalidCredentialsException();
 
         if (!_passwordManager.IsValid(query.Password, user.Password))
         {
             throw new InvalidCredentialsException();
         }
 
-        var claims = new Dictionary<string, IEnumerable<string>>
+        Dictionary<string,IEnumerable<string>> claims = new Dictionary<string, IEnumerable<string>>
         {
             ["permissions"] = user.Role.Permissions
         };
 
         string token = _jwtTokenService.GenerateToken(user.Email.Value);
 
-        _logger.LogInformation($"User with ID: '{user.Id}' has signed in.");
+        _logger.Information($"User with ID: '{user.Id}' has signed in.");
         return token;
     }
 }

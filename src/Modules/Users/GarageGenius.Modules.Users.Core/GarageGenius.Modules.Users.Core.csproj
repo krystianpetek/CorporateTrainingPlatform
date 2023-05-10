@@ -11,8 +11,4 @@
     <ProjectReference Include="..\GarageGenius.Modules.Users.Shared\GarageGenius.Modules.Users.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dto\" />
-  </ItemGroup>
-
 </Project>
