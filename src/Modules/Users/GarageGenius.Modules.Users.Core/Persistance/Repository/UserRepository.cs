@@ -32,14 +32,17 @@ internal class UserRepository : IUserRepository
     public Task<User> GetAsync(Guid id)
     {
         return _usersDbContext.Users
-            .Include(x => x.Role)
+            .AsQueryable()
+            .AsNoTracking()
+            //.Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public Task<User> GetByEmailAsync(string email)
     {
         return _usersDbContext.Users
-            .Include(x => x.Role)
+            .AsNoTracking()
+            //.Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Email == email);
     }
 

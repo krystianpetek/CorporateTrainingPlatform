@@ -4,7 +4,7 @@
 GET {{url}}/health/users-module
 
 ### Sign up user
-POST {{url}}/users-module/account/sign-up
+POST {{url}}/users-module/users/sign-up
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### Sign in user
-POST {{url}}/users-module/account/sign-in
+POST {{url}}/users-module/users/sign-in
 Content-Type: application/json
 
 {

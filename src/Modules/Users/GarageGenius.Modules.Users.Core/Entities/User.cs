@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.ValueObjects;
+﻿using GarageGenius.Modules.Users.Core.Dto;
+using GarageGenius.Modules.Users.Core.ValueObjects;
 using GarageGenius.Shared.Abstractions.Common;
 
 namespace GarageGenius.Modules.Users.Core.Entities;
@@ -34,4 +35,10 @@ internal sealed class User : AuditableEntity
     }
 }
 
-
+public static class UserExtensions
+{
+    internal static GetUserDto AsGetUserDto(this User user)
+    {
+        return new GetUserDto(user.Id, user.RoleId, user.Email.Value, user.State, user.Created);
+    }
+}

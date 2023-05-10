@@ -42,10 +42,14 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         }
 
         string email = command.Email.ToLowerInvariant();
-        User user = await _userRepository.GetByEmailAsync(email) ?? throw new EmailAlreadyRegisteredException();
+        User user = await _userRepository.GetByEmailAsync(email);
+        if (user is not null)
+        {
+            throw new EmailAlreadyRegisteredException();
+        }
 
         string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLowerInvariant();
-        
+
         Role role = await _roleRepository.GetAsync(roleName) ?? throw new RoleNotFoundException(roleName);
 
         string password = _passwordManager.Generate(command.Password);
