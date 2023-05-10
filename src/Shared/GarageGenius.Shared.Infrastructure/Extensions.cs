@@ -4,7 +4,6 @@ using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
-using GarageGenius.Shared.Infrastructure.Middleware.ErrorHandling;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -23,7 +22,6 @@ public static class Extensions
         services.AddInMemoryDispatcher();
         services.AddSystemDate();
         services.AddPasswordManager();
-        services.AddErrorHandling();
         services.AddMessageBroker();
         services.AddHostedService<DbContextWorker>();
         services.AddSingleton<IJwtSettings,JwtSettings>();
@@ -35,7 +33,6 @@ public static class Extensions
 
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
     {
-        app.UseErrorHandling();
         return app;
     }
 }

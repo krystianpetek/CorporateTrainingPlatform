@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 
-namespace GarageGenius.Shared.Infrastructure.Middleware.ErrorHandling;
-public class ErrorHandlingMiddleware : IMiddleware
+namespace GarageGenius.WebApi.Middlewares.ErrorHandling;
+public class GlobalErrorHandlingMiddleware : IMiddleware
 {
-    private readonly ILogger<ErrorHandlingMiddleware> _logger;
+    private readonly Serilog.ILogger _logger;
 
-    public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
+    public GlobalErrorHandlingMiddleware(Serilog.ILogger logger)
     {
         _logger = logger;
     }
@@ -23,7 +19,7 @@ public class ErrorHandlingMiddleware : IMiddleware
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, exception.Message);
+            _logger.Error(exception, exception.Message);
             await HandleExceptionAsync(context, exception);
         }
     }
@@ -65,13 +61,13 @@ public class ErrorHandlingMiddleware : IMiddleware
 
 public static class Extensions
 {
-    public static IServiceCollection AddErrorHandling(this IServiceCollection services)
+    public static IServiceCollection AddGlobalErrorHandling(this IServiceCollection services)
     {
-        return services.AddScoped<ErrorHandlingMiddleware>();
+        return services.AddScoped<GlobalErrorHandlingMiddleware>();
     }
 
-    public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder app)
+    public static IApplicationBuilder UseGlobalErrorHandling(this IApplicationBuilder app)
     {
-        return app.UseMiddleware<ErrorHandlingMiddleware>();
+        return app.UseMiddleware<GlobalErrorHandlingMiddleware>();
     }
 }

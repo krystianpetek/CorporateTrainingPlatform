@@ -1,5 +1,6 @@
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure;
+using GarageGenius.WebApi.Middlewares.ErrorHandling;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.AspNetCore;
@@ -13,6 +14,7 @@ public static class Program
 {
     public async static Task<int> Main(string[] args)
     {
+        // ensure logging before configuration is loaded
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
@@ -30,6 +32,7 @@ public static class Program
                 .Enrich.FromLogContext(), 
                 preserveStaticLogger: true);
 
+            builder.Services.AddGlobalErrorHandling();
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen((swagger) =>
@@ -67,6 +70,7 @@ public static class Program
                 Log.Information($"Mapped registered services for module: {module.Name}");
             }
 
+            app.UseGlobalErrorHandling();
             app.UseSharedInfrastructure();
 
             app.UseHttpsRedirection();
