@@ -1,29 +1,31 @@
-﻿using GarageGenius.Shared.Abstractions.Common;
+﻿using GarageGenius.Modules.Cars.Core.Types;
+using GarageGenius.Modules.Cars.Core.ValueObjects;
+using GarageGenius.Shared.Abstractions.Common;
 
 namespace GarageGenius.Modules.Cars.Core.Entities;
 internal sealed class Car : AuditableEntity
 {
-    public Guid Id { get; private set; }
-    public Guid CustomerId { get; private set; }
-    public string Manufacturer { get; private set; }
-    public string Model { get; private set; }
-    public string? Year { get; private set; }
-    public string? Vin { get; private set; }
-    public string? LicensePlate { get; private set; }
+    public CarId Id { get; private set; }
+    public CustomerId CustomerId { get; private set; }
+    public Manufacturer Manufacturer { get; private set; }
+    public Model Model { get; private set; }
+    public Year? Year { get; private set; }
+    public Vin? Vin { get; private set; }
+    public LicensePlate? LicensePlate { get; private set; }
 
     private Car() { }
 
-    public Car(Guid customerId, string manufacturer, string model)
+    public Car(CustomerId customerId, Manufacturer manufacturer, Model model)
     {
-        Id = Guid.NewGuid();
+        Id = new CarId(Guid.NewGuid());
         CustomerId = customerId;
         Manufacturer = manufacturer;
         Model = model;
     }
 
-    public Car(Guid customerId, string manufacturer, string model, string? year, string? vin, string? licensePlate)
+    public Car(CustomerId customerId, Manufacturer manufacturer, Model model, Year? year, Vin? vin, LicensePlate? licensePlate)
     {
-        Id = Guid.NewGuid();
+        Id = new CarId(Guid.NewGuid());
         CustomerId = customerId;
         Manufacturer = manufacturer;
         Model = model;
