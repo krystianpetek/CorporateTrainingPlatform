@@ -10,7 +10,6 @@ internal static class Extensions
 {
     public static IServiceCollection AddCustomersCore(this IServiceCollection services)
     {
-
         return services;
     }
 }
