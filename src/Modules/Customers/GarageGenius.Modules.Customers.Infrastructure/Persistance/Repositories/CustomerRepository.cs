@@ -1,6 +1,8 @@
 ﻿using GarageGenius.Modules.Customers.Core.Entities;
+using GarageGenius.Modules.Customers.Core.Exceptions;
 using GarageGenius.Modules.Customers.Core.Repositories;
 using GarageGenius.Modules.Customers.Infrastructure.Persistance.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace GarageGenius.Modules.Customers.Infrastructure.Persistance.Repositories;
 internal class CustomerRepository : ICustomerRepository
@@ -18,13 +20,16 @@ internal class CustomerRepository : ICustomerRepository
         await _customersDbContext.SaveChangesAsync();
     }
 
-    public Task<Customer> GetAsync(Guid id)
+    public async Task<Customer> GetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        Customer customer = await _customersDbContext.Customers.SingleOrDefaultAsync(x => x.Id == id) ?? throw new CustomerNotFoundException(id);
+        return customer;
+
     }
 
-    public Task UpdateAsync(Customer customer)
+    public async Task UpdateAsync(Customer customer)
     {
-        throw new NotImplementedException();
+        _customersDbContext.Customers.Update(customer);
+        await _customersDbContext.SaveChangesAsync();
     }
 }
