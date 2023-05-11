@@ -9,7 +9,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 {
     private readonly ISystemDateService _systemDateService;
 
-    public AuditableEntitySaveChangesInterceptor(ISystemDateService systemDateService)
+    public AuditableEntitySaveChangesInterceptor(ISystemDateService systemDateService) // TODO - Inject current user service
     {
         _systemDateService = systemDateService;
     }

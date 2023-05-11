@@ -7,7 +7,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 {
     private readonly HashSet<string> _permissions = new()
     {
-        "users","cars","clients"
+        "users","cars","notifications,customers"
     };
 
     private readonly UsersDbContext _usersDbContext;
@@ -31,9 +31,15 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
     private async Task AddRolesAsync()
     {
-        await _usersDbContext.Roles.AddAsync(new Role("admin", _permissions));
-        await _usersDbContext.Roles.AddAsync(new Role("user", new List<string>()));
-
+        await _usersDbContext.Roles.AddRangeAsync(_roles);
         await _usersDbContext.SaveChangesAsync();
     }
+
+    private List<Role> _roles => new List<Role>() // TODO : Move to config file
+    {
+        new Role("Administrator", _permissions),
+        new Role("Manager", _permissions),
+        new Role("Employee", _permissions),
+        new Role("Customer", new List<string>())
+    };
 }
