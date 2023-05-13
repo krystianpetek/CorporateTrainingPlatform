@@ -5,6 +5,7 @@ using GarageGenius.Shared.Infrastructure.Events;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
+using GarageGenius.Shared.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,7 @@ public static class Extensions
         services.AddSharedInMemoryDispatcher();
         services.AddSharedSystemDate();
         services.AddSharedMessageBroker();
+        services.AddSharedSwagger();
         services.AddHostedService<DbContextWorker>();
         return services;
     }
@@ -29,6 +31,7 @@ public static class Extensions
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
     {
         app.UseSharedAuthentication();
+        app.UseSharedSwagger();
         return app;
     }
 }

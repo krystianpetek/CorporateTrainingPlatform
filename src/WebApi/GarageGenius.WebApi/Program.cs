@@ -23,7 +23,6 @@ public static class Program
         try
         {
             Log.Information("Starting web host");
-
             WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
             builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) => loggerConfiguration
                 .ReadFrom.Configuration(hostBuilderContext.Configuration)
@@ -34,16 +33,6 @@ public static class Program
             builder.Services.AddGlobalErrorHandling();
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen((swagger) =>
-            {
-                swagger.EnableAnnotations();
-                swagger.CustomSchemaIds(x => x.FullName);
-                swagger.SwaggerDoc(name: "v1", info: new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "GeniusGarage"
-                });
-            });
             builder.Services.AddControllers();
             builder.Services.AddHealthChecks();
 
@@ -63,6 +52,7 @@ public static class Program
                 requestLoggingOptions.MessageTemplate = "HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000} ms";
             });
 
+            app.UseSharedInfrastructure();
             foreach (IModule module in modules)
             {
                 module.Use(app);
@@ -70,19 +60,7 @@ public static class Program
             }
 
             app.UseGlobalErrorHandling();
-            app.UseSharedInfrastructure();
-
             app.UseHttpsRedirection();
-            app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI((swagger) =>
-            {
-                swagger.SwaggerEndpoint(
-                    url: "/swagger/v1/swagger.json",
-                    name: "GeniusGarage");
-            });
-
             app.MapControllers();
             await app.RunAsync();
         }
