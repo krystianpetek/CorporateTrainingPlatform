@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 
 /// <summary>
 /// JSON Web Token options class
@@ -46,10 +46,10 @@ public class JsonWebTokenOptions
     /// </summary>
     public bool ValidateIssuerSigningKey { get; init; }
 
-    public static Func<JsonWebTokenOptions, bool> ValidationRules => (JsonWebTokenOptions jsonWebTokenOptions) =>
+    public static Func<JsonWebTokenOptions, bool> ValidationRules => (jsonWebTokenOptions) =>
     {
         if (string.IsNullOrWhiteSpace(jsonWebTokenOptions.IssuerSigningKey) || jsonWebTokenOptions.IssuerSigningKey.Length < 60)
-            throw new OptionsValidationException(jsonWebTokenOptions.IssuerSigningKey, typeof(string),new [] {"Invalidate IssuerSigningKey" });
+            throw new OptionsValidationException(jsonWebTokenOptions.IssuerSigningKey, typeof(string), new[] { "Invalidate IssuerSigningKey" });
         // TODO settings validation rules
         return true;
     };

@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -23,10 +24,10 @@ internal class JsonWebTokenService : IJsonWebTokenService
         _systemDateService = systemDateService;
     }
 
-    public JsonWebTokenDto GenerateToken(Guid userId, string email, string role, IDictionary<string, object> claims)
+    public JsonWebTokenResponse GenerateToken(Guid userId, string email, string role, IDictionary<string, object> claims)
     {
         SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jsonWebTokenOptions.IssuerSigningKey));
-
+        SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
         DateTime operationDate = _systemDateService.GetCurrentDate();
 
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
@@ -45,19 +46,37 @@ internal class JsonWebTokenService : IJsonWebTokenService
             NotBefore = operationDate,
             IssuedAt = operationDate,
             Expires = operationDate.Add(_jsonWebTokenOptions.Expiration),
-            SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = signingCredentials
         };
         
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
         string accessToken = tokenHandler.WriteToken(securityToken);
 
-        return new JsonWebTokenDto(userId, accessToken, operationDate, claims);
+        _logger.Information("Successfully created access token for user {userId}", userId);
+
+        return new JsonWebTokenResponse(userId, accessToken, operationDate, claims);
         // TODO save token after generate
     }
 
     public ClaimsPrincipal GetPrincipalFromToken(string token)
     {
         throw new NotImplementedException();
+
+        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+        SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jsonWebTokenOptions.IssuerSigningKey));
+        SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
+
+        TokenValidationParameters tokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = _jsonWebTokenOptions.Issuer,
+            ValidAudience = _jsonWebTokenOptions.Audience,
+            IssuerSigningKey = signingCredentials.Key,
+            
+            ValidateIssuer = _jsonWebTokenOptions.ValidateIssuer,
+            ValidateAudience = _jsonWebTokenOptions.ValidateAudience,
+            ValidateLifetime = _jsonWebTokenOptions.ValidateLifetime,
+            ValidateIssuerSigningKey = _jsonWebTokenOptions.ValidateIssuerSigningKey,
+        };
     }
 }
