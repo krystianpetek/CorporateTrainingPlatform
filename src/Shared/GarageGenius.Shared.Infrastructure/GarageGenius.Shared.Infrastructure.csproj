@@ -19,8 +19,4 @@
     <ProjectReference Include="..\GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-  </ItemGroup>
-
 </Project>

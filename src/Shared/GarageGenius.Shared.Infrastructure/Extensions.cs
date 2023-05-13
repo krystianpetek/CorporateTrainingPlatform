@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Shared.Infrastructure.Authentication;
+using GarageGenius.Shared.Infrastructure.Authorization;
 using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
@@ -17,6 +18,7 @@ public static class Extensions
     public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies)
     {
         services.AddSharedAuthentication(assemblies, configuration);
+        services.AddSharedAuthorization();
         services.AddSharedEventHandlers(assemblies);
         services.AddSharedCommandHandlers(assemblies);
         services.AddSharedQueryHandlers(assemblies);
@@ -31,6 +33,7 @@ public static class Extensions
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
     {
         app.UseSharedAuthentication();
+        app.UseSharedAuthorization();
         app.UseSharedSwagger();
         return app;
     }

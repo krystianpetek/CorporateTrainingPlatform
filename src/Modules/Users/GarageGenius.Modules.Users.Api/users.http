@@ -21,3 +21,11 @@ Content-Type: application/json
     "email": "krystianpetek2@gmail.com",
     "password": "Password!23"
 }
+
+### Get user info
+@token = token
+@userId = 5b0930f8-374c-411f-8af7-ac90e71d6013
+
+GET {{url}}/users-module/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}

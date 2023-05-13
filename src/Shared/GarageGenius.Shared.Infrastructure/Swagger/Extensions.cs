@@ -25,10 +25,31 @@ public static class Extensions
                     Url = new Uri("https://www.linkedin.com/in/krystian-petek-3731b9215/")
                 }
             });
-            swaggerGenOptions.AddSecurityDefinition("http",new OpenApiSecurityScheme
+            swaggerGenOptions.AddSecurityDefinition("Bearer",new OpenApiSecurityScheme
             {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
                 Type = SecuritySchemeType.Http,
-
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                Description = "JWT Authorization header using the Bearer scheme.",
+            });
+            swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        },
+                        Scheme = "Bearer",
+                        Name = "Bearer",
+                        In = ParameterLocation.Header,
+                    },
+                    new List<string>()
+                }
             });
         });
         return services;
