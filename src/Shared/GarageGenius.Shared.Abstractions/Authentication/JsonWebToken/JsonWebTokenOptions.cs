@@ -1,16 +1,16 @@
-﻿namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+﻿using Microsoft.Extensions.Options;
+
+namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 
 /// <summary>
 /// JSON Web Token options class
 /// </summary>
 public class JsonWebTokenOptions
 {
-    private const string Key = nameof(JsonWebTokenOptions);
-
     /// <summary>
     /// Section name key in appsettings.json
     /// </summary>
-    public static string SectionName => Key;
+    public static string SectionName { get; } = nameof(JsonWebTokenOptions);
 
     /// <summary>
     /// Issuer - claim identifies the principal that issued the JWT
@@ -45,4 +45,12 @@ public class JsonWebTokenOptions
     /// A flag indicating whether to validate the signing key used to sign the JWT.
     /// </summary>
     public bool ValidateIssuerSigningKey { get; init; }
+
+    public static Func<JsonWebTokenOptions, bool> ValidationRules => (JsonWebTokenOptions jsonWebTokenOptions) =>
+    {
+        if (string.IsNullOrWhiteSpace(jsonWebTokenOptions.IssuerSigningKey) || jsonWebTokenOptions.IssuerSigningKey.Length < 60)
+            throw new OptionsValidationException(jsonWebTokenOptions.IssuerSigningKey, typeof(string),new [] {"Invalidate IssuerSigningKey" });
+        // TODO settings validation rules
+        return true;
+    };
 }

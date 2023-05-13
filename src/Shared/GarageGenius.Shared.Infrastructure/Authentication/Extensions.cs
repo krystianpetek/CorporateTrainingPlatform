@@ -14,9 +14,15 @@ public static class Extensions
         {
             //authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         });
+
+        services.AddOptions<JsonWebTokenOptions>()
+            .BindConfiguration(JsonWebTokenOptions.SectionName)
+            .Validate(JsonWebTokenOptions.ValidationRules)
+            .ValidateOnStart();
+
         services.AddPasswordManager();
-        services.Configure<JsonWebTokenOptions>(configuration.GetRequiredSection(JsonWebTokenOptions.SectionName));
         services.AddScoped<IJsonWebTokenService, JsonWebTokenService>(); // token should be generated once per request
+        
         return services;
     }
 }
