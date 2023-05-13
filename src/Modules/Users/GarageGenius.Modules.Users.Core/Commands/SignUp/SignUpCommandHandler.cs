@@ -2,7 +2,7 @@
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Shared.Events;
-using GarageGenius.Shared.Abstractions.Authorization;
+using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
 
@@ -41,14 +41,14 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
             throw new MissingPasswordException();
         }
 
-        string email = command.Email.ToLowerInvariant();
+        string email = command.Email.ToLower();
         User user = await _userRepository.GetByEmailAsync(email);
         if (user is not null)
         {
             throw new EmailAlreadyRegisteredException();
         }
 
-        string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLowerInvariant();
+        string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
 
         Role role = await _roleRepository.GetAsync(roleName) ?? throw new RoleNotFoundException(roleName);
 

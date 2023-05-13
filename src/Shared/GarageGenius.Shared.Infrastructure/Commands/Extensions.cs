@@ -5,7 +5,7 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure.Commands;
 public static class Extensions
 {
-    public static IServiceCollection AddCommandHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddSharedCommandHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
         services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
 

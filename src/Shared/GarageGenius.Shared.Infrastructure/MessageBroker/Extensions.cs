@@ -4,7 +4,7 @@ namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddMessageBroker(this IServiceCollection services)
+    public static IServiceCollection AddSharedMessageBroker(this IServiceCollection services)
     {
         services.AddTransient<IMessageBroker, InMemoryMessageBroker>();
         services.AddSingleton<IEventChannel, EventChannel>();

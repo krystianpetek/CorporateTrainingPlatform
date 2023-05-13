@@ -5,7 +5,7 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure.Queries;
 internal static class Extensions
 {
-    public static IServiceCollection AddQueryHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddSharedQueryHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
         services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
 

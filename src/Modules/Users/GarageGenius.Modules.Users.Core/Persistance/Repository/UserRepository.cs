@@ -34,7 +34,7 @@ internal class UserRepository : IUserRepository
         return _usersDbContext.Users
             .AsQueryable()
             .AsNoTracking()
-            //.Include(x => x.Role)
+            .Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
@@ -42,7 +42,7 @@ internal class UserRepository : IUserRepository
     {
         return _usersDbContext.Users
             .AsNoTracking()
-            //.Include(x => x.Role)
+            .Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Email == email);
     }
 

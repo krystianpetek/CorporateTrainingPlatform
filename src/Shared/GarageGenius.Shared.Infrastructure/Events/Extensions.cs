@@ -5,7 +5,7 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure.Events;
 public static class Extensions
 {
-    public static IServiceCollection AddEventHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddSharedEventHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
         services.AddSingleton<IEventDispatcher, EventDispatcher>();
 

@@ -12,7 +12,7 @@ internal class SystemDateService : ISystemDateService
 
 public static class Extensions
 {
-    public static IServiceCollection AddSystemDate(this IServiceCollection services)
+    public static IServiceCollection AddSharedSystemDate(this IServiceCollection services)
     {
         services.AddSingleton<ISystemDateService, SystemDateService>();
         return services;

@@ -32,7 +32,7 @@ internal sealed class InMemoryDispatcher : IDispatcher
 
 public static class Extensions
 {
-    public static IServiceCollection AddInMemoryDispatcher(this IServiceCollection services)
+    public static IServiceCollection AddSharedInMemoryDispatcher(this IServiceCollection services)
     {
         services.AddSingleton<IDispatcher, InMemoryDispatcher>();
         return services;

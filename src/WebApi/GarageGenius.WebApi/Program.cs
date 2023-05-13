@@ -50,7 +50,7 @@ public static class Program
             IList<Assembly> assemblies = LoadAssemblies(builder.Configuration, "GarageGenius.Modules.");
             IEnumerable<IModule> modules = assemblies.LoadModules();
 
-            builder.Services.AddSharedInfrastructure(assemblies);
+            builder.Services.AddSharedInfrastructure( builder.Configuration, assemblies);
             foreach (IModule module in modules)
             {
                 module.Register(builder.Services);

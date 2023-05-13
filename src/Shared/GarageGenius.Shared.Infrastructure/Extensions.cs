@@ -1,5 +1,6 @@
-﻿using GarageGenius.Shared.Abstractions.Authorization;
-using GarageGenius.Shared.Infrastructure.Authorization;
+﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+using GarageGenius.Shared.Infrastructure.Authentication;
+using GarageGenius.Shared.Infrastructure.Authentication.JsonWebToken;
 using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
@@ -7,27 +8,23 @@ using GarageGenius.Shared.Infrastructure.MessageBroker;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace GarageGenius.Shared.Infrastructure;
 public static class Extensions
 {
-    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IList<Assembly> assemblies)
+    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies)
     {
-
-        services.AddEventHandlers(assemblies);
-        services.AddCommandHandlers(assemblies);
-        services.AddQueryHandlers(assemblies);
-        services.AddInMemoryDispatcher();
-        services.AddSystemDate();
-        services.AddPasswordManager();
-        services.AddMessageBroker();
+        services.AddSharedAuthentication(assemblies, configuration);
+        services.AddSharedEventHandlers(assemblies);
+        services.AddSharedCommandHandlers(assemblies);
+        services.AddSharedQueryHandlers(assemblies);
+        services.AddSharedInMemoryDispatcher();
+        services.AddSharedSystemDate();
+        services.AddSharedMessageBroker();
         services.AddHostedService<DbContextWorker>();
-        services.AddSingleton<IJwtSettings, JwtSettings>();
-        services.AddTransient<IJwtTokenService, JwtTokenService>();
-        //services.Configure<JwtSettings>(jwtSettings => configuration.GetRequiredSection("JwtSecret").Bind(jwtSettings));
-
         return services;
     }
 
