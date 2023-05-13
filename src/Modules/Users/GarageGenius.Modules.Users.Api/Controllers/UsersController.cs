@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Users.Core.Dto;
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
 using GarageGenius.Modules.Users.Core.Queries.SignIn;
+using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -43,9 +44,9 @@ public class UsersController : BaseController
     [HttpPost("sign-in")]
     [AllowAnonymous]
     [SwaggerOperation("Sign in")]
-    public async Task<ActionResult<string>> SignInAsync(SignInQuery signInQuery)
+    public async Task<ActionResult<JsonWebTokenDto>> SignInAsync(SignInQuery signInQuery)
     {
-        string token = await _dispatcher.QueryAsync<string>(signInQuery);
+        JsonWebTokenDto token = await _dispatcher.QueryAsync<JsonWebTokenDto>(signInQuery);
         return Ok(token);
     }
 

@@ -1,5 +1,8 @@
-﻿namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+﻿using System.Security.Claims;
+
+namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 public interface IJsonWebTokenService
 {
-    string GenerateToken(string username, string role = null, IDictionary<string, IEnumerable<string>> claims = null, string audience = null);
+    JsonWebTokenDto GenerateToken(Guid userId, string email, string role, IDictionary<string, object> claims);
+    ClaimsPrincipal GetPrincipalFromToken(string token);
 }

@@ -6,7 +6,7 @@ using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
-internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
+internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenDto>
 {
     private readonly IUserRepository _userRepository;
     private readonly Serilog.ILogger _logger;
@@ -21,33 +21,25 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
         _userRepository = userRepository;
     }
 
-    public async Task<string> HandleAsync(SignInQuery query, CancellationToken cancellationToken = default)
+    public async Task<JsonWebTokenDto> HandleAsync(SignInQuery query, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(query.Email))
-        {
             throw new InvalidEmailException(query.Email);
-        }
 
         if (string.IsNullOrWhiteSpace(query.Password))
-        {
             throw new MissingPasswordException();
-        }
 
         User user = await _userRepository.GetByEmailAsync(query.Email.ToLower()) ?? throw new InvalidCredentialsException();
 
         if (!_passwordManager.IsValid(query.Password, user.Password))
-        {
             throw new InvalidCredentialsException();
-        }
 
-        Dictionary<string,IEnumerable<string>> claims = new Dictionary<string, IEnumerable<string>>
-        {
-            ["permissions"] = user.Role.Permissions
-        };
-
-        string token = _jwtTokenService.GenerateToken(user.Email.Value,user.RoleId, claims);
+        Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
+        JsonWebTokenDto token = _jwtTokenService.GenerateToken(user.Id, user.Email,user.RoleId, claims);
 
         _logger.Information($"User with ID: '{user.Id}' has signed in.");
+        
         return token;
+        // TODO refresh token
     }
 }
