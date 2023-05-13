@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Text;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
+using Microsoft.AspNetCore.Builder;
 
 namespace GarageGenius.Shared.Infrastructure.Authentication;
 public static class Extensions
@@ -32,21 +33,21 @@ public static class Extensions
 
             jwtBearerOptions.RequireHttpsMetadata = true;
             jwtBearerOptions.SaveToken = true;
-            jwtBearerOptions.Audience = jsonWebTokenOptions.Audience;
-            jwtBearerOptions.ClaimsIssuer = jsonWebTokenOptions.Issuer;
             jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
             {
-                RequireAudience = true,
-                RequireExpirationTime = true,
-                RequireSignedTokens = true,
-                ClockSkew = TimeSpan.Zero,
-
                 ValidIssuer = jsonWebTokenOptions.Issuer,
-                ValidAudience = jsonWebTokenOptions.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
-                ValidateAudience = jsonWebTokenOptions.ValidateAudience,
                 ValidateIssuer = jsonWebTokenOptions.ValidateIssuer,
+                
+                RequireSignedTokens = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
                 ValidateIssuerSigningKey = jsonWebTokenOptions.ValidateIssuerSigningKey,
+
+                RequireAudience = true,
+                ValidAudience = jsonWebTokenOptions.Audience,
+                ValidateAudience = jsonWebTokenOptions.ValidateAudience,
+
+                RequireExpirationTime = true,
+                ClockSkew = TimeSpan.Zero,
                 ValidateLifetime = jsonWebTokenOptions.ValidateLifetime,
             };
         });
@@ -55,5 +56,11 @@ public static class Extensions
         services.AddSingleton<IJsonWebTokenStorage, JsonWebTokenStorage>();
         services.AddHttpContextAccessor();
         return services;
+    }
+
+    public static IApplicationBuilder UseSharedAuthentication(this IApplicationBuilder app)
+    {
+        app.UseAuthentication();
+        return app;
     }
 }

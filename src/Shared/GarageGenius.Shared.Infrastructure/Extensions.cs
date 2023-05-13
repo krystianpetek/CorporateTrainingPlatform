@@ -28,6 +28,7 @@ public static class Extensions
 
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
     {
+        app.UseSharedAuthentication();
         return app;
     }
 }
