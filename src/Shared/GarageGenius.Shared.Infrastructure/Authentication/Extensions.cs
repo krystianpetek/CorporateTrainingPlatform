@@ -27,7 +27,28 @@ public static class Extensions
         })
         .AddJwtBearer(jwtBearerOptions =>
         {
-            
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+            JsonWebTokenOptions jsonWebTokenOptions = serviceProvider.GetRequiredService<IOptions<JsonWebTokenOptions>>().Value;
+
+            jwtBearerOptions.RequireHttpsMetadata = true;
+            jwtBearerOptions.SaveToken = true;
+            jwtBearerOptions.Audience = jsonWebTokenOptions.Audience;
+            jwtBearerOptions.ClaimsIssuer = jsonWebTokenOptions.Issuer;
+            jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+            {
+                RequireAudience = true,
+                RequireExpirationTime = true,
+                RequireSignedTokens = true,
+                ClockSkew = TimeSpan.Zero,
+
+                ValidIssuer = jsonWebTokenOptions.Issuer,
+                ValidAudience = jsonWebTokenOptions.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
+                ValidateAudience = jsonWebTokenOptions.ValidateAudience,
+                ValidateIssuer = jsonWebTokenOptions.ValidateIssuer,
+                ValidateIssuerSigningKey = jsonWebTokenOptions.ValidateIssuerSigningKey,
+                ValidateLifetime = jsonWebTokenOptions.ValidateLifetime,
+            };
         });
         services.AddPasswordManager();
         services.AddScoped<IJsonWebTokenService, JsonWebTokenService>(); // token should be generated once per request

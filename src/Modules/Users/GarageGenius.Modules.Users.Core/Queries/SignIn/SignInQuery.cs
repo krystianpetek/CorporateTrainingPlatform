@@ -1,11 +1,11 @@
-﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Queries;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
 
-public record SignInQuery : IQuery<JsonWebTokenDto>
+public record SignInQuery : IQuery<JsonWebTokenResponse>
 {
     [Required]
     [EmailAddress]
