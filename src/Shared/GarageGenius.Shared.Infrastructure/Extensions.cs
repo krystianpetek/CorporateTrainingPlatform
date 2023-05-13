@@ -1,6 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
-using GarageGenius.Shared.Infrastructure.Authentication;
-using GarageGenius.Shared.Infrastructure.Authentication.JsonWebToken;
+﻿using GarageGenius.Shared.Infrastructure.Authentication;
 using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;

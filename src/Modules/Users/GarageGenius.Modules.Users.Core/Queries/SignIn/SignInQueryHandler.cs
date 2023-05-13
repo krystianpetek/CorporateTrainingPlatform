@@ -1,7 +1,8 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
-using GarageGenius.Shared.Abstractions.Authorization;
+using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
+using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
@@ -10,9 +11,9 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
     private readonly IUserRepository _userRepository;
     private readonly Serilog.ILogger _logger;
     private readonly IPasswordManager _passwordManager;
-    private readonly IJwtTokenService _jwtTokenService;
+    private readonly IJsonWebTokenService _jwtTokenService;
 
-    public SignInQueryHandler(IJwtTokenService jwtTokenService, IPasswordManager passwordManager, Serilog.ILogger logger, IUserRepository userRepository)
+    public SignInQueryHandler(IJsonWebTokenService jwtTokenService, IPasswordManager passwordManager, Serilog.ILogger logger, IUserRepository userRepository)
     {
         _jwtTokenService = jwtTokenService;
         _passwordManager = passwordManager;
@@ -32,7 +33,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
             throw new MissingPasswordException();
         }
 
-        User user = await _userRepository.GetByEmailAsync(query.Email.ToLowerInvariant()) ?? throw new InvalidCredentialsException();
+        User user = await _userRepository.GetByEmailAsync(query.Email.ToLower()) ?? throw new InvalidCredentialsException();
 
         if (!_passwordManager.IsValid(query.Password, user.Password))
         {
@@ -44,7 +45,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, string>
             ["permissions"] = user.Role.Permissions
         };
 
-        string token = _jwtTokenService.GenerateToken(user.Email.Value);
+        string token = _jwtTokenService.GenerateToken(user.Email.Value,user.RoleId, claims);
 
         _logger.Information($"User with ID: '{user.Id}' has signed in.");
         return token;

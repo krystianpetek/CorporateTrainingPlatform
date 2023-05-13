@@ -23,6 +23,7 @@ public class UsersController : BaseController
         _dispatcher = dispatcher;
     }
 
+    [Authorize]
     [HttpGet("{id:guid}")]
     [SwaggerOperation("Get user by ID")]
     public async Task<ActionResult<GetUserDto>> GetUserAsync(Guid id)
