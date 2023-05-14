@@ -12,4 +12,10 @@
     <ProjectReference Include="..\GarageGenius.Modules.Notifications.Core\GarageGenius.Modules.Notifications.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="notifications.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

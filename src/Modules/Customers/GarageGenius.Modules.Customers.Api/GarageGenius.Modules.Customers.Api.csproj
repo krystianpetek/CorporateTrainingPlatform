@@ -10,6 +10,12 @@
     <ProjectReference Include="..\GarageGenius.Modules.Customers.Infrastructure\GarageGenius.Modules.Customers.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="customers.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties customers_1settings_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

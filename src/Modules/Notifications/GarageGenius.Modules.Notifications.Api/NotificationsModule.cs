@@ -13,6 +13,7 @@ internal class NotificationsModule : IModule
     public void Register(IServiceCollection services)
     {
         services.AddNotificationsCore();
+        services.AddControllers();
     }
 
     public void Use(IApplicationBuilder app)

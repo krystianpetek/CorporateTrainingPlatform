@@ -1,3 +1,7 @@
 {
-  "Enabled": true
+  "Module": {
+    "Notifications": {
+      "Enabled": true
+    }
+  }
 }
