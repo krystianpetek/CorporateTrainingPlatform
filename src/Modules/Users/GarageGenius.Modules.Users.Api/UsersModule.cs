@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Users.Core;
 using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,6 @@ internal class UsersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseHealthChecks($"/health/{BasePath}");
+        app.UseSharedHealthCheck(Name);
     }
 }

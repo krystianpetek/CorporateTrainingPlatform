@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Notifications.Core;
 using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,11 +14,10 @@ internal class NotificationsModule : IModule
     public void Register(IServiceCollection services)
     {
         services.AddNotificationsCore();
-        services.AddControllers();
     }
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseHealthChecks($"/health/{BasePath}");
+        app.UseSharedHealthCheck(Name);
     }
 }

@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Customers.Core;
 using GarageGenius.Modules.Customers.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,6 @@ internal class CustomersModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseHealthChecks($"/health/{BasePath}");
+        app.UseSharedHealthCheck(Name);
     }
 }

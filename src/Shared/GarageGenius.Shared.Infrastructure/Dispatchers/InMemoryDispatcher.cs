@@ -29,12 +29,3 @@ internal sealed class InMemoryDispatcher : IDispatcher
     public Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
         => _queryDispatcher.QueryAsync(query, cancellationToken);
 }
-
-public static class Extensions
-{
-    public static IServiceCollection AddSharedInMemoryDispatcher(this IServiceCollection services)
-    {
-        services.AddSingleton<IDispatcher, InMemoryDispatcher>();
-        return services;
-    }
-}
