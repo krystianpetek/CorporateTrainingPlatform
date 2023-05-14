@@ -25,14 +25,15 @@ public static class Extensions
                     Url = new Uri("https://www.linkedin.com/in/krystian-petek-3731b9215/")
                 }
             });
-            swaggerGenOptions.AddSecurityDefinition("Bearer",new OpenApiSecurityScheme
+            // TODO OAuth2.0 with OpenIdConnect and OpenIddict
+            swaggerGenOptions.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Name = "Authorization",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
+                Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer",
                 BearerFormat = "JWT",
-                Description = "JWT Authorization header using the Bearer scheme.",
+                Description = "Authorization using the Bearer scheme. To access to this API, pass 'Bearer {token}'",
             });
             swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
@@ -44,7 +45,7 @@ public static class Extensions
                             Type = ReferenceType.SecurityScheme,
                             Id = "Bearer"
                         },
-                        Scheme = "Bearer",
+                        Scheme = "oauth",
                         Name = "Bearer",
                         In = ParameterLocation.Header,
                     },
@@ -60,9 +61,17 @@ public static class Extensions
         app.UseSwagger();
         app.UseSwaggerUI((SwaggerUIOptions swaggerUIOptions) =>
         {
-            swaggerUIOptions.SwaggerEndpoint(
-                url: "/swagger/v1/swagger.json",
-               name: "GeniusGarage");
+            swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json","GeniusGarage");
+
+            swaggerUIOptions.RoutePrefix = "swagger";
+            swaggerUIOptions.DisplayRequestDuration();
+            swaggerUIOptions.EnableDeepLinking();
+            swaggerUIOptions.ShowCommonExtensions();
+            swaggerUIOptions.ShowExtensions();
+
+            swaggerUIOptions.EnableFilter();
+            swaggerUIOptions.EnableValidator();
+            swaggerUIOptions.EnablePersistAuthorization();
         });
         return app;
     }

@@ -19,13 +19,15 @@ public static class Extensions
     {
         services.AddSharedAuthentication(assemblies, configuration);
         services.AddSharedAuthorization();
+        services.AddSharedSwagger();
+
         services.AddSharedEventHandlers(assemblies);
         services.AddSharedCommandHandlers(assemblies);
         services.AddSharedQueryHandlers(assemblies);
         services.AddSharedInMemoryDispatcher();
-        services.AddSharedSystemDate();
         services.AddSharedMessageBroker();
-        services.AddSharedSwagger();
+        
+        services.AddSharedSystemDate();
         services.AddHostedService<DbContextWorker>();
         return services;
     }

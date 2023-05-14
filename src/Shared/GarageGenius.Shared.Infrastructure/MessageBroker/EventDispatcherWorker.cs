@@ -25,6 +25,7 @@ internal sealed class EventDispatcherWorker : BackgroundService
             try
             {
                 await _eventDispatcher.PublishAsync(@event, stoppingToken);
+                _logger.LogInformation("Executed event: {EventName} using {BackgroundService}", @event.GetType().Name, nameof(EventDispatcherWorker));
             }
             catch (Exception exception)
             {
