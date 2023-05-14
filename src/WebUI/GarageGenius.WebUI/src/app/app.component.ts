@@ -8,19 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public work?: string;
-
-  constructor(http: HttpClient) {
-    http.get<Response>('users-module/Account/health-check').subscribe(
-      (result: Response) => {
-        this.work = result.message;
-      },
-      (error) => console.error(error)
-    );
-  }
-
   title = 'GarageGenius.WebUI';
 }
-
-type Response = {
-  message: string;
-};
