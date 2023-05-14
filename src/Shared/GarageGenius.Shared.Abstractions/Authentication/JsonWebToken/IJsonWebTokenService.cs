@@ -1,5 +1,5 @@
-﻿using System.Security.Claims;
-using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
+﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
+using System.Security.Claims;
 
 namespace GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 

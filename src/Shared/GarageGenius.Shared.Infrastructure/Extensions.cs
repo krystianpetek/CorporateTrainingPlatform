@@ -3,6 +3,7 @@ using GarageGenius.Shared.Infrastructure.Authorization;
 using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
+using GarageGenius.Shared.Infrastructure.HealthCheck;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
@@ -20,13 +21,14 @@ public static class Extensions
         services.AddSharedAuthentication(assemblies, configuration);
         services.AddSharedAuthorization();
         services.AddSharedSwagger();
+        services.AddSharedHealthCheck();
 
         services.AddSharedEventHandlers(assemblies);
         services.AddSharedCommandHandlers(assemblies);
         services.AddSharedQueryHandlers(assemblies);
         services.AddSharedInMemoryDispatcher();
         services.AddSharedMessageBroker();
-        
+
         services.AddSharedSystemDate();
         services.AddHostedService<DbContextWorker>();
         return services;

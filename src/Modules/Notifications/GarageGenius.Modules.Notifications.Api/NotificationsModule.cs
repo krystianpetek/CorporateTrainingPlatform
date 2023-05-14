@@ -18,6 +18,6 @@ internal class NotificationsModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
-        app.UseSharedHealthCheck(Name);
+        app.MapHealthCheck(Name);
     }
 }

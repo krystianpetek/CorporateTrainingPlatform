@@ -15,8 +15,8 @@ internal class JsonWebTokenService : IJsonWebTokenService
     private readonly JsonWebTokenOptions _jsonWebTokenOptions;
 
     public JsonWebTokenService(
-        Serilog.ILogger logger, 
-        IOptions<JsonWebTokenOptions> jsonWebTokenOptions, 
+        Serilog.ILogger logger,
+        IOptions<JsonWebTokenOptions> jsonWebTokenOptions,
         ISystemDateService systemDateService)
     {
         _logger = logger;
@@ -48,7 +48,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
             Expires = operationDate.Add(_jsonWebTokenOptions.Expiration),
             SigningCredentials = signingCredentials
         };
-        
+
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
         string accessToken = tokenHandler.WriteToken(securityToken);
@@ -72,7 +72,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
             ValidIssuer = _jsonWebTokenOptions.Issuer,
             ValidAudience = _jsonWebTokenOptions.Audience,
             IssuerSigningKey = signingCredentials.Key,
-            
+
             ValidateIssuer = _jsonWebTokenOptions.ValidateIssuer,
             ValidateAudience = _jsonWebTokenOptions.ValidateAudience,
             ValidateLifetime = _jsonWebTokenOptions.ValidateLifetime,

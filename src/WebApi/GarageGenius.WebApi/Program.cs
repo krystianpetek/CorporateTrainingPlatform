@@ -2,10 +2,9 @@ using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure;
 using GarageGenius.Shared.Infrastructure.Modules;
 using GarageGenius.WebApi.Middlewares.ErrorHandling;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
-using System.Collections.Immutable;
 using System.Reflection;
 
 namespace GarageGenius.WebApi;
@@ -33,13 +32,11 @@ public static class Program
 
             builder.Services.AddGlobalErrorHandling();
             builder.Services.AddEndpointsApiExplorer();
-            //builder.Services.AddControllers();
-            builder.Services.AddHealthChecks();
 
             IReadOnlyCollection<Assembly> assemblies = builder.LoadSharedAssemblies("GarageGenius.Modules.");
-            IEnumerable<IModule> modules = assemblies.LoadModules(builder.Configuration);
+            IReadOnlyCollection<IModule> modules = assemblies.LoadModules(builder.Configuration);
 
-            builder.Services.AddSharedInfrastructure( builder.Configuration, assemblies.ToList());
+            builder.Services.AddSharedInfrastructure(builder.Configuration, assemblies.ToList());
             foreach (IModule module in modules)
             {
                 module.Register(builder.Services);
@@ -49,6 +46,10 @@ public static class Program
             WebApplication? app = builder.Build();
             app.UseSerilogRequestLogging(requestLoggingOptions =>
             {
+                requestLoggingOptions.EnrichDiagnosticContext = (IDiagnosticContext diagnosticContext, HttpContext httpContext) =>
+                {
+                    diagnosticContext.Set("UserId", httpContext.User.Identity.Name ?? "Anonymous");
+                };
                 requestLoggingOptions.MessageTemplate = "HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000} ms";
             });
 

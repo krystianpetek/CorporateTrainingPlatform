@@ -1,9 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using GarageGenius.Shared.Infrastructure.Authentication.PasswordManager;
-using System.Reflection;
-using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
-using GarageGenius.Shared.Infrastructure.Authentication.JsonWebToken;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.Authorization;
 public static class Extensions

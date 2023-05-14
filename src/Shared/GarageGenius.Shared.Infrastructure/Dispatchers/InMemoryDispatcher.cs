@@ -2,7 +2,6 @@ using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using GarageGenius.Shared.Abstractions.Events;
 using GarageGenius.Shared.Abstractions.Queries;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.Dispatchers;
 

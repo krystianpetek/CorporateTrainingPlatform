@@ -1,15 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using GarageGenius.Shared.Infrastructure.Authentication.PasswordManager;
-using System.Reflection;
-using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
-using GarageGenius.Shared.Infrastructure.Authentication.JsonWebToken;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Options;
-using System.Text;
+﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
+using GarageGenius.Shared.Infrastructure.Authentication.JsonWebToken;
+using GarageGenius.Shared.Infrastructure.Authentication.PasswordManager;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+using System.Text;
 
 namespace GarageGenius.Shared.Infrastructure.Authentication;
 public static class Extensions
@@ -37,7 +37,7 @@ public static class Extensions
             {
                 ValidIssuer = jsonWebTokenOptions.Issuer,
                 ValidateIssuer = jsonWebTokenOptions.ValidateIssuer,
-                
+
                 RequireSignedTokens = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
                 ValidateIssuerSigningKey = jsonWebTokenOptions.ValidateIssuerSigningKey,

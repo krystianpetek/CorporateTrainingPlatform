@@ -16,9 +16,9 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
     private readonly IJsonWebTokenStorage _jwtTokenStorage;
 
     public SignInQueryHandler(
-        Serilog.ILogger logger, 
+        Serilog.ILogger logger,
         IUserRepository userRepository,
-        IJsonWebTokenService jwtTokenService, 
+        IJsonWebTokenService jwtTokenService,
         IJsonWebTokenStorage jwtTokenStorage,
         IPasswordManager passwordManager)
     {
@@ -43,7 +43,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
             throw new InvalidCredentialsException();
 
         Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
-        JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email,user.RoleId, claims);
+        JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email, user.RoleId, claims);
 
         _logger.Information($"User with ID: '{user.Id}' has signed in.");
 

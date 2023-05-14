@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 using System.Reflection;
 
 namespace GarageGenius.Shared.Infrastructure.Modules;
@@ -13,17 +12,17 @@ public static class Extensions
         // load all assemblies
         var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
         var locations = assemblies.Where(x => !x.IsDynamic).Select(x => x.Location).ToArray();
-        
+
         // filter only GarageGenius monolith modules
         var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
             .Where(x => !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
             .Where(x => x.Contains(modulePart))
             .ToList();
 
-        foreach(var settings in Directory.EnumerateFiles(webApplicationBuilder.Environment.ContentRootPath,"*.settings.json",SearchOption.AllDirectories))
+        foreach (var settings in Directory.EnumerateFiles(webApplicationBuilder.Environment.ContentRootPath, "*.settings.json", SearchOption.AllDirectories))
         {
             webApplicationBuilder.Configuration.AddJsonFile(settings);
-            
+
         }
 
         //var abc = webApplicationBuilder.Configuration
@@ -48,7 +47,7 @@ public static class Extensions
         return assemblies;
     }
 
-    public static IList<IModule> LoadModules(this IReadOnlyCollection<Assembly> assemblies, IConfiguration configuration)
+    public static IReadOnlyCollection<IModule> LoadModules(this IReadOnlyCollection<Assembly> assemblies, IConfiguration configuration)
     {
         return assemblies
             .SelectMany(x => x.GetTypes())
