@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -12,6 +15,7 @@ public static class Extensions
         services.AddSwaggerGen((SwaggerGenOptions swaggerGenOptions) =>
         {
             swaggerGenOptions.EnableAnnotations();
+            // swaggerGenOptions.IncludeXmlComments(); // TODO - add XML comments to the project controllers
             swaggerGenOptions.CustomSchemaIds((Type x) => x.FullName);
             swaggerGenOptions.SwaggerDoc(name: "v1", info: new OpenApiInfo
             {
@@ -30,10 +34,10 @@ public static class Extensions
             {
                 Name = "Authorization",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
+                Type = SecuritySchemeType.Http,
                 Scheme = "Bearer",
                 BearerFormat = "JWT",
-                Description = "Authorization using the Bearer scheme. To access to this API, pass 'Bearer {token}'",
+                Description = "Authorization using the Bearer scheme. To access to this API, please enter bearer token",
             });
             swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
@@ -45,7 +49,7 @@ public static class Extensions
                             Type = ReferenceType.SecurityScheme,
                             Id = "Bearer"
                         },
-                        Scheme = "oauth",
+                        Scheme = "bearer",
                         Name = "Bearer",
                         In = ParameterLocation.Header,
                     },
@@ -58,20 +62,26 @@ public static class Extensions
 
     public static IApplicationBuilder UseSharedSwagger(this IApplicationBuilder app)
     {
-        app.UseSwagger();
+        app.UseSwagger((SwaggerOptions swaggerOptions) =>
+        {
+            swaggerOptions.RouteTemplate = "garageGenius/{documentName}/swagger.json";
+
+        });
         app.UseSwaggerUI((SwaggerUIOptions swaggerUIOptions) =>
         {
-            swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json","GeniusGarage");
-
-            swaggerUIOptions.RoutePrefix = "swagger";
-            swaggerUIOptions.DisplayRequestDuration();
-            swaggerUIOptions.EnableDeepLinking();
-            swaggerUIOptions.ShowCommonExtensions();
-            swaggerUIOptions.ShowExtensions();
+            swaggerUIOptions.RoutePrefix = "garageGenius";
+            swaggerUIOptions.SwaggerEndpoint("/garageGenius/v1/swagger.json", "GeniusGarage API");
 
             swaggerUIOptions.EnableFilter();
-            swaggerUIOptions.EnableValidator();
+            swaggerUIOptions.EnableDeepLinking();
             swaggerUIOptions.EnablePersistAuthorization();
+            swaggerUIOptions.EnableValidator();
+
+            swaggerUIOptions.DisplayRequestDuration();
+            swaggerUIOptions.DisplayOperationId();
+
+            swaggerUIOptions.ShowCommonExtensions();
+            swaggerUIOptions.ShowExtensions();
         });
         return app;
     }

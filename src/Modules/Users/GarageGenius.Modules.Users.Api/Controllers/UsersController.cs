@@ -26,6 +26,7 @@ public class UsersController : BaseController
     [Authorize]
     [HttpGet("{id:guid}")]
     [SwaggerOperation("Get user by ID")]
+    //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
     public async Task<ActionResult<GetUserDto>> GetUserAsync(Guid id)
     {
         return await _dispatcher.QueryAsync<GetUserDto>(new GetUserQuery(id));
