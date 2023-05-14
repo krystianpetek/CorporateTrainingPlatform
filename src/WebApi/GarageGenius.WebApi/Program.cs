@@ -16,7 +16,7 @@ public static class Program
     {
         // ensure logging before configuration is loaded
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateBootstrapLogger();
@@ -45,7 +45,7 @@ public static class Program
                 module.Register(builder.Services);
                 Log.Information($"Loaded module: {module.Name}");
             }
-
+            builder.Services.AddControllers();
             WebApplication? app = builder.Build();
             app.UseSerilogRequestLogging(requestLoggingOptions =>
             {
