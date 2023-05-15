@@ -41,6 +41,8 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
 
         if (!_passwordManager.IsValid(query.Password, user.Password))
             throw new InvalidCredentialsException();
+        
+        user.VerifyUserState();
 
         Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
         JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email, user.RoleId, claims);

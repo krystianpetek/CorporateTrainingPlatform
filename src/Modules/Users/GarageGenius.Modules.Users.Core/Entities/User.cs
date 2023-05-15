@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Users.Core.Dto;
+using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.ValueObjects;
 using GarageGenius.Shared.Abstractions.Common;
 
@@ -10,7 +11,7 @@ internal sealed class User : AuditableEntity
     public string RoleId { get; private set; }
     public EmailAddress Email { get; private set; }
     public string Password { get; private set; }
-    public UserState State { get; private set; }
+    public UserState? State { get; private set; }
 
     public User(EmailAddress email, string password, Role role)
     {
@@ -32,6 +33,12 @@ internal sealed class User : AuditableEntity
     internal void Activate()
     {
         State = UserState.Active;
+    }
+
+    internal void VerifyUserState()
+    {
+        if (State! != UserState.Active.Value)
+            throw new UserInactiveStateException(this.Id); // domain entity should throw exception ?
     }
 }
 

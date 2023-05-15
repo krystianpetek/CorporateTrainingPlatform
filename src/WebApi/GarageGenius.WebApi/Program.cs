@@ -2,7 +2,6 @@ using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure;
 using GarageGenius.Shared.Infrastructure.Modules;
 using GarageGenius.WebApi.Middlewares.ErrorHandling;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -48,7 +47,7 @@ public static class Program
             {
                 requestLoggingOptions.EnrichDiagnosticContext = (IDiagnosticContext diagnosticContext, HttpContext httpContext) =>
                 {
-                    diagnosticContext.Set("UserId", httpContext.User.Identity.Name ?? "Anonymous");
+                    diagnosticContext.Set("UserId", httpContext?.User?.Identity?.Name ?? "Anonymous");
                 };
                 requestLoggingOptions.MessageTemplate = "HTTP {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000} ms";
             });
