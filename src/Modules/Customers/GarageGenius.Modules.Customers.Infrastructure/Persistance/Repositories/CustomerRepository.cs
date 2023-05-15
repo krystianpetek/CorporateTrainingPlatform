@@ -20,11 +20,14 @@ internal class CustomerRepository : ICustomerRepository
         await _customersDbContext.SaveChangesAsync();
     }
 
-    public async Task<Customer> GetAsync(Guid id)
+    public async Task<Customer?> GetAsync(Guid id)
     {
-        Customer customer = await _customersDbContext.Customers.SingleOrDefaultAsync(x => x.Id == id) ?? throw new CustomerNotFoundException(id);
-        return customer;
+        Customer? customer = await _customersDbContext.Customers
+            .AsQueryable()
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id) ?? throw new CustomerNotFoundException(id);
 
+        return customer;
     }
 
     public async Task UpdateAsync(Customer customer)

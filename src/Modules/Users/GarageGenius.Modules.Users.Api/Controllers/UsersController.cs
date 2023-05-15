@@ -60,5 +60,6 @@ public class UsersController : BaseController
         await _dispatcher.SendAsync<DeactivateUserCommand>(deactivateUserCommand);
         return NoContent();
     }
-
+    // TODO change user password 
+    // TODO activate user
 }

@@ -21,7 +21,8 @@ internal sealed class Customer : AuditableEntity
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
-        EmailAddress = emailAddress; // validation email
+        EmailAddress = emailAddress;
+        // TODO validation domain entity
     }
 
     public Customer(UserId userId, EmailAddress emailAddress)

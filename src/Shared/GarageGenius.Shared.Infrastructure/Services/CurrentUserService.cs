@@ -9,7 +9,7 @@ internal class CurrentUserService : ICurrentUserService
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
     {
         IsAuthenticated = UserId is not null;
-        UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? "Anonymous";
         Role = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Role);
     }
 
