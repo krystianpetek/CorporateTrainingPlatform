@@ -51,7 +51,7 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         user = new User(email, password, role);
         await _userRepository.AddAsync(user);
 
-        _logger.Information($"User with ID: '{user.Id}' has signed up.");
+        _logger.Information("User with ID: {UserId}' has signed up.", user.Id);
         await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email), cancellationToken);
     }
 }

@@ -9,8 +9,8 @@ using GarageGenius.Shared.Abstractions.Queries;
 namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
 internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenResponse>
 {
-    private readonly IUserRepository _userRepository;
     private readonly Serilog.ILogger _logger;
+    private readonly IUserRepository _userRepository;
     private readonly IPasswordManager _passwordManager;
     private readonly IJsonWebTokenService _jwtTokenService;
     private readonly IJsonWebTokenStorage _jwtTokenStorage;
@@ -47,7 +47,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
         Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
         JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email, user.RoleId, claims);
 
-        _logger.Information($"User with ID: '{user.Id}' has signed in.");
+        _logger.Information("User with ID: '{UserId}' has signed in.", user.Id);
 
         _jwtTokenStorage.SetToken(token);
         return token;

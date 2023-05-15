@@ -7,8 +7,8 @@ using GarageGenius.Shared.Abstractions.Queries;
 namespace GarageGenius.Modules.Users.Core.Queries.GetUser;
 internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserDto>
 {
-    private readonly IUserRepository _userRepository;
     private readonly Serilog.ILogger _logger;
+    private readonly IUserRepository _userRepository;
 
     public GetUserQueryHandler(Serilog.ILogger logger, IUserRepository userRepository)
     {
@@ -19,7 +19,7 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserDto>
     {
         User user = await _userRepository.GetAsync(query.id) ?? throw new UserNotFoundException(query.id);
 
-        _logger.Information($"User with ID: '{user.Id}' has been retrieved.");
+        _logger.Information("User with ID: {UserId}' has been retrieved.", user.Id);
         return user.AsGetUserDto();
     }
 }

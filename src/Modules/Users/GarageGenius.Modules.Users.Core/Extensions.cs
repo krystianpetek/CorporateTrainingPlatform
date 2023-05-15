@@ -18,7 +18,7 @@ internal static class Extensions
 
         using IServiceScope? serviceScope = services.BuildServiceProvider().CreateScope();
         var dbSeeder = serviceScope.ServiceProvider.GetService<IDbContextSeeder>();
-        await dbSeeder.SeedDatabaseAsync();
+        await dbSeeder.SeedDatabaseAsync(); // TODO redesign seeder to be more generic and to better approach, idk yet
         return services;
     }
 }

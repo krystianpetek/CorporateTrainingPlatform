@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
-
+ 
 namespace GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 internal class UsersDbContextSeeder : IDbContextSeeder
 {
@@ -35,7 +35,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
         await _usersDbContext.SaveChangesAsync();
     }
 
-    private List<Role> _roles => new List<Role>() // TODO : Move to config file
+    private List<Role> _roles => new List<Role>() // TODO : Move to config file ?
     {
         new Role("Administrator", _permissions),
         new Role("Manager", _permissions),
