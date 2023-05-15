@@ -1,4 +1,8 @@
-﻿using GarageGenius.Shared.Abstractions.Dispatcher;
+﻿using GarageGenius.Modules.Customers.Application.Commands.CreateCustomer;
+using GarageGenius.Shared.Abstractions.Dispatcher;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GarageGenius.Modules.Customers.Api.Controllers;
 public class CustomersController : BaseController
@@ -8,5 +12,14 @@ public class CustomersController : BaseController
     public CustomersController(IDispatcher dispatcher)
     {
         _dispatcher = dispatcher;
+    }
+
+    [HttpPost]
+    [Authorize]
+    [SwaggerOperation("Create customer")]
+    public async Task<ActionResult> CreateCustomer(CreateCustomerCommand createCustomerCommand)
+    {
+        await _dispatcher.SendAsync<CreateCustomerCommand>(createCustomerCommand);
+        return NoContent();
     }
 }
