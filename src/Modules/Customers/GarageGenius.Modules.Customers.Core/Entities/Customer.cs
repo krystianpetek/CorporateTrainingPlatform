@@ -36,11 +36,10 @@ internal sealed class Customer : AuditableEntity
         EmailAddress = emailAddress;
     }
 
-    //public void Update(FirstName firstName, LastName lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
-    //{
-    //    FirstName = firstName;
-    //    LastName = lastName;
-    //    PhoneNumber = phoneNumber;
-    //    EmailAddress = emailAddress;
-    //}
+    public void Update(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        PhoneNumber = phoneNumber;
+    }
 }

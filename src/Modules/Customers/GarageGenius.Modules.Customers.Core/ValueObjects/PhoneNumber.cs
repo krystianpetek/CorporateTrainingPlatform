@@ -10,7 +10,7 @@ internal sealed class PhoneNumber : IEquatable<PhoneNumber>
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
-            // IMPORTANT Phone Number can be empty when creating a customer
+            // IMPORTANT Phone number can be empty when customer is created by integration event
             Value = string.Empty;
             return;
         }

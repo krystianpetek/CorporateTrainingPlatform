@@ -9,7 +9,7 @@ internal sealed class FirstName : IEquatable<FirstName>
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            // IMPORTANT Fist name can be empty when creating a customer
+            // IMPORTANT First name can be empty when customer is created by integration event
             Value = string.Empty;
             return;
         }
