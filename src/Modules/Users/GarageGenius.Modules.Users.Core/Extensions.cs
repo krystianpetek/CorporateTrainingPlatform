@@ -4,9 +4,7 @@ using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GarageGenius.Modules.Users.Api")]
 namespace GarageGenius.Modules.Users.Core;
 
 internal static class Extensions

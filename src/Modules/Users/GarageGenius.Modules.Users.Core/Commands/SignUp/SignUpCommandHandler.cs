@@ -32,25 +32,19 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
     public async Task HandleAsync(SignUpCommand command, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(command.Email))
-        {
             throw new InvalidEmailException(command.Email);
-        }
 
         if (string.IsNullOrWhiteSpace(command.Password))
-        {
             throw new MissingPasswordException();
-        }
 
         string email = command.Email.ToLower();
-        User user = await _userRepository.GetByEmailAsync(email);
+        User? user = await _userRepository.GetByEmailAsync(email);        
         if (user is not null)
-        {
             throw new EmailAlreadyRegisteredException();
-        }
 
         string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
 
-        Role role = await _roleRepository.GetAsync(roleName) ?? throw new RoleNotFoundException(roleName);
+        Role? role = await _roleRepository.GetAsync(roleName) ?? throw new RoleNotFoundException(roleName);
 
         string password = _passwordManager.Generate(command.Password);
 
