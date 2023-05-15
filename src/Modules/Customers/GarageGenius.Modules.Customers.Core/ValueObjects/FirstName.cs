@@ -1,0 +1,58 @@
+﻿using GarageGenius.Modules.Customers.Core.Exceptions;
+
+namespace GarageGenius.Modules.Customers.Core.ValueObjects;
+internal sealed class FirstName : IEquatable<FirstName>
+{
+    public string Value { get; }
+
+    public FirstName(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            // IMPORTANT Fist name can be empty when creating a customer
+            Value = string.Empty;
+            return;
+        }
+
+        if (Value?.Length > 50)
+        {
+            throw new InvalidFirstNameException(value);
+        }
+
+        Value = value.ToLowerInvariant();
+    }
+
+    public static implicit operator string(FirstName value)
+    {
+        return value.Value;
+    }
+
+    public static implicit operator FirstName(string value)
+    {
+        return new FirstName(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
+    public bool Equals(FirstName? other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Value == other.Value;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == this.GetType() && Equals((FirstName?)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Value is not null ? Value.GetHashCode() : 0;
+    }
+}
