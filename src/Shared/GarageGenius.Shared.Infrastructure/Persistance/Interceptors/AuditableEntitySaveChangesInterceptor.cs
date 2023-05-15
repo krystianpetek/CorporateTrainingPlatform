@@ -7,10 +7,14 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
 public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 {
+    private readonly Serilog.ILogger _logger;
     private readonly ISystemDateService _systemDateService;
     private readonly ICurrentUserService _currentUserService;
 
-    public AuditableEntitySaveChangesInterceptor(ISystemDateService systemDateService, ICurrentUserService currentUserService) // TODO - Inject current user service
+    public AuditableEntitySaveChangesInterceptor(
+        Serilog.ILogger logger,
+        ISystemDateService systemDateService, 
+        ICurrentUserService currentUserService)
     {
         _systemDateService = systemDateService;
         _currentUserService = currentUserService;
