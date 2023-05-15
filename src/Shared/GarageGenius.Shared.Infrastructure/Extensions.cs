@@ -30,6 +30,7 @@ public static class Extensions
         services.AddSharedMessageBroker();
 
         services.AddSharedSystemDate();
+        services.AddSharedCurrentUser();
         services.AddHostedService<DbContextWorker>();
         return services;
     }

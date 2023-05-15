@@ -10,7 +10,7 @@ internal class SystemDateService : ISystemDateService
     }
 }
 
-public static class Extensions
+public static partial class Extensions
 {
     public static IServiceCollection AddSharedSystemDate(this IServiceCollection services)
     {

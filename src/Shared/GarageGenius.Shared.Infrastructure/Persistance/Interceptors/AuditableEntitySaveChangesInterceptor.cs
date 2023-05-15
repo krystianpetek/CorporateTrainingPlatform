@@ -8,10 +8,12 @@ namespace GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
 public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 {
     private readonly ISystemDateService _systemDateService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public AuditableEntitySaveChangesInterceptor(ISystemDateService systemDateService) // TODO - Inject current user service
+    public AuditableEntitySaveChangesInterceptor(ISystemDateService systemDateService, ICurrentUserService currentUserService) // TODO - Inject current user service
     {
         _systemDateService = systemDateService;
+        _currentUserService = currentUserService;
     }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
@@ -36,12 +38,12 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedBy = "user";
+                entry.Entity.CreatedBy = _currentUserService.UserId;
                 entry.Entity.Created = _systemDateService.GetCurrentDate();
             }
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
             {
-                entry.Entity.LastModifiedBy = "user";
+                entry.Entity.LastModifiedBy = _currentUserService.UserId;
                 entry.Entity.LastModified = _systemDateService.GetCurrentDate();
             }
         }
