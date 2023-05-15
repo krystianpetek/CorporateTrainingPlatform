@@ -5,8 +5,9 @@ using GarageGenius.Shared.Abstractions.Common;
 namespace GarageGenius.Modules.Customers.Core.Entities;
 internal sealed class Customer : AuditableEntity
 {
+    // TODO validation domain entity
     public CustomerId Id { get; private set; }
-    public UserId UserId { get; private set; }
+    public UserId? UserId { get; private set; }
     public string? FirstName { get; private set; }
     public string? LastName { get; private set; }
     public PhoneNumber? PhoneNumber { get; private set; }
@@ -14,15 +15,18 @@ internal sealed class Customer : AuditableEntity
 
     private Customer() { }
 
-    public Customer(UserId userId, string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
+    public Customer(UserId userId, string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress) : this(firstName, lastName, phoneNumber, emailAddress)
+    {
+        UserId = userId;
+    }
+
+    public Customer(string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
     {
         Id = new CustomerId(Guid.NewGuid());
-        UserId = userId;
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
-        EmailAddress = emailAddress;
-        // TODO validation domain entity
+        EmailAddress = emailAddress;        
     }
 
     public Customer(UserId userId, EmailAddress emailAddress)
@@ -31,4 +35,12 @@ internal sealed class Customer : AuditableEntity
         UserId = userId;
         EmailAddress = emailAddress;
     }
+
+    //public void Update(string firstName, string lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
+    //{
+    //    FirstName = firstName;
+    //    LastName = lastName;
+    //    PhoneNumber = phoneNumber;
+    //    EmailAddress = emailAddress;
+    //}
 }

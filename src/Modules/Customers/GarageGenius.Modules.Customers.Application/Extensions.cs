@@ -8,7 +8,6 @@ internal static class Extensions
 {
     public static IServiceCollection AddCustomersApplication(this IServiceCollection services)
     {
-
         return services;
     }
 }

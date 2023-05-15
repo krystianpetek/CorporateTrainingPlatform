@@ -9,7 +9,18 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
-        builder.HasIndex(x => x.EmailAddress).IsUnique();
+        builder.HasIndex(x => x.Id).IsUnique();
+        builder.Property(x => x.Id)
+            .IsRequired()
+            .HasConversion(x => x.Value, x => new CustomerId(x));
+
+        builder.Property(x => x.UserId)
+            .HasConversion(x => x.Value, x => new UserId(x));
+
+        builder.Property(x => x.FirstName).HasMaxLength(30);
+        
+        builder.Property(x => x.LastName).HasMaxLength(50);
+
         builder.Property(x => x.EmailAddress)
             .IsRequired()
             .HasMaxLength(100)
@@ -18,14 +29,5 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(x => x.PhoneNumber)
             .HasMaxLength(12)
             .HasConversion(x => x.Value, x => new PhoneNumber(x));
-
-        builder.Property(x => x.UserId)
-            .HasConversion(x => x.Value, x => new UserId(x));
-
-        builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new CustomerId(x));
-
-        builder.Property(x => x.FirstName).HasMaxLength(30);
-        builder.Property(x => x.LastName).HasMaxLength(50);
     }
 }

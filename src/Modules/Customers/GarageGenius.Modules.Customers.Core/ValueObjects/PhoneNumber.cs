@@ -10,7 +10,10 @@ internal sealed class PhoneNumber : IEquatable<PhoneNumber>
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
-            throw new InvalidPhoneNumberException(phoneNumber);
+            // IMPORTANT Phone Number can be empty when creating a customer
+            Value = string.Empty;
+            return;
+            //throw new InvalidPhoneNumberException(phoneNumber);
         }
 
         if (!Regex.IsMatch(phoneNumber, @"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$",
