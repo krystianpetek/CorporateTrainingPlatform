@@ -13,20 +13,27 @@ internal class RoleRepository : IRoleRepository
         _usersDbContext = usersDbContext;
     }
 
+    public async Task<IReadOnlyList<Role>> GetRolesAsync()
+    {
+        IReadOnlyList<Role> roles = await _usersDbContext.Roles
+            .ToListAsync();
+
+        return roles;
+    }
+
+    public async Task<Role?> GetAsync(string name)
+    {
+        Role? role = await _usersDbContext.Roles
+            .SingleOrDefaultAsync(role => role.Name == name);
+        
+        return role;
+    }
+
     public async Task AddAsync(Role role)
     {
-        _usersDbContext.Roles.Add(role);
+        await _usersDbContext.Roles
+            .AddAsync(role);
+        
         await _usersDbContext.SaveChangesAsync();
-    }
-
-    public async Task<IReadOnlyList<Role>> GetAllAsync()
-    {
-        return await _usersDbContext.Roles.ToListAsync();
-    }
-
-    public async Task<Role> GetAsync(string name)
-    {
-        return await _usersDbContext.Roles
-            .SingleOrDefaultAsync(role => role.Name == name);
     }
 }

@@ -19,9 +19,13 @@ internal class UserRepository : IUserRepository
         await _usersDbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Guid id)
+    public async Task DeactivateUserAsync(Guid id)
     {
-        User? user = await _usersDbContext.Users.FindAsync(id);
+        User? user = await _usersDbContext.Users
+            .FirstOrDefaultAsync(user => user.Id == id);
+
+        user?.VerifyUserState();
+
         if (user is not null)
         {
             user.Deactivate();
@@ -29,26 +33,31 @@ internal class UserRepository : IUserRepository
         }
     }
 
-    public Task<User> GetAsync(Guid id)
+    public async Task<User?> GetAsync(Guid id)
     {
-        return _usersDbContext.Users
+        User? user = await _usersDbContext.Users
             .AsQueryable()
             .AsNoTracking()
             .Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Id == id);
+
+        return user;
     }
 
-    public Task<User> GetByEmailAsync(string email)
+    public async Task<User?> GetByEmailAsync(string email)
     {
-        return _usersDbContext.Users
+        User? user = await _usersDbContext.Users
+            .AsQueryable()
             .AsNoTracking()
             .Include(x => x.Role)
             .SingleOrDefaultAsync(x => x.Email == email);
+
+        return user;
     }
 
     public async Task UpdateAsync(User user)
     {
-        _usersDbContext.Update(user);
+        _usersDbContext.Users.Update(user);
         await _usersDbContext.SaveChangesAsync();
     }
 }
