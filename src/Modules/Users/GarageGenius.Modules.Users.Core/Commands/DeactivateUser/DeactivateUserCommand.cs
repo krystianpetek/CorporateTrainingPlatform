@@ -6,7 +6,7 @@ namespace GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
 public record DeactivateUserCommand : ICommand
 {
     [Required]
-    public Guid UserId { get; }
+    public Guid UserId { get; init; }
 
     public DeactivateUserCommand(Guid userId)
     {

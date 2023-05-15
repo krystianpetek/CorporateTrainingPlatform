@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.Commands.SignUp;
+﻿using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
+using GarageGenius.Modules.Users.Core.Commands.SignUp;
 using GarageGenius.Modules.Users.Core.Dto;
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
 using GarageGenius.Modules.Users.Core.Queries.SignIn;
@@ -48,6 +49,16 @@ public class UsersController : BaseController
     {
         JsonWebTokenResponse token = await _dispatcher.QueryAsync<JsonWebTokenResponse>(signInQuery);
         return Ok(token);
+    }
+
+    //[Authorize(Policy = "Master")]
+    [Authorize]
+    [HttpPost("deactivate")]
+    [SwaggerOperation("Deactivate user")]
+    public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
+    {
+        await _dispatcher.SendAsync<DeactivateUserCommand>(deactivateUserCommand);
+        return NoContent();
     }
 
 }

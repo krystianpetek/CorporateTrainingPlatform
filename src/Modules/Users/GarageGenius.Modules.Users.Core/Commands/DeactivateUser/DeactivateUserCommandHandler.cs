@@ -1,4 +1,6 @@
-﻿using GarageGenius.Modules.Users.Core.Repositories;
+﻿using GarageGenius.Modules.Users.Core.Entities;
+using GarageGenius.Modules.Users.Core.Exceptions;
+using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Commands;
 
 namespace GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
@@ -17,7 +19,9 @@ internal class DeactivateUserCommandHandler : ICommandHandler<DeactivateUserComm
 
     public async Task HandleAsync(DeactivateUserCommand command, CancellationToken cancellationToken = default)
     {
-        await _userRepository.DeactivateUserAsync(command.UserId);
+        User? user = await _userRepository.GetAsync(command.UserId) ?? throw new UserNotFoundException(command.UserId);
+
+        await _userRepository.DeactivateUserAsync(user.Id);
         _logger.Information("User with ID: {UserId} has been deactivated.", command.UserId);
     }
 }
