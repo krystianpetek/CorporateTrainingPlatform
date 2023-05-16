@@ -5,25 +5,25 @@ internal sealed class Model : IEquatable<Model>
 {
     public string Value { get; }
 
-    public Model(string model)
+    public Model(string value)
     {
-        if (string.IsNullOrWhiteSpace(model) || model.Length is > 100 or < 3)
+        if (string.IsNullOrWhiteSpace(value) || value.Length is > 100 or < 3)
         {
-            throw new InvalidModelException(model);
+            throw new InvalidModelException(value);
         }
 
-        Value = model;
+        Value = value;
     }
 
-    public static implicit operator string(Model model)
+    public static implicit operator string(Model value)
     {
-        return model.Value;
+        return value.Value;
     }
 
-    public static implicit operator Model(string model)
+    public static implicit operator Model(string value)
     {
-        if (model is null) return null;
-        return new Model(model);
+        if (value is null) return null;
+        return new Model(value);
     }
 
     public bool Equals(Model? other)

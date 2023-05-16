@@ -5,25 +5,25 @@ internal sealed class Manufacturer : IEquatable<Manufacturer>
 {
     public string Value { get; }
 
-    public Manufacturer(string manufacturer)
+    public Manufacturer(string value)
     {
-        if (string.IsNullOrWhiteSpace(manufacturer) || manufacturer.Length is > 100 or < 3)
+        if (string.IsNullOrWhiteSpace(value) || value.Length is > 100 or < 3)
         {
-            throw new InvalidManufacturerException(manufacturer);
+            throw new InvalidManufacturerException(value);
         }
 
-        Value = manufacturer;
+        Value = value;
     }
 
-    public static implicit operator string(Manufacturer manufacturer)
+    public static implicit operator string(Manufacturer value)
     {
-        return manufacturer.Value;
+        return value.Value;
     }
 
-    public static implicit operator Manufacturer(string manufacturer)
+    public static implicit operator Manufacturer(string value)
     {
-        if (manufacturer is null) return null;
-        return new Manufacturer(manufacturer);
+        if (value is null) return null;
+        return new Manufacturer(value);
     }
 
     public bool Equals(Manufacturer? other)

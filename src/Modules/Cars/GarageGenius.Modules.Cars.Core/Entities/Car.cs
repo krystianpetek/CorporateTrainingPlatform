@@ -9,28 +9,30 @@ internal sealed class Car : AuditableEntity
     public CustomerId CustomerId { get; private set; }
     public Manufacturer Manufacturer { get; private set; }
     public Model Model { get; private set; }
+    public LicensePlate LicensePlate { get; private set; }
     public Year? Year { get; private set; }
     public Vin? Vin { get; private set; }
-    public LicensePlate? LicensePlate { get; private set; }
 
     private Car() { }
 
-    public Car(CustomerId customerId, Manufacturer manufacturer, Model model)
+    public Car(CustomerId customerId, Manufacturer manufacturer, Model model, LicensePlate licensePlate)
     {
         Id = new CarId(Guid.NewGuid());
         CustomerId = customerId;
         Manufacturer = manufacturer;
         Model = model;
+        LicensePlate = licensePlate;
     }
 
-    public Car(CustomerId customerId, Manufacturer manufacturer, Model model, Year? year, Vin? vin, LicensePlate? licensePlate)
+    public Car(CustomerId customerId, Manufacturer manufacturer, Model model, LicensePlate licensePlate, Year? year, Vin? vin) : this(customerId, manufacturer, model, licensePlate)
     {
-        Id = new CarId(Guid.NewGuid());
-        CustomerId = customerId;
-        Manufacturer = manufacturer;
-        Model = model;
         Year = year;
         Vin = vin;
-        LicensePlate = licensePlate;
+    }
+
+    public void UpdateCar(Year? year, Vin? vin)
+    {
+        Year = year;
+        Vin = vin;
     }
 }

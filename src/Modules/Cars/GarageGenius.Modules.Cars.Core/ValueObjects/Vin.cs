@@ -5,25 +5,31 @@ internal sealed class Vin : IEquatable<Vin>
 {
     public string Value { get; }
 
-    public Vin(string vin)
+    public Vin(string value)
     {
-        if (vin.Length is not 17 or 10)
+        if (string.IsNullOrWhiteSpace(value))
         {
-            throw new InvalidVinException(vin);
+            Value = string.Empty;
+            return;
         }
 
-        Value = vin;
+        if (value.Length is not 17 or 10)
+        {
+            throw new InvalidVinException(value);
+        }
+
+        Value = value;
     }
 
-    public static implicit operator string(Vin vin)
+    public static implicit operator string(Vin value)
     {
-        return vin.Value;
+        return value.Value;
     }
 
-    public static implicit operator Vin(string vin)
+    public static implicit operator Vin(string value)
     {
-        if (vin is null) return null;
-        return new Vin(vin);
+        if (value is null) return null;
+        return new Vin(value);
     }
 
     public bool Equals(Vin? other)

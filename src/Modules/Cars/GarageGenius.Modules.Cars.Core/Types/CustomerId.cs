@@ -14,9 +14,9 @@ internal sealed class CustomerId : IEquatable<CustomerId>
         return new CustomerId(value);
     }
 
-    public static implicit operator Guid(CustomerId customerId)
+    public static implicit operator Guid(CustomerId value)
     {
-        return customerId.Value;
+        return value.Value;
     }
 
     public bool Equals(CustomerId? other)

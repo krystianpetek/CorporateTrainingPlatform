@@ -5,25 +5,25 @@ internal sealed class LicensePlate : IEquatable<LicensePlate>
 {
     public string Value { get; }
 
-    public LicensePlate(string licensePlate)
+    public LicensePlate(string value)
     {
-        if (string.IsNullOrWhiteSpace(licensePlate) || licensePlate.Length is < 5 or > 8)
+        if (string.IsNullOrWhiteSpace(value) || value.Length is < 5 or > 8)
         {
-            throw new InvalidLicensePlateException(licensePlate);
+            throw new InvalidLicensePlateException(value);
         }
 
-        Value = licensePlate;
+        Value = value;
     }
 
-    public static implicit operator string(LicensePlate licensePlate)
+    public static implicit operator string(LicensePlate value)
     {
-        return licensePlate.Value;
+        return value.Value;
     }
 
-    public static implicit operator LicensePlate(string licensePlate)
+    public static implicit operator LicensePlate(string value)
     {
-        if (licensePlate is null) return null;
-        return new LicensePlate(licensePlate);
+        if (value is null) return null;
+        return new LicensePlate(value);
     }
 
     public bool Equals(LicensePlate? other)

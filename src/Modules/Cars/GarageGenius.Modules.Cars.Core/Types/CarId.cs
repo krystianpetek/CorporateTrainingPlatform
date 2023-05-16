@@ -14,9 +14,9 @@ internal sealed class CarId : IEquatable<CarId>
         return new CarId(value);
     }
 
-    public static implicit operator Guid(CarId userId)
+    public static implicit operator Guid(CarId value)
     {
-        return userId.Value;
+        return value.Value;
     }
 
     public bool Equals(CarId? other)
