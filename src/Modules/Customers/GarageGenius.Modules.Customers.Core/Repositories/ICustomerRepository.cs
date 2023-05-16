@@ -3,8 +3,8 @@
 namespace GarageGenius.Modules.Customers.Core.Repositories;
 internal interface ICustomerRepository
 {
-    Task<Customer?> GetAsync(Guid id);
-    Task AddAsync(Customer customer);
-    Task UpdateAsync(Customer customer);
+    Task<Customer?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+    Task AddAsync(Customer customer, CancellationToken cancellationToken = default);
+    Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default);
 
 }

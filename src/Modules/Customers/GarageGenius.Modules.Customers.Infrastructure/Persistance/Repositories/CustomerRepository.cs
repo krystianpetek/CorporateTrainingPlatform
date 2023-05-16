@@ -14,25 +14,25 @@ internal class CustomerRepository : ICustomerRepository
         _customersDbContext = customersDbContext;
     }
 
-    public async Task AddAsync(Customer customer)
+    public async Task AddAsync(Customer customer, CancellationToken cancellationToken = default)
     {
-        await _customersDbContext.Customers.AddAsync(customer);
-        await _customersDbContext.SaveChangesAsync();
+        await _customersDbContext.Customers.AddAsync(customer, cancellationToken);
+        await _customersDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<Customer?> GetAsync(Guid id)
+    public async Task<Customer?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         Customer? customer = await _customersDbContext.Customers
             .AsQueryable()
             .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.Id == id) ?? throw new CustomerNotFoundException(id);
+            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new CustomerNotFoundException(id);
 
         return customer;
     }
 
-    public async Task UpdateAsync(Customer customer)
+    public async Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default)
     {
         _customersDbContext.Customers.Update(customer);
-        await _customersDbContext.SaveChangesAsync();
+        await _customersDbContext.SaveChangesAsync(cancellationToken);
     }
 }
