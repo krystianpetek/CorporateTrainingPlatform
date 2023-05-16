@@ -27,6 +27,7 @@ public class UserCreatedCommandHandlerTest
     [Fact]
     public async Task Handle_Should_ThrowException_WhenEmailIsNotUnique()
     {
+        await Task.CompletedTask;
         //// Arrange
         //var command = new SignUpCommand("krystianpetek2@gmail.com", "Password!23", "Administrator");
 

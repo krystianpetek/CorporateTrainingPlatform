@@ -4,21 +4,16 @@ namespace GarageGenius.Modules.Cars.Core.ValueObjects;
 internal sealed class Year : IEquatable<Year>
 {
     private readonly int _currentYear = DateTime.UtcNow.Year;
-    public int? Value { get; }
+    public int Value { get; }
 
-    public Year(int? value)
+    public Year(int year)
     {
-        if(value == default(int) || value == null)
+        if (year is < 1900 || year > _currentYear)
         {
-            Value = null;
-            return;
-        }
-        if (value is < 1900 || value > _currentYear)
-        {
-            throw new InvalidProductionYearException(value);
+            throw new InvalidProductionYearException(year);
         }
 
-        Value = value;
+        Value = year;
     }
 
     public static implicit operator int?(Year value)

@@ -7,12 +7,6 @@ internal sealed class Vin : IEquatable<Vin>
 
     public Vin(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            Value = string.Empty;
-            return;
-        }
-
         if (value.Length is not 17 or 10)
         {
             throw new InvalidVinException(value);
