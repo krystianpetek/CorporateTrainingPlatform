@@ -25,6 +25,7 @@ public static class Extensions
         {
             authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             authenticationOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            authenticationOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
         })
         .AddJwtBearer(jwtBearerOptions =>
         {
