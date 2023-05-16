@@ -18,7 +18,7 @@ public class CustomersController : BaseController
     [HttpPost]
     [Authorize]
     [SwaggerOperation("Create customer")]
-    public async Task<ActionResult> CreateCustomer(CreateCustomerCommand createCustomerCommand)
+    public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
     {
         await _dispatcher.SendAsync<CreateCustomerCommand>(createCustomerCommand);
         return NoContent();
@@ -27,7 +27,7 @@ public class CustomersController : BaseController
     [HttpPut]
     [Authorize]
     [SwaggerOperation("Update customer")]
-    public async Task<ActionResult> UpdateCustomer(UpdateCustomerCommand updateCustomerCommand)
+    public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand)
     {
         await _dispatcher.SendAsync<UpdateCustomerCommand>(updateCustomerCommand);
         return NoContent();

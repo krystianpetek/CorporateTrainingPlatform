@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Observable,
-  map,
-  catchError,
-  throwError,
-  retry,
-  timeout,
-} from 'rxjs';
+import { Observable, map, catchError, throwError, retry } from 'rxjs';
 import {
   HttpClient,
   HttpErrorResponse,

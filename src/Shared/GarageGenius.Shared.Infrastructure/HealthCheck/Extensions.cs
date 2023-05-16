@@ -22,7 +22,7 @@ public static class Extensions
         {
             ResponseWriter = async (HttpContext httpContext, HealthReport healthReport) =>
             {
-                await httpContext.Response.WriteAsJsonAsync(new { message = $"{moduleName}, {healthReport.Status}" });
+                await httpContext.Response.WriteAsJsonAsync(new { message = $"{healthReport.Status}" });
             }
         });
         return app;
