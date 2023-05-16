@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Cars.Application.Commands.AddCar;
 using GarageGenius.Modules.Cars.Application.Dto;
 using GarageGenius.Modules.Cars.Application.Queries.GetCarQuery;
+using GarageGenius.Modules.Cars.Core.Types;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,18 +30,20 @@ public class CarsController : BaseController
     [HttpGet("{customerId:guid}/cars")]
     [Authorize]
     [SwaggerOperation("Get customer cars")]
-    public async Task<ActionResult> GetCustomerCarsAsync(GetCustomerCarsQuery getCustomerCarsQuery)
+    public async Task<ActionResult> GetCustomerCarsAsync(Guid customerId)
     {
+        GetCustomerCarsQuery getCustomerCarsQuery = new GetCustomerCarsQuery(customerId);
         IReadOnlyList<GetCarDto> customerCars = await _dispatcher.QueryAsync<IReadOnlyList<GetCarDto>>(getCustomerCarsQuery);
         return Ok(customerCars);
     }
 
-    [HttpPost("{carId:guid}")]
+    [HttpGet("{carId:guid}")]
     [Authorize]
     [SwaggerOperation("Get car")]
-    public async Task<ActionResult> GetCarAsync(GetCarQuery carID)
+    public async Task<ActionResult> GetCarAsync(Guid carId)
     {
-        GetCarDto carDto = await _dispatcher.QueryAsync<GetCarDto>(carID);
+        GetCarQuery getCarQuery = new GetCarQuery(carId);
+        GetCarDto carDto = await _dispatcher.QueryAsync<GetCarDto>(getCarQuery);
         return Ok(carDto);
     }
 }
