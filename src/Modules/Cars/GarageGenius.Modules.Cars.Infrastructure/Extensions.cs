@@ -1,4 +1,6 @@
-﻿using GarageGenius.Modules.Cars.Infrastructure.Persistance.DbContexts;
+﻿using GarageGenius.Modules.Cars.Core.Repositories;
+using GarageGenius.Modules.Cars.Infrastructure.Persistance.DbContexts;
+using GarageGenius.Modules.Cars.Infrastructure.Persistance.Repositories;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.CompilerServices;
@@ -11,6 +13,7 @@ internal static class Extensions
     public static IServiceCollection AddCarsInfrastructure(this IServiceCollection services)
     {
         services.AddMsSqlServerDbContext<CarsDbContext>();
+        services.AddScoped<ICarRepository, CarRepository>();
         return services;
     }
 }

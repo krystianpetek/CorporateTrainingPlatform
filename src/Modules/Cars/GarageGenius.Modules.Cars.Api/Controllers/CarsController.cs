@@ -21,6 +21,6 @@ public class CarsController : BaseController
     {
         addCarCommand.CustomerId = customerId;
         await _dispatcher.SendAsync<AddCarCommand>(addCarCommand);
-        return NoContent();
+        return Accepted(); // TODO Controllers response types
     }
 }
