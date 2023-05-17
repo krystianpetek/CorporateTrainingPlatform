@@ -18,7 +18,7 @@ internal sealed class Year : IEquatable<Year>
 
     public static implicit operator int?(Year value)
     {
-        return value.Value;
+        return value?.Value;
     }
 
     public static implicit operator Year(int value)

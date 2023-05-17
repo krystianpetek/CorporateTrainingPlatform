@@ -32,7 +32,7 @@ internal class CarConfiguration : IEntityTypeConfiguration<Car>
             .IsUnique();
         builder.Property(x => x.Vin)
             .HasMaxLength(17)
-            .HasConversion(conversion => conversion.Value, value => new Vin(value));
+            .HasConversion(conversion => conversion.Value, value => (value != default) ? new Vin(value) : null);
 
         builder.Property(x => x.LicensePlate)
             .HasMaxLength(8)
@@ -40,6 +40,6 @@ internal class CarConfiguration : IEntityTypeConfiguration<Car>
 
         builder.Property(x => x.Year)
             .HasMaxLength(8)
-            .HasConversion(conversion => conversion.Value, value => new Year(value));
+            .HasConversion(conversion => conversion.Value, value => (value != default) ? new Year(value) : null);
     }
 }
