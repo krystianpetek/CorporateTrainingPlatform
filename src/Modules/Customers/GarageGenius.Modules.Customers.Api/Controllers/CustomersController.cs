@@ -1,5 +1,7 @@
 ﻿using GarageGenius.Modules.Customers.Application.Commands.CreateCustomer;
 using GarageGenius.Modules.Customers.Application.Commands.UpdateCustomer;
+using GarageGenius.Modules.Customers.Application.Queries.GetCustomerById;
+using GarageGenius.Modules.Customers.Application.Queries.GetCustomerByUserId;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +17,32 @@ public class CustomersController : BaseController
         _dispatcher = dispatcher;
     }
 
+    [HttpGet("{id:guid}")]
+    [Authorize]
+    [SwaggerOperation("Get customer id")]
+    public async Task<ActionResult> GetCustomerByIdAsync(Guid id)
+    {
+        var customer = await _dispatcher.QueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
+        return Ok(customer);
+    }
+
+    [HttpGet("{userId:guid}")]
+    [Authorize]
+    [SwaggerOperation("Get customer by user id")]
+    public async Task<ActionResult> GetCustomerByUserIdAsync(Guid userId)
+    {
+        var customer = await _dispatcher.QueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(userId));
+        return Ok(customer);
+    }
+
+
     [HttpPost]
     [Authorize]
     [SwaggerOperation("Create customer")]
     public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
     {
         await _dispatcher.SendAsync<CreateCustomerCommand>(createCustomerCommand);
-        return NoContent();
+        return Accepted();
     }
 
     [HttpPut]

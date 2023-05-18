@@ -19,9 +19,9 @@ internal class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerComm
 
     public async Task HandleAsync(UpdateCustomerCommand command, CancellationToken cancellationToken = default)
     {
-        Customer? customer = await _customerRepository.GetAsync(command.Id) ?? throw new CustomerNotFoundException(command.Id);
+        Customer? customer = await _customerRepository.GetCustomerByIdAsync(command.Id) ?? throw new CustomerNotFoundException(command.Id);
         customer.Update(command.FirstName, command.LastName, command.PhoneNumber);
-        await _customerRepository.UpdateAsync(customer);
+        await _customerRepository.UpdateCustomerAsync(customer);
 
         _logger.Information("Handled {CommandName} in {ModuleName} module, update customer with ID: {CustomerId}", nameof(UpdateCustomerCommand), nameof(Customers), command.Id);
     }

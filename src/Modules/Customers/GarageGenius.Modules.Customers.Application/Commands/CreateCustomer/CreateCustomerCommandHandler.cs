@@ -19,7 +19,7 @@ internal class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComm
     public async Task HandleAsync(CreateCustomerCommand command, CancellationToken cancellationToken = default)
     {
         Customer customer = new Customer(command.FirstName, command.LastName, command.PhoneNumber, command.EmailAddress);
-        await _customerRepository.AddAsync(customer);
+        await _customerRepository.AddCustomerAsync(customer);
 
         _logger.Information("Handled {CommandName} in {ModuleName} module, created customer with email: {Email}", nameof(CreateCustomerCommand), nameof(Customers), command.EmailAddress);
     }

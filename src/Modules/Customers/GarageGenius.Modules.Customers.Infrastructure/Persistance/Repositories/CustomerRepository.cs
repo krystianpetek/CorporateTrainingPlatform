@@ -14,13 +14,13 @@ internal class CustomerRepository : ICustomerRepository
         _customersDbContext = customersDbContext;
     }
 
-    public async Task AddAsync(Customer customer, CancellationToken cancellationToken = default)
+    public async Task AddCustomerAsync(Customer customer, CancellationToken cancellationToken = default)
     {
         await _customersDbContext.Customers.AddAsync(customer, cancellationToken);
         await _customersDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<Customer?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Customer?> GetCustomerByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         Customer? customer = await _customersDbContext.Customers
             .AsQueryable()
@@ -30,7 +30,17 @@ internal class CustomerRepository : ICustomerRepository
         return customer;
     }
 
-    public async Task UpdateAsync(Customer customer, CancellationToken cancellationToken = default)
+    public async Task<Customer?> GetCustomerByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        Customer? customer = await _customersDbContext.Customers
+            .AsQueryable()
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.UserId == userId, cancellationToken) ?? throw new CustomerNotFoundException(userId);
+
+        return customer;
+    }
+
+    public async Task UpdateCustomerAsync(Customer customer, CancellationToken cancellationToken = default)
     {
         _customersDbContext.Customers.Update(customer);
         await _customersDbContext.SaveChangesAsync(cancellationToken);

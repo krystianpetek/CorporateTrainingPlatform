@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
+using GarageGenius.Modules.Vehicles.Core.Exceptions;
 using GarageGenius.Modules.Vehicles.Infrastructure.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,14 +15,14 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
         _vehiclesDbContext = vehiclesDbContext;
     }
 
-    public async Task<GetVehicleQueryDto?> GetVehicleAsync(Guid vehicleId, CancellationToken cancellationToken)
+    public async Task<GetVehicleQueryDto?> GetVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default)
     {
         GetVehicleQueryDto? getVehicleDto = await _vehiclesDbContext.Vehicles
             .AsNoTracking()
             .AsQueryable()
             .Where(x => x.Id == vehicleId)
             .Select(x => new GetVehicleQueryDto(x.Id, x.Manufacturer, x.Model, x.Year, x.LicensePlate))
-            .FirstOrDefaultAsync(cancellationToken);
+            .SingleOrDefaultAsync(cancellationToken) ?? throw new VehicleNotFoundException(vehicleId);
 
         return getVehicleDto;
     }
