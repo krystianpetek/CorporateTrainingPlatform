@@ -8,13 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Infrastructure\GarageGenius.Shared.Infrastructure.csproj" />
-    <ProjectReference Include="..\GarageGenius.Modules.Customers.Application\GarageGenius.Modules.Customers.Application.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Booking.Application\GarageGenius.Modules.Booking.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GarageGenius.Modules.Customers.Api</_Parameter1>
+      <_Parameter1>GarageGenius.Modules.Booking.Api</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
-
+  
 </Project>

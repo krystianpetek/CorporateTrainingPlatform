@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,18 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GarageGenius.Modules.Vehicles.Infrastructure\GarageGenius.Modules.Vehicles.Infrastructure.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Booking.Infrastructure\GarageGenius.Modules.Booking.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="vehicles.http">
+    <None Update="booking.http">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="vehicles.settings.json">
+    <None Update="booking.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

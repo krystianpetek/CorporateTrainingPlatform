@@ -57,6 +57,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Users.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Booking", "Booking", "{33DA4406-21AB-4E8B-B34F-052D3C48BC4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Api", "Modules\Booking\GarageGenius.Modules.Booking.Api\GarageGenius.Modules.Booking.Api.csproj", "{CA0B2798-26C3-4495-B18F-4E11741DDDC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Infrastructure", "Modules\Booking\GarageGenius.Modules.Booking.Infrastructure\GarageGenius.Modules.Booking.Infrastructure.csproj", "{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Core", "Modules\Booking\GarageGenius.Modules.Booking.Core\GarageGenius.Modules.Booking.Core.csproj", "{9F63B70B-7646-465B-AB71-F58BF77102EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Application", "Modules\Booking\GarageGenius.Modules.Booking.Application\GarageGenius.Modules.Booking.Application.csproj", "{295B0044-6DD1-47F7-A62A-F698583A2B56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +145,22 @@ Global
 		{C13C39E5-C1A1-4718-9367-528BE552A7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C13C39E5-C1A1-4718-9367-528BE552A7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C13C39E5-C1A1-4718-9367-528BE552A7EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA0B2798-26C3-4495-B18F-4E11741DDDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA0B2798-26C3-4495-B18F-4E11741DDDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA0B2798-26C3-4495-B18F-4E11741DDDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA0B2798-26C3-4495-B18F-4E11741DDDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F63B70B-7646-465B-AB71-F58BF77102EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F63B70B-7646-465B-AB71-F58BF77102EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F63B70B-7646-465B-AB71-F58BF77102EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F63B70B-7646-465B-AB71-F58BF77102EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{295B0044-6DD1-47F7-A62A-F698583A2B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295B0044-6DD1-47F7-A62A-F698583A2B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295B0044-6DD1-47F7-A62A-F698583A2B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295B0044-6DD1-47F7-A62A-F698583A2B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +189,10 @@ Global
 		{4708CE64-E67E-4B65-A215-A0464419B348} = {F850B2AA-A60A-4C00-B917-997C62810C08}
 		{C13C39E5-C1A1-4718-9367-528BE552A7EC} = {0F3A7E4B-4DAF-4201-9721-8651EA358315}
 		{33DA4406-21AB-4E8B-B34F-052D3C48BC4A} = {516CBDC4-9D3D-484D-B502-DFDD8D6E262A}
+		{CA0B2798-26C3-4495-B18F-4E11741DDDC3} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
+		{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
+		{9F63B70B-7646-465B-AB71-F58BF77102EE} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
+		{295B0044-6DD1-47F7-A62A-F698583A2B56} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {189A71AE-347A-4505-BF66-B684A21B9A4B}

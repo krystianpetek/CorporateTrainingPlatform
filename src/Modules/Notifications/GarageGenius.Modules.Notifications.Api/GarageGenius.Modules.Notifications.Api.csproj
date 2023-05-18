@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="notifications.http">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="notifications.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="customers.http">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="customers.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
