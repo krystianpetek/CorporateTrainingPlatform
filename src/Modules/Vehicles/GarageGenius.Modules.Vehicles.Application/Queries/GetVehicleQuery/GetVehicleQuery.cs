@@ -1,8 +1,7 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Dto;
-using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
-public record GetVehicleQuery : IQuery<GetVehicleDto>
+public record GetVehicleQuery : IQuery<GetVehicleQueryDto>
 {
     public Guid VehicleId { get; init; }
 

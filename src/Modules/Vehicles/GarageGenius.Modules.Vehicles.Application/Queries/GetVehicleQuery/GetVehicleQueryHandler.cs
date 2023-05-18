@@ -1,9 +1,8 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Dto;
-using GarageGenius.Modules.Vehicles.Application.QueryStorage;
+﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
-internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicleDto>
+internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicleQueryDto>
 {
     private readonly Serilog.ILogger _logger;
     private readonly IVehicleQueryStorage _vehicleQueryStorage;
@@ -16,9 +15,9 @@ internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicl
         _vehicleQueryStorage = vehicleQueryStorage;
     }
 
-    public async Task<GetVehicleDto> HandleAsync(GetVehicleQuery query, CancellationToken cancellationToken = default)
+    public async Task<GetVehicleQueryDto> HandleAsync(GetVehicleQuery query, CancellationToken cancellationToken = default)
     {
-        GetVehicleDto? getVehicleDto = await _vehicleQueryStorage.GetVehicleAsync(query.VehicleId, cancellationToken);
+        GetVehicleQueryDto? getVehicleDto = await _vehicleQueryStorage.GetVehicleAsync(query.VehicleId, cancellationToken);
 
         _logger.Information(
             messageTemplate: "Query {QueryName} handled by {ModuleName} module, retrieved vehicle with ID: {VehicleId}",

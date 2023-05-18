@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle;
-using GarageGenius.Modules.Vehicles.Application.Dto;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
 using GarageGenius.Shared.Abstractions.Dispatcher;
@@ -33,7 +32,7 @@ public class VehiclesController : BaseController
     public async Task<ActionResult> GetCustomerVehiclesAsync(Guid customerId)
     {
         GetCustomerVehiclesQuery getCustomerVehiclesQuery = new GetCustomerVehiclesQuery(customerId);
-        IReadOnlyList<GetVehicleDto> customerVehicles = await _dispatcher.QueryAsync(getCustomerVehiclesQuery);
+        IReadOnlyList<GetVehicleQueryDto> customerVehicles = await _dispatcher.QueryAsync(getCustomerVehiclesQuery);
         return Ok(customerVehicles);
     }
 
@@ -43,7 +42,7 @@ public class VehiclesController : BaseController
     public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
     {
         GetVehicleQuery getVehicleQuery = new GetVehicleQuery(vehicleId);
-        GetVehicleDto vehicleDto = await _dispatcher.QueryAsync(getVehicleQuery);
+        GetVehicleQueryDto vehicleDto = await _dispatcher.QueryAsync(getVehicleQuery);
         return Ok(vehicleDto);
     }
 }
