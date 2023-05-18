@@ -35,7 +35,6 @@ public class CustomersController : BaseController
         return Ok(customer);
     }
 
-
     [HttpPost]
     [Authorize]
     [SwaggerOperation("Create customer")]

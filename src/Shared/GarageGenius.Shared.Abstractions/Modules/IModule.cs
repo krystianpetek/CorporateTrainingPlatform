@@ -7,5 +7,5 @@ public interface IModule
     string Name { get; }
     abstract IEnumerable<string>? Policies { get; }
     void Register(IServiceCollection services);
-    void Use(IApplicationBuilder app);
+    void Use(WebApplication app);
 }

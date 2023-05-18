@@ -20,7 +20,7 @@ internal class BookingModule : IModule
         services.AddBookingInfrastructure();
     }
 
-    public void Use(IApplicationBuilder app)
+    public void Use(WebApplication app)
     {
         app.MapHealthCheck(Name);
     }

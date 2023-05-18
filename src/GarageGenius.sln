@@ -57,13 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Users.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Booking", "Booking", "{33DA4406-21AB-4E8B-B34F-052D3C48BC4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Api", "Modules\Booking\GarageGenius.Modules.Booking.Api\GarageGenius.Modules.Booking.Api.csproj", "{CA0B2798-26C3-4495-B18F-4E11741DDDC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Booking.Api", "Modules\Booking\GarageGenius.Modules.Booking.Api\GarageGenius.Modules.Booking.Api.csproj", "{CA0B2798-26C3-4495-B18F-4E11741DDDC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Infrastructure", "Modules\Booking\GarageGenius.Modules.Booking.Infrastructure\GarageGenius.Modules.Booking.Infrastructure.csproj", "{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Booking.Infrastructure", "Modules\Booking\GarageGenius.Modules.Booking.Infrastructure\GarageGenius.Modules.Booking.Infrastructure.csproj", "{A23D7CD3-CDEE-40CC-B3B6-E093B4E2B3DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Core", "Modules\Booking\GarageGenius.Modules.Booking.Core\GarageGenius.Modules.Booking.Core.csproj", "{9F63B70B-7646-465B-AB71-F58BF77102EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Booking.Core", "Modules\Booking\GarageGenius.Modules.Booking.Core\GarageGenius.Modules.Booking.Core.csproj", "{9F63B70B-7646-465B-AB71-F58BF77102EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Booking.Application", "Modules\Booking\GarageGenius.Modules.Booking.Application\GarageGenius.Modules.Booking.Application.csproj", "{295B0044-6DD1-47F7-A62A-F698583A2B56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Booking.Application", "Modules\Booking\GarageGenius.Modules.Booking.Application\GarageGenius.Modules.Booking.Application.csproj", "{295B0044-6DD1-47F7-A62A-F698583A2B56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

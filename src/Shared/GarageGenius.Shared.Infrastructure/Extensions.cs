@@ -7,6 +7,7 @@ using GarageGenius.Shared.Infrastructure.HealthCheck;
 using GarageGenius.Shared.Infrastructure.MessageBroker;
 using GarageGenius.Shared.Infrastructure.Queries;
 using GarageGenius.Shared.Infrastructure.Services;
+using GarageGenius.Shared.Infrastructure.SignalR;
 using GarageGenius.Shared.Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ public static class Extensions
         services.AddSharedQueryHandlers(assemblies);
         services.AddSharedInMemoryDispatcher();
         services.AddSharedMessageBroker();
+        services.AddSharedSignalR();
 
         services.AddSharedSystemDate();
         services.AddSharedCurrentUser();

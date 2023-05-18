@@ -16,8 +16,9 @@ internal class NotificationsModule : IModule
         services.AddNotificationsCore();
     }
 
-    public void Use(IApplicationBuilder app)
+    public void Use(WebApplication app)
     {
+        app.UseNotificationsCore();
         app.MapHealthCheck(Name);
     }
 }

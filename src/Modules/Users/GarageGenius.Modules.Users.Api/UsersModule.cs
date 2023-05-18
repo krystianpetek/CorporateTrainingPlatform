@@ -16,7 +16,7 @@ internal class UsersModule : IModule
         services.AddUsersCore().GetAwaiter().GetResult();
     }
 
-    public void Use(IApplicationBuilder app)
+    public void Use(WebApplication app)
     {
         app.MapHealthCheck(Name);
     }

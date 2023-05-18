@@ -20,7 +20,7 @@ internal class VehiclesModule : IModule
         services.AddVehiclesInfrastructure();
     }
 
-    public void Use(IApplicationBuilder app)
+    public void Use(WebApplication app)
     {
         app.MapHealthCheck(Name);
     }
