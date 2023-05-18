@@ -26,12 +26,12 @@ public class CustomersController : BaseController
         return Ok(customer);
     }
 
-    [HttpGet("{userId:guid}")]
+    [HttpGet("User/{id:guid}")]
     [Authorize]
     [SwaggerOperation("Get customer by user id")]
-    public async Task<ActionResult> GetCustomerByUserIdAsync(Guid userId)
+    public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)
     {
-        var customer = await _dispatcher.QueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(userId));
+        var customer = await _dispatcher.QueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
         return Ok(customer);
     }
 

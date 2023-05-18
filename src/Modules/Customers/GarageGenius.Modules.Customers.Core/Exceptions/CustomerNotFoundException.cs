@@ -3,5 +3,5 @@
 namespace GarageGenius.Modules.Customers.Core.Exceptions;
 internal sealed class CustomerNotFoundException : GarageGeniusException
 {
-    public CustomerNotFoundException(Guid id) : base($"User with ID: '{id}' was not found.") { }
+    public CustomerNotFoundException(Guid id) : base($"Customer with ID: '{id}' was not found.") { }
 }
