@@ -7,7 +7,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 {
     private readonly HashSet<string> _permissions = new()
     {
-        "users","cars","notifications,customers"
+        "users","vehicles","notifications,customers"
     };
 
     private readonly UsersDbContext _usersDbContext;

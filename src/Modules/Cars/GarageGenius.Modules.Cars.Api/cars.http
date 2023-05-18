@@ -1,4 +1,0 @@
-@url = https://localhost:7283
-
-### Health check
-GET {{url}}/health/cars-module

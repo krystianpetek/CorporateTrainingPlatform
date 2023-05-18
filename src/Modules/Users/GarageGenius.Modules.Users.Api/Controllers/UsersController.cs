@@ -39,7 +39,7 @@ public class UsersController : BaseController
     public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
     {
         await _dispatcher.SendAsync<SignUpCommand>(signUpCommand);
-        return NoContent();
+        return Accepted();
     }
 
     [HttpPost("sign-in")]

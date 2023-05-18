@@ -9,9 +9,9 @@ import { HealthCheckService } from '../health-check.service';
 export class HealthCheckComponent {
   private healthCheckService: HealthCheckService;
   public moduleHealths: Record<Modules, HealthCheckDisplay> = {
-    Cars: {
+    Vehicles: {
       module: { message: 'Loading...' },
-      name: 'Cars',
+      name: 'Vehicles',
     },
     Customers: {
       module: { message: 'Loading...' },
@@ -29,13 +29,13 @@ export class HealthCheckComponent {
 
   constructor(healthCheckService: HealthCheckService) {
     this.healthCheckService = healthCheckService;
-    this.healthCheckService.healthCheckCars().subscribe({
+    this.healthCheckService.healthCheckVehicles().subscribe({
       next: (response: HealthCheck) => {
-        this.moduleHealths.Cars.module = response;
+        this.moduleHealths.Vehicles.module = response;
       },
       error: (error: void) => {
-        this.moduleHealths.Cars.module = {
-          message: 'Cars module is not available',
+        this.moduleHealths.Vehicles.module = {
+          message: 'Vehicles module is not available',
         };
       },
     });
@@ -80,6 +80,6 @@ export interface HealthCheckDisplay {
   name: string;
 }
 
-export type Modules = 'Users' | 'Cars' | 'Customers' | 'Notifications';
+export type Modules = 'Users' | 'Vehicles' | 'Customers' | 'Notifications';
 // https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type
 // https://blog.angular-university.io/rxjs-error-handling/

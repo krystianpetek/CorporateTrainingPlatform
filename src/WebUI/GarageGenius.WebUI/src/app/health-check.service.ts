@@ -10,7 +10,7 @@ import { HealthCheck } from './health-check/health-check.component';
 export interface IHealthCheckService {
   healthCheckUsers(): Observable<HealthCheck>;
   healthCheckCustomers(): Observable<HealthCheck>;
-  healthCheckCars(): Observable<HealthCheck>;
+  healthCheckVehicles(): Observable<HealthCheck>;
   healthCheckNotifications(): Observable<HealthCheck>;
 }
 
@@ -21,7 +21,7 @@ export class HealthCheckService implements IHealthCheckService {
   private httpClient: HttpClient;
   private users = `health/users-module`;
   private customers = `health/customers-module`;
-  private cars = `health/cars-module`;
+  private vehicles = `health/vehicles-module`;
   private notifications = `health/notifications-module`;
 
   constructor(httpClient: HttpClient) {
@@ -34,8 +34,8 @@ export class HealthCheckService implements IHealthCheckService {
   public healthCheckCustomers(): Observable<HealthCheck> {
     return this.handleRequest(this.customers);
   }
-  public healthCheckCars(): Observable<HealthCheck> {
-    return this.handleRequest(this.cars);
+  public healthCheckVehicles(): Observable<HealthCheck> {
+    return this.handleRequest(this.vehicles);
   }
   public healthCheckNotifications(): Observable<HealthCheck> {
     return this.handleRequest(this.notifications);

@@ -1,6 +1,6 @@
 export const environment = {
   baseUrl: 'https://localhost:7283/',
   usersApiUrl: `users-module/`,
-  carsApiUrl: `cars-module/`,
+  vehiclesApiUrl: `vehicles-module/`,
   customersApiUrl: `customers-module/`,
 };
