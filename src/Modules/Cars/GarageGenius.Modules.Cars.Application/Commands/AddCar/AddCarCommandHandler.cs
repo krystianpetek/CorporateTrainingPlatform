@@ -20,7 +20,7 @@ internal class AddCarCommandHandler : ICommandHandler<AddCarCommand>
     {
         Car car = new Car(command.CustomerId, command.Manufacturer, command.Model, command.LicensePlate, command.Year, command.Vin);
         await _carsRepository.AddCarAsync(car, cancellationToken);
-        
+
         _logger.Information(
             messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new car with ID: {CarId} to customer with ID: {CustomerId}",
             nameof(AddCarCommand),

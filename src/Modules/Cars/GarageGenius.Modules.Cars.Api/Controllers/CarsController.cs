@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Cars.Application.Commands.AddCar;
 using GarageGenius.Modules.Cars.Application.Dto;
 using GarageGenius.Modules.Cars.Application.Queries.GetCarQuery;
-using GarageGenius.Modules.Cars.Core.Types;
+using GarageGenius.Modules.Cars.Application.Queries.GetCustomerCarsQuery;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

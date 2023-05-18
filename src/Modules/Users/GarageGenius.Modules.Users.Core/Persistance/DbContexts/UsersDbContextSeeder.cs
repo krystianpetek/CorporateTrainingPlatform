@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 internal class UsersDbContextSeeder : IDbContextSeeder
 {

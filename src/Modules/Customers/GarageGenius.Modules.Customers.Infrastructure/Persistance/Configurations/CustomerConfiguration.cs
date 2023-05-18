@@ -18,7 +18,7 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .HasConversion(x => x.Value, x => new UserId(x));
 
         builder.Property(x => x.FirstName)
-            .HasMaxLength(50)        
+            .HasMaxLength(50)
             .HasConversion(x => x.Value, x => new FirstName(x));
 
         builder.Property(x => x.LastName)

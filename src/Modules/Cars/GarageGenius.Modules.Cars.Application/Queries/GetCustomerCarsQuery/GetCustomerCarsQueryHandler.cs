@@ -1,31 +1,24 @@
 ﻿using GarageGenius.Modules.Cars.Application.Dto;
-using GarageGenius.Modules.Cars.Core.Entities;
-using GarageGenius.Modules.Cars.Core.Repositories;
+using GarageGenius.Modules.Cars.Application.QueryStorage;
 using GarageGenius.Shared.Abstractions.Queries;
 
-namespace GarageGenius.Modules.Cars.Application.Queries.GetCarQuery;
+namespace GarageGenius.Modules.Cars.Application.Queries.GetCustomerCarsQuery;
 internal class GetCustomerCarsQueryHandler : IQueryHandler<GetCustomerCarsQuery, IReadOnlyList<GetCarDto>>
 {
     private readonly Serilog.ILogger _logger;
-    private readonly ICarRepository _carRepository;
+    private readonly ICarQueryStorage _carQueryStorage;
 
     public GetCustomerCarsQueryHandler(
         Serilog.ILogger logger,
-        ICarRepository carRepository)
+       ICarQueryStorage carQueryStorage)
     {
         _logger = logger;
-        _carRepository = carRepository;
+        _carQueryStorage = carQueryStorage;
     }
 
     public async Task<IReadOnlyList<GetCarDto>> HandleAsync(GetCustomerCarsQuery query, CancellationToken cancellationToken = default)
     {
-        IReadOnlyList<Car> customerCars = await _carRepository.GetCustomerCarsAsync(query.CustomerId, cancellationToken);
-
-        List<GetCarDto> customerCarsDto = new List<GetCarDto>();
-        foreach(Car car in customerCars)
-        {
-            customerCarsDto.Add(car.AsGetUserDto());
-        }
+        IReadOnlyList<GetCarDto> customerCars = await _carQueryStorage.GetCustomerCarsAsync(query.CustomerId, cancellationToken);
 
         _logger.Information(
             messageTemplate: "Query {QueryName} handled by {ModuleName} module, retrieved cars for customer with ID: {CustomerId}",
@@ -33,6 +26,6 @@ internal class GetCustomerCarsQueryHandler : IQueryHandler<GetCustomerCarsQuery,
             nameof(Cars),
             query.CustomerId);
 
-        return customerCarsDto;
+        return customerCars;
     }
 }

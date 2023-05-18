@@ -1,5 +1,3 @@
-using GarageGenius.Modules.Users.Core.Commands.SignUp;
-using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Infrastructure.MessageBroker;

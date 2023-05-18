@@ -38,7 +38,7 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
             throw new MissingPasswordException();
 
         string email = command.Email.ToLower();
-        User? user = await _userRepository.GetByEmailAsync(email);        
+        User? user = await _userRepository.GetByEmailAsync(email);
         if (user is not null)
             throw new EmailAlreadyRegisteredException();
 

@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Cars.Core.Entities;
 
 namespace GarageGenius.Modules.Cars.Application.Dto;
-internal record GetCarDto
+public record GetCarDto
 {
     public GetCarDto(Guid carId, string manufacturer, string model, int? year, string licensePlate)
     {

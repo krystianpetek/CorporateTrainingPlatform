@@ -26,7 +26,7 @@ internal sealed class Customer : AuditableEntity
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
-        EmailAddress = emailAddress;        
+        EmailAddress = emailAddress;
     }
 
     public Customer(UserId userId, EmailAddress emailAddress)

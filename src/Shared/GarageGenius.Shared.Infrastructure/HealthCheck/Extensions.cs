@@ -1,11 +1,8 @@
-﻿using GarageGenius.Shared.Abstractions.Events;
-using GarageGenius.Shared.Infrastructure.Events;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Reflection;
 
 namespace GarageGenius.Shared.Infrastructure.HealthCheck;
 public static class Extensions

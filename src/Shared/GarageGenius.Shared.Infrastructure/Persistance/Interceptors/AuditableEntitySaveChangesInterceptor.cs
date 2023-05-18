@@ -13,7 +13,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 
     public AuditableEntitySaveChangesInterceptor(
         Serilog.ILogger logger,
-        ISystemDateService systemDateService, 
+        ISystemDateService systemDateService,
         ICurrentUserService currentUserService)
     {
         _systemDateService = systemDateService;
