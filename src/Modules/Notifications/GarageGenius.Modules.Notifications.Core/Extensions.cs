@@ -13,7 +13,7 @@ internal static class Extensions
     
     public static WebApplication UseNotificationsCore(this WebApplication app)
     {
-        app.UseSharedSignalR();
+        app.UseSignalRNotificationsHub();
         return app;
     }
 }

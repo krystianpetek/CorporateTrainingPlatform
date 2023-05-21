@@ -1,4 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.SignalR.Hubs;
+﻿using GarageGenius.Shared.Infrastructure.SignalR.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +18,7 @@ public static class Extensions
         return services;
     }
 
-    public static IApplicationBuilder UseSharedSignalR(this WebApplication app)
+    public static IApplicationBuilder UseSignalRNotificationsHub(this WebApplication app)
     {
         app.MapHub<NotificationsHub>("/notifications");
         return app;

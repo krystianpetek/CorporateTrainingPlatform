@@ -62,4 +62,5 @@ public class UsersController : BaseController
     }
     // TODO change user password 
     // TODO activate user
+    // TODO logout user
 }
