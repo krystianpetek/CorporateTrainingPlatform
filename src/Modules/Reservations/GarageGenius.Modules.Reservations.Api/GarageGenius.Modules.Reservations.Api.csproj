@@ -7,18 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GarageGenius.Modules.Booking.Infrastructure\GarageGenius.Modules.Booking.Infrastructure.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Reservations.Infrastructure\GarageGenius.Modules.Reservations.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="booking.http">
+    <None Update="reservations.http">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="booking.settings.json">
+    <None Update="reservations.settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties booking_1settings_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties reservations_1settings_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

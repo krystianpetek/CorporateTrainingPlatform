@@ -26,6 +26,10 @@ export class HealthCheckComponent implements OnDestroy {
       module: { message: 'Loading...' },
       name: 'Users',
     },
+    Reservations: {
+      module: { message: 'Loading...' },
+      name: 'Reservations',
+    },
   };
   public signalrService: SignalrService;
 
@@ -75,6 +79,16 @@ export class HealthCheckComponent implements OnDestroy {
         };
       },
     });
+    this.healthCheckService.healthCheckReservations().subscribe({
+      next: (response: HealthCheck) => {
+        this.moduleHealths.Reservations.module = response;
+      },
+      error: (error: void) => {
+        this.moduleHealths.Reservations.module = {
+          message: 'Reservations module is not available',
+        };
+      },
+    });
     signalrService.startConnection();
   }
   ngOnDestroy(): void {
@@ -90,6 +104,6 @@ export interface HealthCheckDisplay {
   name: string;
 }
 
-export type Modules = 'Users' | 'Vehicles' | 'Customers' | 'Notifications';
+export type Modules = 'Users' | 'Vehicles' | 'Customers' | 'Notifications' | 'Reservations';
 // https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type
 // https://blog.angular-university.io/rxjs-error-handling/

@@ -1,7 +1,7 @@
-﻿using GarageGenius.Modules.Users.Core.MappingService;
-using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
+﻿using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 using GarageGenius.Modules.Users.Core.Persistance.Repositories;
 using GarageGenius.Modules.Users.Core.Repositories;
+using GarageGenius.Modules.Users.Core.ServiceMapper;
 using GarageGenius.Shared.Abstractions.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;

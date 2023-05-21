@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
 
-namespace GarageGenius.Modules.Users.Core.MappingService;
+namespace GarageGenius.Modules.Users.Core.ServiceMapper;
 internal interface IUserServiceMapper
 {
     public GetUserQueryDto MapToGetUserQueryDto(User entity);

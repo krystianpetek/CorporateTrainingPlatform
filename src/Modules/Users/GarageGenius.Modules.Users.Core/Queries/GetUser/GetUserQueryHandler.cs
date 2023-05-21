@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
-using GarageGenius.Modules.Users.Core.MappingService;
 using GarageGenius.Modules.Users.Core.Repositories;
+using GarageGenius.Modules.Users.Core.ServiceMapper;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Users.Core.Queries.GetUser;

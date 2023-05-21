@@ -12,6 +12,7 @@ export interface IHealthCheckService {
   healthCheckCustomers(): Observable<HealthCheck>;
   healthCheckVehicles(): Observable<HealthCheck>;
   healthCheckNotifications(): Observable<HealthCheck>;
+  healthCheckReservations(): Observable<HealthCheck>;
 }
 
 @Injectable({
@@ -23,6 +24,7 @@ export class HealthCheckService implements IHealthCheckService {
   private customers = `health/customers-module`;
   private vehicles = `health/vehicles-module`;
   private notifications = `health/notifications-module`;
+  private reservations = `health/reservations-module`;
 
   constructor(httpClient: HttpClient) {
     this.httpClient = httpClient;
@@ -39,6 +41,9 @@ export class HealthCheckService implements IHealthCheckService {
   }
   public healthCheckNotifications(): Observable<HealthCheck> {
     return this.handleRequest(this.notifications);
+  }
+  public healthCheckReservations(): Observable<HealthCheck> {
+    return this.handleRequest(this.reservations);
   }
 
   private handleRequest(url: string): Observable<HealthCheck> {

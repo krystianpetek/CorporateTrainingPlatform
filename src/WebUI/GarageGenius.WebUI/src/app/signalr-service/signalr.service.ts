@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NotificationsHubModel } from './notifications/notifications-hub-model';
 import * as signalR from '@microsoft/signalr';
+import { Observable, of, retry, Subject, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,14 @@ export class SignalrService {
   constructor() {
     this._hubUrl = '/notifications';
   }
+
+  //public isConnected: Observable<boolean> = new Observable<boolean>(() => {
+  //  // TODO signalR connection state
+  //  of(this._connection?.state == signalR.HubConnectionState.Connected)
+  //    .pipe(
+  //      timeout(5000),
+  //      retry(5));
+  //});
 
   public async startConnection(): Promise<void> {
     try {

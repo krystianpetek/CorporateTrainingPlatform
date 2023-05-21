@@ -45,4 +45,6 @@ public class VehiclesController : BaseController
         GetVehicleQueryDto vehicleDto = await _dispatcher.DispatchQueryAsync(getVehicleQuery);
         return Ok(vehicleDto);
     }
+
+    // TODO search by Vin and license plate
 }

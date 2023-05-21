@@ -12,17 +12,17 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GarageGenius.Modules.Booking.Api</_Parameter1>
+      <_Parameter1>GarageGenius.Modules.Reservations.Api</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GarageGenius.Modules.Booking.Application</_Parameter1>
+      <_Parameter1>GarageGenius.Modules.Reservations.Application</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GarageGenius.Modules.Booking.Infrastructure</_Parameter1>
+      <_Parameter1>GarageGenius.Modules.Reservations.Infrastructure</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
   

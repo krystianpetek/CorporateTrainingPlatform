@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Booking\GarageGenius.Modules.Booking.Api\GarageGenius.Modules.Booking.Api.csproj" />
+    <ProjectReference Include="..\..\Modules\Reservations\GarageGenius.Modules.Reservations.Api\GarageGenius.Modules.Reservations.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Vehicles\GarageGenius.Modules.Vehicles.Api\GarageGenius.Modules.Vehicles.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Customers\GarageGenius.Modules.Customers.Api\GarageGenius.Modules.Customers.Api.csproj" />
     <ProjectReference Include="..\..\Modules\Notifications\GarageGenius.Modules.Notifications.Api\GarageGenius.Modules.Notifications.Api.csproj" />
