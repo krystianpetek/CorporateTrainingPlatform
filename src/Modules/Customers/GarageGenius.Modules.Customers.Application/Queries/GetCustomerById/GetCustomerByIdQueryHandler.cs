@@ -13,9 +13,9 @@ internal class GetCustomerByIdQueryHandler : IQueryHandler<GetCustomerByIdQuery,
         _customerRepository = customerRepository;
     }
 
-    public async Task<GetCustomerByIdDto> HandleAsync(GetCustomerByIdQuery query, CancellationToken cancellationToken = default)
+    public async Task<GetCustomerByIdDto> HandleQueryAsync(GetCustomerByIdQuery query, CancellationToken cancellationToken = default)
     {
-        Customer? customer = await _customerRepository.GetCustomerByIdAsync(query.Id);
+        Customer? customer = await _customerRepository.GetCustomerByIdAsync(query.Id, cancellationToken);
         return new GetCustomerByIdDto(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber, customer.EmailAddress);
     }
 }

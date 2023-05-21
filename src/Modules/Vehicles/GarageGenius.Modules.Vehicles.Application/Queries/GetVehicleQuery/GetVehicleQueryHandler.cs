@@ -15,7 +15,7 @@ internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicl
         _vehicleQueryStorage = vehicleQueryStorage;
     }
 
-    public async Task<GetVehicleQueryDto> HandleAsync(GetVehicleQuery query, CancellationToken cancellationToken = default)
+    public async Task<GetVehicleQueryDto> HandleQueryAsync(GetVehicleQuery query, CancellationToken cancellationToken = default)
     {
         GetVehicleQueryDto? getVehicleDto = await _vehicleQueryStorage.GetVehicleAsync(query.VehicleId, cancellationToken);
 

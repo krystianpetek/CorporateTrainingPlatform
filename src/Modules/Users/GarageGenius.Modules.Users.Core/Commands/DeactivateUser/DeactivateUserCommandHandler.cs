@@ -17,11 +17,11 @@ internal class DeactivateUserCommandHandler : ICommandHandler<DeactivateUserComm
         _userRepository = userRepository;
     }
 
-    public async Task HandleAsync(DeactivateUserCommand command, CancellationToken cancellationToken = default)
+    public async Task HandleCommandAsync(DeactivateUserCommand command, CancellationToken cancellationToken = default)
     {
-        User? user = await _userRepository.GetAsync(command.UserId) ?? throw new UserNotFoundException(command.UserId);
+        User? user = await _userRepository.GetAsync(command.UserId, cancellationToken) ?? throw new UserNotFoundException(command.UserId);
 
-        await _userRepository.DeactivateUserAsync(user.Id);
+        await _userRepository.DeactivateUserAsync(user.Id, cancellationToken);
         _logger.Information("User with ID: {UserId} has been deactivated.", command.UserId);
     }
 }

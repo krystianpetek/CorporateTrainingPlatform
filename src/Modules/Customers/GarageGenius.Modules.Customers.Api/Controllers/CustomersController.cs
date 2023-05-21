@@ -22,7 +22,7 @@ public class CustomersController : BaseController
     [SwaggerOperation("Get customer id")]
     public async Task<ActionResult> GetCustomerByIdAsync(Guid id)
     {
-        var customer = await _dispatcher.QueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
+        var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
         return Ok(customer);
     }
 
@@ -31,7 +31,7 @@ public class CustomersController : BaseController
     [SwaggerOperation("Get customer by user id")]
     public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)
     {
-        var customer = await _dispatcher.QueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
+        var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
         return Ok(customer);
     }
 
@@ -40,7 +40,7 @@ public class CustomersController : BaseController
     [SwaggerOperation("Create customer")]
     public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
     {
-        await _dispatcher.SendAsync<CreateCustomerCommand>(createCustomerCommand);
+        await _dispatcher.DispatchCommandAsync<CreateCustomerCommand>(createCustomerCommand);
         return Accepted();
     }
 
@@ -49,7 +49,7 @@ public class CustomersController : BaseController
     [SwaggerOperation("Update customer")]
     public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand)
     {
-        await _dispatcher.SendAsync<UpdateCustomerCommand>(updateCustomerCommand);
+        await _dispatcher.DispatchCommandAsync<UpdateCustomerCommand>(updateCustomerCommand);
         return NoContent();
     }
 }

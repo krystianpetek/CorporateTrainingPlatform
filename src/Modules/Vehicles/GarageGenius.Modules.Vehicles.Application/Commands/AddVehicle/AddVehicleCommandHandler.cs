@@ -16,7 +16,7 @@ internal class AddVehicleCommandHandler : ICommandHandler<AddVehicleCommand>
         _vehiclesRepository = vehiclesRepository;
     }
 
-    public async Task HandleAsync(AddVehicleCommand command, CancellationToken cancellationToken = default)
+    public async Task HandleCommandAsync(AddVehicleCommand command, CancellationToken cancellationToken = default)
     {
         Vehicle vehicle = new Vehicle(command.CustomerId, command.Manufacturer, command.Model, command.LicensePlate, command.Year, command.Vin);
         await _vehiclesRepository.AddVehicleAsync(vehicle, cancellationToken);

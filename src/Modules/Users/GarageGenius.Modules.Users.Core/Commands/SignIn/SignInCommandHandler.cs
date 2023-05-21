@@ -4,10 +4,12 @@ using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
+using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.Queries;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
-internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenResponse>
+namespace GarageGenius.Modules.Users.Core.Commands.SignIn;
+internal class SignInCommandHandler : ICommandHandler<SignInCommand>
 {
     private readonly Serilog.ILogger _logger;
     private readonly IUserRepository _userRepository;
@@ -15,7 +17,7 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
     private readonly IJsonWebTokenService _jwtTokenService;
     private readonly IJsonWebTokenStorage _jwtTokenStorage;
 
-    public SignInQueryHandler(
+    public SignInCommandHandler(
         Serilog.ILogger logger,
         IUserRepository userRepository,
         IJsonWebTokenService jwtTokenService,
@@ -29,17 +31,17 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
         _jwtTokenStorage = jwtTokenStorage;
     }
 
-    public async Task<JsonWebTokenResponse> HandleAsync(SignInQuery query, CancellationToken cancellationToken = default)
+    public async Task HandleCommandAsync(SignInCommand command, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(query.Email))
-            throw new InvalidEmailException(query.Email);
+        if (string.IsNullOrWhiteSpace(command.Email))
+            throw new InvalidEmailException(command.Email);
 
-        if (string.IsNullOrWhiteSpace(query.Password))
+        if (string.IsNullOrWhiteSpace(command.Password))
             throw new MissingPasswordException();
 
-        User user = await _userRepository.GetByEmailAsync(query.Email.ToLower()) ?? throw new InvalidCredentialsException();
+        User user = await _userRepository.GetByEmailAsync(command.Email.ToLower(), cancellationToken) ?? throw new InvalidCredentialsException();
 
-        if (!_passwordManager.IsValid(query.Password, user.Password))
+        if (!_passwordManager.IsValid(command.Password, user.Password))
             throw new InvalidCredentialsException();
 
         user.VerifyUserState();
@@ -47,10 +49,8 @@ internal class SignInQueryHandler : IQueryHandler<SignInQuery, JsonWebTokenRespo
         Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
         JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email, user.RoleId, claims);
 
-        _logger.Information("User with ID: '{UserId}' has signed in.", user.Id);
-
         _jwtTokenStorage.SetToken(token);
-        return token;
+        _logger.Information("User with ID: '{UserId}' has signed in.", user.Id);
         // TODO refresh token
     }
 }

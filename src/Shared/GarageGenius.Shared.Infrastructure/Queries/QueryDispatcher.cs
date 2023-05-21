@@ -12,12 +12,12 @@ internal class QueryDispatcher : IQueryDispatcher
         _serviceProvider = serviceProvider;
     }
 
-    public async Task<TQueryResult> QueryAsync<TQueryResult>(IQuery<TQueryResult> query, CancellationToken cancellationToken = default)
+    public async Task<TQueryResult> DispatchQueryAsync<TQueryResult>(IQuery<TQueryResult> query, CancellationToken cancellationToken = default)
     {
         using IServiceScope? scope = _serviceProvider.CreateScope();
         Type? handlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TQueryResult));
         object handler = scope.ServiceProvider.GetRequiredService(handlerType);
-        MethodInfo? method = handlerType.GetMethod(nameof(IQueryHandler<IQuery<TQueryResult>, TQueryResult>.HandleAsync));
+        MethodInfo? method = handlerType.GetMethod(nameof(IQueryHandler<IQuery<TQueryResult>, TQueryResult>.HandleQueryAsync));
 
         if (method is null)
         {

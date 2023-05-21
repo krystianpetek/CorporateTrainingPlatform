@@ -1,8 +1,8 @@
 ﻿using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
+using GarageGenius.Modules.Users.Core.Commands.SignIn;
 using GarageGenius.Modules.Users.Core.Commands.SignUp;
-using GarageGenius.Modules.Users.Core.Dto;
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
-using GarageGenius.Modules.Users.Core.Queries.SignIn;
+using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +12,8 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GarageGenius.Modules.Users.Api.Controllers;
 public class UsersController : BaseController
 {
+    private readonly IJsonWebTokenStorage _jsonWebTokenStorage;
+
     //[ProducesResponseType(StatusCodes.Status200OK)]
     //[ProducesResponseType(StatusCodes.Status404NotFound)]
     //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -19,8 +21,11 @@ public class UsersController : BaseController
 
     private readonly IDispatcher _dispatcher;
 
-    public UsersController(IDispatcher dispatcher)
+    public UsersController(
+        IJsonWebTokenStorage jsonWebTokenStorage,
+        IDispatcher dispatcher)
     {
+        _jsonWebTokenStorage = jsonWebTokenStorage;
         _dispatcher = dispatcher;
     }
 
@@ -28,9 +33,9 @@ public class UsersController : BaseController
     [HttpGet("{id:guid}")]
     [SwaggerOperation("Get user by ID")]
     //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
-    public async Task<ActionResult<GetUserDto>> GetUserAsync(Guid id)
+    public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
     {
-        return await _dispatcher.QueryAsync<GetUserDto>(new GetUserQuery(id));
+        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
     }
 
     [HttpPost("sign-up")]
@@ -38,16 +43,18 @@ public class UsersController : BaseController
     [SwaggerOperation("Sign up")]
     public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
     {
-        await _dispatcher.SendAsync<SignUpCommand>(signUpCommand);
+        await _dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
         return Accepted();
     }
 
     [HttpPost("sign-in")]
     [AllowAnonymous]
     [SwaggerOperation("Sign in")]
-    public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInQuery signInQuery)
+    public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
     {
-        JsonWebTokenResponse token = await _dispatcher.QueryAsync<JsonWebTokenResponse>(signInQuery);
+        await _dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
+        
+        JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
         return Ok(token);
     }
 
@@ -57,7 +64,7 @@ public class UsersController : BaseController
     [SwaggerOperation("Deactivate user")]
     public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
     {
-        await _dispatcher.SendAsync<DeactivateUserCommand>(deactivateUserCommand);
+        await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
         return NoContent();
     }
     // TODO change user password 

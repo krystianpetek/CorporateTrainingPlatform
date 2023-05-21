@@ -19,12 +19,12 @@ internal sealed class InMemoryDispatcher : IDispatcher
         _queryDispatcher = queryDispatcher;
     }
 
-    public Task SendAsync<T>(T command, CancellationToken cancellationToken = default) where T : class, ICommand
-        => _commandDispatcher.SendAsync(command, cancellationToken);
+    public Task DispatchCommandAsync<T>(T command, CancellationToken cancellationToken = default) where T : class, ICommand
+        => _commandDispatcher.DispatchCommandAsync(command, cancellationToken);
 
-    public Task PublishAsync<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEvent
-        => _eventDispatcher.PublishAsync(@event, cancellationToken);
+    public Task DispatchEventAsync<T>(T @event, CancellationToken cancellationToken = default) where T : class, IEvent
+        => _eventDispatcher.DispatchEventAsync(@event, cancellationToken);
 
-    public Task<TResult> QueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
-        => _queryDispatcher.QueryAsync(query, cancellationToken);
+    public Task<TResult> DispatchQueryAsync<TResult>(IQuery<TResult> query, CancellationToken cancellationToken = default)
+        => _queryDispatcher.DispatchQueryAsync(query, cancellationToken);
 }

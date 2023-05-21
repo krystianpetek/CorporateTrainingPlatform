@@ -15,7 +15,7 @@ internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
         _customerRepository = customerRepository;
     }
 
-    public async Task HandleAsync(UserCreated @event, CancellationToken cancellationToken = default)
+    public async Task HandleEventAsync(UserCreated @event, CancellationToken cancellationToken = default)
     {
         await _customerRepository.AddCustomerAsync(new Customer(@event.UserId, @event.Email), cancellationToken);
         _logger.Information(

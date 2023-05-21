@@ -22,7 +22,7 @@ public class VehiclesController : BaseController
     public async Task<ActionResult> AddVehicleAsync(Guid customerId, AddVehicleCommand addVehicleCommand)
     {
         addVehicleCommand.CustomerId = customerId;
-        await _dispatcher.SendAsync(addVehicleCommand);
+        await _dispatcher.DispatchCommandAsync(addVehicleCommand);
         return Accepted(); // TODO Controllers response types
     }
 
@@ -32,7 +32,7 @@ public class VehiclesController : BaseController
     public async Task<ActionResult> GetCustomerVehiclesAsync(Guid customerId)
     {
         GetCustomerVehiclesQuery getCustomerVehiclesQuery = new GetCustomerVehiclesQuery(customerId);
-        IReadOnlyList<GetCustomerVehiclesQueryDto> customerVehicles = await _dispatcher.QueryAsync(getCustomerVehiclesQuery);
+        IReadOnlyList<GetCustomerVehiclesQueryDto> customerVehicles = await _dispatcher.DispatchQueryAsync(getCustomerVehiclesQuery);
         return Ok(customerVehicles);
     }
 
@@ -42,7 +42,7 @@ public class VehiclesController : BaseController
     public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
     {
         GetVehicleQuery getVehicleQuery = new GetVehicleQuery(vehicleId);
-        GetVehicleQueryDto vehicleDto = await _dispatcher.QueryAsync(getVehicleQuery);
+        GetVehicleQueryDto vehicleDto = await _dispatcher.DispatchQueryAsync(getVehicleQuery);
         return Ok(vehicleDto);
     }
 }

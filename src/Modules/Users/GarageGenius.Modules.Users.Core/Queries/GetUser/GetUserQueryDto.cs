@@ -1,5 +1,5 @@
-﻿namespace GarageGenius.Modules.Users.Core.Dto;
-public record GetUserDto
+﻿namespace GarageGenius.Modules.Users.Core.Queries.GetUser;
+public record GetUserQueryDto
 {
     public Guid Id { get; init; }
     public string Role { get; init; }
@@ -7,7 +7,7 @@ public record GetUserDto
     public string State { get; init; }
     public DateTime CreatedAt { get; init; }
 
-    public GetUserDto(Guid id, string role, string email, string state, DateTime createdAt)
+    public GetUserQueryDto(Guid id, string role, string email, string state, DateTime createdAt)
     {
         Id = id;
         Role = role;

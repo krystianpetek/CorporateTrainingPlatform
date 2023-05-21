@@ -29,7 +29,7 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         _messageBroker = messageBroker;
     }
 
-    public async Task HandleAsync(SignUpCommand command, CancellationToken cancellationToken = default)
+    public async Task HandleCommandAsync(SignUpCommand command, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(command.Email))
             throw new InvalidEmailException(command.Email);
@@ -44,12 +44,12 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 
         string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
 
-        Role? role = await _roleRepository.GetAsync(roleName) ?? throw new RoleNotFoundException(roleName);
+        Role? role = await _roleRepository.GetAsync(roleName, cancellationToken) ?? throw new RoleNotFoundException(roleName);
 
         string password = _passwordManager.Generate(command.Password);
 
         user = new User(email, password, role);
-        await _userRepository.AddAsync(user);
+        await _userRepository.AddAsync(user, cancellationToken);
 
         _logger.Information("User with ID: {UserId}' has signed up.", user.Id);
         await _messageBroker.PublishAsync(new UserCreated(user.Id, user.Email), cancellationToken);

@@ -10,10 +10,10 @@ internal class CommandDispatcher : ICommandDispatcher
     {
         _serviceProvider = serviceProvider;
     }
-    public async Task SendAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : class, ICommand
+    public async Task DispatchCommandAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default) where TCommand : class, ICommand
     {
         using IServiceScope? scope = _serviceProvider.CreateScope();
         ICommandHandler<TCommand> handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-        await handler.HandleAsync(command, cancellationToken);
+        await handler.HandleCommandAsync(command, cancellationToken);
     }
 }

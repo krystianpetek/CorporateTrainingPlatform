@@ -1,5 +1,5 @@
 ﻿namespace GarageGenius.Shared.Abstractions.Commands;
 public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
 {
-    Task HandleAsync(TCommand command, CancellationToken cancellationToken = default);
+    Task HandleCommandAsync(TCommand command, CancellationToken cancellationToken = default);
 }

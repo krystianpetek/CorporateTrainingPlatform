@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Users.Core.Dto;
-using GarageGenius.Modules.Users.Core.Exceptions;
+﻿using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.ValueObjects;
 using GarageGenius.Shared.Abstractions.Common;
 
@@ -39,13 +38,5 @@ internal sealed class User : AuditableEntity
     {
         if (State! != UserState.Active.Value)
             throw new UserInactiveStateException(this.Id); // domain entity should throw exception ?
-    }
-}
-
-public static class UserExtensions
-{
-    internal static GetUserDto AsGetUserDto(this User user)
-    {
-        return new GetUserDto(user.Id, user.RoleId, user.Email.Value, user.State, user.Created);
     }
 }

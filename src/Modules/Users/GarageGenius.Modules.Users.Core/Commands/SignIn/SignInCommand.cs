@@ -1,11 +1,10 @@
-﻿using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
-using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Commands;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace GarageGenius.Modules.Users.Core.Queries.SignIn;
+namespace GarageGenius.Modules.Users.Core.Commands.SignIn;
 
-public record SignInQuery : IQuery<JsonWebTokenResponse>
+public record SignInCommand : ICommand
 {
     [Required]
     [EmailAddress]
@@ -16,7 +15,7 @@ public record SignInQuery : IQuery<JsonWebTokenResponse>
     [DefaultValue("Password!23")]
     public string Password { get; init; }
 
-    public SignInQuery(string email, string password)
+    public SignInCommand(string email, string password)
     {
         Email = email;
         Password = password;
