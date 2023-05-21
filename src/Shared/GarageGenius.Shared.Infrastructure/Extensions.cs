@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Shared.Infrastructure.Authentication;
 using GarageGenius.Shared.Infrastructure.Authorization;
 using GarageGenius.Shared.Infrastructure.Commands;
+using GarageGenius.Shared.Infrastructure.Cors;
 using GarageGenius.Shared.Infrastructure.Dispatchers;
 using GarageGenius.Shared.Infrastructure.Events;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
@@ -23,6 +24,7 @@ public static class Extensions
         services.AddSharedAuthorization();
         services.AddSharedSwagger();
         services.AddSharedHealthCheck();
+        services.AddSharedCors();
 
         services.AddSharedEventHandlers(assemblies);
         services.AddSharedCommandHandlers(assemblies);
@@ -42,6 +44,7 @@ public static class Extensions
         app.UseSharedAuthentication();
         app.UseSharedAuthorization();
         app.UseSharedSwagger();
+        app.UseSharedCors();
         return app;
     }
 }
