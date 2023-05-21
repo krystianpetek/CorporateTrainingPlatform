@@ -17,8 +17,18 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    // TODO
+    //{
+    //  provide: APP_INITIALIZER,
+    //  useFactory: async (signalrService: SignalrService) => {
+    //    await signalrService.initializeStartConnection();
+    //  },
+    //  multi: true,
+    //  deps: [SignalrService],
+    //},
+  ],
   bootstrap: [AppComponent],
   exports: [MatButtonModule],
 })
-export class AppModule {}
+export class AppModule { }

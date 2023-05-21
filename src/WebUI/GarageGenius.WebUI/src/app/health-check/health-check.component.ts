@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { HealthCheckService } from '../health-check.service';
+import { SignalrService } from '../signalr-service/signalr.service';
 
 @Component({
   selector: 'app-health-check',
   templateUrl: './health-check.component.html',
   styleUrls: ['./health-check.component.css'],
 })
-export class HealthCheckComponent {
+export class HealthCheckComponent implements OnDestroy  {
   private healthCheckService: HealthCheckService;
   public moduleHealths: Record<Modules, HealthCheckDisplay> = {
     Vehicles: {
@@ -26,8 +27,13 @@ export class HealthCheckComponent {
       name: 'Users',
     },
   };
+  private signalrService: SignalrService;
 
-  constructor(healthCheckService: HealthCheckService) {
+  constructor(
+    healthCheckService: HealthCheckService,
+    signalrService: SignalrService
+  ) {
+    this.signalrService = signalrService;
     this.healthCheckService = healthCheckService;
     this.healthCheckService.healthCheckVehicles().subscribe({
       next: (response: HealthCheck) => {
@@ -69,6 +75,10 @@ export class HealthCheckComponent {
         };
       },
     });
+    signalrService.startConnection();
+  }
+  ngOnDestroy(): void {
+    this.signalrService.stopConnection();
   }
 }
 export interface HealthCheck {
