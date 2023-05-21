@@ -4,3 +4,7 @@
   <li>{{this.moduleHealths.Notifications.name}} - {{this.moduleHealths.Notifications.module.message}}</li>
   <li>{{this.moduleHealths.Users.name}} - {{this.moduleHealths.Users.module.message}}</li>
 </ul>
+
+<ul>
+  <li *ngFor="let item of this.signalrService.data">{{item}}</li>
+</ul>

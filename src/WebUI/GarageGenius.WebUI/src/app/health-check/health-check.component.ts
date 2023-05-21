@@ -7,7 +7,7 @@ import { SignalrService } from '../signalr-service/signalr.service';
   templateUrl: './health-check.component.html',
   styleUrls: ['./health-check.component.css'],
 })
-export class HealthCheckComponent implements OnDestroy  {
+export class HealthCheckComponent implements OnDestroy {
   private healthCheckService: HealthCheckService;
   public moduleHealths: Record<Modules, HealthCheckDisplay> = {
     Vehicles: {
@@ -27,7 +27,7 @@ export class HealthCheckComponent implements OnDestroy  {
       name: 'Users',
     },
   };
-  private signalrService: SignalrService;
+  public signalrService: SignalrService;
 
   constructor(
     healthCheckService: HealthCheckService,

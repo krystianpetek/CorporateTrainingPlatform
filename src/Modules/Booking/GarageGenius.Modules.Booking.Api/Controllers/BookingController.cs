@@ -1,5 +1,5 @@
 ﻿using GarageGenius.Shared.Abstractions.Dispatcher;
-using GarageGenius.Shared.Abstractions.SignalR.Hubs;
+using GarageGenius.Shared.Infrastructure.SignalR.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -16,9 +16,9 @@ public class BookingController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(string data)
     {
-        await _hubContextNotifications.Clients.All.SendAsync("PackageAsync", "data");
+        await _hubContextNotifications.Clients.All.SendAsync("SendNotification", DateTime.Now, data);
         return Ok();
     }
 
