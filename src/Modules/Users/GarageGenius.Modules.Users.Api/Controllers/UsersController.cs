@@ -13,12 +13,6 @@ namespace GarageGenius.Modules.Users.Api.Controllers;
 public class UsersController : BaseController
 {
     private readonly IJsonWebTokenStorage _jsonWebTokenStorage;
-
-    //[ProducesResponseType(StatusCodes.Status200OK)]
-    //[ProducesResponseType(StatusCodes.Status404NotFound)]
-    //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    //[ProducesResponseType(StatusCodes.Status403Forbidden)]
-
     private readonly IDispatcher _dispatcher;
 
     public UsersController(
@@ -32,7 +26,7 @@ public class UsersController : BaseController
     [Authorize]
     [HttpGet("{id:guid}")]
     [SwaggerOperation("Get user by ID")]
-    //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
+
     public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
     {
         return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
@@ -40,7 +34,7 @@ public class UsersController : BaseController
 
     [HttpPost("sign-up")]
     [AllowAnonymous]
-    [SwaggerOperation("Sign up")]
+    [SwaggerOperation("Sign up user")]
     public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
     {
         await _dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
@@ -49,16 +43,24 @@ public class UsersController : BaseController
 
     [HttpPost("sign-in")]
     [AllowAnonymous]
-    [SwaggerOperation("Sign in")]
+    [SwaggerOperation("Sign in user")]
     public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
     {
         await _dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
-        
+
         JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
         return Ok(token);
     }
 
-    //[Authorize(Policy = "Master")]
+    [Authorize]
+    [HttpPost("sign-out")]
+    [SwaggerOperation("Sign out user")]
+    public new IActionResult SignOut()
+    {
+        _jsonWebTokenStorage.RemoveToken();
+        return Ok();
+    }
+
     [Authorize]
     [HttpPost("deactivate")]
     [SwaggerOperation("Deactivate user")]
@@ -67,7 +69,9 @@ public class UsersController : BaseController
         await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
         return NoContent();
     }
+
+    //[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
+    //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
     // TODO change user password 
     // TODO activate user
-    // TODO logout user
 }

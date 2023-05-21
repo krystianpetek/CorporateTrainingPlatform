@@ -34,4 +34,6 @@ internal class JsonWebTokenStorage : IJsonWebTokenStorage
     {
         _httpContextAccessor?.HttpContext?.Items.TryAdd(SectionName, token);
     }
+
+    // TODO store token in database, maybe sql and redis/distributed cache
 }

@@ -2,12 +2,12 @@
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
 
 namespace GarageGenius.Modules.Users.Core.MappingService;
-public interface IUserServiceMapper<in T>
+internal interface IUserServiceMapper
 {
-    public GetUserQueryDto MapToGetUserQueryDto(T entity);
+    public GetUserQueryDto MapToGetUserQueryDto(User entity);
 }
 
-internal class UserServiceMapper : IUserServiceMapper<User>
+internal class UserServiceMapper : IUserServiceMapper
 {
     public GetUserQueryDto MapToGetUserQueryDto(User entity)
     {

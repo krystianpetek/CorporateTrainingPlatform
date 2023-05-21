@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
+﻿using GarageGenius.Modules.Users.Core.MappingService;
+using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 using GarageGenius.Modules.Users.Core.Persistance.Repositories;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Persistance;
@@ -15,6 +16,7 @@ internal static class Extensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddMsSqlServerDbContext<UsersDbContext>();
         services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
+        services.AddScoped<IUserServiceMapper, UserServiceMapper>();
 
         using IServiceScope? serviceScope = services.BuildServiceProvider().CreateScope();
         var dbSeeder = serviceScope.ServiceProvider.GetService<IDbContextSeeder>();

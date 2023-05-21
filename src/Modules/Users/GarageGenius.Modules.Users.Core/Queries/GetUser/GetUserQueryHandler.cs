@@ -9,9 +9,12 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
 {
     private readonly Serilog.ILogger _logger;
     private readonly IUserRepository _userRepository;
-    private readonly IUserServiceMapper<User> _userServiceMapper;
+    private readonly IUserServiceMapper _userServiceMapper;
 
-    public GetUserQueryHandler(Serilog.ILogger logger, IUserRepository userRepository, IUserServiceMapper<User> userServiceMapper)
+    public GetUserQueryHandler(
+        Serilog.ILogger logger, 
+        IUserRepository userRepository, 
+        IUserServiceMapper userServiceMapper)
     {
         _logger = logger;
         _userRepository = userRepository;
