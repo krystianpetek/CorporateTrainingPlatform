@@ -15,8 +15,8 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
             .Property(x => x.Permissions)
             .HasConversion(x => string.Join(',', x), x => x.Split(',', StringSplitOptions.None));
 
-        builder
-            .Property(x => x.Permissions).Metadata.SetValueComparer(
+        builder.Property(x => x.Permissions)
+            .Metadata.SetValueComparer(
                 new ValueComparer<IEnumerable<string>>(
                     (c1, c2) => c1.SequenceEqual(c2),
                     c => c.Aggregate(0, (a, next) => HashCode.Combine(a, next.GetHashCode()))));

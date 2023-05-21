@@ -22,7 +22,7 @@ internal class UserRepository : IUserRepository
     public async Task DeactivateUserAsync(Guid id, CancellationToken cancellationToken = default)
     {
         User? user = await _usersDbContext.Users
-            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(user => user.UserId == id, cancellationToken);
 
         user?.VerifyUserState();
 
@@ -39,7 +39,7 @@ internal class UserRepository : IUserRepository
             .AsQueryable()
             .AsNoTracking()
             .Include(x => x.Role)
-            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+            .SingleOrDefaultAsync(x => x.UserId == id, cancellationToken);
 
         return user;
     }

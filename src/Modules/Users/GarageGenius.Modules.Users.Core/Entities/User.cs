@@ -5,20 +5,20 @@ using GarageGenius.Shared.Abstractions.Common;
 namespace GarageGenius.Modules.Users.Core.Entities;
 internal sealed class User : AuditableEntity
 {
-    public Guid Id { get; private set; }
+    internal Guid UserId { get; private set; } // TODO userid as Types
+    public string RoleName { get; private set; } // TODO ValueObject
+    public EmailAddress Email { get; private set; } 
+    public string Password { get; private set; } // TODO maybe ValueObject
+    public UserState State { get; private set; }
     public Role Role { get; private set; }
-    public string RoleId { get; private set; }
-    public EmailAddress Email { get; private set; }
-    public string Password { get; private set; }
-    public UserState? State { get; private set; }
 
     public User(EmailAddress email, string password, Role role)
     {
-        Id = Guid.NewGuid();
+        UserId = Guid.NewGuid();
         Email = email;
         Password = password;
         Role = role;
-        RoleId = role.Name;
+        RoleName = role.Name;
         this.Activate();
     }
 
@@ -36,7 +36,12 @@ internal sealed class User : AuditableEntity
 
     internal void VerifyUserState()
     {
-        if (State! != UserState.Active.Value)
-            throw new UserInactiveStateException(this.Id); // domain entity should throw exception ?
+        if (State != UserState.Active.Value)
+            throw new UserInactiveStateException(this.UserId); // TODO - domain entity should throw exception ?
+    }
+
+    internal void ChangePassword(string newPassword)
+    {
+        Password = newPassword;
     }
 }

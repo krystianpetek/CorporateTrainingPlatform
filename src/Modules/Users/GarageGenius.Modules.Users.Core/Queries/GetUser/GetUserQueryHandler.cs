@@ -25,7 +25,7 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
         User user = await _userRepository.GetAsync(query.id, cancellationToken) ?? throw new UserNotFoundException(query.id);
 
         GetUserQueryDto mappedUser = _userServiceMapper.MapToGetUserQueryDto(user);
-        _logger.Information("User with ID: {UserId}' has been retrieved.", user.Id);
+        _logger.Information("User with ID: {UserId}' has been retrieved.", user.UserId);
         
         return mappedUser;
     }

@@ -52,7 +52,7 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
 
             modelBuilder.Entity("GarageGenius.Modules.Users.Core.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -78,7 +78,7 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("RoleId")
+                    b.Property<string>("RoleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
@@ -86,12 +86,12 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleName");
 
                     b.ToTable("Users", "users");
                 });
@@ -100,7 +100,7 @@ namespace GarageGenius.Modules.Users.Core.Persistance.Migrations
                 {
                     b.HasOne("GarageGenius.Modules.Users.Core.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -20,8 +20,8 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
         GetVehicleQueryDto? getVehicleDto = await _vehiclesDbContext.Vehicles
             .AsNoTracking()
             .AsQueryable()
-            .Where(x => x.Id == vehicleId)
-            .Select(x => new GetVehicleQueryDto(x.Id, x.Manufacturer, x.Model, x.Year, x.LicensePlate))
+            .Where(x => x.VehicleId == vehicleId)
+            .Select(x => new GetVehicleQueryDto(x.VehicleId, x.Manufacturer, x.Model, x.Year, x.LicensePlate))
             .SingleOrDefaultAsync(cancellationToken) ?? throw new VehicleNotFoundException(vehicleId);
 
         return getVehicleDto;
@@ -32,7 +32,7 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
             .AsNoTracking()
             .AsQueryable()
             .Where(vehicle => vehicle.CustomerId == customerId)
-            .Select(x => new GetCustomerVehiclesQueryDto(x.Id, x.Manufacturer, x.Model, x.Year, x.LicensePlate))
+            .Select(x => new GetCustomerVehiclesQueryDto(x.VehicleId, x.Manufacturer, x.Model, x.Year, x.LicensePlate))
             .ToListAsync(cancellationToken);
 
         return customerVehicles;

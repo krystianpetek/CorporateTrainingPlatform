@@ -3,10 +3,10 @@
 namespace GarageGenius.Modules.Users.Core.Entities;
 internal sealed class Role : AuditableEntity
 {
-    public static string DefaultRole => "user";
+    internal static string DefaultRole => "Customer";
 
-    public string Name { get; private set; }
-    public IEnumerable<string> Permissions { get; private set; }
+    public string Name { get; private set; } // TODO ValueObject
+    public IEnumerable<string> Permissions { get; private set; } // TODO ValueObject
 
     private Role() { }
 

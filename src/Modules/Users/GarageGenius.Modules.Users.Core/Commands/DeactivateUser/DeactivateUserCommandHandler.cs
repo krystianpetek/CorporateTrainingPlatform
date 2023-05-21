@@ -21,7 +21,7 @@ internal class DeactivateUserCommandHandler : ICommandHandler<DeactivateUserComm
     {
         User? user = await _userRepository.GetAsync(command.UserId, cancellationToken) ?? throw new UserNotFoundException(command.UserId);
 
-        await _userRepository.DeactivateUserAsync(user.Id, cancellationToken);
+        await _userRepository.DeactivateUserAsync(user.UserId, cancellationToken);
         _logger.Information("User with ID: {UserId} has been deactivated.", command.UserId);
     }
 }

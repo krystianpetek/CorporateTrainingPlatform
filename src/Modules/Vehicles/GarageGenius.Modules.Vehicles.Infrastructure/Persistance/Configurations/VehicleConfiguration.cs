@@ -9,8 +9,9 @@ internal class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.HasIndex(x => x.Id);
-        builder.Property(x => x.Id)
+        builder.HasKey(x => x.VehicleId);
+        builder.HasIndex(x => x.VehicleId);
+        builder.Property(x => x.VehicleId)
             .IsRequired()
             .HasConversion(conversion => conversion.Value, value => new VehicleId(value));
 
@@ -28,15 +29,16 @@ internal class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
             .HasMaxLength(100)
             .HasConversion(conversion => conversion.Value, value => new Model(value));
 
+        builder.Property(x => x.LicensePlate)
+            .IsRequired()
+            .HasMaxLength(8)
+            .HasConversion(conversion => conversion.Value, value => new LicensePlate(value));
+
         builder.HasIndex(x => x.Vin)
             .IsUnique();
         builder.Property(x => x.Vin)
             .HasMaxLength(17)
             .HasConversion(conversion => conversion.Value, value => value != default ? new Vin(value) : null);
-
-        builder.Property(x => x.LicensePlate)
-            .HasMaxLength(8)
-            .HasConversion(conversion => conversion.Value, value => new LicensePlate(value));
 
         builder.Property(x => x.Year)
             .HasMaxLength(8)

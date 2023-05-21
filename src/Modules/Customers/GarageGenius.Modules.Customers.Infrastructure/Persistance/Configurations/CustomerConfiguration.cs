@@ -9,8 +9,8 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
-        builder.HasIndex(x => x.Id).IsUnique();
-        builder.Property(x => x.Id)
+        builder.HasIndex(x => x.CustomerId).IsUnique();
+        builder.Property(x => x.CustomerId)
             .IsRequired()
             .HasConversion(x => x.Value, x => new CustomerId(x));
 

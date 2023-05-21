@@ -25,7 +25,7 @@ internal class CustomerRepository : ICustomerRepository
         Customer? customer = await _customersDbContext.Customers
             .AsQueryable()
             .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new CustomerNotFoundException(id);
+            .SingleOrDefaultAsync(x => x.CustomerId == id, cancellationToken) ?? throw new CustomerNotFoundException(id);
 
         return customer;
     }

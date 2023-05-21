@@ -6,7 +6,7 @@ namespace GarageGenius.Modules.Customers.Core.Entities;
 internal sealed class Customer : AuditableEntity
 {
     // TODO validation domain entity
-    public CustomerId Id { get; private set; }
+    internal CustomerId CustomerId { get; private set; }
     public UserId? UserId { get; private set; } // TODO linking to user if customer created separately, but how ?
     public FirstName? FirstName { get; private set; }
     public LastName? LastName { get; private set; }
@@ -15,14 +15,9 @@ internal sealed class Customer : AuditableEntity
 
     private Customer() { }
 
-    public Customer(UserId userId, FirstName firstName, LastName lastName, PhoneNumber phoneNumber, EmailAddress emailAddress) : this(firstName, lastName, phoneNumber, emailAddress)
-    {
-        UserId = userId;
-    }
-
     public Customer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
     {
-        Id = new CustomerId(Guid.NewGuid());
+        CustomerId = new CustomerId(Guid.NewGuid());
         FirstName = firstName;
         LastName = lastName;
         PhoneNumber = phoneNumber;
@@ -31,12 +26,12 @@ internal sealed class Customer : AuditableEntity
 
     public Customer(UserId userId, EmailAddress emailAddress)
     {
-        Id = new CustomerId(Guid.NewGuid());
+        CustomerId = new CustomerId(Guid.NewGuid());
         UserId = userId;
         EmailAddress = emailAddress;
     }
 
-    public void Update(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
+    internal void UpdateCustomer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
     {
         FirstName = firstName;
         LastName = lastName;

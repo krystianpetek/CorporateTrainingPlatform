@@ -18,14 +18,14 @@ internal class AddVehicleCommandHandler : ICommandHandler<AddVehicleCommand>
 
     public async Task HandleCommandAsync(AddVehicleCommand command, CancellationToken cancellationToken = default)
     {
-        Vehicle vehicle = new Vehicle(command.CustomerId, command.Manufacturer, command.Model, command.LicensePlate, command.Year, command.Vin);
+        Vehicle vehicle = new Vehicle(command.CustomerId, command.Manufacturer, command.Model, command.LicensePlate, command.Vin, command.Year);
         await _vehiclesRepository.AddVehicleAsync(vehicle, cancellationToken);
 
         _logger.Information(
             messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new vehicle with ID: {VehicleId} to customer with ID: {CustomerId}",
             nameof(AddVehicleCommand),
             nameof(Vehicles),
-            vehicle.Id,
+            vehicle.VehicleId,
             command.CustomerId);
     }
 }

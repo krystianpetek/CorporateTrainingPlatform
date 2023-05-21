@@ -47,10 +47,10 @@ internal class SignInCommandHandler : ICommandHandler<SignInCommand>
         user.VerifyUserState();
 
         Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
-        JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.Id, user.Email, user.RoleId, claims);
+        JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.UserId, user.Email, user.RoleName, claims);
 
         _jwtTokenStorage.SetToken(token);
-        _logger.Information("User with ID: '{UserId}' has signed in.", user.Id);
+        _logger.Information("User with ID: '{UserId}' has signed in.", user.UserId);
         // TODO refresh token
     }
 }

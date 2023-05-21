@@ -33,7 +33,7 @@ internal class VehicleRepository : IVehicleRepository
     [Obsolete($"Moved responsibility for fetching data from IVehicleRepository to IVehicleQueryStorage")]
     public async Task<Vehicle?> GetVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default)
     {
-        Vehicle? vehicle = await _vehiclesDbContext.Vehicles.FirstOrDefaultAsync(vehicle => vehicle.Id == vehicleId, cancellationToken);
+        Vehicle? vehicle = await _vehiclesDbContext.Vehicles.FirstOrDefaultAsync(vehicle => vehicle.VehicleId == vehicleId, cancellationToken);
         return vehicle;
     }
 
