@@ -25,5 +25,9 @@
       <_Parameter1>GarageGenius.Modules.Reservations.Infrastructure</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReservationHistories\Exceptions\" />
+    <Folder Include="Reservations\Exceptions\" />
+  </ItemGroup>
   
 </Project>
