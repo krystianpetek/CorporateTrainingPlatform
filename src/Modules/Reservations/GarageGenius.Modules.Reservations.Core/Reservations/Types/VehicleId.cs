@@ -1,25 +1,25 @@
-﻿namespace GarageGenius.Modules.Reservations.Core.Types;
+﻿namespace GarageGenius.Modules.Reservations.Core.Reservations.Types;
 
-internal sealed class ReservationId : IEquatable<ReservationId>
+internal sealed class VehicleId : IEquatable<VehicleId>
 {
     public Guid Value { get; }
 
-    public ReservationId(Guid value)
+    public VehicleId(Guid value)
     {
         Value = value;
     }
 
-    public static implicit operator ReservationId(Guid value)
+    public static implicit operator VehicleId(Guid value)
     {
-        return new ReservationId(value);
+        return new VehicleId(value);
     }
 
-    public static implicit operator Guid(ReservationId value)
+    public static implicit operator Guid(VehicleId value)
     {
         return value.Value;
     }
 
-    public bool Equals(ReservationId? other)
+    public bool Equals(VehicleId? other)
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -28,7 +28,7 @@ internal sealed class ReservationId : IEquatable<ReservationId>
 
     public override bool Equals(object obj)
     {
-        return Equals(obj as ReservationId);
+        return Equals(obj as VehicleId);
     }
 
     public override int GetHashCode()
