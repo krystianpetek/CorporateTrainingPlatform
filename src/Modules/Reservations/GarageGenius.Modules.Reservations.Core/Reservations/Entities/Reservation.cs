@@ -20,12 +20,14 @@ internal sealed class Reservation : AuditableEntity
         private set => new List<ReservationHistory>(value);
     }
 
-    public Reservation(VehicleId vehicleId, ReservationNote reservationNote, ReservationDate date)
+    private Reservation() { }
+
+    public Reservation(VehicleId vehicleId, ReservationNote reservationNote, ReservationDate reservationDate)
     {
         ReservationId = Guid.NewGuid();
         VehicleId = vehicleId;
         ReservationNote = reservationNote;
-        ReservationDate = date;
+        ReservationDate = reservationDate;
         ReservationState = ReservationState.Pending;
     }
 
