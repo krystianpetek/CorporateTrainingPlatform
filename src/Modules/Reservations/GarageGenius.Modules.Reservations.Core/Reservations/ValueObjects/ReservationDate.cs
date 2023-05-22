@@ -43,6 +43,3 @@ internal sealed class ReservationDate : IEquatable<ReservationDate>
         return obj.GetType() == GetType() && Equals((ReservationDate?)obj);
     }
 }
-
-{
-}
