@@ -1,6 +1,8 @@
 ﻿using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Types;
+using GarageGenius.Modules.Reservations.Core.ReservationHistories.ValueObjects;
 using GarageGenius.Modules.Reservations.Core.Reservations.Types;
+using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,6 +21,14 @@ internal class ReservationHistoryConfiguration : IEntityTypeConfiguration<Reserv
         builder.Property(builder => builder.ReservationId)
             .IsRequired()
             .HasConversion(conversion => conversion.Value, value => new ReservationId(value));
+
+        builder.Property(builder => builder.ReservationState)
+            .IsRequired()
+            .HasConversion(conversion => conversion.Value, value => new ReservationState(value));
+
+        builder.Property(builder => builder.Comment)
+            .IsRequired()
+            .HasConversion(conversion => conversion.Value, value => new Comment(value));
 
         // TODO configure other properties
     }
