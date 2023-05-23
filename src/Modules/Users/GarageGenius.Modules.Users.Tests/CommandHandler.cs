@@ -1,6 +1,6 @@
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
-using GarageGenius.Shared.Infrastructure.MessageBroker;
+using GarageGenius.Shared.Abstractions.MessageBroker;
 using Moq;
 
 namespace GarageGenius.Modules.Users.Tests;

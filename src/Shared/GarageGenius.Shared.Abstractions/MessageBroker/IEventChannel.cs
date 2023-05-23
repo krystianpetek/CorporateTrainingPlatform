@@ -1,9 +1,9 @@
 ﻿using GarageGenius.Shared.Abstractions.Events;
 using System.Threading.Channels;
 
-namespace GarageGenius.Shared.Infrastructure.MessageBroker;
+namespace GarageGenius.Shared.Abstractions.MessageBroker;
 
-internal interface IEventChannel
+public interface IEventChannel
 {
     ChannelReader<IEvent> Reader { get; }
     ChannelWriter<IEvent> Writer { get; }

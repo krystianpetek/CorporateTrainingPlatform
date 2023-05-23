@@ -4,7 +4,7 @@ using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Shared.Events;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Commands;
-using GarageGenius.Shared.Infrastructure.MessageBroker;
+using GarageGenius.Shared.Abstractions.MessageBroker;
 
 namespace GarageGenius.Modules.Users.Core.Commands.SignUp;
 internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>

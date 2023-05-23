@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Shared.Abstractions.Events;
+using GarageGenius.Shared.Abstractions.MessageBroker;
 using Microsoft.Extensions.Logging;
 
 namespace GarageGenius.Shared.Infrastructure.MessageBroker;

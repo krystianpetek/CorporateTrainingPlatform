@@ -11,8 +11,8 @@ internal sealed class Reservation : AuditableEntity
     internal ReservationId ReservationId { get; private set; }
     internal VehicleId VehicleId { get; private set; }
     public ReservationState ReservationState { get; private set; }
-    public ReservationDate ReservationDate { get; private set; } // todo
-    public ReservationNote ReservationNote { get; private set; } //  todo
+    public ReservationDate ReservationDate { get; private set; }
+    public ReservationNote ReservationNote { get; private set; }
 
     public IEnumerable<ReservationHistory> ReservationHistories
     {

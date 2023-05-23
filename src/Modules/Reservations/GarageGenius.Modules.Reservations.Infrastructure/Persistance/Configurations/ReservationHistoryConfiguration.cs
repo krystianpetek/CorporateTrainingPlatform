@@ -29,7 +29,5 @@ internal class ReservationHistoryConfiguration : IEntityTypeConfiguration<Reserv
         builder.Property(builder => builder.Comment)
             .IsRequired()
             .HasConversion(conversion => conversion.Value, value => new Comment(value));
-
-        // TODO configure other properties
     }
 }

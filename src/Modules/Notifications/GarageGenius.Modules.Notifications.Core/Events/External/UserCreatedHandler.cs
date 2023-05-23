@@ -14,7 +14,11 @@ internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
     public Task HandleEventAsync(UserCreated @event, CancellationToken cancellationToken = default)
     {
         // TODO: Send email notification to user
-        _logger.Information("Handled UserCreated event by {ModuleName} module and send notification to email: {Email}", nameof(Notifications), @event.Email);
+        _logger.Information(
+            messageTemplate: "Event {EventName} handled by {ModuleName} module, added customer with user ID: {UserId}",
+            nameof(UserCreated),
+            nameof(Notifications),
+            @event.UserId);
         return Task.CompletedTask;
     }
 }

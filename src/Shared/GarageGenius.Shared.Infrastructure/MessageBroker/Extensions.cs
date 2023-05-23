@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GarageGenius.Shared.Abstractions.MessageBroker;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Shared.Infrastructure.MessageBroker;
 
