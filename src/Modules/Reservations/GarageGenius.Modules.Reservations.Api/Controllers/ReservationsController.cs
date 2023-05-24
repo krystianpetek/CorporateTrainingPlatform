@@ -1,9 +1,7 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 using GarageGenius.Shared.Abstractions.Dispatcher;
-using GarageGenius.Shared.Infrastructure.SignalR.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace GarageGenius.Modules.Reservations.Api.Controllers;

@@ -20,7 +20,7 @@ internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
     public async Task HandleEventAsync(UserCreated @event, CancellationToken cancellationToken = default)
     {
         await _hubContextNotifications.Clients.All.SendAsync("SendNotification", DateTime.Now, @event.Email);
-        
+
         _logger.Information(
             messageTemplate: "Event {EventName} handled by {ModuleName} module, added customer with user ID: {UserId}",
             nameof(UserCreated),

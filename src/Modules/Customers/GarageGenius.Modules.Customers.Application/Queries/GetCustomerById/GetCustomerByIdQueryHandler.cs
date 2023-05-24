@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Customers.Application.Queries.GetCustomerByUserId;
-using GarageGenius.Modules.Customers.Core.Entities;
+﻿using GarageGenius.Modules.Customers.Core.Entities;
 using GarageGenius.Modules.Customers.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Queries;
 

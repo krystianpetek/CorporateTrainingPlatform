@@ -10,7 +10,7 @@ internal static class Extensions
     {
         return services;
     }
-    
+
     public static WebApplication UseNotificationsCore(this WebApplication app)
     {
         app.UseSignalRNotificationsHub();

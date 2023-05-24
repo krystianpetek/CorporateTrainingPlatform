@@ -15,7 +15,7 @@ internal sealed class LicensePlate : IEquatable<LicensePlate>
 
     public static implicit operator string(LicensePlate value)
     {
-        return value.Value;
+        return value?.Value;
     }
 
     public static implicit operator LicensePlate(string value)

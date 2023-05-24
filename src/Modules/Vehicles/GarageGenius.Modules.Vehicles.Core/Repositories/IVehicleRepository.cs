@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Modules.Vehicles.Core.Entities;
-using System.Linq.Expressions;
 
 namespace GarageGenius.Modules.Vehicles.Core.Repositories;
 internal interface IVehicleRepository

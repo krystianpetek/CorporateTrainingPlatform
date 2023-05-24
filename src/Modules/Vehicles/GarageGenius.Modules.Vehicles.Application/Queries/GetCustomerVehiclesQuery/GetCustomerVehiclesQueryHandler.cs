@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
-using GarageGenius.Modules.Vehicles.Application.QueryStorage;
+﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;

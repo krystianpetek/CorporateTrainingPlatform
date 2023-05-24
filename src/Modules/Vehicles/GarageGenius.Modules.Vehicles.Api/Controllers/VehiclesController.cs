@@ -1,6 +1,8 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
+using GarageGenius.Modules.Vehicles.Application.Queries.GetFilteredVehicle;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
+using GarageGenius.Modules.Vehicles.Core.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +18,14 @@ public class VehiclesController : BaseController
         _dispatcher = dispatcher;
     }
 
-    [HttpPost("{customerId:guid}/vehicle")]
+    [HttpGet("{vehicleId:guid}")]
     [Authorize]
-    [SwaggerOperation("Add vehicle")]
-    public async Task<ActionResult> AddVehicleAsync(Guid customerId, AddVehicleCommand addVehicleCommand)
+    [SwaggerOperation("Get vehicle")]
+    public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
     {
-        addVehicleCommand.CustomerId = customerId;
-        await _dispatcher.DispatchCommandAsync(addVehicleCommand);
-        return Accepted(); // TODO Controllers response types
+        GetVehicleQuery getVehicleQuery = new GetVehicleQuery(vehicleId);
+        GetVehicleQueryDto getVehicleQueryDto = await _dispatcher.DispatchQueryAsync(getVehicleQuery);
+        return Ok(getVehicleQueryDto);
     }
 
     [HttpGet("{customerId:guid}/vehicles")]
@@ -36,15 +38,27 @@ public class VehiclesController : BaseController
         return Ok(customerVehicles);
     }
 
-    [HttpGet("{vehicleId:guid}")]
+    [HttpGet("search")]
     [Authorize]
-    [SwaggerOperation("Get vehicle")]
-    public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
+    [SwaggerOperation("Get filtered vehicles")]
+    public async Task<ActionResult> GetFilteredVehicleAsync([FromQuery] GetVehicleFilterParameters getFilteredVehicleParameters)
     {
-        GetVehicleQuery getVehicleQuery = new GetVehicleQuery(vehicleId);
-        GetVehicleQueryDto vehicleDto = await _dispatcher.DispatchQueryAsync(getVehicleQuery);
-        return Ok(vehicleDto);
+        GetVehicleFilterQuery getFilteredVehicleQuery = new GetVehicleFilterQuery(getFilteredVehicleParameters);
+        GetVehicleFilterQueryDto getVehicleFilterQueryDto = await _dispatcher.DispatchQueryAsync(getFilteredVehicleQuery);
+
+        return Ok(getVehicleFilterQueryDto);
+    }
+
+    [HttpPost("customers/{customerId:guid}/vehicle")]
+    [Authorize]
+    [SwaggerOperation("Add customer vehicle")]
+    public async Task<ActionResult> AddVehicleAsync(Guid customerId, AddVehicleCommand addVehicleCommand)
+    {
+        addVehicleCommand.CustomerId = customerId;
+        await _dispatcher.DispatchCommandAsync(addVehicleCommand);
+        return Accepted();
     }
 
     // TODO search by Vin and license plate
+    // TODO Controllers response types
 }

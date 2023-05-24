@@ -5,8 +5,6 @@ using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Commands;
-using GarageGenius.Shared.Abstractions.Queries;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GarageGenius.Modules.Users.Core.Commands.SignIn;
 internal class SignInCommandHandler : ICommandHandler<SignInCommand>

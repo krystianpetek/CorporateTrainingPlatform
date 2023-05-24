@@ -12,8 +12,8 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
     private readonly IUserServiceMapper _userServiceMapper;
 
     public GetUserQueryHandler(
-        Serilog.ILogger logger, 
-        IUserRepository userRepository, 
+        Serilog.ILogger logger,
+        IUserRepository userRepository,
         IUserServiceMapper userServiceMapper)
     {
         _logger = logger;
@@ -26,7 +26,7 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
 
         GetUserQueryDto mappedUser = _userServiceMapper.MapToGetUserQueryDto(user);
         _logger.Information("User with ID: {UserId}' has been retrieved.", user.UserId);
-        
+
         return mappedUser;
     }
 }

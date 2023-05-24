@@ -15,7 +15,7 @@ internal sealed class Vin : IEquatable<Vin>
 
     public static implicit operator string(Vin value)
     {
-        return value.Value;
+        return value?.Value;
     }
 
     public static implicit operator Vin(string value)

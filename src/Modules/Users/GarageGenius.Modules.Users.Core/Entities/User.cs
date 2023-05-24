@@ -7,7 +7,7 @@ internal sealed class User : AuditableEntity
 {
     internal Guid UserId { get; private set; } // TODO userid as Types
     public string RoleName { get; private set; } // TODO ValueObject
-    public EmailAddress Email { get; private set; } 
+    public EmailAddress Email { get; private set; }
     public string Password { get; private set; } // TODO maybe ValueObject
     public UserState State { get; private set; }
     public Role Role { get; private set; }
