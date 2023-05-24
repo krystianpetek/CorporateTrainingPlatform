@@ -1,10 +1,11 @@
 ﻿using GarageGenius.Modules.Vehicles.Core.Entities;
+using System.Linq.Expressions;
 
 namespace GarageGenius.Modules.Vehicles.Core.Repositories;
 internal interface IVehicleRepository
 {
     Task AddVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default);
-    Task<Vehicle> UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default);
+    Task UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default);
     Task DeleteVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default);
 
     [Obsolete($"Moved responsibility for fetching data from IVehicleRepository to IVehicleQueryStorage")]

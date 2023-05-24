@@ -17,8 +17,7 @@ internal class AddReservationCommandHandler : ICommandHandler<AddReservationComm
     public AddReservationCommandHandler(
         Serilog.ILogger logger,
         IMessageBroker messageBroker,
-        IReservationDomainService reservationDomainService
-        )
+        IReservationDomainService reservationDomainService)
     {
         _logger = logger;
         _messageBroker = messageBroker;

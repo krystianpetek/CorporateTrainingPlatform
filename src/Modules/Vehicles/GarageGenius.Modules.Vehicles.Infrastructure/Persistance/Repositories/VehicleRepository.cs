@@ -18,29 +18,34 @@ internal class VehicleRepository : IVehicleRepository
         await _vehiclesDbContext.AddAsync(vehicle, cancellationToken);
         await _vehiclesDbContext.SaveChangesAsync(cancellationToken);
     }
+    public async Task UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default)
+    {
+        _vehiclesDbContext.Update(vehicle);
+        await _vehiclesDbContext.SaveChangesAsync(cancellationToken);
+    }
 
     public Task DeleteVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
-    }
-
-
-    public Task<Vehicle> UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
+        // TODO - remove vehicle if doesn't have any reservations ?
     }
 
     [Obsolete($"Moved responsibility for fetching data from IVehicleRepository to IVehicleQueryStorage")]
     public async Task<Vehicle?> GetVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default)
     {
-        Vehicle? vehicle = await _vehiclesDbContext.Vehicles.FirstOrDefaultAsync(vehicle => vehicle.VehicleId == vehicleId, cancellationToken);
+        Vehicle? vehicle = await _vehiclesDbContext.Vehicles
+            .FirstOrDefaultAsync(vehicle => vehicle.VehicleId == vehicleId, cancellationToken);
+
         return vehicle;
     }
 
     [Obsolete($"Moved responsibility for fetching data from IVehicleRepository to IVehicleQueryStorage")]
     public async Task<IReadOnlyList<Vehicle>> GetCustomerVehiclesAsync(Guid customerId, CancellationToken cancellationToken = default)
     {
-        IReadOnlyList<Vehicle> customerVehicles = await _vehiclesDbContext.Vehicles.Where(vehicle => vehicle.CustomerId == customerId).ToListAsync(cancellationToken);
+        IReadOnlyList<Vehicle> customerVehicles = await _vehiclesDbContext.Vehicles
+            .Where(vehicle => vehicle.CustomerId == customerId)
+            .ToListAsync(cancellationToken);
+
         return customerVehicles;
     }
 }

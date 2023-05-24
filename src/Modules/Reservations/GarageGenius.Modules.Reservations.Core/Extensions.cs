@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Reservations.Core.Reservations.DomainServices;
-using GarageGenius.Modules.Reservations.Core.Reservations.Services;
+﻿using GarageGenius.Modules.Reservations.Core.Reservations.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Reservations.Core;

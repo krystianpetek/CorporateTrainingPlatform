@@ -1,8 +1,5 @@
-﻿using GarageGenius.Modules.Reservations.Core.Reservations.Types;
-using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
-using GarageGenius.Shared.Abstractions.Commands;
+﻿using GarageGenius.Shared.Abstractions.Commands;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 public record AddReservationCommand : ICommand

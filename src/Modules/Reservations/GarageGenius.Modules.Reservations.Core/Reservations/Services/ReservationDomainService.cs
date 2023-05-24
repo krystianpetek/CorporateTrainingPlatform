@@ -2,10 +2,9 @@
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Repositories;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Repositories;
-using GarageGenius.Modules.Reservations.Core.Reservations.Services;
 using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
 
-namespace GarageGenius.Modules.Reservations.Core.Reservations.DomainServices;
+namespace GarageGenius.Modules.Reservations.Core.Reservations.Services;
 internal class ReservationDomainService : IReservationDomainService
 {
     private readonly Serilog.ILogger _logger;
