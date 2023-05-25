@@ -44,8 +44,8 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
     public async Task<GetVehicleFilterQueryDto> GetFilteredVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default)
     {
         IQueryable<Vehicle> vehicleQuery = _vehiclesDbContext.Vehicles
-        .AsNoTracking()
-        .AsQueryable();
+            .AsNoTracking()
+            .AsQueryable();
 
         if (getVehicleFilterParameters.Vin != default)
             vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.Vin == getVehicleFilterParameters.Vin);
@@ -55,7 +55,7 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
 
         GetVehicleFilterQueryDto getVehicleFilterQueryDto = await vehicleQuery
             .Select<Vehicle, GetVehicleFilterQueryDto>(vehicle => new GetVehicleFilterQueryDto(vehicle.VehicleId, vehicle.Manufacturer, vehicle.Model, vehicle.Year, vehicle.LicensePlate, vehicle.Vin))
-           .SingleOrDefaultAsync<GetVehicleFilterQueryDto>(cancellationToken) ?? throw new VehicleNotFoundException(getVehicleFilterParameters.Vin);
+            .SingleOrDefaultAsync<GetVehicleFilterQueryDto>(cancellationToken) ?? throw new VehicleNotFoundException();
 
         return getVehicleFilterQueryDto;
     }

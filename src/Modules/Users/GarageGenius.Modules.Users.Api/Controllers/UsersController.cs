@@ -24,6 +24,15 @@ public class UsersController : BaseController
     }
 
     [Authorize]
+    [HttpGet("me")]
+    [SwaggerOperation("Get current logged user")]
+    public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
+    {
+        Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
+        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+    }
+
+    [Authorize]
     [HttpGet("{id:guid}")]
     [SwaggerOperation("Get user by ID")]
 
