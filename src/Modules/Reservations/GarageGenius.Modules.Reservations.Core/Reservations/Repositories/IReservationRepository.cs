@@ -8,4 +8,5 @@ internal interface IReservationRepository
     //Task<IEnumerable<Reservation>> GetReservationsAsync(CancellationToken cancellationToken);
     Task/*<Reservation>*/ AddReservationAsync(Reservation reservation, CancellationToken cancellationToken);
     Task/*<Reservation>*/ UpdateReservationAsync(Reservation reservation, CancellationToken cancellationToken);
+    Task DeleteReservationAsync(ReservationId reservation, CancellationToken cancellationToken);
 }

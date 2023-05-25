@@ -31,5 +31,8 @@ internal class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
         builder.Property(x => x.ReservationNote)
             .IsRequired()
             .HasConversion(conversion => conversion.Value, value => value != default ? new ReservationNote(value) : null);
+
+        builder.Property(x => x.ReservationDeleted)
+            .IsRequired();
     }
 }

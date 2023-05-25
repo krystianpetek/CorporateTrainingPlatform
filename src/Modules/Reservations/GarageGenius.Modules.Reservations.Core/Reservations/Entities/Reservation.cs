@@ -13,6 +13,7 @@ internal sealed class Reservation : AuditableEntity
     public ReservationState ReservationState { get; private set; }
     public ReservationDate ReservationDate { get; private set; }
     public ReservationNote ReservationNote { get; private set; }
+    public bool ReservationDeleted { get; private set; }
 
     public IEnumerable<ReservationHistory> ReservationHistories
     {
@@ -29,6 +30,7 @@ internal sealed class Reservation : AuditableEntity
         ReservationNote = reservationNote;
         ReservationDate = reservationDate;
         ReservationState = ReservationState.Pending;
+        ReservationDeleted = true;
     }
 
     internal void ChangeStateAccepted() { ReservationState = ReservationState.Accepted; }
@@ -36,4 +38,6 @@ internal sealed class Reservation : AuditableEntity
     internal void ChangeStateCanceled() { ReservationState = ReservationState.Canceled; }
     internal void ChangeStateCompleted() { ReservationState = ReservationState.Completed; }
     internal void ChangeStateChanged() { ReservationState = ReservationState.Changed; }
+
+    internal void ReservationDeactivate() { ReservationDeleted = false; }
 }
