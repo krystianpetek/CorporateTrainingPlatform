@@ -52,5 +52,7 @@ internal class ReservationRepository : IReservationRepository
         _reservationsDbContext.Reservations.Update(reservation);
 
         await _reservationsDbContext.SaveChangesAsync(cancellationToken);
+
+        // TODO this should be in a domain service / aggregate ?
     }
 }

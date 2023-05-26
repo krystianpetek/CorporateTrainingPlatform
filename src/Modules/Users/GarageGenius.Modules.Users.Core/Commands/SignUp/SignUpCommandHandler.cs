@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.Entities;
+﻿using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
+using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Shared.Events;
@@ -43,15 +44,17 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
             throw new EmailAlreadyRegisteredException();
 
         string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
-
         Role? role = await _roleRepository.GetAsync(roleName, cancellationToken) ?? throw new RoleNotFoundException(roleName);
 
         string password = _passwordManager.Generate(command.Password);
-
+        
         user = new User(email, password, role);
         await _userRepository.AddAsync(user, cancellationToken);
 
-        _logger.Information("User with ID: {UserId}' has signed up.", user.UserId);
+        _logger.Information(
+    "Handled {CommandName} in {ModuleName} module, signed up user with ID: {UserId}",
+    nameof(SignUpCommand), nameof(Users), user.UserId);
+
         await _messageBroker.PublishAsync(new UserCreated(user.UserId, user.Email), cancellationToken);
     }
 }

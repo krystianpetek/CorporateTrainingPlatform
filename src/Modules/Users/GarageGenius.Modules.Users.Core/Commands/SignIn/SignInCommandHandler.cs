@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core.Entities;
+﻿using GarageGenius.Modules.Users.Core.Commands.SignUp;
+using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
@@ -29,7 +30,7 @@ internal class SignInCommandHandler : ICommandHandler<SignInCommand>
         _jwtTokenStorage = jwtTokenStorage;
     }
 
-    public async Task HandleCommandAsync(SignInCommand command, CancellationToken cancellationToken)
+    public async Task HandleCommandAsync(SignInCommand command, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(command.Email))
             throw new InvalidEmailException(command.Email);
@@ -48,7 +49,9 @@ internal class SignInCommandHandler : ICommandHandler<SignInCommand>
         JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.UserId, user.Email, user.RoleName, claims);
 
         _jwtTokenStorage.SetToken(token);
-        _logger.Information("User with ID: '{UserId}' has signed in.", user.UserId);
-        // TODO refresh token
+        _logger.Information(
+    "Handled {CommandName} in {ModuleName} module, signed in user with ID: {UserId}",
+    nameof(SignInCommand), nameof(Users), user.UserId);
+        // TODO refresh token ?
     }
 }

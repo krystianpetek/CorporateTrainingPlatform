@@ -23,24 +23,6 @@ public class UsersController : BaseController
         _dispatcher = dispatcher;
     }
 
-    [Authorize]
-    [HttpGet("me")]
-    [SwaggerOperation("Get current logged user")]
-    public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
-    {
-        Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
-        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
-    }
-
-    [Authorize]
-    [HttpGet("{id:guid}")]
-    [SwaggerOperation("Get user by ID")]
-
-    public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
-    {
-        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
-    }
-
     [HttpPost("sign-up")]
     [AllowAnonymous]
     [SwaggerOperation("Sign up user")]
@@ -59,6 +41,23 @@ public class UsersController : BaseController
 
         JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
         return Ok(token);
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    [SwaggerOperation("Get current logged user")]
+    public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
+    {
+        Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
+        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+    }
+
+    [Authorize]
+    [HttpGet("{id:guid}")]
+    [SwaggerOperation("Get user by ID")]
+    public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
+    {
+        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
     }
 
     [Authorize]
