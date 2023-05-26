@@ -25,7 +25,7 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
             .AsQueryable()
             .Where<Vehicle>(vehicle => vehicle.VehicleId == vehicleId)
             .Select<Vehicle, GetVehicleQueryDto>(vehicle => new GetVehicleQueryDto(vehicle.VehicleId, vehicle.Manufacturer, vehicle.Model, vehicle.Year, vehicle.LicensePlate, vehicle.Vin))
-            .SingleOrDefaultAsync<GetVehicleQueryDto>(cancellationToken) ?? throw new VehicleNotFoundException(vehicleId);
+            .SingleOrDefaultAsync<GetVehicleQueryDto>(cancellationToken);
 
         return getVehicleQueryDto;
     }
@@ -41,7 +41,7 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
         return getCustomerVehiclesQueryDto;
     }
 
-    public async Task<GetVehicleFilterQueryDto> GetFilteredVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default)
+    public async Task<GetVehicleFilterQueryDto?> SearchVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default)
     {
         IQueryable<Vehicle> vehicleQuery = _vehiclesDbContext.Vehicles
             .AsNoTracking()
@@ -53,9 +53,9 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
         if (getVehicleFilterParameters.LicensePlate != default)
             vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.LicensePlate == getVehicleFilterParameters.LicensePlate);
 
-        GetVehicleFilterQueryDto getVehicleFilterQueryDto = await vehicleQuery
+        GetVehicleFilterQueryDto? getVehicleFilterQueryDto = await vehicleQuery
             .Select<Vehicle, GetVehicleFilterQueryDto>(vehicle => new GetVehicleFilterQueryDto(vehicle.VehicleId, vehicle.Manufacturer, vehicle.Model, vehicle.Year, vehicle.LicensePlate, vehicle.Vin))
-            .SingleOrDefaultAsync<GetVehicleFilterQueryDto>(cancellationToken) ?? throw new VehicleNotFoundException();
+            .SingleOrDefaultAsync<GetVehicleFilterQueryDto>(cancellationToken);
 
         return getVehicleFilterQueryDto;
     }

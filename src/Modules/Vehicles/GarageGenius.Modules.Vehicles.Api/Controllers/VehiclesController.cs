@@ -40,8 +40,8 @@ public class VehiclesController : BaseController
 
     [HttpGet("search")]
     [Authorize]
-    [SwaggerOperation("Get filtered vehicles")]
-    public async Task<ActionResult> GetFilteredVehicleAsync([FromQuery] GetVehicleFilterParameters getFilteredVehicleParameters)
+    [SwaggerOperation("Search vehicle by VIN number and license plate")]
+    public async Task<ActionResult> SearchVehicleAsync([FromQuery] GetVehicleFilterParameters getFilteredVehicleParameters)
     {
         GetVehicleFilterQuery getFilteredVehicleQuery = new GetVehicleFilterQuery(getFilteredVehicleParameters);
         GetVehicleFilterQueryDto getVehicleFilterQueryDto = await _dispatcher.DispatchQueryAsync(getFilteredVehicleQuery);
