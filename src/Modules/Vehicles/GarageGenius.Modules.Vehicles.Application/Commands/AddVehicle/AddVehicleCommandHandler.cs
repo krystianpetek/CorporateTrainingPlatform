@@ -1,4 +1,4 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetFilteredVehicle;
+﻿using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Entities;
 using GarageGenius.Modules.Vehicles.Core.Exceptions;
@@ -24,8 +24,8 @@ internal class AddVehicleCommandHandler : ICommandHandler<AddVehicleCommand>
 
     public async Task HandleCommandAsync(AddVehicleCommand command, CancellationToken cancellationToken = default)
     {
-        GetVehicleFilterQueryDto vehicleQuery = await _vehicleQueryStorage.SearchVehicleAsync(new Core.Models.GetVehicleFilterParameters(command.Vin, null), cancellationToken);
-        if (vehicleQuery != null) throw new VehicleAlreadyExistsException(vehicleQuery.Id);
+        IReadOnlyList<SearchVehiclesQueryDto> vehicleQuery = await _vehicleQueryStorage.SearchVehicleAsync(new Core.Models.SearchVehiclesParameters(command.Vin, null), cancellationToken);
+        if (vehicleQuery.Any(x => x.Vin == command.Vin)) throw new VehicleAlreadyExistsException(command.Vin);
 
         Vehicle vehicle = new Vehicle(command.CustomerId, command.Manufacturer, command.Model, command.LicensePlate, command.Vin, command.Year);
         await _vehiclesRepository.AddVehicleAsync(vehicle, cancellationToken);

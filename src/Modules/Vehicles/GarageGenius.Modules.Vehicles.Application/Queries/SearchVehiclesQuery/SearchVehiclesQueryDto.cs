@@ -1,7 +1,7 @@
-﻿namespace GarageGenius.Modules.Vehicles.Application.Queries.GetFilteredVehicle;
-public record GetVehicleFilterQueryDto
+﻿namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
+public record SearchVehiclesQueryDto
 {
-    public GetVehicleFilterQueryDto(Guid vehicleId, string manufacturer, string model, int? year, string licensePlate, string vin)
+    public SearchVehiclesQueryDto(Guid vehicleId, string manufacturer, string model, int? year, string licensePlate, string vin)
     {
         Id = vehicleId;
         Manufacturer = manufacturer;

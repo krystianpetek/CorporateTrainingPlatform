@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.GetFilteredVehicle;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
+using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Core.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
@@ -40,13 +40,13 @@ public class VehiclesController : BaseController
 
     [HttpGet("search")]
     [Authorize]
-    [SwaggerOperation("Search vehicle by VIN number and license plate")]
-    public async Task<ActionResult> SearchVehicleAsync([FromQuery] GetVehicleFilterParameters getFilteredVehicleParameters)
+    [SwaggerOperation("Search vehicles by VIN number and license plate")]
+    public async Task<ActionResult> SearchVehiclesAsync([FromQuery] SearchVehiclesParameters searchVehiclesParameters)
     {
-        GetVehicleFilterQuery getFilteredVehicleQuery = new GetVehicleFilterQuery(getFilteredVehicleParameters);
-        GetVehicleFilterQueryDto getVehicleFilterQueryDto = await _dispatcher.DispatchQueryAsync(getFilteredVehicleQuery);
+        SearchVehiclesQuery searchVehiclesQuery = new SearchVehiclesQuery(searchVehiclesParameters);
+        IReadOnlyList<SearchVehiclesQueryDto> searchVehiclesQueryDto = await _dispatcher.DispatchQueryAsync(searchVehiclesQuery);
 
-        return Ok(getVehicleFilterQueryDto);
+        return Ok(searchVehiclesQueryDto);
     }
 
     [HttpPost("customers/{customerId:guid}/vehicle")]

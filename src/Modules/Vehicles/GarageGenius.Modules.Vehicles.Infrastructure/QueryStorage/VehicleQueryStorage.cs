@@ -1,9 +1,8 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.GetFilteredVehicle;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
+using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Entities;
-using GarageGenius.Modules.Vehicles.Core.Exceptions;
 using GarageGenius.Modules.Vehicles.Core.Models;
 using GarageGenius.Modules.Vehicles.Infrastructure.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -41,22 +40,22 @@ internal class VehicleQueryStorage : IVehicleQueryStorage
         return getCustomerVehiclesQueryDto;
     }
 
-    public async Task<GetVehicleFilterQueryDto?> SearchVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<SearchVehiclesQueryDto>> SearchVehicleAsync(SearchVehiclesParameters searchVehiclesParameters, CancellationToken cancellationToken = default)
     {
         IQueryable<Vehicle> vehicleQuery = _vehiclesDbContext.Vehicles
             .AsNoTracking()
             .AsQueryable();
 
-        if (getVehicleFilterParameters.Vin != default)
-            vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.Vin == getVehicleFilterParameters.Vin);
+        if (searchVehiclesParameters.Vin != default)
+            vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.Vin == searchVehiclesParameters.Vin);
 
-        if (getVehicleFilterParameters.LicensePlate != default)
-            vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.LicensePlate == getVehicleFilterParameters.LicensePlate);
+        if (searchVehiclesParameters.LicensePlate != default)
+            vehicleQuery = vehicleQuery.Where<Vehicle>(vehicle => vehicle.LicensePlate == searchVehiclesParameters.LicensePlate);
 
-        GetVehicleFilterQueryDto? getVehicleFilterQueryDto = await vehicleQuery
-            .Select<Vehicle, GetVehicleFilterQueryDto>(vehicle => new GetVehicleFilterQueryDto(vehicle.VehicleId, vehicle.Manufacturer, vehicle.Model, vehicle.Year, vehicle.LicensePlate, vehicle.Vin))
-            .SingleOrDefaultAsync<GetVehicleFilterQueryDto>(cancellationToken);
+        IReadOnlyList<SearchVehiclesQueryDto> searchVehiclesQueryDto = await vehicleQuery
+            .Select<Vehicle, SearchVehiclesQueryDto>(vehicle => new SearchVehiclesQueryDto(vehicle.VehicleId, vehicle.Manufacturer, vehicle.Model, vehicle.Year, vehicle.LicensePlate, vehicle.Vin))
+            .ToListAsync<SearchVehiclesQueryDto>(cancellationToken);
 
-        return getVehicleFilterQueryDto;
+        return searchVehiclesQueryDto;
     }
 }
