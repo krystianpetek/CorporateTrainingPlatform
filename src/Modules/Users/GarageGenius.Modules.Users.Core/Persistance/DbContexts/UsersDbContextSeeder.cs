@@ -26,8 +26,22 @@ internal class UsersDbContextSeeder : IDbContextSeeder
         {
             return;
         }
-        await AddRolesAsync();
+        Task rolesTask = AddRolesAsync();
+        Task usersTask = AddUsersAsync();
+
+        await Task.WhenAll(rolesTask, usersTask);
     }
+
+    private async Task AddUsersAsync()
+    {
+        await _usersDbContext.Users.AddRangeAsync(_users);
+        
+    }
+
+    private List<User> _users => new List<User>()
+    {
+        new User(new ValueObjects.EmailAddress("admin@garagegenius.com"), "garageGenius", new Role("Administrator", _permissions))
+    };
 
     private async Task AddRolesAsync()
     {
@@ -35,11 +49,13 @@ internal class UsersDbContextSeeder : IDbContextSeeder
         await _usersDbContext.SaveChangesAsync();
     }
 
-    private List<Role> _roles => new List<Role>() // TODO : Move to config file ?
+    private List<Role> _roles => new List<Role>()
     {
         new Role("Administrator", _permissions),
         new Role("Manager", _permissions),
         new Role("Employee", _permissions),
         new Role("Customer", new List<string>())
     };
+
+    // TODO : Move to config file ?
 }

@@ -22,10 +22,30 @@ Content-Type: application/json
     "password": "Password!23"
 }
 
-### Get user info
+### Auth information
 @token = token
-@userId = 5b0930f8-374c-411f-8af7-ac90e71d6013
+@userId = a51543c7-3bef-49d6-8de8-b5a3e945c85d
 
+### Get current logged user info
+GET {{url}}/users-module/users/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get user info
 GET {{url}}/users-module/users/{{userId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+### Sign out user
+POST {{url}}/users-module/users/sign-out
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Deactivate user
+POST {{url}}/users-module/users/deactivate
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "userId": "{{userId}}"
+}

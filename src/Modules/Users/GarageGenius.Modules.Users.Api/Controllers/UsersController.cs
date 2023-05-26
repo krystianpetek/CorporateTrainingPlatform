@@ -81,5 +81,5 @@ public class UsersController : BaseController
     //[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
     //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
     // TODO change user password 
-    // TODO activate user
+    // TODO activate user ?
 }
