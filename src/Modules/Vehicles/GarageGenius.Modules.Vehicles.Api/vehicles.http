@@ -2,3 +2,43 @@
 
 ### Health check
 GET {{url}}/health/vehicles-module
+
+### Variables
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZWUxMTU0Zi02ZTkwLTRhMjMtOGM4Ni05ZDA1Y2ZmOGQxZWUiLCJ1bmlxdWVfbmFtZSI6ImVlZTExNTRmLTZlOTAtNGEyMy04Yzg2LTlkMDVjZmY4ZDFlZSIsImp0aSI6ImVlZDRlMGNhLTAzNzEtNDU3ZC1hY2ZjLTJlZTUzNTU2ZGJkNiIsImVtYWlsIjoia3J5c3RpYW5wZXRlazJAZ21haWwuY29tIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJwZXJtaXNzaW9ucyI6WyJ1c2VycyIsInZlaGljbGVzIiwibm90aWZpY2F0aW9ucyIsImN1c3RvbWVycyJdLCJuYmYiOjE2ODUxMjY3MjQsImV4cCI6MTY4NTIxMzEyNCwiaWF0IjoxNjg1MTI2NzI0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MjgzLyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcyODMvIn0.rKXzYLA5vt97pXVVU-JhNilXadEUnVuuLd-tMy96LtY
+@customerId = cce8e0f9-9e1a-45e6-b17c-46ac67da65b0
+@vehicleId = 14dada56-5fb6-4a17-bc4b-dfff4c531ac5
+@vin = VF1BB0A0523456789
+@licencePlate = KWA00000
+
+### Add customer vehicle
+POST {{url}}/vehicles-module/vehicles/customers/{{customerId}}/vehicle
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "manufacturer": "Renault",
+    "model": "Clio",
+    "year": 2002,
+    "vin": "VF1BB0A0523456789",
+    "licensePlate": "KWA00000"
+}
+
+### Get vehicle by ID
+GET {{url}}/vehicles-module/vehicles/{{vehicleId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Get customer all vehicles
+GET {{url}}/vehicles-module/vehicles/{{customerId}}/vehicles
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Search vehicle by VIN number
+GET {{url}}/vehicles-module/vehicles/search?vin={{vin}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Search vehicle by VIN number and license plate
+GET {{url}}/vehicles-module/vehicles/search?vin={{vin}}&licencePlate={{licencePlate}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
