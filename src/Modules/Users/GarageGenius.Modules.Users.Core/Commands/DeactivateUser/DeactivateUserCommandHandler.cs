@@ -23,7 +23,7 @@ internal class DeactivateUserCommandHandler : ICommandHandler<DeactivateUserComm
         await _userRepository.DeactivateUserAsync(user.UserId, cancellationToken);
 
         _logger.Information(
-            "Handled {CommandName} in {ModuleName} module, deactivated user with ID: {UserId}", 
+            "Handled {CommandName} in {ModuleName} module, deactivated user with ID: {UserId}",
             nameof(DeactivateUserCommand), nameof(Users), user.UserId);
     }
 }

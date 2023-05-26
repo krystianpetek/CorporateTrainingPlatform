@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Users.Core.Commands.SignUp;
-using GarageGenius.Modules.Users.Core.Entities;
+﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;

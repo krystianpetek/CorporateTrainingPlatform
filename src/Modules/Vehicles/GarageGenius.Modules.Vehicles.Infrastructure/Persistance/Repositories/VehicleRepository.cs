@@ -18,6 +18,7 @@ internal class VehicleRepository : IVehicleRepository
         await _vehiclesDbContext.AddAsync(vehicle, cancellationToken);
         await _vehiclesDbContext.SaveChangesAsync(cancellationToken);
     }
+
     public async Task UpdateVehicleAsync(Vehicle vehicle, CancellationToken cancellationToken = default)
     {
         _vehiclesDbContext.Update(vehicle);
@@ -48,4 +49,5 @@ internal class VehicleRepository : IVehicleRepository
 
         return customerVehicles;
     }
+
 }

@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle;
+using GarageGenius.Modules.Vehicles.Application.Commands.UpdateVehicleOwner;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
 using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
 using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
@@ -57,6 +58,16 @@ public class VehiclesController : BaseController
         addVehicleCommand.CustomerId = customerId;
         await _dispatcher.DispatchCommandAsync(addVehicleCommand);
         return Accepted();
+    }
+
+    [HttpPatch("{vehicleId:guid}/customer")]
+    [Authorize]
+    [SwaggerOperation("Update vehicle owner")]
+    public async Task<ActionResult> UpdateVehicleOwner(Guid vehicleId, UpdateVehicleOwnerCommand updateVehicleOwnerCommand)
+    {
+        updateVehicleOwnerCommand.VehicleId = vehicleId;
+        await _dispatcher.DispatchCommandAsync(updateVehicleOwnerCommand);
+        return Ok();
     }
 
     // TODO search by Vin and license plate

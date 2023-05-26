@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
-using GarageGenius.Modules.Users.Core.Entities;
+﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Shared.Events;
@@ -47,7 +46,7 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         Role? role = await _roleRepository.GetAsync(roleName, cancellationToken) ?? throw new RoleNotFoundException(roleName);
 
         string password = _passwordManager.Generate(command.Password);
-        
+
         user = new User(email, password, roleName);
         await _userRepository.AddAsync(user, cancellationToken);
 
