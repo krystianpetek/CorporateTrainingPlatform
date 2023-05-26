@@ -5,14 +5,14 @@ public record GetUserQueryDto
     public string Role { get; init; }
     public string Email { get; init; }
     public string State { get; init; }
-    public DateTime CreatedAt { get; init; }
+    public DateTime Created { get; init; }
 
-    public GetUserQueryDto(Guid id, string role, string email, string state, DateTime createdAt)
+    public GetUserQueryDto(Guid id, string role, string email, string state, DateTime created)
     {
         Id = id;
         Role = role;
         Email = email;
         State = state;
-        CreatedAt = createdAt;
+        Created = created;
     }
 }

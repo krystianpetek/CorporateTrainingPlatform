@@ -35,5 +35,7 @@ public class UserCreatedCommandHandlerTest
         //var exception = await Assert.ThrowsAsync<EmailAlreadyRegisteredException>(() => handler.HandleAsync(command, default));
 
         //// Assert
+        ///
+        // TODO tests
     }
 }

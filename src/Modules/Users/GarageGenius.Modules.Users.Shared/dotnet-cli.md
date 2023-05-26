@@ -1,8 +1,8 @@
-create new project
+## Create new project
 dotnet new classlib -n GarageGenius.Modules.Users.Shared
 
-add project to solution
+## Add project to solution
 dotnet sln ../../../  add  .\GarageGenius.Modules.Users.Shared.csproj
 
-create project reference
+## Create project reference
 dotnet add  .\GarageGenius.Modules.Users.Shared.csproj reference ..\GarageGenius.Modules.Users.Core\GarageGenius.Modules.Users.Core.csproj

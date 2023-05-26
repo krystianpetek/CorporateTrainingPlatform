@@ -23,9 +23,11 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
     public async Task<GetUserQueryDto> HandleQueryAsync(GetUserQuery query, CancellationToken cancellationToken = default)
     {
         User user = await _userRepository.GetAsync(query.id, cancellationToken) ?? throw new UserNotFoundException(query.id);
-
         GetUserQueryDto mappedUser = _userServiceMapper.MapToGetUserQueryDto(user);
-        _logger.Information("User with ID: {UserId}' has been retrieved.", user.UserId);
+
+        _logger.Information(
+            "Handled {QueryName} in {ModuleName} module, retrieved user with ID: {UserId}",
+            nameof(GetUserQuery), nameof(Users), user.UserId);
 
         return mappedUser;
     }
