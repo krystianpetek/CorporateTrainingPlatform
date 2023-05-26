@@ -28,7 +28,6 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
         _logger.Information(
             "Handled {QueryName} in {ModuleName} module, retrieved user with ID: {UserId}",
             nameof(GetUserQuery), nameof(Users), user.UserId);
-
         return mappedUser;
     }
 }

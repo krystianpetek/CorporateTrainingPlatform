@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
+using GarageGenius.Modules.Vehicles.Core.Exceptions;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
@@ -17,7 +18,7 @@ internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicl
 
     public async Task<GetVehicleQueryDto> HandleQueryAsync(GetVehicleQuery query, CancellationToken cancellationToken = default)
     {
-        GetVehicleQueryDto? getVehicleDto = await _vehicleQueryStorage.GetVehicleAsync(query.VehicleId, cancellationToken);
+        GetVehicleQueryDto? getVehicleDto = await _vehicleQueryStorage.GetVehicleAsync(query.VehicleId, cancellationToken) ?? throw new VehicleNotFoundException(query.VehicleId);
 
         _logger.Information(
             messageTemplate: "Query {QueryName} handled by {ModuleName} module, retrieved vehicle with ID: {VehicleId}",
@@ -25,6 +26,6 @@ internal class GetVehicleQueryHandler : IQueryHandler<GetVehicleQuery, GetVehicl
             nameof(Vehicles),
             getVehicleDto?.Id);
 
-        return getVehicleDto;
+        return getVehicleDto!;
     }
 }

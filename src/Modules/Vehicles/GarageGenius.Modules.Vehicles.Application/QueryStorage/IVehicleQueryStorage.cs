@@ -8,5 +8,5 @@ public interface IVehicleQueryStorage
 {
     Task<GetVehicleQueryDto?> GetVehicleAsync(Guid vehicleId, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<GetCustomerVehiclesQueryDto>> GetCustomerVehiclesAsync(Guid customerId, CancellationToken cancellationToken = default);
-    Task<GetVehicleFilterQueryDto> GetFilteredVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default);
+    Task<GetVehicleFilterQueryDto?> SearchVehicleAsync(GetVehicleFilterParameters getVehicleFilterParameters, CancellationToken cancellationToken = default);
 }
