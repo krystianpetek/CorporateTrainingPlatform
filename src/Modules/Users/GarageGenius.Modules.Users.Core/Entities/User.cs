@@ -12,13 +12,12 @@ internal sealed class User : AuditableEntity
     public UserState State { get; private set; }
     public Role Role { get; private set; }
 
-    public User(EmailAddress email, string password, Role role)
+    public User(EmailAddress email, string password, string role)
     {
         UserId = Guid.NewGuid();
         Email = email;
         Password = password;
-        Role = role;
-        RoleName = role.Name;
+        RoleName = role;
         this.Activate();
     }
 

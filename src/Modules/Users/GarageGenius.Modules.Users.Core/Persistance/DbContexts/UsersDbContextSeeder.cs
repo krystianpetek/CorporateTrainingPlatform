@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
+using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,12 @@ internal class UsersDbContextSeeder : IDbContextSeeder
     };
 
     private readonly UsersDbContext _usersDbContext;
+    private readonly IPasswordManager _passwordManager;
 
-    public UsersDbContextSeeder(UsersDbContext dbContext)
+    public UsersDbContextSeeder(UsersDbContext dbContext, IPasswordManager passwordManager)
     {
         _usersDbContext = dbContext;
+        _passwordManager = passwordManager;
     }
 
     public async Task SeedDatabaseAsync()
@@ -26,21 +29,21 @@ internal class UsersDbContextSeeder : IDbContextSeeder
         {
             return;
         }
-        Task rolesTask = AddRolesAsync();
-        Task usersTask = AddUsersAsync();
+        Task rolesSeed = AddRolesAsync();
+        Task usersSeed = AddUsersAsync();
 
-        await Task.WhenAll(rolesTask, usersTask);
+        await Task.WhenAll(rolesSeed, usersSeed);
     }
 
     private async Task AddUsersAsync()
     {
         await _usersDbContext.Users.AddRangeAsync(_users);
-        
+        await _usersDbContext.SaveChangesAsync();
     }
 
     private List<User> _users => new List<User>()
     {
-        new User(new ValueObjects.EmailAddress("admin@garagegenius.com"), "garageGenius", new Role("Administrator", _permissions))
+        new User(new ValueObjects.EmailAddress("admin@garagegenius.com"), _passwordManager.Generate("garageGenius"), "Administrator")
     };
 
     private async Task AddRolesAsync()
