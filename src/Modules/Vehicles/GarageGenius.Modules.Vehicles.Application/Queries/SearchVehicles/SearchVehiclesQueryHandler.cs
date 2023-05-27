@@ -2,7 +2,7 @@
 using GarageGenius.Modules.Vehicles.Core.Exceptions;
 using GarageGenius.Shared.Abstractions.Queries;
 
-namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
+namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 internal class SearchVehiclesQueryHandler : IQueryHandler<SearchVehiclesQuery, IReadOnlyList<SearchVehiclesQueryDto>>
 {
     private readonly Serilog.ILogger _logger;

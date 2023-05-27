@@ -1,6 +1,6 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
+﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
+using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicle;
+using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Entities;
 using GarageGenius.Modules.Vehicles.Core.Models;

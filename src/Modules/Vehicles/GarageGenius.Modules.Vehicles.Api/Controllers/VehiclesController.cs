@@ -1,8 +1,8 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle;
 using GarageGenius.Modules.Vehicles.Application.Commands.UpdateVehicleOwner;
-using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
-using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
+using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
+using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicle;
+using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 using GarageGenius.Modules.Vehicles.Core.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
@@ -70,6 +70,5 @@ public class VehiclesController : BaseController
         return Ok();
     }
 
-    // TODO search by Vin and license plate
     // TODO Controllers response types
 }

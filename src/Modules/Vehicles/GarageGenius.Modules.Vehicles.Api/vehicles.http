@@ -42,3 +42,12 @@ Authorization: Bearer {{token}}
 GET {{url}}/vehicles-module/vehicles/search?vin={{vin}}&licencePlate={{licencePlate}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+### Change vehicle owner
+PATCH {{url}}/vehicles-module/vehicles/{{vehicleId}}/customer
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "customerId":"{{customerId}}"
+}

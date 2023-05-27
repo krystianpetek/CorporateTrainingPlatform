@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Shared.Abstractions.Queries;
 
-namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehiclesQuery;
+namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
 internal class GetCustomerVehiclesQueryHandler : IQueryHandler<GetCustomerVehiclesQuery, IReadOnlyList<GetCustomerVehiclesQueryDto>>
 {
     private readonly Serilog.ILogger _logger;

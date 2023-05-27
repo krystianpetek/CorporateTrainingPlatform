@@ -1,4 +1,4 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehiclesQuery;
+﻿using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Entities;
 using GarageGenius.Modules.Vehicles.Core.Exceptions;

@@ -1,4 +1,4 @@
-﻿namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleQuery;
+﻿namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicle;
 public record GetVehicleQueryDto
 {
     public GetVehicleQueryDto(Guid vehicleId, string manufacturer, string model, int? year, string licensePlate, string vin)
