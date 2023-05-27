@@ -25,7 +25,7 @@ internal class UpdateReservationCommandHandler : ICommandHandler<UpdateReservati
     public async Task HandleCommandAsync(UpdateReservationCommand command, CancellationToken cancellationToken = default)
     {
         Reservation reservation = await _reservationRepository.GetReservationAsync(command.ReservationId, cancellationToken) ?? throw new ReservationNotFoundException(command.ReservationId);
-        reservation.ChangeState(command.ReservationNote);
+        reservation.ChangeState(command.ReservationState);
 
         // TODO - add reservation history
 

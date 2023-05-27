@@ -38,15 +38,21 @@ internal sealed class Reservation : AuditableEntity
     internal void ChangeStateRejected() { ReservationState = ReservationState.Rejected; }
     internal void ChangeStateCanceled() { ReservationState = ReservationState.Canceled; }
     internal void ChangeStateCompleted() { ReservationState = ReservationState.Completed; }
-    internal void ChangeStateChanged() { ReservationState = ReservationState.Changed; }
+    internal void ChangeStateWaitingForCustomer() { ReservationState = ReservationState.WaitingForCustomer; }
 
-    internal void ReservationDeactivate() { ReservationDeleted = false; }
+    internal void ReservationDeactivate() { ReservationDeleted = true; }
 
     internal void ChangeState(string reservationState)
     {
-        switch(reservationState)
+        if (this.ReservationState == ReservationState.Completed ||
+            this.ReservationState == ReservationState.Canceled)
         {
-              case "Accepted":
+            throw new UnableChangeReservationStateException(this.ReservationId);
+        }
+
+        switch (reservationState)
+        {
+            case "Accepted":
                 ChangeStateAccepted();
                 break;
             case "Rejected":
@@ -58,8 +64,8 @@ internal sealed class Reservation : AuditableEntity
             case "Completed":
                 ChangeStateCompleted();
                 break;
-            case "Changed":
-                ChangeStateChanged();
+            case "WaitingForCustomer":
+                ChangeStateWaitingForCustomer();
                 break;
             default:
                 throw new InvalidReservationStateException(reservationState);
