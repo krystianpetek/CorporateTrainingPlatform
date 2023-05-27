@@ -14,7 +14,7 @@ internal class ReservationAddedHandler : IEventHandler<ReservationAdded>
     {
         // TODO - maybe move to other module
         _logger.Information(
-            messageTemplate: "Event {EventName} handled by {ModuleName} module, added customer with user ID: {UserId}",
+            messageTemplate: "Event {EventName} handled by {ModuleName} module, added reservation with ID: {ReservationId}",
             nameof(ReservationAdded),
             nameof(Reservations),
             @event.reservationId);

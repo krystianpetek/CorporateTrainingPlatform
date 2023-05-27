@@ -27,10 +27,10 @@ internal class AddReservationCommandHandler : ICommandHandler<AddReservationComm
         await _reservationDomainService.AddReservation(reservation, cancellationToken);
 
         _logger.Information(
-            messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new reservation for vehicle with ID: {VehicleId}",
+            messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new reservation with ID: {ReservationId}",
             nameof(AddReservationCommand),
             nameof(Reservations),
-            reservation.VehicleId);
+            reservation.ReservationId);
 
         await _messageBroker.PublishAsync(new ReservationAdded(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
 
