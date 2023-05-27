@@ -14,6 +14,15 @@ public class ReservationsController : BaseController
         _dispatcher = dispatcher;
     }
 
+    [HttpPut]
+    [Authorize]
+    [SwaggerOperation("Update reservation")]
+    public async Task<ActionResult> UpdateReservation(UpdateReservationCommand command)
+    {
+        await _dispatcher.DispatchCommandAsync(command);
+        return Ok();
+    }
+
     [HttpPost]
     [Authorize]
     [SwaggerOperation("Add reservation")]

@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
+using GarageGenius.Modules.Reservations.Core.Reservations.Exceptions;
 using GarageGenius.Modules.Reservations.Core.Reservations.Types;
 using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
 using GarageGenius.Shared.Abstractions.Common;
@@ -40,4 +41,28 @@ internal sealed class Reservation : AuditableEntity
     internal void ChangeStateChanged() { ReservationState = ReservationState.Changed; }
 
     internal void ReservationDeactivate() { ReservationDeleted = false; }
+
+    internal void ChangeState(string reservationState)
+    {
+        switch(reservationState)
+        {
+              case "Accepted":
+                ChangeStateAccepted();
+                break;
+            case "Rejected":
+                ChangeStateRejected();
+                break;
+            case "Canceled":
+                ChangeStateCanceled();
+                break;
+            case "Completed":
+                ChangeStateCompleted();
+                break;
+            case "Changed":
+                ChangeStateChanged();
+                break;
+            default:
+                throw new InvalidReservationStateException(reservationState);
+        }
+    }
 }
