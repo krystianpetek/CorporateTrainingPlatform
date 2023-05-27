@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
+using GarageGenius.Modules.Reservations.Application.Commands.UpdateReservation;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

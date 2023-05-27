@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Repositories;
+using GarageGenius.Modules.Reservations.Core.ReservationHistories.ValueObjects;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Repositories;
 using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
@@ -36,8 +37,19 @@ internal class ReservationDomainService : IReservationDomainService
             reservationHistory.ReservationHistoryId);
     }
 
-    public Task AddReservationHistory(ReservationHistory reservationHistory, CancellationToken cancellationToken = default)
+    public async Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        reservation.ChangeState(reservationState);
+        await _reservationRepository.UpdateReservationAsync(reservation, cancellationToken);
+        
+        _logger.Information(
+            messageTemplate: "Reservation with ID: {ReservationId} updated",
+            reservation.ReservationId);
+
+        ReservationHistory reservationHistory = new ReservationHistory(reservation.ReservationId, reservationState, comment);
+        await _reservationHistoryRepository.AddReservationHistoryAsync(reservationHistory, cancellationToken);
+        _logger.Information(
+            messageTemplate: "Reservation history with ID: {ReservationHistoryId} added",
+            reservationHistory.ReservationHistoryId);
     }
 }

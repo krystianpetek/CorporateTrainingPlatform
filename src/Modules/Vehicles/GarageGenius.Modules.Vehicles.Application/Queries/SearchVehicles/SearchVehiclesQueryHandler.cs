@@ -24,7 +24,7 @@ internal class SearchVehiclesQueryHandler : IQueryHandler<SearchVehiclesQuery, I
 
         _logger.Information(
             messageTemplate: "Query {QueryName} handled by {ModuleName} module, retrieved vehicles with filters: {Vin} and {LicencePlate}",
-            nameof(GetVehicleQuery),
+            nameof(SearchVehiclesQuery),
             nameof(Vehicles),
             query.SearchVehiclesParameters.Vin,
             query.SearchVehiclesParameters.LicensePlate);
