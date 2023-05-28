@@ -33,7 +33,7 @@ internal sealed class Reservation : AuditableEntity
         ReservationNote = reservationNote;
         ReservationDate = reservationDate;
         ReservationState = ReservationState.Pending;
-        ReservationDeleted = true;
+        ReservationDeleted = false;
     }
 
     internal void ChangeStateAccepted() { ReservationState = ReservationState.Accepted; }

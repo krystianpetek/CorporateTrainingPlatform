@@ -10,12 +10,6 @@ public record AddReservationCommand : ICommand
 	[Required]
 	public Guid CustomerId { get; init; }
 
-	[Required]
-    public string ReservationState { get; init; }
-
-    [Required]
-    public DateTime ReservationDate { get; init; }
-
     [Required]
     [MaxLength(2000)]
     public string ReservationNote { get; init; }

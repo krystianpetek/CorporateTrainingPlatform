@@ -51,7 +51,7 @@ public class ReservationsController : BaseController
     public async Task<ActionResult> GetReservationHistoryAsync(Guid reservationId)
     {
 		GetReservationHistoryQuery query = new GetReservationHistoryQuery(reservationId);
-		IReadOnlyList<GetReservationHistoryQueryDto> getReservationHistoryQueryDto = await _dispatcher.DispatchQueryAsync(query);
+		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = await _dispatcher.DispatchQueryAsync(query);
 		return Ok(getReservationHistoryQueryDto);
     }
 }

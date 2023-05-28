@@ -5,12 +5,12 @@ internal sealed class ReservationState : IEquatable<ReservationState>
     private const string PendingState = "Pending";
     private const string CanceledState = "Canceled";
     private const string CompletedState = "Completed";
-    private const string ChangedState = "Changed";
+    private const string WaitingForCustomerState = "WaitingForCustomer";
     private const string RejectedState = "Rejected";
     private const string AcceptedState = "Accepted";
 
     internal static ReservationState Pending => new ReservationState(PendingState);
-    internal static ReservationState WaitingForCustomer => new ReservationState(ChangedState);
+    internal static ReservationState WaitingForCustomer => new ReservationState(WaitingForCustomerState);
     internal static ReservationState Accepted => new ReservationState(AcceptedState);
     internal static ReservationState Rejected => new ReservationState(RejectedState);
     internal static ReservationState Canceled => new ReservationState(CanceledState);

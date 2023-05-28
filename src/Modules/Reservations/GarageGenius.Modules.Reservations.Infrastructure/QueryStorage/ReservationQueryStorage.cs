@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 using GarageGenius.Modules.Reservations.Application.QueryStorage;
+using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -21,22 +22,24 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.AsNoTracking()
 		.AsQueryable()
 		.Where<Reservation>(reservation => reservation.ReservationId == reservationId)
-			.Select<Reservation, GetReservationQueryDto>(reservation => new GetReservationQueryDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState))
-			.SingleOrDefaultAsync<GetReservationQueryDto>(cancellationToken);
+		.Select<Reservation, GetReservationQueryDto>(reservation => new GetReservationQueryDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState))
+		.SingleOrDefaultAsync<GetReservationQueryDto>(cancellationToken);
 
 		return getReservationQueryDto;
 	}
 
-	public async Task<IReadOnlyList<GetReservationHistoryQueryDto>> GetReservationHistoryAsync(Guid reservationId, CancellationToken cancellationToken = default)
+	public async Task<GetReservationHistoryQueryDtos> GetReservationHistoryAsync(Guid reservationId, CancellationToken cancellationToken = default)
 	{
-		IReadOnlyList<GetReservationHistoryQueryDto> getReservationHistoryQueryDtos = await _reservationsDbContext.Reservations
+		IReadOnlyList<ReservationHistoriesDto> reservationHistoriesDto = await _reservationsDbContext.ReservationHistories
 		.AsNoTracking()
 		.AsQueryable()
-		.Where<Reservation>(reservation => reservation.ReservationId == reservationId)
-			.Select<Reservation, GetReservationHistoryQueryDto>(reservation => new GetReservationHistoryQueryDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationNote))
-			.ToListAsync<GetReservationHistoryQueryDto>(cancellationToken);
+		.Where<ReservationHistory>(reservationHistory => reservationHistory.ReservationId == reservationId)
+		.Select<ReservationHistory, ReservationHistoriesDto>(reservationHistory => new ReservationHistoriesDto(reservationHistory.ReservationHistoryId, reservationHistory.ReservationState, reservationHistory.Comment))
+		.ToListAsync(cancellationToken);
 
-		return getReservationHistoryQueryDtos;
+		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = new GetReservationHistoryQueryDtos(reservationId, reservationHistoriesDto);
+
+		return getReservationHistoryQueryDto;
 
 	}
 }

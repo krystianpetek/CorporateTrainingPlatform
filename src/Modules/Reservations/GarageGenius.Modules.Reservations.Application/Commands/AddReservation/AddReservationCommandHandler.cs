@@ -3,6 +3,7 @@ using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Services;
 using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.MessageBroker;
+using GarageGenius.Shared.Abstractions.Services;
 
 namespace GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 internal class AddReservationCommandHandler : ICommandHandler<AddReservationCommand>
@@ -10,20 +11,23 @@ internal class AddReservationCommandHandler : ICommandHandler<AddReservationComm
     private readonly Serilog.ILogger _logger;
     private readonly IMessageBroker _messageBroker;
     private readonly IReservationDomainService _reservationDomainService;
+    private readonly ISystemDateService _systemDateService;
 
     public AddReservationCommandHandler(
         Serilog.ILogger logger,
         IMessageBroker messageBroker,
-        IReservationDomainService reservationDomainService)
+        IReservationDomainService reservationDomainService,
+        ISystemDateService systemDateService)
     {
         _logger = logger;
         _messageBroker = messageBroker;
         _reservationDomainService = reservationDomainService;
+        _systemDateService = systemDateService;
     }
 
     public async Task HandleCommandAsync(AddReservationCommand command, CancellationToken cancellationToken = default)
     {
-        Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.ReservationNote, command.ReservationDate);
+        Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.ReservationNote, _systemDateService.GetCurrentDate());
         await _reservationDomainService.AddReservation(reservation, cancellationToken);
 
         _logger.Information(
