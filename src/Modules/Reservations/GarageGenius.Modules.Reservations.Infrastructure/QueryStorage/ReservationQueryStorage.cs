@@ -5,6 +5,7 @@ using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
+using GarageGenius.Shared.Abstractions.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageGenius.Modules.Reservations.Infrastructure.QueryStorage;
@@ -44,16 +45,16 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 
 	}
 
-	public async Task<GetCustomerReservationsQueryDto> GetCustomerReservationsAsync(Guid customerId, CancellationToken cancellationToken = default)
+	public async Task<GetCustomerReservationsQueryDto> GetCustomerReservationsAsync(GetCustomerReservationsQuery getCustomerReservationsQuery, CancellationToken cancellationToken = default)
 	{
-		IReadOnlyList<CustomerReservationsDto> customerReservationsDtos = await _reservationsDbContext.Reservations
+		PaginatedList<CustomerReservationsDto> customerReservationsDtos = await _reservationsDbContext.Reservations
 		.AsNoTracking()
 		.AsQueryable()
-		.Where<Reservation>(reservation => reservation.CustomerId == customerId)
+		.Where<Reservation>(reservation => reservation.CustomerId == getCustomerReservationsQuery.CustomerId)
 		.Select<Reservation, CustomerReservationsDto>(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
-		.ToListAsync<CustomerReservationsDto>(cancellationToken);
+		.PaginateAsync<CustomerReservationsDto>(getCustomerReservationsQuery.PageNumber, getCustomerReservationsQuery.PageSize, cancellationToken);
 
-		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = new GetCustomerReservationsQueryDto(customerId, customerReservationsDtos);
+		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = new GetCustomerReservationsQueryDto(getCustomerReservationsQuery.CustomerId, customerReservationsDtos);
 
 		return getCustomerReservationsQueryDto;
 	}

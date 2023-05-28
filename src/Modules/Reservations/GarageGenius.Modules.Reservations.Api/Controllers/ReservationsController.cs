@@ -56,13 +56,12 @@ public class ReservationsController : BaseController
 		return Ok(getReservationHistoryQueryDto);
 	}
 
-	[HttpGet("customer/{customerId:guid}")]
+	[HttpGet("customer")]
 	[Authorize]
 	[SwaggerOperation("Get customer reservations")]
-	public async Task<ActionResult> GetCustomerReservationsAsync(Guid customerId)
+	public async Task<ActionResult> GetCustomerReservationsAsync([FromQuery] GetCustomerReservationsQuery getCustomerReservationsQuery)
 	{
-		GetCustomerReservationsQuery query = new GetCustomerReservationsQuery(customerId);
-		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _dispatcher.DispatchQueryAsync(query);
+		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _dispatcher.DispatchPagedQueryAsync(getCustomerReservationsQuery);
 		return Ok(getCustomerReservationsQueryDto);
 	}
 }

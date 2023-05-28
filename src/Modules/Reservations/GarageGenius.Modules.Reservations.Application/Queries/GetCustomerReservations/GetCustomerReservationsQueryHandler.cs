@@ -1,8 +1,8 @@
 ﻿using GarageGenius.Modules.Reservations.Application.QueryStorage;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
-internal class GetCustomerReservationsQueryHandler : IQueryHandler<GetCustomerReservationsQuery, GetCustomerReservationsQueryDto>
+internal class GetCustomerReservationsQueryHandler : IPagedQueryHandler<GetCustomerReservationsQuery, GetCustomerReservationsQueryDto>
 {
 	private readonly Serilog.ILogger _logger;
 	private readonly IReservationQueryStorage _reservationQueryStorage;
@@ -15,9 +15,9 @@ internal class GetCustomerReservationsQueryHandler : IQueryHandler<GetCustomerRe
 		_reservationQueryStorage = reservationQueryStorage;
 	}
 
-	public async Task<GetCustomerReservationsQueryDto> HandleQueryAsync(GetCustomerReservationsQuery query, CancellationToken cancellationToken = default)
+	public async Task<GetCustomerReservationsQueryDto> HandlePagedQueryAsync(GetCustomerReservationsQuery query, CancellationToken cancellationToken = default)
 	{
-		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _reservationQueryStorage.GetCustomerReservationsAsync(query.CustomerId, cancellationToken);
+		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _reservationQueryStorage.GetCustomerReservationsAsync(query, cancellationToken);
 
 		_logger.Information(
 			messageTemplate: "Query {QueryName} handled by {ModuleName} module, retrieved customer reservations for customer with ID: {CustomerId}",
