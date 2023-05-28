@@ -1,8 +1,7 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
+using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
-using GarageGenius.Modules.Reservations.Core.Reservations.Types;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
-using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageGenius.Modules.Reservations.Infrastructure.QueryStorage;

@@ -1,9 +1,9 @@
-﻿using GarageGenius.Modules.Reservations.Core.ReservationHistories.Repositories;
+﻿using GarageGenius.Modules.Reservations.Application.QueryStorage;
+using GarageGenius.Modules.Reservations.Core.ReservationHistories.Repositories;
 using GarageGenius.Modules.Reservations.Core.Reservations.Repositories;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.Repositories;
 using GarageGenius.Modules.Reservations.Infrastructure.QueryStorage;
-using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;
 

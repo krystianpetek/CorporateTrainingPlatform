@@ -1,5 +1,5 @@
-﻿using GarageGenius.Modules.Reservations.Core.Reservations.Exceptions;
-using GarageGenius.Modules.Vehicles.Application.QueryStorage;
+﻿using GarageGenius.Modules.Reservations.Application.QueryStorage;
+using GarageGenius.Modules.Reservations.Core.Reservations.Exceptions;
 using GarageGenius.Shared.Abstractions.Queries;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetReservation;

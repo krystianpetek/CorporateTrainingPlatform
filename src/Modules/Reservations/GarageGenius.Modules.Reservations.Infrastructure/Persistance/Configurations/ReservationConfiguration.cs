@@ -17,8 +17,12 @@ internal class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
             .HasConversion(conversion => conversion.Value, value => new ReservationId(value));
 
         builder.Property(builder => builder.VehicleId)
-            .HasConversion(conversion => conversion.Value, value => new VehicleId(value))
-            .IsRequired();
+            .IsRequired()
+            .HasConversion(conversion => conversion.Value, value => new VehicleId(value));
+
+        builder.Property(x => x.CustomerId)
+            .IsRequired()
+            .HasConversion(conversion => conversion.Value, value => new CustomerId(value));
 
         builder.Property(x => x.ReservationDate)
             .IsRequired()
@@ -34,5 +38,6 @@ internal class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
 
         builder.Property(x => x.ReservationDeleted)
             .IsRequired();
+            
     }
 }
