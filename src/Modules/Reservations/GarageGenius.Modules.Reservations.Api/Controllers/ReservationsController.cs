@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 using GarageGenius.Modules.Reservations.Application.Commands.UpdateReservation;
+using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +32,15 @@ public class ReservationsController : BaseController
     {
         await _dispatcher.DispatchCommandAsync(command);
         return Ok();
+    }
+
+    [HttpGet("{reservationId:guid}")]
+    [Authorize]
+    [SwaggerOperation("Get reservation")]
+    public async Task<ActionResult> GetReservationHistoryAsync(Guid reservationId)
+    {
+		GetReservationQuery query = new GetReservationQuery(reservationId);
+        GetReservationQueryDto? getReservationQueryDto = await _dispatcher.DispatchQueryAsync(query);
+        return Ok(getReservationQueryDto);
     }
 }
