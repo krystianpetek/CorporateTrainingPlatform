@@ -1,5 +1,5 @@
 ﻿using GarageGenius.Modules.Vehicles.Core.Models;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 public record SearchVehiclesQuery : IQuery<IReadOnlyList<SearchVehiclesQueryDto>>

@@ -1,4 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Customers.Application.Queries.GetCustomerById;
 internal record GetCustomerByIdQuery : IQuery<GetCustomerByIdDto>

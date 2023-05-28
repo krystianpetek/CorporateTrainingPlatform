@@ -1,4 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
 public record GetCustomerVehiclesQuery : IQuery<IReadOnlyList<GetCustomerVehiclesQueryDto>>

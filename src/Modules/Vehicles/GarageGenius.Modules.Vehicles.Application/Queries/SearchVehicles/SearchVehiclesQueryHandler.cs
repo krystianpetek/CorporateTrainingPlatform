@@ -1,6 +1,6 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Exceptions;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 internal class SearchVehiclesQueryHandler : IQueryHandler<SearchVehiclesQuery, IReadOnlyList<SearchVehiclesQueryDto>>

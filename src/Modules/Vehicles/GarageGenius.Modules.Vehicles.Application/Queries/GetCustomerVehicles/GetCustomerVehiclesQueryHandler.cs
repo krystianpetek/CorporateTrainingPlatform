@@ -1,5 +1,5 @@
 ﻿using GarageGenius.Modules.Vehicles.Application.QueryStorage;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
 internal class GetCustomerVehiclesQueryHandler : IQueryHandler<GetCustomerVehiclesQuery, IReadOnlyList<GetCustomerVehiclesQueryDto>>

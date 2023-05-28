@@ -1,4 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 public sealed record class GetReservationHistoryQuery : IQuery<GetReservationHistoryQueryDtos>

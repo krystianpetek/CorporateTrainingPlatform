@@ -1,6 +1,6 @@
 using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Reservations.Core.Reservations.Exceptions;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 internal class GetReservationHistoryQueryHandler : IQueryHandler<GetReservationHistoryQuery, GetReservationHistoryQueryDtos>

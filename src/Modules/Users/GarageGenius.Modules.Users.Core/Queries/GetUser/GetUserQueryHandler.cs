@@ -2,7 +2,7 @@
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Core.ServiceMapper;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Users.Core.Queries.GetUser;
 internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto>

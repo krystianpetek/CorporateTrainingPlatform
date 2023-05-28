@@ -1,4 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Queries;
+﻿using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Users.Core.Queries.GetUser;
 

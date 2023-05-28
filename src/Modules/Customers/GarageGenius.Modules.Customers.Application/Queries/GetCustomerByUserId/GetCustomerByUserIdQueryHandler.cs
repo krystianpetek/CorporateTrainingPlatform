@@ -1,6 +1,6 @@
 ﻿using GarageGenius.Modules.Customers.Core.Entities;
 using GarageGenius.Modules.Customers.Core.Repositories;
-using GarageGenius.Shared.Abstractions.Queries;
+using GarageGenius.Shared.Abstractions.Queries.Query;
 
 namespace GarageGenius.Modules.Customers.Application.Queries.GetCustomerByUserId;
 internal class GetCustomerByUserIdQueryHandler : IQueryHandler<GetCustomerByUserIdQuery, GetCustomerByUserIdDto>
