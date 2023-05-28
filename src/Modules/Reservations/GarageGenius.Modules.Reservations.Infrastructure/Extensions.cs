@@ -2,6 +2,8 @@
 using GarageGenius.Modules.Reservations.Core.Reservations.Repositories;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.Repositories;
+using GarageGenius.Modules.Reservations.Infrastructure.QueryStorage;
+using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,7 @@ internal static class Extensions
         services.AddMsSqlServerDbContext<ReservationsDbContext>();
         services.AddScoped<IReservationRepository, ReservationRepository>();
         services.AddScoped<IReservationHistoryRepository, ReservationHistoryRepository>();
+        services.AddScoped<IReservationQueryStorage, ReservationQueryStorage>();
         return services;
     }
 }

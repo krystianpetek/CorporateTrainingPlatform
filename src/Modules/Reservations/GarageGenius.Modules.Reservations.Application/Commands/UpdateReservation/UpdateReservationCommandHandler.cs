@@ -39,11 +39,11 @@ internal class UpdateReservationCommandHandler : ICommandHandler<UpdateReservati
             nameof(Reservations),
             command.ReservationId);
 
-        await _messageBroker.PublishAsync(new ReservationUpdated(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
+        await _messageBroker.PublishAsync(new ReservationUpdatedEvent(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
 
         _logger.Information(
             messageTemplate: "Event {EventName} published by {ModuleName} module, reservation with ID: {ReservationId} updated",
-            nameof(ReservationUpdated),
+            nameof(ReservationUpdatedEvent),
             nameof(Reservations),
             reservation.ReservationId);
 
