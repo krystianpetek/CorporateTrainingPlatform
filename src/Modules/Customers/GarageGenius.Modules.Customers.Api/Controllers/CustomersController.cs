@@ -26,7 +26,7 @@ public class CustomersController : BaseController
         return Ok(customer);
     }
 
-    [HttpGet("User/{id:guid}")]
+    [HttpGet("user/{id:guid}")]
     [Authorize]
     [SwaggerOperation("Get customer by user id")]
     public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)

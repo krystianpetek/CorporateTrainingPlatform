@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 using GarageGenius.Modules.Reservations.Application.Commands.UpdateReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
+using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,10 +38,20 @@ public class ReservationsController : BaseController
     [HttpGet("{reservationId:guid}")]
     [Authorize]
     [SwaggerOperation("Get reservation")]
-    public async Task<ActionResult> GetReservationHistoryAsync(Guid reservationId)
+    public async Task<ActionResult> GetReservationAsync(Guid reservationId)
     {
-		GetReservationQuery query = new GetReservationQuery(reservationId);
+        GetReservationQuery query = new GetReservationQuery(reservationId);
         GetReservationQueryDto? getReservationQueryDto = await _dispatcher.DispatchQueryAsync(query);
         return Ok(getReservationQueryDto);
+    }
+
+    [HttpGet("{reservationId:guid}/history")]
+    [Authorize]
+    [SwaggerOperation("Get reservation history")]
+    public async Task<ActionResult> GetReservationHistoryAsync(Guid reservationId)
+    {
+		GetReservationHistoryQuery query = new GetReservationHistoryQuery(reservationId);
+		IReadOnlyList<GetReservationHistoryQueryDto> getReservationHistoryQueryDto = await _dispatcher.DispatchQueryAsync(query);
+		return Ok(getReservationHistoryQueryDto);
     }
 }

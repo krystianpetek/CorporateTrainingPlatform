@@ -24,7 +24,7 @@ internal sealed class LastName : IEquatable<LastName>
 
     public static implicit operator string(LastName value)
     {
-        return value.Value;
+        return value?.Value;
     }
 
     public static implicit operator LastName(string value)

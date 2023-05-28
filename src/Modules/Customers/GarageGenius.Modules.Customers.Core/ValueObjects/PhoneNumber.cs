@@ -26,7 +26,7 @@ internal sealed class PhoneNumber : IEquatable<PhoneNumber>
 
     public static implicit operator string(PhoneNumber phoneNumber)
     {
-        return phoneNumber.Value;
+        return phoneNumber?.Value;
     }
 
     public static implicit operator PhoneNumber(string phoneNumber)
