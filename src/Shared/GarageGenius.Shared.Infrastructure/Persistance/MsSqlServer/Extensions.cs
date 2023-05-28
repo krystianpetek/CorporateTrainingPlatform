@@ -6,20 +6,20 @@ using Microsoft.Extensions.DependencyInjection;
 namespace GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 public static class Extensions
 {
-    public static IServiceCollection AddMsSqlServerDbContext<T>(this IServiceCollection services) where T : DbContext
-    {
-        using ServiceProvider? serviceProvider = services.BuildServiceProvider();
-        IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-        services.AddScoped<AuditableEntitySaveChangesInterceptor>();
+	public static IServiceCollection AddMsSqlServerDbContext<T>(this IServiceCollection services) where T : DbContext
+	{
+		using ServiceProvider? serviceProvider = services.BuildServiceProvider();
+		IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+		services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
-        string connection = configuration.GetConnectionString("SqlServerConnection");
-        bool inMemoryDatabase = configuration.GetValue<bool>("InMemoryDatabase");
+		string connection = configuration.GetConnectionString("SqlServerConnection");
+		bool inMemoryDatabase = configuration.GetValue<bool>("InMemoryDatabase");
 
-        if (inMemoryDatabase)
-            services.AddDbContext<T>(x => x.UseInMemoryDatabase(connection));
-        else
-            services.AddDbContext<T>(x => x.UseSqlServer(connection));
+		if (inMemoryDatabase)
+			services.AddDbContext<T>(x => x.UseInMemoryDatabase(connection));
+		else
+			services.AddDbContext<T>(x => x.UseSqlServer(connection));
 
-        return services;
-    }
+		return services;
+	}
 }

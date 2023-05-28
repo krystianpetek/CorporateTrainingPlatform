@@ -3,5 +3,5 @@
 namespace GarageGenius.Modules.Customers.Core.Exceptions;
 internal sealed class InvalidEmailException : GarageGeniusException
 {
-    public InvalidEmailException(string email) : base($"Invalid email: {email}") { }
+	public InvalidEmailException(string email) : base($"Invalid email: {email}") { }
 }

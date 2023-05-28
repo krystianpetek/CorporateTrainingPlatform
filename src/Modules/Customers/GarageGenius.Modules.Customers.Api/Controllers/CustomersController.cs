@@ -10,46 +10,46 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GarageGenius.Modules.Customers.Api.Controllers;
 public class CustomersController : BaseController
 {
-    private readonly IDispatcher _dispatcher;
+	private readonly IDispatcher _dispatcher;
 
-    public CustomersController(IDispatcher dispatcher)
-    {
-        _dispatcher = dispatcher;
-    }
+	public CustomersController(IDispatcher dispatcher)
+	{
+		_dispatcher = dispatcher;
+	}
 
-    [HttpGet("{id:guid}")]
-    [Authorize]
-    [SwaggerOperation("Get customer id")]
-    public async Task<ActionResult> GetCustomerByIdAsync(Guid id)
-    {
-        var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
-        return Ok(customer);
-    }
+	[HttpGet("{id:guid}")]
+	[Authorize]
+	[SwaggerOperation("Get customer id")]
+	public async Task<ActionResult> GetCustomerByIdAsync(Guid id)
+	{
+		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
+		return Ok(customer);
+	}
 
-    [HttpGet("user/{id:guid}")]
-    [Authorize]
-    [SwaggerOperation("Get customer by user id")]
-    public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)
-    {
-        var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
-        return Ok(customer);
-    }
+	[HttpGet("user/{id:guid}")]
+	[Authorize]
+	[SwaggerOperation("Get customer by user id")]
+	public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)
+	{
+		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
+		return Ok(customer);
+	}
 
-    [HttpPost]
-    [Authorize]
-    [SwaggerOperation("Create customer")]
-    public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
-    {
-        await _dispatcher.DispatchCommandAsync<CreateCustomerCommand>(createCustomerCommand);
-        return Accepted();
-    }
+	[HttpPost]
+	[Authorize]
+	[SwaggerOperation("Create customer")]
+	public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
+	{
+		await _dispatcher.DispatchCommandAsync<CreateCustomerCommand>(createCustomerCommand);
+		return Accepted();
+	}
 
-    [HttpPut]
-    [Authorize]
-    [SwaggerOperation("Update customer")]
-    public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand)
-    {
-        await _dispatcher.DispatchCommandAsync<UpdateCustomerCommand>(updateCustomerCommand);
-        return NoContent();
-    }
+	[HttpPut]
+	[Authorize]
+	[SwaggerOperation("Update customer")]
+	public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand)
+	{
+		await _dispatcher.DispatchCommandAsync<UpdateCustomerCommand>(updateCustomerCommand);
+		return NoContent();
+	}
 }

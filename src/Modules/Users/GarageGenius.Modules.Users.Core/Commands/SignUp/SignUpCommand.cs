@@ -6,22 +6,22 @@ namespace GarageGenius.Modules.Users.Core.Commands.SignUp;
 
 public record SignUpCommand : ICommand
 {
-    [Required]
-    [EmailAddress]
-    [DefaultValue("krystianpetek2@gmail.com")]
-    public string Email { get; init; }
+	[Required]
+	[EmailAddress]
+	[DefaultValue("krystianpetek2@gmail.com")]
+	public string Email { get; init; }
 
-    [Required]
-    [DefaultValue("Password!23")]
-    public string Password { get; init; }
+	[Required]
+	[DefaultValue("Password!23")]
+	public string Password { get; init; }
 
-    [DefaultValue("Administrator")]
-    public string Role { get; init; }
+	[DefaultValue("Administrator")]
+	public string Role { get; init; }
 
-    public SignUpCommand(string email, string password, string role)
-    {
-        Email = email;
-        Password = password;
-        Role = role;
-    }
+	public SignUpCommand(string email, string password, string role)
+	{
+		Email = email;
+		Password = password;
+		Role = role;
+	}
 }

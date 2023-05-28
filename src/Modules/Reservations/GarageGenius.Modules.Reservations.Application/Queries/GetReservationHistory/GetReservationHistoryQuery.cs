@@ -1,6 +1,6 @@
 ﻿using GarageGenius.Shared.Abstractions.Queries;
 
-namespace GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory; 
+namespace GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 public sealed record class GetReservationHistoryQuery : IQuery<GetReservationHistoryQueryDtos>
 {
 	public Guid ReservationId { get; init; }

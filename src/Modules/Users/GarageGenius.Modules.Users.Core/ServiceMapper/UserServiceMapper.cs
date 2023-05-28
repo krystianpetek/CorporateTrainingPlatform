@@ -4,15 +4,15 @@ using GarageGenius.Modules.Users.Core.Queries.GetUser;
 namespace GarageGenius.Modules.Users.Core.ServiceMapper;
 internal interface IUserServiceMapper
 {
-    public GetUserQueryDto MapToGetUserQueryDto(User entity);
+	public GetUserQueryDto MapToGetUserQueryDto(User entity);
 }
 
 internal class UserServiceMapper : IUserServiceMapper
 {
-    public GetUserQueryDto MapToGetUserQueryDto(User entity)
-    {
-        return new GetUserQueryDto(entity.UserId, entity?.Role?.Name, entity?.Email, entity?.State, entity.Created);
-    }
+	public GetUserQueryDto MapToGetUserQueryDto(User entity)
+	{
+		return new GetUserQueryDto(entity.UserId, entity?.Role?.Name, entity?.Email, entity?.State, entity.Created);
+	}
 }
 
 // TODO i dont known whether this is the right way to do this,

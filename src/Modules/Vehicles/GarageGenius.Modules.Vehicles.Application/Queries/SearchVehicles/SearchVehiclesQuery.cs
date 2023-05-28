@@ -4,10 +4,10 @@ using GarageGenius.Shared.Abstractions.Queries;
 namespace GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 public record SearchVehiclesQuery : IQuery<IReadOnlyList<SearchVehiclesQueryDto>>
 {
-    public SearchVehiclesParameters SearchVehiclesParameters { get; init; }
+	public SearchVehiclesParameters SearchVehiclesParameters { get; init; }
 
-    public SearchVehiclesQuery(SearchVehiclesParameters SearchVehiclesParameters)
-    {
-        this.SearchVehiclesParameters = SearchVehiclesParameters;
-    }
+	public SearchVehiclesQuery(SearchVehiclesParameters SearchVehiclesParameters)
+	{
+		this.SearchVehiclesParameters = SearchVehiclesParameters;
+	}
 }

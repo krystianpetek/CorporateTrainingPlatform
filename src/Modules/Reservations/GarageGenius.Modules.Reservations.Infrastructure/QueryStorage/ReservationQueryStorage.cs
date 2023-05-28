@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
+﻿using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
+using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
@@ -41,5 +42,19 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 
 		return getReservationHistoryQueryDto;
 
+	}
+
+	public async Task<GetCustomerReservationsQueryDto> GetCustomerReservationsAsync(Guid customerId, CancellationToken cancellationToken = default)
+	{
+		IReadOnlyList<CustomerReservationsDto> customerReservationsDtos = await _reservationsDbContext.Reservations
+		.AsNoTracking()
+		.AsQueryable()
+		.Where<Reservation>(reservation => reservation.CustomerId == customerId)
+		.Select<Reservation, CustomerReservationsDto>(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
+		.ToListAsync<CustomerReservationsDto>(cancellationToken);
+
+		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = new GetCustomerReservationsQueryDto(customerId, customerReservationsDtos);
+
+		return getCustomerReservationsQueryDto;
 	}
 }

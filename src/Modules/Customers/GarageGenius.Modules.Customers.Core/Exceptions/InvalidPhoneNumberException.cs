@@ -3,5 +3,5 @@
 namespace GarageGenius.Modules.Customers.Core.Exceptions;
 internal sealed class InvalidPhoneNumberException : GarageGeniusException
 {
-    public InvalidPhoneNumberException(string phoneNumber) : base($"Invalid phone number: {phoneNumber}") { }
+	public InvalidPhoneNumberException(string phoneNumber) : base($"Invalid phone number: {phoneNumber}") { }
 }

@@ -11,12 +11,12 @@ namespace GarageGenius.Modules.Reservations.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddReservationsInfrastructure(this IServiceCollection services)
-    {
-        services.AddMsSqlServerDbContext<ReservationsDbContext>();
-        services.AddScoped<IReservationRepository, ReservationRepository>();
-        services.AddScoped<IReservationHistoryRepository, ReservationHistoryRepository>();
-        services.AddScoped<IReservationQueryStorage, ReservationQueryStorage>();
-        return services;
-    }
+	public static IServiceCollection AddReservationsInfrastructure(this IServiceCollection services)
+	{
+		services.AddMsSqlServerDbContext<ReservationsDbContext>();
+		services.AddScoped<IReservationRepository, ReservationRepository>();
+		services.AddScoped<IReservationHistoryRepository, ReservationHistoryRepository>();
+		services.AddScoped<IReservationQueryStorage, ReservationQueryStorage>();
+		return services;
+	}
 }

@@ -9,19 +9,19 @@ using Microsoft.Extensions.DependencyInjection;
 namespace GarageGenius.Modules.Customers.Api;
 internal class CustomersModule : IModule
 {
-    public const string BasePath = "customers-module";
-    public string Name => "Customers";
-    public IEnumerable<string>? Policies { get; } = new string[] { "customers" };
+	public const string BasePath = "customers-module";
+	public string Name => "Customers";
+	public IEnumerable<string>? Policies { get; } = new string[] { "customers" };
 
-    public void Register(IServiceCollection services)
-    {
-        services.AddCustomersCore();
-        services.AddCustomersApplication();
-        services.AddCustomersInfrastructure();
-    }
+	public void Register(IServiceCollection services)
+	{
+		services.AddCustomersCore();
+		services.AddCustomersApplication();
+		services.AddCustomersInfrastructure();
+	}
 
-    public void Use(WebApplication app)
-    {
-        app.MapHealthCheck(Name);
-    }
+	public void Use(WebApplication app)
+	{
+		app.MapHealthCheck(Name);
+	}
 }

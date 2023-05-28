@@ -3,10 +3,10 @@
 namespace GarageGenius.Modules.Customers.Application.Queries.GetCustomerById;
 internal record GetCustomerByIdQuery : IQuery<GetCustomerByIdDto>
 {
-    public Guid Id { get; init; }
+	public Guid Id { get; init; }
 
-    public GetCustomerByIdQuery(Guid id)
-    {
-        Id = id;
-    }
+	public GetCustomerByIdQuery(Guid id)
+	{
+		Id = id;
+	}
 }

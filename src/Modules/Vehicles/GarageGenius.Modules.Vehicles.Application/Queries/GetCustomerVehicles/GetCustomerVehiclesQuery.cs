@@ -3,9 +3,9 @@
 namespace GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles;
 public record GetCustomerVehiclesQuery : IQuery<IReadOnlyList<GetCustomerVehiclesQueryDto>>
 {
-    public Guid CustomerId { get; init; }
-    public GetCustomerVehiclesQuery(Guid CustomerId)
-    {
-        this.CustomerId = CustomerId;
-    }
+	public Guid CustomerId { get; init; }
+	public GetCustomerVehiclesQuery(Guid CustomerId)
+	{
+		this.CustomerId = CustomerId;
+	}
 }

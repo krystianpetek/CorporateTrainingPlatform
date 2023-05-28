@@ -3,5 +3,5 @@
 namespace GarageGenius.Modules.Vehicles.Core.Exceptions;
 internal sealed class InvalidVinException : GarageGeniusException
 {
-    public InvalidVinException(string vin) : base($"Invalid vehicle vin number: {vin}") { }
+	public InvalidVinException(string vin) : base($"Invalid vehicle vin number: {vin}") { }
 }

@@ -12,74 +12,74 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace GarageGenius.Modules.Users.Api.Controllers;
 public class UsersController : BaseController
 {
-    private readonly IJsonWebTokenStorage _jsonWebTokenStorage;
-    private readonly IDispatcher _dispatcher;
+	private readonly IJsonWebTokenStorage _jsonWebTokenStorage;
+	private readonly IDispatcher _dispatcher;
 
-    public UsersController(
-        IJsonWebTokenStorage jsonWebTokenStorage,
-        IDispatcher dispatcher)
-    {
-        _jsonWebTokenStorage = jsonWebTokenStorage;
-        _dispatcher = dispatcher;
-    }
+	public UsersController(
+		IJsonWebTokenStorage jsonWebTokenStorage,
+		IDispatcher dispatcher)
+	{
+		_jsonWebTokenStorage = jsonWebTokenStorage;
+		_dispatcher = dispatcher;
+	}
 
-    [HttpPost("sign-up")]
-    [AllowAnonymous]
-    [SwaggerOperation("Sign up user")]
-    public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
-    {
-        await _dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
-        return Accepted();
-    }
+	[HttpPost("sign-up")]
+	[AllowAnonymous]
+	[SwaggerOperation("Sign up user")]
+	public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
+	{
+		await _dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
+		return Accepted();
+	}
 
-    [HttpPost("sign-in")]
-    [AllowAnonymous]
-    [SwaggerOperation("Sign in user")]
-    public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
-    {
-        await _dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
+	[HttpPost("sign-in")]
+	[AllowAnonymous]
+	[SwaggerOperation("Sign in user")]
+	public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
+	{
+		await _dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
 
-        JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
-        return Ok(token);
-    }
+		JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
+		return Ok(token);
+	}
 
-    [Authorize]
-    [HttpGet("me")]
-    [SwaggerOperation("Get current logged user")]
-    public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
-    {
-        Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
-        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
-    }
+	[Authorize]
+	[HttpGet("me")]
+	[SwaggerOperation("Get current logged user")]
+	public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
+	{
+		Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
+		return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+	}
 
-    [Authorize]
-    [HttpGet("{id:guid}")]
-    [SwaggerOperation("Get user by ID")]
-    public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
-    {
-        return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
-    }
+	[Authorize]
+	[HttpGet("{id:guid}")]
+	[SwaggerOperation("Get user by ID")]
+	public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
+	{
+		return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
+	}
 
-    [Authorize]
-    [HttpPost("sign-out")]
-    [SwaggerOperation("Sign out user")]
-    public new IActionResult SignOut()
-    {
-        _jsonWebTokenStorage.RemoveToken();
-        return Ok();
-    }
+	[Authorize]
+	[HttpPost("sign-out")]
+	[SwaggerOperation("Sign out user")]
+	public new IActionResult SignOut()
+	{
+		_jsonWebTokenStorage.RemoveToken();
+		return Ok();
+	}
 
-    [Authorize]
-    [HttpPost("deactivate")]
-    [SwaggerOperation("Deactivate user")]
-    public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
-    {
-        await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
-        return NoContent();
-    }
+	[Authorize]
+	[HttpPost("deactivate")]
+	[SwaggerOperation("Deactivate user")]
+	public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
+	{
+		await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
+		return NoContent();
+	}
 
-    //[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
-    //[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
-    // TODO change user password 
-    // TODO activate user ?
+	//[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
+	//[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
+	// TODO change user password 
+	// TODO activate user ?
 }

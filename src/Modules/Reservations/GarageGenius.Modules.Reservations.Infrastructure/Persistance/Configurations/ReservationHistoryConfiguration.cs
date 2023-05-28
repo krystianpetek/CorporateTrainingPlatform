@@ -9,25 +9,25 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace GarageGenius.Modules.Reservations.Infrastructure.Persistance.Configurations;
 internal class ReservationHistoryConfiguration : IEntityTypeConfiguration<ReservationHistory>
 {
-    public void Configure(EntityTypeBuilder<ReservationHistory> builder)
-    {
-        builder.HasKey(builder => builder.ReservationHistoryId);
-        builder.HasIndex(builder => builder.ReservationId);
+	public void Configure(EntityTypeBuilder<ReservationHistory> builder)
+	{
+		builder.HasKey(builder => builder.ReservationHistoryId);
+		builder.HasIndex(builder => builder.ReservationId);
 
-        builder.Property(builder => builder.ReservationHistoryId)
-            .IsRequired()
-            .HasConversion(conversion => conversion.Value, value => new ReservationHistoryId(value));
+		builder.Property(builder => builder.ReservationHistoryId)
+			.IsRequired()
+			.HasConversion(conversion => conversion.Value, value => new ReservationHistoryId(value));
 
-        builder.Property(builder => builder.ReservationId)
-            .IsRequired()
-            .HasConversion(conversion => conversion.Value, value => new ReservationId(value));
+		builder.Property(builder => builder.ReservationId)
+			.IsRequired()
+			.HasConversion(conversion => conversion.Value, value => new ReservationId(value));
 
-        builder.Property(builder => builder.ReservationState)
-            .IsRequired()
-            .HasConversion(conversion => conversion.Value, value => new ReservationState(value));
+		builder.Property(builder => builder.ReservationState)
+			.IsRequired()
+			.HasConversion(conversion => conversion.Value, value => new ReservationState(value));
 
-        builder.Property(builder => builder.Comment)
-            .IsRequired()
-            .HasConversion(conversion => conversion.Value, value => new Comment(value));
-    }
+		builder.Property(builder => builder.Comment)
+			.IsRequired()
+			.HasConversion(conversion => conversion.Value, value => new Comment(value));
+	}
 }

@@ -5,6 +5,6 @@ namespace GarageGenius.Shared.Abstractions.MessageBroker;
 
 public interface IEventChannel
 {
-    ChannelReader<IEvent> Reader { get; }
-    ChannelWriter<IEvent> Writer { get; }
+	ChannelReader<IEvent> Reader { get; }
+	ChannelWriter<IEvent> Writer { get; }
 }

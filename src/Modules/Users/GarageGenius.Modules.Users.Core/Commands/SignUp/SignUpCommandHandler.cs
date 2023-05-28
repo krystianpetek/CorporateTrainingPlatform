@@ -9,51 +9,51 @@ using GarageGenius.Shared.Abstractions.MessageBroker;
 namespace GarageGenius.Modules.Users.Core.Commands.SignUp;
 internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 {
-    private readonly Serilog.ILogger _logger;
-    private readonly IUserRepository _userRepository;
-    private readonly IRoleRepository _roleRepository;
-    private readonly IPasswordManager _passwordManager;
-    private readonly IMessageBroker _messageBroker;
+	private readonly Serilog.ILogger _logger;
+	private readonly IUserRepository _userRepository;
+	private readonly IRoleRepository _roleRepository;
+	private readonly IPasswordManager _passwordManager;
+	private readonly IMessageBroker _messageBroker;
 
-    public SignUpCommandHandler(
-        Serilog.ILogger logger,
-        IUserRepository userRepository,
-        IRoleRepository roleRepository,
-        IPasswordManager passwordManager,
-        IMessageBroker messageBroker)
-    {
-        _logger = logger;
-        _userRepository = userRepository;
-        _roleRepository = roleRepository;
-        _passwordManager = passwordManager;
-        _messageBroker = messageBroker;
-    }
+	public SignUpCommandHandler(
+		Serilog.ILogger logger,
+		IUserRepository userRepository,
+		IRoleRepository roleRepository,
+		IPasswordManager passwordManager,
+		IMessageBroker messageBroker)
+	{
+		_logger = logger;
+		_userRepository = userRepository;
+		_roleRepository = roleRepository;
+		_passwordManager = passwordManager;
+		_messageBroker = messageBroker;
+	}
 
-    public async Task HandleCommandAsync(SignUpCommand command, CancellationToken cancellationToken = default)
-    {
-        if (string.IsNullOrWhiteSpace(command.Email))
-            throw new InvalidEmailException(command.Email);
+	public async Task HandleCommandAsync(SignUpCommand command, CancellationToken cancellationToken = default)
+	{
+		if (string.IsNullOrWhiteSpace(command.Email))
+			throw new InvalidEmailException(command.Email);
 
-        if (string.IsNullOrWhiteSpace(command.Password))
-            throw new MissingPasswordException();
+		if (string.IsNullOrWhiteSpace(command.Password))
+			throw new MissingPasswordException();
 
-        string email = command.Email.ToLower();
-        User? user = await _userRepository.GetByEmailAsync(email);
-        if (user is not null)
-            throw new EmailAlreadyRegisteredException();
+		string email = command.Email.ToLower();
+		User? user = await _userRepository.GetByEmailAsync(email);
+		if (user is not null)
+			throw new EmailAlreadyRegisteredException();
 
-        string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
-        Role? role = await _roleRepository.GetAsync(roleName, cancellationToken) ?? throw new RoleNotFoundException(roleName);
+		string roleName = string.IsNullOrWhiteSpace(command.Role) ? Role.DefaultRole : command.Role.ToLower();
+		Role? role = await _roleRepository.GetAsync(roleName, cancellationToken) ?? throw new RoleNotFoundException(roleName);
 
-        string password = _passwordManager.Generate(command.Password);
+		string password = _passwordManager.Generate(command.Password);
 
-        user = new User(email, password, roleName);
-        await _userRepository.AddAsync(user, cancellationToken);
+		user = new User(email, password, roleName);
+		await _userRepository.AddAsync(user, cancellationToken);
 
-        _logger.Information(
-    "Handled {CommandName} in {ModuleName} module, signed up user with ID: {UserId}",
-    nameof(SignUpCommand), nameof(Users), user.UserId);
+		_logger.Information(
+	"Handled {CommandName} in {ModuleName} module, signed up user with ID: {UserId}",
+	nameof(SignUpCommand), nameof(Users), user.UserId);
 
-        await _messageBroker.PublishAsync(new UserCreated(user.UserId, user.Email), cancellationToken);
-    }
+		await _messageBroker.PublishAsync(new UserCreated(user.UserId, user.Email), cancellationToken);
+	}
 }

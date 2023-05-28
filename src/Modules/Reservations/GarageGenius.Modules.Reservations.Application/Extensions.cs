@@ -4,8 +4,8 @@ namespace GarageGenius.Modules.Reservations.Application;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddReservationsApplication(this IServiceCollection services)
-    {
-        return services;
-    }
+	public static IServiceCollection AddReservationsApplication(this IServiceCollection services)
+	{
+		return services;
+	}
 }

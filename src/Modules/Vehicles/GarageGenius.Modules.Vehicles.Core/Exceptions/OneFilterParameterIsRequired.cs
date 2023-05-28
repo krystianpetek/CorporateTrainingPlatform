@@ -3,8 +3,8 @@
 namespace GarageGenius.Modules.Vehicles.Core.Exceptions;
 internal class OneFilterParameterIsRequired : GarageGeniusException
 {
-    public OneFilterParameterIsRequired() : base($"At least one filter parameter is required.")
+	public OneFilterParameterIsRequired() : base($"At least one filter parameter is required.")
 
-    {
-    }
+	{
+	}
 }

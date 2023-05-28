@@ -5,36 +5,36 @@ using GarageGenius.Shared.Abstractions.Common;
 namespace GarageGenius.Modules.Customers.Core.Entities;
 internal sealed class Customer : AuditableEntity
 {
-    // TODO validation domain entity
-    internal CustomerId CustomerId { get; private set; }
-    public UserId? UserId { get; private set; } // TODO linking to user if customer created separately, but how ?
-    public FirstName? FirstName { get; private set; }
-    public LastName? LastName { get; private set; }
-    public PhoneNumber? PhoneNumber { get; private set; }
-    public EmailAddress EmailAddress { get; private set; }
+	// TODO validation domain entity
+	internal CustomerId CustomerId { get; private set; }
+	public UserId? UserId { get; private set; } // TODO linking to user if customer created separately, but how ?
+	public FirstName? FirstName { get; private set; }
+	public LastName? LastName { get; private set; }
+	public PhoneNumber? PhoneNumber { get; private set; }
+	public EmailAddress EmailAddress { get; private set; }
 
-    private Customer() { }
+	private Customer() { }
 
-    public Customer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
-    {
-        CustomerId = new CustomerId(Guid.NewGuid());
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
-        EmailAddress = emailAddress;
-    }
+	public Customer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber, EmailAddress emailAddress)
+	{
+		CustomerId = new CustomerId(Guid.NewGuid());
+		FirstName = firstName;
+		LastName = lastName;
+		PhoneNumber = phoneNumber;
+		EmailAddress = emailAddress;
+	}
 
-    public Customer(UserId userId, EmailAddress emailAddress)
-    {
-        CustomerId = new CustomerId(Guid.NewGuid());
-        UserId = userId;
-        EmailAddress = emailAddress;
-    }
+	public Customer(UserId userId, EmailAddress emailAddress)
+	{
+		CustomerId = new CustomerId(Guid.NewGuid());
+		UserId = userId;
+		EmailAddress = emailAddress;
+	}
 
-    internal void UpdateCustomer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
-    {
-        FirstName = firstName;
-        LastName = lastName;
-        PhoneNumber = phoneNumber;
-    }
+	internal void UpdateCustomer(FirstName firstName, LastName lastName, PhoneNumber phoneNumber)
+	{
+		FirstName = firstName;
+		LastName = lastName;
+		PhoneNumber = phoneNumber;
+	}
 }

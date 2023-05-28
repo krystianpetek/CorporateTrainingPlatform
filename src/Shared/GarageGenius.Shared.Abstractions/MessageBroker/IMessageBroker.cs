@@ -4,5 +4,5 @@ namespace GarageGenius.Shared.Abstractions.MessageBroker;
 
 public interface IMessageBroker
 {
-    Task PublishAsync(IEvent @event, CancellationToken cancellationToken = default);
+	Task PublishAsync(IEvent @event, CancellationToken cancellationToken = default);
 }

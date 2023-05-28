@@ -8,40 +8,40 @@ using GarageGenius.Shared.Abstractions.Services;
 namespace GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 internal class AddReservationCommandHandler : ICommandHandler<AddReservationCommand>
 {
-    private readonly Serilog.ILogger _logger;
-    private readonly IMessageBroker _messageBroker;
-    private readonly IReservationDomainService _reservationDomainService;
-    private readonly ISystemDateService _systemDateService;
+	private readonly Serilog.ILogger _logger;
+	private readonly IMessageBroker _messageBroker;
+	private readonly IReservationDomainService _reservationDomainService;
+	private readonly ISystemDateService _systemDateService;
 
-    public AddReservationCommandHandler(
-        Serilog.ILogger logger,
-        IMessageBroker messageBroker,
-        IReservationDomainService reservationDomainService,
-        ISystemDateService systemDateService)
-    {
-        _logger = logger;
-        _messageBroker = messageBroker;
-        _reservationDomainService = reservationDomainService;
-        _systemDateService = systemDateService;
-    }
+	public AddReservationCommandHandler(
+		Serilog.ILogger logger,
+		IMessageBroker messageBroker,
+		IReservationDomainService reservationDomainService,
+		ISystemDateService systemDateService)
+	{
+		_logger = logger;
+		_messageBroker = messageBroker;
+		_reservationDomainService = reservationDomainService;
+		_systemDateService = systemDateService;
+	}
 
-    public async Task HandleCommandAsync(AddReservationCommand command, CancellationToken cancellationToken = default)
-    {
-        Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.ReservationNote, _systemDateService.GetCurrentDate());
-        await _reservationDomainService.AddReservation(reservation, cancellationToken);
+	public async Task HandleCommandAsync(AddReservationCommand command, CancellationToken cancellationToken = default)
+	{
+		Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.ReservationNote, _systemDateService.GetCurrentDate());
+		await _reservationDomainService.AddReservation(reservation, cancellationToken);
 
-        _logger.Information(
-            messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new reservation with ID: {ReservationId}",
-            nameof(AddReservationCommand),
-            nameof(Reservations),
-            reservation.ReservationId);
+		_logger.Information(
+			messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new reservation with ID: {ReservationId}",
+			nameof(AddReservationCommand),
+			nameof(Reservations),
+			reservation.ReservationId);
 
-        await _messageBroker.PublishAsync(new ReservationAddedEvent(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
+		await _messageBroker.PublishAsync(new ReservationAddedEvent(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
 
-        _logger.Information(
-            messageTemplate: "Event {EventName} published by {ModuleName} module, reservation with ID: {ReservationId} added",
-            nameof(ReservationAddedEvent),
-            nameof(Reservations),
-            reservation.ReservationId);
-    }
+		_logger.Information(
+			messageTemplate: "Event {EventName} published by {ModuleName} module, reservation with ID: {ReservationId} added",
+			nameof(ReservationAddedEvent),
+			nameof(Reservations),
+			reservation.ReservationId);
+	}
 }

@@ -5,9 +5,9 @@ namespace GarageGenius.Modules.Reservations.Core;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddReservationsCore(this IServiceCollection services)
-    {
-        services.AddScoped<IReservationDomainService, ReservationDomainService>();
-        return services;
-    }
+	public static IServiceCollection AddReservationsCore(this IServiceCollection services)
+	{
+		services.AddScoped<IReservationDomainService, ReservationDomainService>();
+		return services;
+	}
 }

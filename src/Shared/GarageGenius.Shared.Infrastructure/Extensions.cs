@@ -18,33 +18,33 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure;
 public static class Extensions
 {
-    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies)
-    {
-        services.AddSharedAuthentication(assemblies, configuration);
-        services.AddSharedAuthorization();
-        services.AddSharedSwagger();
-        services.AddSharedHealthCheck();
-        services.AddSharedCors();
+	public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies)
+	{
+		services.AddSharedAuthentication(assemblies, configuration);
+		services.AddSharedAuthorization();
+		services.AddSharedSwagger();
+		services.AddSharedHealthCheck();
+		services.AddSharedCors();
 
-        services.AddSharedEventHandlers(assemblies);
-        services.AddSharedCommandHandlers(assemblies);
-        services.AddSharedQueryHandlers(assemblies);
-        services.AddSharedInMemoryDispatcher();
-        services.AddSharedMessageBroker();
-        services.AddSharedSignalR();
+		services.AddSharedEventHandlers(assemblies);
+		services.AddSharedCommandHandlers(assemblies);
+		services.AddSharedQueryHandlers(assemblies);
+		services.AddSharedInMemoryDispatcher();
+		services.AddSharedMessageBroker();
+		services.AddSharedSignalR();
 
-        services.AddSharedSystemDate();
-        services.AddSharedCurrentUser();
-        services.AddHostedService<DbContextWorker>();
-        return services;
-    }
+		services.AddSharedSystemDate();
+		services.AddSharedCurrentUser();
+		services.AddHostedService<DbContextWorker>();
+		return services;
+	}
 
-    public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
-    {
-        app.UseSharedAuthentication();
-        app.UseSharedAuthorization();
-        app.UseSharedSwagger();
-        app.UseSharedCors();
-        return app;
-    }
+	public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
+	{
+		app.UseSharedAuthentication();
+		app.UseSharedAuthorization();
+		app.UseSharedSwagger();
+		app.UseSharedCors();
+		return app;
+	}
 }

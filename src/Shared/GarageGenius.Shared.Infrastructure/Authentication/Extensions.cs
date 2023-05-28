@@ -14,54 +14,54 @@ using System.Text;
 namespace GarageGenius.Shared.Infrastructure.Authentication;
 public static class Extensions
 {
-    public static IServiceCollection AddSharedAuthentication(this IServiceCollection services, IList<Assembly> assemblies, IConfiguration configuration)
-    {
-        services.AddOptions<JsonWebTokenOptions>()
-            .BindConfiguration(JsonWebTokenOptions.SectionName)
-            .Validate(JsonWebTokenOptions.ValidationRules)
-            .ValidateOnStart();
+	public static IServiceCollection AddSharedAuthentication(this IServiceCollection services, IList<Assembly> assemblies, IConfiguration configuration)
+	{
+		services.AddOptions<JsonWebTokenOptions>()
+			.BindConfiguration(JsonWebTokenOptions.SectionName)
+			.Validate(JsonWebTokenOptions.ValidationRules)
+			.ValidateOnStart();
 
-        services.AddAuthentication(authenticationOptions =>
-        {
-            authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            authenticationOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            authenticationOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(jwtBearerOptions =>
-        {
-            ServiceProvider serviceProvider = services.BuildServiceProvider();
-            JsonWebTokenOptions jsonWebTokenOptions = serviceProvider.GetRequiredService<IOptions<JsonWebTokenOptions>>().Value;
+		services.AddAuthentication(authenticationOptions =>
+		{
+			authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+			authenticationOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			authenticationOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+		})
+		.AddJwtBearer(jwtBearerOptions =>
+		{
+			ServiceProvider serviceProvider = services.BuildServiceProvider();
+			JsonWebTokenOptions jsonWebTokenOptions = serviceProvider.GetRequiredService<IOptions<JsonWebTokenOptions>>().Value;
 
-            jwtBearerOptions.RequireHttpsMetadata = true;
-            jwtBearerOptions.SaveToken = true;
-            jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidIssuer = jsonWebTokenOptions.Issuer,
-                ValidateIssuer = jsonWebTokenOptions.ValidateIssuer,
+			jwtBearerOptions.RequireHttpsMetadata = true;
+			jwtBearerOptions.SaveToken = true;
+			jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+			{
+				ValidIssuer = jsonWebTokenOptions.Issuer,
+				ValidateIssuer = jsonWebTokenOptions.ValidateIssuer,
 
-                RequireSignedTokens = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
-                ValidateIssuerSigningKey = jsonWebTokenOptions.ValidateIssuerSigningKey,
+				RequireSignedTokens = true,
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokenOptions.IssuerSigningKey)),
+				ValidateIssuerSigningKey = jsonWebTokenOptions.ValidateIssuerSigningKey,
 
-                RequireAudience = true,
-                ValidAudience = jsonWebTokenOptions.Audience,
-                ValidateAudience = jsonWebTokenOptions.ValidateAudience,
+				RequireAudience = true,
+				ValidAudience = jsonWebTokenOptions.Audience,
+				ValidateAudience = jsonWebTokenOptions.ValidateAudience,
 
-                RequireExpirationTime = true,
-                ClockSkew = TimeSpan.Zero,
-                ValidateLifetime = jsonWebTokenOptions.ValidateLifetime,
-            };
-        });
-        services.AddPasswordManager();
-        services.AddScoped<IJsonWebTokenService, JsonWebTokenService>(); // token should be generated once per request
-        services.AddSingleton<IJsonWebTokenStorage, JsonWebTokenStorage>();
-        services.AddHttpContextAccessor();
-        return services;
-    }
+				RequireExpirationTime = true,
+				ClockSkew = TimeSpan.Zero,
+				ValidateLifetime = jsonWebTokenOptions.ValidateLifetime,
+			};
+		});
+		services.AddPasswordManager();
+		services.AddScoped<IJsonWebTokenService, JsonWebTokenService>(); // token should be generated once per request
+		services.AddSingleton<IJsonWebTokenStorage, JsonWebTokenStorage>();
+		services.AddHttpContextAccessor();
+		return services;
+	}
 
-    public static IApplicationBuilder UseSharedAuthentication(this IApplicationBuilder app)
-    {
-        app.UseAuthentication();
-        return app;
-    }
+	public static IApplicationBuilder UseSharedAuthentication(this IApplicationBuilder app)
+	{
+		app.UseAuthentication();
+		return app;
+	}
 }

@@ -10,11 +10,11 @@ namespace GarageGenius.Modules.Vehicles.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddVehiclesInfrastructure(this IServiceCollection services)
-    {
-        services.AddMsSqlServerDbContext<VehiclesDbContext>();
-        services.AddScoped<IVehicleRepository, VehicleRepository>();
-        services.AddScoped<IVehicleQueryStorage, VehicleQueryStorage>();
-        return services;
-    }
+	public static IServiceCollection AddVehiclesInfrastructure(this IServiceCollection services)
+	{
+		services.AddMsSqlServerDbContext<VehiclesDbContext>();
+		services.AddScoped<IVehicleRepository, VehicleRepository>();
+		services.AddScoped<IVehicleQueryStorage, VehicleQueryStorage>();
+		return services;
+	}
 }
