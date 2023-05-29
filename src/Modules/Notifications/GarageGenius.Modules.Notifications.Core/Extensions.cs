@@ -1,4 +1,5 @@
-﻿using GarageGenius.Shared.Infrastructure.SignalR;
+﻿using GarageGenius.Modules.Notifications.Core.Services;
+using GarageGenius.Shared.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +9,7 @@ internal static class Extensions
 {
 	public static IServiceCollection AddNotificationsCore(this IServiceCollection services)
 	{
+		services.AddScoped<IEmailSenderService, EmailSenderService>();
 		return services;
 	}
 
