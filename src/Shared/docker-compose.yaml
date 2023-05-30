@@ -5,4 +5,4 @@ services:
     environment:
       ACCEPT_EULA: Y
     ports:
-      - 25421:5341
+      - 25421:80

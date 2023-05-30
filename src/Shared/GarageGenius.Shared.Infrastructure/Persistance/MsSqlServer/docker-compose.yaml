@@ -6,4 +6,4 @@ services:
         ACCEPT_EULA: 'Y'
         SA_PASSWORD: 'NotAll0wedForPublic'
     ports:
-    - 8725:1433
+    - 25411:1433
