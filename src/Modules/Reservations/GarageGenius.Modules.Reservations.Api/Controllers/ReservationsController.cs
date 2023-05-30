@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
 using GarageGenius.Modules.Reservations.Application.Commands.UpdateReservation;
+using GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
@@ -63,5 +64,14 @@ public class ReservationsController : BaseController
 	{
 		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _dispatcher.DispatchPagedQueryAsync(getCustomerReservationsQuery);
 		return Ok(getCustomerReservationsQueryDto);
+	}
+
+	[HttpGet("not-completed")]
+	[Authorize]
+	[SwaggerOperation("Get current not completed reservations")]
+	public async Task<ActionResult> GetCurrentNotCompletedReservationsAsync([FromQuery] GetCurrentNotCompletedReservationsQuery getCurrentNotCompletedReservationsQuery)
+	{
+		GetCurrentNotCompletedReservationsQueryDto getCurrentNotCompletedReservationsQueryDto = await _dispatcher.DispatchPagedQueryAsync(getCurrentNotCompletedReservationsQuery);
+		return Ok(getCurrentNotCompletedReservationsQueryDto); 
 	}
 }

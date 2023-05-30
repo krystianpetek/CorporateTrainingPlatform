@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
+﻿using GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;
+using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 
@@ -8,4 +9,5 @@ public interface IReservationQueryStorage
 	public Task<GetReservationQueryDto?> GetReservationAsync(Guid reservationId, CancellationToken cancellationToken = default);
 	public Task<GetReservationHistoryQueryDtos> GetReservationHistoryAsync(Guid reservationId, CancellationToken cancellationToken = default);
 	public Task<GetCustomerReservationsQueryDto> GetCustomerReservationsAsync(GetCustomerReservationsQuery getCustomerReservationsQuery, CancellationToken cancellationToken = default);
+	public Task<GetCurrentNotCompletedReservationsQueryDto> GetCurrentNotCompletedReservationsAsync(GetCurrentNotCompletedReservationsQuery getCurrentNotCompletedReservationsQuery, CancellationToken cancellationToken);
 }
