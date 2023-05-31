@@ -1,4 +1,4 @@
-﻿using GarageGenius.Modules.Reservations.Application.Events;
+﻿using GarageGenius.Modules.Reservations.Application.Events.ReservationAdded;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Services;
 using GarageGenius.Shared.Abstractions.Commands;

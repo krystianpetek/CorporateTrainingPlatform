@@ -30,11 +30,7 @@ internal class ReservationDomainService : IReservationDomainService
 			messageTemplate: "Reservation with ID: {ReservationId} added",
 			reservation.ReservationId);
 
-		ReservationHistory reservationHistory = new ReservationHistory(reservation.ReservationId, ReservationState.Pending, reservation.ReservationNote.Value);
-		await _reservationHistoryRepository.AddReservationHistoryAsync(reservationHistory, cancellationToken);
-		_logger.Information(
-			messageTemplate: "Reservation history with ID: {ReservationHistoryId} added",
-			reservationHistory.ReservationHistoryId);
+		await AddReservationHistory(reservation.ReservationId, ReservationState.Pending, reservation.ReservationNote.Value, cancellationToken);
 	}
 
 	public async Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, CancellationToken cancellationToken = default)
@@ -46,10 +42,30 @@ internal class ReservationDomainService : IReservationDomainService
 			messageTemplate: "Reservation with ID: {ReservationId} updated",
 			reservation.ReservationId);
 
-		ReservationHistory reservationHistory = new ReservationHistory(reservation.ReservationId, reservationState, comment);
-		await _reservationHistoryRepository.AddReservationHistoryAsync(reservationHistory, cancellationToken);
+		await AddReservationHistory(reservation.ReservationId, reservationState, comment, cancellationToken);
+	}
+
+	public async Task CompleteReservation(Reservation reservation, string ReservationResultNote, CancellationToken cancellationToken = default)
+	{
+		reservation.ChangeState(ReservationState.Completed);
+		await _reservationRepository.UpdateReservationAsync(reservation, cancellationToken);
+
 		_logger.Information(
-			messageTemplate: "Reservation history with ID: {ReservationHistoryId} added",
-			reservationHistory.ReservationHistoryId);
+			messageTemplate: "Reservation with ID: {ReservationId} completed",
+			reservation.ReservationId);
+
+		await AddReservationHistory(reservation.ReservationId, ReservationState.Completed, ReservationResultNote, cancellationToken);
+		// TODO change comment
+	}
+
+	private async Task AddReservationHistory(Guid reservationId, string reservationState, string reservationComment, CancellationToken cancellationToken = default)
+	{
+		ReservationHistory reservationHistory = new ReservationHistory(reservationId, reservationState, reservationComment);
+		await _reservationHistoryRepository.AddReservationHistoryAsync(reservationHistory, cancellationToken);
+
+		_logger.Information(
+			messageTemplate: "Reservation history with ID: {ReservationHistoryId} added for reservation {ReservationId}",
+			reservationHistory.ReservationHistoryId,
+			reservationId);
 	}
 }

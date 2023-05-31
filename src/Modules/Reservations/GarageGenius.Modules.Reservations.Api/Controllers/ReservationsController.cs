@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Reservations.Application.Commands.AddReservation;
+using GarageGenius.Modules.Reservations.Application.Commands.CompleteReservation;
 using GarageGenius.Modules.Reservations.Application.Commands.UpdateReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
@@ -21,7 +22,7 @@ public class ReservationsController : BaseController
 
 	[HttpPut]
 	[Authorize]
-	[SwaggerOperation("Update reservation")]
+	[SwaggerOperation(Summary = "Update reservation", Description = "Allow customer to update reservation when its state is other than ...?")]
 	public async Task<ActionResult> UpdateReservation(UpdateReservationCommand command)
 	{
 		await _dispatcher.DispatchCommandAsync(command);
@@ -73,5 +74,14 @@ public class ReservationsController : BaseController
 	{
 		GetCurrentNotCompletedReservationsQueryDto getCurrentNotCompletedReservationsQueryDto = await _dispatcher.DispatchPagedQueryAsync(getCurrentNotCompletedReservationsQuery);
 		return Ok(getCurrentNotCompletedReservationsQueryDto); 
+	}
+
+	[HttpPost("complete")]
+	[Authorize]
+	[SwaggerOperation("Complete reservation", Description = "Mark reservation as completed, when all works with vehicle is done.")]
+	public async Task<ActionResult> CompleteReservationAsync(CompleteReservationCommand completeReservationCommand)
+	{
+		await _dispatcher.DispatchCommandAsync(completeReservationCommand);
+		return Ok();
 	}
 }

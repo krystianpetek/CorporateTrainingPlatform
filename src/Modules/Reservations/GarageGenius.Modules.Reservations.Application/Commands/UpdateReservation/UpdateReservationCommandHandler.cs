@@ -1,4 +1,4 @@
-﻿using GarageGenius.Modules.Reservations.Application.Events;
+﻿using GarageGenius.Modules.Reservations.Application.Events.ReservationUpdated;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Exceptions;
 using GarageGenius.Modules.Reservations.Core.Reservations.Repositories;
