@@ -73,15 +73,18 @@ public class ReservationsController : BaseController
 	public async Task<ActionResult> GetCurrentNotCompletedReservationsAsync([FromQuery] GetCurrentNotCompletedReservationsQuery getCurrentNotCompletedReservationsQuery)
 	{
 		GetCurrentNotCompletedReservationsQueryDto getCurrentNotCompletedReservationsQueryDto = await _dispatcher.DispatchPagedQueryAsync(getCurrentNotCompletedReservationsQuery);
-		return Ok(getCurrentNotCompletedReservationsQueryDto); 
+		return Ok(getCurrentNotCompletedReservationsQueryDto);
 	}
 
-	[HttpPost("complete")]
+	[HttpPost("{reservationId:guid}/complete")]
 	[Authorize]
-	[SwaggerOperation("Complete reservation", Description = "Mark reservation as completed, when all works with vehicle is done.")]
-	public async Task<ActionResult> CompleteReservationAsync(CompleteReservationCommand completeReservationCommand)
+	[SwaggerOperation(Summary = "Complete reservation", Description = "Mark reservation as completed, when all works with vehicle is done.")]
+	public async Task<ActionResult> CompleteReservationAsync(Guid reservationId, CompleteReservationCommand completeReservationCommand)
 	{
+		completeReservationCommand.ReservationId = reservationId;
 		await _dispatcher.DispatchCommandAsync(completeReservationCommand);
 		return Ok();
 	}
+
+	// TODO - add description for all controller actions
 }
