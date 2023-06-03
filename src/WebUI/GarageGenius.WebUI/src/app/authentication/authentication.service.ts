@@ -10,7 +10,7 @@ import {AuthenticationResponseModel} from "./sign-in/models/authentication-respo
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthenticationService implements IAuthenticationService {
   private _signUpPath: string = environment.signUpUrl;
   private _signInPath: string = environment.signInUrl;
   private basePath: string = environment.baseUrl;
@@ -25,4 +25,14 @@ export class AuthenticationService {
   public signInUser(signInModel: SignInModel): Observable<AuthenticationResponseModel> {
     return this._httpClient.post<AuthenticationResponseModel>(this.basePath + this._signInPath, signInModel);
   }
+
+  public setAuthenticationToken(accessToken: string): void {
+    localStorage.setItem('access-token', accessToken);
+  }
+}
+
+export interface IAuthenticationService {
+  signUpUser(signUpModel: SignUpModel): Observable<void>;
+  signInUser(signInModel: SignInModel): Observable<AuthenticationResponseModel>;
+  setAuthenticationToken(token: string): void;
 }

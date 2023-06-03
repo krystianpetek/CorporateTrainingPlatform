@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../authentication.service";
 import {SignUpModel} from "../sign-up/models/sign-up.model";
 import {catchError, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SignInModel} from "./models/sign-in.model";
+import {AuthenticationResponseModel} from "./models/authentication-response.model";
 
 @Component({
   selector: 'app-sign-in',
@@ -49,8 +50,8 @@ export class SignInComponent {
         return throwError(errorMessage);
       })
     ).subscribe(
-      (response) => {
-        console.log(response);
+      (response: AuthenticationResponseModel): void => {
+        this._authenticationService.setAuthenticationToken(response.accessToken);
       }
     );
   }
