@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## MIGRATION STEPS from 15 to 16
+ng update @angular/core @angular/cli @angular/material @angular/cdk --force
+ng update @angular-eslint/eslint-plugin  --force
