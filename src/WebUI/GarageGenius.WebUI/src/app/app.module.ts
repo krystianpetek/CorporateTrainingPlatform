@@ -1,12 +1,13 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { HealthCheckComponent } from './health-check/health-check.component';
-import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import {AppComponent} from './app.component';
+import {HealthCheckComponent} from './health-check/health-check.component';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {AuthenticationModule} from "./authentication/authentication.module";
 
 @NgModule({
   declarations: [AppComponent, HealthCheckComponent],
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    AuthenticationModule,
   ],
   providers: [
     // TODO
@@ -31,4 +33,5 @@ import { MatButtonModule } from '@angular/material/button';
   bootstrap: [AppComponent],
   exports: [MatButtonModule],
 })
-export class AppModule { }
+export class AppModule {
+}
