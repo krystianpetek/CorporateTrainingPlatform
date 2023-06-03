@@ -5,6 +5,6 @@ export const environment = {
   vehiclesApiUrl: `vehicles-module/`,
   customersApiUrl: `customers-module/`,
 
-  signUpUrl: `users-module/users/sign-up/`,
-  signInUrl: `users-module/users/sign-in/`,
+  signUpUrl: `users-module/users/sign-up`,
+  signInUrl: `users-module/users/sign-in`,
 };

@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignUpModel} from "./models/sign-up.model";
+import {AuthenticationService} from "../authentication.service";
+import {catchError, throwError} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,24 +20,41 @@ export class SignUpComponent {
     // TODO - form validation
     email: [``, Validators.required],
     password: [``, Validators.required],
-    role: [`Client`, Validators.required],
+    role: [`Customer`, Validators.required],
   });
 
   public get emailFormField(): FormControl<string | null> {
     return this.signUpForm.controls.email;
   }
+
   public get passwordFormField(): FormControl<string | null> {
     return this.signUpForm.controls.password;
     // TODO - its safety?
   }
+
   public get roleFormField(): FormControl<string | null> {
     return this.signUpForm.controls.role;
   }
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private _authenticationService: AuthenticationService) {
   }
 
   onSubmitForm(): void {
-    console.log(`SUBMIT signup`);
+    const signUpModel: SignUpModel = this.signUpForm.value as SignUpModel;
+    this._authenticationService.signUp(signUpModel).pipe(
+      catchError((err: HttpErrorResponse) => {
+        let errorMessage = "";
+        console.log(err);
+        if (err.error instanceof ErrorEvent) {
+          errorMessage = `An error occurred: ${err.error.message}`;
+        } else {
+          errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+        }
+        console.error(err.error);
+        return throwError(errorMessage);
+      })
+    ).subscribe(((a) => {
+      console.log(a.email)
+    }));
   }
 }
