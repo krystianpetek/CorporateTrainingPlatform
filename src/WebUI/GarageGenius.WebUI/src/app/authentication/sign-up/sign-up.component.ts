@@ -18,8 +18,8 @@ export class SignUpComponent {
   }>
     = this._formBuilder.group({
     // TODO - form validation
-    email: [``, Validators.required],
-    password: [``, Validators.required],
+    email: [`krystianpetek2@gmail.com`, Validators.required],
+    password: [`Password!23`, Validators.required],
     role: [`Customer`, Validators.required],
   });
 
@@ -41,7 +41,7 @@ export class SignUpComponent {
 
   onSubmitForm(): void {
     const signUpModel: SignUpModel = this.signUpForm.value as SignUpModel;
-    this._authenticationService.signUp(signUpModel).pipe(
+    this._authenticationService.signUpUser(signUpModel).pipe(
       catchError((err: HttpErrorResponse) => {
         let errorMessage = "";
         console.log(err);
@@ -53,8 +53,6 @@ export class SignUpComponent {
         console.error(err.error);
         return throwError(errorMessage);
       })
-    ).subscribe(((a) => {
-      console.log(a.email)
-    }));
+    ).subscribe();
   }
 }

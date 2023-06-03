@@ -3,6 +3,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {SignUpModel} from "./sign-up/models/sign-up.model";
+import {SignInModel} from "./sign-in/models/sign-in.model";
+import {AuthenticationResponseModel} from "./sign-in/models/authentication-response.model";
 
 
 @Injectable({
@@ -16,7 +18,11 @@ export class AuthenticationService {
   private constructor(private _httpClient: HttpClient) {
   }
 
-  public signUp(payload: SignUpModel): Observable<SignUpModel> {
-    return this._httpClient.post<SignUpModel>(this.basePath + this._signUpPath, payload);
+  public signUpUser(signUpModel: SignUpModel): Observable<void> {
+    return this._httpClient.post<void>(this.basePath + this._signUpPath, signUpModel);
+  }
+
+  public signInUser(signInModel: SignInModel): Observable<AuthenticationResponseModel> {
+    return this._httpClient.post<AuthenticationResponseModel>(this.basePath + this._signInPath, signInModel);
   }
 }

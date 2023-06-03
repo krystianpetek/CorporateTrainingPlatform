@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <form [formGroup]="this.signInForm" (submit)="onSubmitForm()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input formControlName="email" id="email" type="email" class="form-control">
+          <span *ngIf="this.emailFormField.touched && this.emailFormField.invalid">
+            The email is not valid
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input formControlName="password" id="password" type="password" class="form-control">
+          <span *ngIf="this.passwordFormField.touched && this.passwordFormField.invalid">
+            The password is not valid
+          </span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
