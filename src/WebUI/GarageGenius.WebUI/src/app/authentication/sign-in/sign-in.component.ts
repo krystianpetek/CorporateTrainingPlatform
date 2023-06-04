@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../service/authentication.service";
-import {SignUpModel} from "../sign-up/models/sign-up.model";
 import {catchError, throwError} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SignInModel} from "./models/sign-in.model";
@@ -52,6 +51,14 @@ export class SignInComponent {
     ).subscribe(
       (response: AuthenticationResponseModel): void => {
         this._authenticationService.setAuthenticationToken(response.accessToken);
+      }
+    );
+  }
+
+  getMe(): void {
+    this._authenticationService.showMe().subscribe(
+      (response: any) => {
+        console.log(response);
       }
     );
   }

@@ -29,10 +29,21 @@ export class AuthenticationService implements IAuthenticationService {
   public setAuthenticationToken(accessToken: string): void {
     localStorage.setItem('access-token', accessToken);
   }
+
+  public getAuthenticationToken(): string {
+    // TODO - change store jwt into cookie instead localStorage?
+    return localStorage.getItem('access-token') as string;
+  }
+
+  public showMe(): Observable<unknown> {
+    return this._httpClient.get<AuthenticationResponseModel>(this.basePath + `users-module/users/me`);
+  }
 }
 
 export interface IAuthenticationService {
   signUpUser(signUpModel: SignUpModel): Observable<void>;
   signInUser(signInModel: SignInModel): Observable<AuthenticationResponseModel>;
+  showMe(): Observable<unknown>;
   setAuthenticationToken(token: string): void;
+  getAuthenticationToken(): string;
 }

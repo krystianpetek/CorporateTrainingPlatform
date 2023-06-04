@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -8,6 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {AuthenticationModule} from "./authentication/authentication.module";
+import {JsonWebTokenInterceptor} from "./authentication/service/json-web-token.interceptor";
 
 @NgModule({
   declarations: [AppComponent, HealthCheckComponent],
@@ -20,6 +21,7 @@ import {AuthenticationModule} from "./authentication/authentication.module";
     AuthenticationModule,
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JsonWebTokenInterceptor, multi: true,},
     // TODO
     //{
     //  provide: APP_INITIALIZER,
