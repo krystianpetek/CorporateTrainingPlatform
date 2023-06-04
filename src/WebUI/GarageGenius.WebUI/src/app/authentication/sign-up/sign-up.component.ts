@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignUpModel} from "./models/sign-up.model";
-import {AuthenticationService} from "../authentication.service";
+import {AuthenticationService} from "../service/authentication.service";
 import {catchError, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 

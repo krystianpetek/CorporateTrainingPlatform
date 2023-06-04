@@ -2,9 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {SignUpModel} from "./sign-up/models/sign-up.model";
-import {SignInModel} from "./sign-in/models/sign-in.model";
-import {AuthenticationResponseModel} from "./sign-in/models/authentication-response.model";
+import {SignUpModel} from "../sign-up/models/sign-up.model";
+import {SignInModel} from "../sign-in/models/sign-in.model";
+import {AuthenticationResponseModel} from "../sign-in/models/authentication-response.model";
 
 
 @Injectable({
