@@ -5,7 +5,7 @@ import {
   HttpErrorResponse,
   HttpStatusCode,
 } from '@angular/common/http';
-import { HealthCheck } from './health-check/health-check.component';
+import { HealthCheck } from './health-check.component';
 
 export interface IHealthCheckService {
   healthCheckUsers(): Observable<HealthCheck>;

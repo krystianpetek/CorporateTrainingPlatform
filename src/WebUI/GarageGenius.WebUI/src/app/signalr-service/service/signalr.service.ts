@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { NotificationsHubModel } from './notifications/notifications-hub-model';
+import { NotificationsHubModel } from '../notifications/notifications-hub-model';
 import * as signalR from '@microsoft/signalr';
 import { Observable, of, retry, Subject, timeout } from 'rxjs';
+
+// TODO add signalr module ?? and  signalr routing ??
 
 @Injectable({
   providedIn: 'root',
