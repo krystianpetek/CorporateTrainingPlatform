@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using GarageGenius.Shared.Abstractions.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace GarageGenius.WebApi.Middlewares.ErrorHandling;
@@ -37,6 +38,9 @@ public class GlobalErrorHandlingMiddleware : IMiddleware
 			//case NotFoundException:
 			//    statusCode = HttpStatusCode.NotFound;
 			//    break;
+			case GarageGeniusException garageGeniusException:
+				statusCode = garageGeniusException.StatusCode;
+				break;
 			case NotImplementedException:
 				statusCode = HttpStatusCode.NotImplemented;
 				break;
