@@ -5,8 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthenticationModule } from "./authentication/authentication.module";
-import { JsonWebTokenInterceptor } from "./authentication/service/json-web-token.interceptor";
+import { AuthenticationModule } from './authentication/authentication.module';
+import { JsonWebTokenInterceptor } from './authentication/service/json-web-token.interceptor';
 import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
@@ -21,7 +21,11 @@ import { AppMaterialModule } from './app-material.module';
   ],
   exports: [AppMaterialModule],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JsonWebTokenInterceptor, multi: true, },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JsonWebTokenInterceptor,
+      multi: true,
+    },
     //{
     //  //TODO
     //  provide: APP_INITIALIZER,
@@ -34,5 +38,4 @@ import { AppMaterialModule } from './app-material.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
