@@ -5,6 +5,7 @@ import { SignUpFormModel } from './models/sign-up-form.model';
 import {
   AuthenticationService,
   AuthenticationServiceBase,
+  IAuthenticationService,
 } from '../service/authentication.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,12 +19,12 @@ import { SamePasswordValidator } from './validators/confirm-password.validator';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  private readonly _authenticationService: AuthenticationServiceBase;
+  private readonly _authenticationService: IAuthenticationService;
   private readonly _formBuilder: FormBuilder;
 
   constructor(
     formBuilder: FormBuilder,
-    authenticationService: AuthenticationService
+    authenticationService: AuthenticationServiceBase
   ) {
     this._authenticationService = authenticationService;
     this._formBuilder = formBuilder;
