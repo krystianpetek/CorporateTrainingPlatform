@@ -6,8 +6,8 @@ import { SignUpModel } from '../sign-up/models/sign-up.model';
 import { SignInModel } from '../sign-in/models/sign-in.model';
 import { AuthenticationResponseModel } from '../sign-in/models/authentication-response.model';
 import {
+  IStorageService,
   StorageService,
-  StorageServiceBase,
 } from 'src/app/storage/storage.service';
 
 /**
@@ -48,7 +48,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
   private _signInPath: string = environment.signInUrl;
   private _signOutPath: string = environment.signOutUrl;
 
-  private _storageService: StorageServiceBase;
+  private _storageService: IStorageService;
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -82,13 +82,12 @@ export class AuthenticationService extends AuthenticationServiceBase {
   }
 
   public override setAuthenticationToken(accessToken: string): void {
-    localStorage.setItem('access-token', accessToken);
+    this._storageService.setKey<string>(StorageService.JWT_KEY, accessToken);
   }
 
   public override getAuthenticationToken(): string {
     // TODO - change store jwt into cookie instead localStorage?
-
-    return localStorage.getItem('access-token') as string;
+    return this._storageService.getKey<string>(StorageService.JWT_KEY);
   }
 
   public override showMe(): Observable<unknown> {
