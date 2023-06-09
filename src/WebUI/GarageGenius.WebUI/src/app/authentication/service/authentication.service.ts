@@ -18,8 +18,10 @@ export interface IAuthenticationService {
   signInUser(signInModel: SignInModel): Observable<AuthenticationResponseModel>;
   signOutUser(): Observable<void>;
   showMe(): Observable<unknown>;
-  setAuthenticationToken(token: string): void;
+  setAuthenticationToken(jwt: string): void;
   getAuthenticationToken(): string;
+  setUserInfo(userInfo: unknown): void;
+  getUserInfo(): unknown;
 }
 /**
  *  Abstract class for authentication service
@@ -34,8 +36,11 @@ export abstract class AuthenticationServiceBase
   ): Observable<AuthenticationResponseModel>;
   abstract signOutUser(): Observable<void>;
   abstract showMe(): Observable<unknown>;
-  abstract setAuthenticationToken(token: string): void;
+  abstract setAuthenticationToken(jwt: string): void;
   abstract getAuthenticationToken(): string;
+  // TODO - change to user service
+  abstract setUserInfo(userInfo: unknown): void;
+  abstract getUserInfo(): unknown;
 }
 
 @Injectable({
@@ -81,8 +86,8 @@ export class AuthenticationService extends AuthenticationServiceBase {
     return this._httpClient.post<void>(this._signOutPath, {}, this.httpOptions);
   }
 
-  public override setAuthenticationToken(accessToken: string): void {
-    this._storageService.setKey<string>(StorageService.JWT_KEY, accessToken);
+  public override setAuthenticationToken(jwt: string): void {
+    this._storageService.setKey<string>(StorageService.JWT_KEY, jwt);
   }
 
   public override getAuthenticationToken(): string {
@@ -94,5 +99,12 @@ export class AuthenticationService extends AuthenticationServiceBase {
     return this._httpClient.get<AuthenticationResponseModel>(
       this.basePath + `users-module/users/me`
     );
+  }
+
+  override setUserInfo(userInfo: unknown): void {
+    this._storageService.setKey<unknown>(StorageService.USER_KEY, userInfo);
+  }
+  override getUserInfo(): unknown {
+    return this._storageService.getKey<string>(StorageService.USER_KEY);
   }
 }

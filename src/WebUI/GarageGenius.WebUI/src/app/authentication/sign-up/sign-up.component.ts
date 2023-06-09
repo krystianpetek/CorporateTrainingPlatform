@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpModel } from './models/sign-up.model';
 import { SignUpFormModel } from './models/sign-up-form.model';
 import {
-  AuthenticationService,
   AuthenticationServiceBase,
   IAuthenticationService,
 } from '../service/authentication.service';

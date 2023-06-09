@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 400px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-title {
+  padding: 1rem;
+  color: black;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-validation-message {
+  color: red;
+  display: block;
+  max-width: 300px;
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.error-block {
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  color: red;
+  background-color: #FF000015;
+  border: 1px red solid;
+  text-align: center;
+  border-radius: 5px;
+}
