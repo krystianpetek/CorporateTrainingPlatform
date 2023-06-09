@@ -35,8 +35,13 @@ export class SignUpComponent implements OnInit {
         email: [
           `krystianpetek2@gmail.com`,
           {
-            validators: [Validators.required, Validators.email],
-            nonNullable: true,
+            validators: [
+              Validators.required,
+              Validators.email,
+              Validators.minLength(5),
+              Validators.maxLength(60),
+            ],
+            nonNullable: false,
             asyncValidators: [],
             updateOn: `change`,
           },
@@ -47,19 +52,27 @@ export class SignUpComponent implements OnInit {
             validators: [
               Validators.required,
               Validators.minLength(8),
+              Validators.maxLength(60),
               PasswordValidator(),
             ],
-            nonNullable: true,
+            nonNullable: false,
           },
         ],
         confirmPassword: [
           `Password!23`,
-          { validators: [Validators.required], nonNullable: true },
+          {
+            validators: [Validators.required, Validators.maxLength(60)],
+            nonNullable: false,
+          },
         ],
         role: [
           `Customer`, // TODO - for hide?
           {
-            validators: [Validators.required, RoleValidator()],
+            validators: [
+              Validators.required,
+              Validators.maxLength(30),
+              RoleValidator(),
+            ],
             nonNullable: true,
           },
         ],
@@ -78,6 +91,10 @@ export class SignUpComponent implements OnInit {
   public get password(): SignUpFormModel['password'] {
     return this.signUpForm.controls.password;
     // TODO - its safety?
+  }
+
+  public get confirmPassword(): SignUpFormModel['confirmPassword'] {
+    return this.signUpForm.controls.confirmPassword;
   }
 
   public get role(): SignUpFormModel['role'] {

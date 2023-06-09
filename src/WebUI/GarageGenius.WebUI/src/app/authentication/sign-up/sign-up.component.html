@@ -7,23 +7,33 @@
           <mat-label>Email</mat-label>
           <input type="text" id="email" matInput placeholder="Email" formControlName="email" />
         </mat-form-field>
+        <div class="error-validation-message" *ngIf="this.email.touched && this.email.invalid">
+          The email is not valid
+        </div>
       </div>
+
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" id="password" matInput placeholder="Password" formControlName="password">
         </mat-form-field>
-        <span class="error-message" *ngIf="password.errors?.['passwordStrength'] && this.password.touched">
+        <span class="error-validation-message" *ngIf="this.password.touched && this.password.invalid ">
+          <!-- && password.errors?.['passwordStrength'] -->
           Your password must have lower case, upper case and numeric characters.
         </span>
       </div>
+
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Confirm password</mat-label>
           <input type="password" id="confirmPassword" matInput placeholder="Confirm password"
             formControlName="confirmPassword">
         </mat-form-field>
+        <div class="error-validation-message" *ngIf="this.confirmPassword.touched && this.confirmPassword.invalid">
+          The passwords are not the same
+        </div>
       </div>
+
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Role</mat-label>
@@ -31,11 +41,11 @@
         </mat-form-field>
       </div>
 
-      <p *ngIf="error" class="error">
+      <p *ngIf="error" class="error-block">
         {{error}}
       </p>
 
-      <div class="button">
+      <div class="button-container">
         <button type="button" (click)="signUpResetForm()" mat-button>Reset</button>
         <button type="submit" mat-raised-button color="primary">Sign up</button>
       </div>
