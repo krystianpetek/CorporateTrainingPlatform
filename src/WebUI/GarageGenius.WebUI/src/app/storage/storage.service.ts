@@ -28,9 +28,11 @@ export class StorageService extends StorageServiceBase {
 
   public override getKey<T>(key: string): T {
     const value: T | null = window.sessionStorage.getItem(key) as T;
-    return value;
+    const deserializedValue: T = JSON.parse(value as string);
+    return deserializedValue;
   }
   public override setKey<T>(key: string, value: T): void {
+    window.sessionStorage.removeItem(key);
     const serializedJson: string = JSON.stringify(value);
     window.sessionStorage.setItem(key, serializedJson);
   }
