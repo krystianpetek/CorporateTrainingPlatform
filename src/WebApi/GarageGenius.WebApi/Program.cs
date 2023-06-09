@@ -1,7 +1,9 @@
+using GarageGenius.Shared.Abstractions.Exceptions;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure;
 using GarageGenius.Shared.Infrastructure.Modules;
 using GarageGenius.WebApi.Middlewares.ErrorHandling;
+using Microsoft.AspNetCore.Diagnostics;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -29,7 +31,8 @@ public static class Program
 				.Enrich.FromLogContext(),
 				preserveStaticLogger: true);
 
-			builder.Services.AddGlobalErrorHandling();
+			builder.Services.AddGlobalErrorHandling(); // TODO - rewrite GlobalErrorHandling to ExceptionHandler with ProblemDetails
+			builder.Services.AddProblemDetails();
 			builder.Services.AddEndpointsApiExplorer();
 
 			IReadOnlyCollection<Assembly> assemblies = builder.LoadSharedAssemblies("GarageGenius.Modules.");
@@ -59,7 +62,55 @@ public static class Program
 				Log.Information($"Mapped registered services for module: {module.Name}");
 			}
 
-			app.UseGlobalErrorHandling();
+			app.UseGlobalErrorHandling();  // TODO - rewrite GlobalErrorHandling to ExceptionHandler with ProblemDetails
+			app.UseExceptionHandler(exceptionHandlerApp =>
+			{
+				exceptionHandlerApp.Run(async context =>
+				{
+					context.Response.ContentType = "application/problem+json";
+					if (context.RequestServices.GetService<IProblemDetailsService>() is { } problemDetailsService)
+					{
+						var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+						var exceptionType = exceptionHandlerFeature?.Error;
+						if (exceptionType is not null)
+						{
+							(string Title, string Detail, int StatusCode) details = exceptionType switch
+							{
+								GarageGeniusException customException =>
+								(
+									exceptionType.GetType().Name,
+									exceptionType.Message,
+									context.Response.StatusCode = (int)customException.StatusCode
+								),
+								_ =>
+								(
+									exceptionType.GetType().Name,
+									exceptionType.Message,
+									context.Response.StatusCode = StatusCodes.Status500InternalServerError
+								)
+							};
+							var problem = new ProblemDetailsContext
+							{
+								HttpContext = context,
+								ProblemDetails =
+								{
+									Title = details.Title,
+									Detail = details.Detail,
+									Status = details.StatusCode
+								}
+							};
+							if (builder.Environment.IsDevelopment())
+							{
+								problem.ProblemDetails.Extensions.Add("exception", exceptionHandlerFeature?.Error.ToString());
+							}
+
+							await problemDetailsService.WriteAsync(problem);
+						}
+					}
+				});
+			});
+			app.UseStatusCodePages();
+
 			app.UseHttpsRedirection();
 			app.MapControllers();
 			await app.RunAsync();
