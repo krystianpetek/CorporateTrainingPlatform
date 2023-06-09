@@ -7,7 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PasswordValidator } from './validators/password.validator';
 import { RoleValidator } from './validators/role.validator';
-import { match as CheckPasswordValidator } from './validators/confirm-password.validator';
+import { SamePasswordValidator } from './validators/confirm-password.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -33,7 +33,7 @@ export class SignUpComponent {
       confirmPassword: [`Password!23`, [Validators.required]],
       role: [`Customer`, [Validators.required, RoleValidator()]],
     },
-    { validators: CheckPasswordValidator('password', 'confirmPassword') }
+    { validators: SamePasswordValidator() }
   );
 
   public get email(): SignUpFormModel['email'] {
@@ -51,6 +51,11 @@ export class SignUpComponent {
 
   public error?: string | null;
 
+  public resetForm(): void {
+    this.signUpForm.reset();
+    this.signUpForm.controls.role.setValue(`Customer`);
+  }
+
   onSubmitForm(): void {
     const signUpModel: SignUpModel = this.signUpForm.value as SignUpModel;
     this.error = null;
@@ -59,14 +64,12 @@ export class SignUpComponent {
       .pipe(
         catchError((err: HttpErrorResponse) => {
           let errorMessage = '';
-          console.log(err);
           if (err.error instanceof ErrorEvent) {
             errorMessage = `An error occurred: ${err.error.message}`;
           } else {
             errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
           }
-          console.error(err.error);
-          this.error = err.error.error;
+          this.error = err.error.detail;
           return throwError(errorMessage);
         })
       )

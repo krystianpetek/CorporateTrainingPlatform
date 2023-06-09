@@ -13,6 +13,9 @@
           <mat-label>Password</mat-label>
           <input type="password" id="password" matInput placeholder="Password" formControlName="password">
         </mat-form-field>
+        <span class="error-message" *ngIf="password.errors?.['passwordStrength'] && this.password.touched">
+          Your password must have lower case, upper case and numeric characters.
+        </span>
       </div>
       <div>
         <mat-form-field appearance="outline">
@@ -33,6 +36,7 @@
       </p>
 
       <div class="button">
+        <button type="button" (click)="resetForm()" mat-button>Reset</button>
         <button type="submit" mat-raised-button color="primary">Sign up</button>
       </div>
     </form>

@@ -6,7 +6,7 @@
 
 mat-form-field {
   width: 100%;
-  min-width: 300px;
+  min-width: 400px;
 }
 
 mat-card-title,
@@ -22,12 +22,23 @@ mat-card-title {
 
 .error {
   padding: 1rem;
-  width: 300px;
+  width: 100%;
+  box-sizing: border-box;
   color: white;
   background-color: red;
 }
 
 .button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.error-message {
+  color: red;
+  display: block;
+  max-width: 300px;
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
