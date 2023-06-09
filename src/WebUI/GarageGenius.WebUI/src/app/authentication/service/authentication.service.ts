@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -34,8 +34,12 @@ export class AuthenticationService implements AuthenticationServiceBase {
   private _httpClient: HttpClient;
   private _signUpPath: string = environment.signUpUrl;
   private _signInPath: string = environment.signInUrl;
+  private _signOutPath: string = environment.signOutUrl;
   private basePath: string = environment.baseUrl;
 
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   constructor(httpClient: HttpClient) {
     this._httpClient = httpClient;
   }
@@ -43,7 +47,8 @@ export class AuthenticationService implements AuthenticationServiceBase {
   public signUpUser(signUpModel: SignUpModel): Observable<void> {
     return this._httpClient.post<void>(
       this.basePath + this._signUpPath,
-      signUpModel
+      signUpModel,
+      this.httpOptions
     );
   }
 
@@ -52,8 +57,13 @@ export class AuthenticationService implements AuthenticationServiceBase {
   ): Observable<AuthenticationResponseModel> {
     return this._httpClient.post<AuthenticationResponseModel>(
       this.basePath + this._signInPath,
-      signInModel
+      signInModel,
+      this.httpOptions
     );
+  }
+
+  public signOutUser(): Observable<void> {
+    return this._httpClient.post<void>(this._signOutPath, {}, this.httpOptions);
   }
 
   public setAuthenticationToken(accessToken: string): void {
