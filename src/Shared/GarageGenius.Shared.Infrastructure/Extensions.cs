@@ -1,4 +1,5 @@
-﻿using GarageGenius.Shared.Infrastructure.Authentication;
+﻿using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Infrastructure.Authentication;
 using GarageGenius.Shared.Infrastructure.Authorization;
 using GarageGenius.Shared.Infrastructure.Commands;
 using GarageGenius.Shared.Infrastructure.Cors;
@@ -18,10 +19,10 @@ using System.Reflection;
 namespace GarageGenius.Shared.Infrastructure;
 public static class Extensions
 {
-	public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies)
+	public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration, IList<Assembly> assemblies, IList<IModule> modules)
 	{
 		services.AddSharedAuthentication(assemblies, configuration);
-		services.AddSharedAuthorization();
+		services.AddSharedAuthorization(modules);
 		services.AddSharedSwagger();
 		services.AddSharedHealthCheck();
 		services.AddSharedCors();

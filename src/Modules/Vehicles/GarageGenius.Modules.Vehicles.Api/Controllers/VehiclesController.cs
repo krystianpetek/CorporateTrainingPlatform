@@ -20,7 +20,7 @@ public class VehiclesController : BaseController
 	}
 
 	[HttpGet("{vehicleId:guid}")]
-	[Authorize]
+	[Authorize(Policy = "vehicles")]
 	[SwaggerOperation("Get vehicle")]
 	public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
 	{

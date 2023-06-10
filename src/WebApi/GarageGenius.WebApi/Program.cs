@@ -38,7 +38,7 @@ public static class Program
 			IReadOnlyCollection<Assembly> assemblies = builder.LoadSharedAssemblies("GarageGenius.Modules.");
 			IReadOnlyCollection<IModule> modules = assemblies.LoadModules(builder.Configuration);
 
-			builder.Services.AddSharedInfrastructure(builder.Configuration, assemblies.ToList());
+			builder.Services.AddSharedInfrastructure(builder.Configuration, assemblies.ToList(), modules.ToList());
 			foreach (IModule module in modules)
 			{
 				module.Register(builder.Services);
