@@ -30,7 +30,7 @@ public class VehiclesController : BaseController
 	}
 
 	[HttpGet("{customerId:guid}/vehicles")]
-	[Authorize(Policy = "customers-r")]
+	[Authorize(Policy = "administrator")]
 	[SwaggerOperation("Get customer vehicles")]
 	public async Task<ActionResult> GetCustomerVehiclesAsync(Guid customerId)
 	{

@@ -1,29 +1,53 @@
-﻿using GarageGenius.Shared.Abstractions.Modules;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using GarageGenius.Shared.Abstractions.Modules;
+using GarageGenius.Shared.Abstractions.Authorization;
 
 namespace GarageGenius.Shared.Infrastructure.Authorization;
 public static class Extensions
 {
 	public static IServiceCollection AddSharedAuthorization(this IServiceCollection services, IList<IModule> modules)
 	{
-		services.AddAuthorization(authorization =>
+		services.AddAuthorization(authorizationOptions =>
 		{
 			foreach (var module in modules)
 			{
+				// register modules policies, all available in system
 				foreach (string policy in module.Policies)
 				{
 					string read = policy + "-r";
-					authorization.AddPolicy(read, claims => claims.RequireClaim("permissions", read));
+					authorizationOptions.AddPolicy(
+						read,
+						authorizationPolicyBuilder => authorizationPolicyBuilder.RequireClaim("permissions", read));
 
 					string write = policy + "-w";
-					authorization.AddPolicy(write, claims => claims.RequireClaim("permissions", write));
+					authorizationOptions.AddPolicy(
+						write,
+						authorizationPolicyBuilder => authorizationPolicyBuilder.RequireClaim("permissions", write));
 
 					string readWrite = policy + "-rw";
-					authorization.AddPolicy(readWrite, claims => claims.RequireClaim("permissions", readWrite));
+					authorizationOptions.AddPolicy(
+						readWrite,
+						authorizationPolicyBuilder => authorizationPolicyBuilder.RequireClaim("permissions", readWrite));
 				}
 			}
+
+			authorizationOptions.AddAdministratorRolePolicy();
+			authorizationOptions.AddManagerRolePolicy();
+			authorizationOptions.AddEmployeeRolePolicy();
+			authorizationOptions.AddCustomerRolePolicy();
+
+			// authorization.FallbackPolicy = new AuthorizationPolicyBuilder()
+			// .RequireAuthenticatedUser()
+			// .Build();
+			// TODO - fallback policy block swagger ? what to do here?
 		});
+
+		services.AddSingleton<IAuthorizationHandler, AdministratorRequirementHandler>();
+		services.AddSingleton<IAuthorizationHandler, ManagerRequirementHandler>();
+		services.AddSingleton<IAuthorizationHandler, EmployeeRequirementHandler>();
+		services.AddSingleton<IAuthorizationHandler, CustomerRequirementHandler>();
 		// TODO - change this to use the policies from storage?
 		return services;
 	}

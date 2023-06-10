@@ -5,7 +5,7 @@ namespace GarageGenius.Shared.Abstractions.Modules;
 public interface IModule
 {
 	string Name { get; }
-	abstract IEnumerable<string>? Policies { get; }
+	abstract IEnumerable<string> Policies { get; }
 	void Register(IServiceCollection services);
 	void Use(WebApplication app);
 }
