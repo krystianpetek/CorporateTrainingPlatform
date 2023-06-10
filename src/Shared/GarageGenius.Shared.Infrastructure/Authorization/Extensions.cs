@@ -13,11 +13,18 @@ public static class Extensions
 			{
 				foreach (string policy in module.Policies)
 				{
-					authorization.AddPolicy(policy, claims => claims.RequireClaim("permissions", policy));
+					string read = policy + "-r";
+					authorization.AddPolicy(read, claims => claims.RequireClaim("permissions", read));
+
+					string write = policy + "-w";
+					authorization.AddPolicy(write, claims => claims.RequireClaim("permissions", write));
+
+					string readWrite = policy + "-rw";
+					authorization.AddPolicy(readWrite, claims => claims.RequireClaim("permissions", readWrite));
 				}
 			}
 		});
-		// TODO - change this to use the module policies?
+		// TODO - change this to use the policies from storage?
 		return services;
 	}
 
