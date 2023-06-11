@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageGenius.Shared.Abstractions.Authorization;
+namespace GarageGenius.Shared.Abstractions.Authorization.AdministratorRequirement;
 
 public class AdministratorRequirementHandler : AuthorizationHandler<AdministratorRequirement>
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdministratorRequirement requirement)
     {
-        if (context.User.IsInRole(AuthorizationConstants.Administrator))
+        if (context.User.IsInRole(AuthorizationSharedConstants.Administrator))
         {
             context.Succeed(requirement);
         }
@@ -19,6 +19,6 @@ public static partial class Extensions
 {
     public static void AddAdministratorRolePolicy(this AuthorizationOptions options)
     {
-		options.AddPolicy(AuthorizationConstants.Administrator, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new AdministratorRequirement()));
+		options.AddPolicy(AuthorizationSharedConstants.Administrator, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new AdministratorRequirement()));
 	}
 }

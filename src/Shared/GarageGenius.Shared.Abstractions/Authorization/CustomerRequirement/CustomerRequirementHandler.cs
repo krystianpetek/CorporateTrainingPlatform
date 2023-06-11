@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageGenius.Shared.Abstractions.Authorization;
+namespace GarageGenius.Shared.Abstractions.Authorization.CustomerRequirement;
 
 public class CustomerRequirementHandler : AuthorizationHandler<CustomerRequirement>
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, CustomerRequirement requirement)
     {
-        if (context.User.IsInRole(AuthorizationConstants.Customer))
+        if (context.User.IsInRole(AuthorizationSharedConstants.Customer))
         {
             context.Succeed(requirement);
         }
@@ -19,6 +19,6 @@ public static partial class Extensions
 {
 	public static void AddCustomerRolePolicy(this AuthorizationOptions options)
     {
-		options.AddPolicy(AuthorizationConstants.Customer, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new CustomerRequirement()));
+		options.AddPolicy(AuthorizationSharedConstants.Customer, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new CustomerRequirement()));
 	}
 }

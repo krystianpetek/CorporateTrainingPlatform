@@ -1,4 +1,4 @@
-﻿namespace GarageGenius.Modules.Customers.Core.Types;
+﻿namespace GarageGenius.Modules.Vehicles.Core.Types;
 
 internal sealed class UserId : IEquatable<UserId>
 {

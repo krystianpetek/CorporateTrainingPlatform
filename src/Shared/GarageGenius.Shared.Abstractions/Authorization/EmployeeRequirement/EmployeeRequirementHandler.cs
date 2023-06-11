@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageGenius.Shared.Abstractions.Authorization;
+namespace GarageGenius.Shared.Abstractions.Authorization.EmployeeRequirement;
 
 public class EmployeeRequirementHandler : AuthorizationHandler<EmployeeRequirement>
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, EmployeeRequirement requirement)
     {
-        if (context.User.IsInRole(AuthorizationConstants.Employee))
+        if (context.User.IsInRole(AuthorizationSharedConstants.Employee))
         {
             context.Succeed(requirement);
         }
@@ -19,6 +19,6 @@ public static partial class Extensions
 {
 	public static void AddEmployeeRolePolicy(this AuthorizationOptions options)
     {
-		options.AddPolicy(AuthorizationConstants.Employee, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new EmployeeRequirement()));
+		options.AddPolicy(AuthorizationSharedConstants.Employee, authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new EmployeeRequirement()));
 	}
 }

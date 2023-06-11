@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using GarageGenius.Shared.Abstractions.Modules;
-using GarageGenius.Shared.Abstractions.Authorization;
+using GarageGenius.Shared.Abstractions.Authorization.AdministratorRequirement;
+using GarageGenius.Shared.Abstractions.Authorization.ManagerRequirement;
+using GarageGenius.Shared.Abstractions.Authorization.CustomerRequirement;
+using GarageGenius.Shared.Abstractions.Authorization.EmployeeRequirement;
 
 namespace GarageGenius.Shared.Infrastructure.Authorization;
 public static class Extensions
