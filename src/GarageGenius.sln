@@ -65,7 +65,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Reserv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Reservations.Application", "Modules\Reservations\GarageGenius.Modules.Reservations.Application\GarageGenius.Modules.Reservations.Application.csproj", "{295B0044-6DD1-47F7-A62A-F698583A2B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Customers.Shared", "Modules\Customers\GarageGenius.Modules.Customers.Shared\GarageGenius.Modules.Customers.Shared.csproj", "{520FC17E-7B9C-428F-AFBA-85117C90D1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarageGenius.Modules.Customers.Shared", "Modules\Customers\GarageGenius.Modules.Customers.Shared\GarageGenius.Modules.Customers.Shared.csproj", "{520FC17E-7B9C-428F-AFBA-85117C90D1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Vehicles.Shared", "Modules\Vehicles\GarageGenius.Modules.Vehicles.Shared\GarageGenius.Modules.Vehicles.Shared.csproj", "{62782242-B3F3-491A-8178-C3A1302B8418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +169,10 @@ Global
 		{520FC17E-7B9C-428F-AFBA-85117C90D1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{520FC17E-7B9C-428F-AFBA-85117C90D1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{520FC17E-7B9C-428F-AFBA-85117C90D1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62782242-B3F3-491A-8178-C3A1302B8418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62782242-B3F3-491A-8178-C3A1302B8418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62782242-B3F3-491A-8178-C3A1302B8418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62782242-B3F3-491A-8178-C3A1302B8418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{9F63B70B-7646-465B-AB71-F58BF77102EE} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
 		{295B0044-6DD1-47F7-A62A-F698583A2B56} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
 		{520FC17E-7B9C-428F-AFBA-85117C90D1BB} = {E608D1D7-BF86-4A13-B647-78BFF3DBAFD5}
+		{62782242-B3F3-491A-8178-C3A1302B8418} = {14A4F3DE-1270-4BC6-A814-B0B193078D31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {189A71AE-347A-4505-BF66-B684A21B9A4B}

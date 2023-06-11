@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Customers\GarageGenius.Modules.Customers.Shared\GarageGenius.Modules.Customers.Shared.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Vehicles.Shared\GarageGenius.Modules.Vehicles.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

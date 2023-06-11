@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using GarageGenius.Modules.Vehicles.Application.Policies;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Vehicles.Application;
 
@@ -6,6 +7,7 @@ internal static class Extensions
 {
 	public static IServiceCollection AddVehiclesApplication(this IServiceCollection services)
 	{
+		services.AddVehiclesModulePolicies();
 		return services;
 	}
 }

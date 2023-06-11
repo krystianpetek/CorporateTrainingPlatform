@@ -3,10 +3,10 @@
 namespace GarageGenius.Shared.Abstractions.Authorization;
 public static class AuthorizationSharedConstants
 {
-	public static readonly string AdministratorRequirement = nameof(AdministratorRequirement);
-	public static readonly string ManagerRequirement = nameof(ManagerRequirement);
-	public static readonly string EmployeeRequirement = nameof(EmployeeRequirement);
-	public static readonly string CustomerRequirement = nameof(CustomerRequirement);
+	public static readonly string AdministratorRequirement = "administrator";
+	public static readonly string ManagerRequirement = "manager";
+	public static readonly string EmployeeRequirement = "employee";
+	public static readonly string CustomerRequirement = "customer";
 
 	public static readonly OperationAuthorizationRequirement CreateRequirement = new OperationAuthorizationRequirement() { Name = nameof(CreateRequirement) };
 	public static readonly OperationAuthorizationRequirement ReadRequirement = new OperationAuthorizationRequirement() { Name = nameof(ReadRequirement) };
