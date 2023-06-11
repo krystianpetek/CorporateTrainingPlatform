@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageGenius.Shared.Abstractions.Authorization.ManagerRequirement;
+namespace GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Manager;
 
 public class ManagerRequirement : IAuthorizationRequirement
 {

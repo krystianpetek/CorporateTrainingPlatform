@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageGenius.Shared.Abstractions.Authorization.CustomerRequirement;
+namespace GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Customer;
 
 public class CustomerRequirement : IAuthorizationRequirement
 {
