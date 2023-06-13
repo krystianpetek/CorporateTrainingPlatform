@@ -20,6 +20,9 @@ import { SamePasswordValidator } from './validators/confirm-password.validator';
 export class SignUpComponent implements OnInit {
   private readonly _authenticationService: IAuthenticationService;
   private readonly _formBuilder: FormBuilder;
+  private isSuccessful: boolean;
+  private isSignedUpFailed: boolean;
+  public error: string;
 
   constructor(
     formBuilder: FormBuilder,
@@ -27,6 +30,9 @@ export class SignUpComponent implements OnInit {
   ) {
     this._authenticationService = authenticationService;
     this._formBuilder = formBuilder;
+    this.isSuccessful = false;
+    this.isSignedUpFailed = false;
+    this.error = '';
   }
 
   ngOnInit(): void {
@@ -82,7 +88,6 @@ export class SignUpComponent implements OnInit {
   }
 
   public signUpForm!: FormGroup<SignUpFormModel>;
-  public error?: string | null;
 
   public get email(): SignUpFormModel['email'] {
     return this.signUpForm.controls.email;
@@ -107,12 +112,13 @@ export class SignUpComponent implements OnInit {
   }
 
   public signUpSubmitForm(): void {
-    this.error = null;
+    this.error = '';
 
     const signUpModel: SignUpModel = this.signUpForm.value as SignUpModel;
     this._authenticationService
       .signUpUser(signUpModel)
       .pipe(
+
         catchError((err: HttpErrorResponse) => {
           let errorMessage = '';
           if (err.error instanceof ErrorEvent) {
@@ -124,6 +130,15 @@ export class SignUpComponent implements OnInit {
           return throwError(errorMessage);
         })
       )
-      .subscribe();
+      .subscribe({
+        next: () => {
+          this.isSuccessful = true;
+          this.isSignedUpFailed = false;
+        },
+        error: (err) => {
+          this.isSignedUpFailed = true;
+          this.error = err.error.detail;
+        }
+      });
   }
 }

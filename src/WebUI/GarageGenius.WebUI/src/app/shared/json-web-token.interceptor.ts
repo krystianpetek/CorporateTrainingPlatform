@@ -5,8 +5,8 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {AuthenticationService} from "./authentication.service";
+import { Observable } from 'rxjs';
+import { AuthenticationService } from "../authentication/service/authentication.service";
 
 @Injectable()
 export class JsonWebTokenInterceptor implements HttpInterceptor {
@@ -23,9 +23,14 @@ export class JsonWebTokenInterceptor implements HttpInterceptor {
         setHeaders: {
           Authorization: `Bearer ${jsonWebToken}`
         }
+        // TODO - implement cookie storage?
       });
     }
 
     return next.handle(request);
   }
 }
+
+export const jwtInterceptorProvider = [
+{ provide: JsonWebTokenInterceptor, useClass: JsonWebTokenInterceptor, multi: true },
+]

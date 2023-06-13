@@ -18,6 +18,9 @@ import { SignInFormModel } from './models/sign-in-form.model';
 export class SignInComponent implements OnInit {
   private readonly _authenticationService: IAuthenticationService;
   private readonly _formBuilder: FormBuilder;
+  private isSignedIn: boolean;
+  private isSignInFailed: boolean;
+  public error: string;
 
   constructor(
     formBuilder: FormBuilder,
@@ -25,6 +28,9 @@ export class SignInComponent implements OnInit {
   ) {
     this._authenticationService = authenticationService;
     this._formBuilder = formBuilder;
+    this.isSignedIn = false;
+    this.isSignInFailed = false;
+    this.error = '';
   }
 
   ngOnInit(): void {
@@ -58,7 +64,6 @@ export class SignInComponent implements OnInit {
   }
 
   public signInForm!: FormGroup<SignInFormModel>;
-  public error?: string | null;
 
   public get email(): SignInFormModel['email'] {
     return this.signInForm.controls.email;
@@ -74,7 +79,7 @@ export class SignInComponent implements OnInit {
   }
 
   public signInSubmitForm(): void {
-    this.error = null;
+    this.error = '';
 
     const signInModel: SignInModel = this.signInForm.value as SignInModel;
     this._authenticationService
@@ -91,12 +96,20 @@ export class SignInComponent implements OnInit {
           return throwError(errorMessage);
         })
       )
-      .subscribe((response: AuthenticationResponseModel): void => {
-        this._authenticationService.setAuthenticationToken(
-          response.accessToken
-        );
+      .subscribe({
+        next: (response: AuthenticationResponseModel): void => {
+          this._authenticationService.setAuthenticationToken(
+            response.accessToken
+          );
 
-        this._authenticationService.setUserInfo(response);
+          this._authenticationService.setUserInfo(response);
+          this.isSignInFailed = false;
+          this.isSignedIn = true;
+        },
+        error: (error: any): void => {
+          this.error = error.error.message;
+          this.isSignInFailed = true;
+        }
       });
   }
 
