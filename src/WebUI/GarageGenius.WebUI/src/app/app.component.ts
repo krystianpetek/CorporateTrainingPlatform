@@ -3,6 +3,7 @@ import {
   AuthenticationServiceBase,
   IAuthenticationService,
 } from './shared/services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,27 @@ import {
 })
 export class AppComponent {
   private readonly _authenticationService: IAuthenticationService;
-  constructor(authenticationService: AuthenticationServiceBase) {
+  private readonly _router: Router;
+
+  constructor(
+    authenticationService: AuthenticationServiceBase,
+    router: Router
+  ) {
     this._authenticationService = authenticationService;
+    this._router = router;
   }
 
-  public isUserLogggedIn(): boolean {
-    return this._authenticationService.getAuthenticationToken() !== null;
+  public isUserLoggedIn(): boolean {
+    const user = this._authenticationService.getUserInfo();
+    if (user) {
+      return true;
+    }
+    return false;
+  }
+
+  public signOut(): void {
+    this._authenticationService.signOutUser();
+
+    this._router.navigate(['/home']);
   }
 }

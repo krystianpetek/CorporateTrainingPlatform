@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SignInModel } from '../../shared/services/authentication/models/sign-in.model';
 import { AuthenticationResponseModel } from '../../shared/services/authentication/models/authentication-response.model';
 import { SignInFormModel } from './models/sign-in-form.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,13 +22,16 @@ export class SignInComponent implements OnInit {
   private isSignedIn: boolean;
   private isSignInFailed: boolean;
   public error: string;
+  private readonly _router: Router;
 
   constructor(
     formBuilder: FormBuilder,
-    authenticationService: AuthenticationServiceBase
+    authenticationService: AuthenticationServiceBase,
+    router: Router
   ) {
     this._authenticationService = authenticationService;
     this._formBuilder = formBuilder;
+    this._router = router;
     this.isSignedIn = false;
     this.isSignInFailed = false;
     this.error = '';
@@ -105,11 +109,12 @@ export class SignInComponent implements OnInit {
           this._authenticationService.setUserInfo(response);
           this.isSignInFailed = false;
           this.isSignedIn = true;
+          this._router.navigate(['/dashboard']);
         },
         error: (error: any): void => {
           this.error = error.error.message;
           this.isSignInFailed = true;
-        }
+        },
       });
   }
 

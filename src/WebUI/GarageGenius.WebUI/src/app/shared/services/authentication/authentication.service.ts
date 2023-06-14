@@ -83,6 +83,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
   }
 
   public override signOutUser(): Observable<void> {
+    this._storageService.cleanStorage();
     return this._httpClient.post<void>(this._signOutPath, {}, this.httpOptions);
   }
 

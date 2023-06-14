@@ -1,8 +1,8 @@
 <div class="button-container">
   <button mat-flat-button routerLink="/" routerLinkActive="active-link">Home</button>
 
-  <ng-container *ngIf="this.isUserLogggedIn() else elseTemplate">
-    <button mat-flat-button routerLink="/authentication/sign-out">Sign out</button>
+  <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
+    <button (click)="this.signOut()" mat-flat-button routerLink="/authentication/sign-out">Sign out</button>
   </ng-container>
   <ng-template #elseTemplate>
     <button mat-flat-button routerLink="/authentication/sign-in">Sign in</button>
