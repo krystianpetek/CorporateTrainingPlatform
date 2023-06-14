@@ -11,6 +11,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\GarageGenius.WebUI</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\shared\components\" />
+    <Folder Include="src\app\shared\components\navigation\" />
   </ItemGroup>
 </Project>

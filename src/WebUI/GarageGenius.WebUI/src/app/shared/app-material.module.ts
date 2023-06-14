@@ -3,18 +3,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ErrorComponent } from './components/error/error.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
+  MatSidenavModule,
 ];
 
 @NgModule({
   declarations: [
-    ErrorComponent
   ],
   imports: [materialModules],
   exports: [materialModules],

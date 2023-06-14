@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+  AuthenticationServiceBase,
+  IAuthenticationService,
+} from './shared/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public work?: string;
-  title = 'GarageGenius.WebUI';
+  private readonly _authenticationService: IAuthenticationService;
+  constructor(authenticationService: AuthenticationServiceBase) {
+    this._authenticationService = authenticationService;
+  }
+
+  public isUserLogggedIn(): boolean {
+    return this._authenticationService.getAuthenticationToken() !== null;
+  }
 }
