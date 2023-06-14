@@ -1,5 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthenticationService } from './service/authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 import { inject } from '@angular/core';
 
 export const authenticationGuard: CanActivateFn = async (route, state) => {
@@ -12,7 +12,6 @@ export const authenticationGuard: CanActivateFn = async (route, state) => {
     }
 
   await router.navigate(['/sign-in'], { replaceUrl: true, queryParams: { returnUrl: state.url } });
-    window.
     return false;
   } 
 

@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   AuthenticationServiceBase,
   IAuthenticationService,
-} from '../service/authentication.service';
+} from '../../shared/services/authentication/authentication.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SignInModel } from './models/sign-in.model';
-import { AuthenticationResponseModel } from './models/authentication-response.model';
+import { SignInModel } from '../../shared/services/authentication/models/sign-in.model';
+import { AuthenticationResponseModel } from '../../shared/services/authentication/models/authentication-response.model';
 import { SignInFormModel } from './models/sign-in-form.model';
 
 @Component({

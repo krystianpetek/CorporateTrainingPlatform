@@ -7,15 +7,22 @@ const routes: Routes = [
     path: 'authentication',
     loadChildren: () =>
       import('./authentication/authentication-routing.module').then(
-        (m) => m.AuthenticationRoutingModule
+        (routing) => routing.AuthenticationRoutingModule
+      ),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard-routing.module').then(
+        (routing) => routing.DashboardRoutingModule
       ),
   },
   { path: 'health-check', component: HealthCheckComponent },
-  // TODO - fallback route
+  { path: '**', redirectTo: '/dashboard' } // TODO - fallback
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignUpModel } from './models/sign-up.model';
+import { SignUpModel } from '../../shared/services/authentication/models/sign-up.model';
 import { SignUpFormModel } from './models/sign-up-form.model';
 import {
   AuthenticationServiceBase,
   IAuthenticationService,
-} from '../service/authentication.service';
+} from '../../shared/services/authentication/authentication.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PasswordValidator } from './validators/password.validator';
