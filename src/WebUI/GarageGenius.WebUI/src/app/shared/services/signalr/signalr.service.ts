@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NotificationsHubModel } from '../notifications/notifications-hub-model';
+import { NotificationsHubModel } from './models/notifications-hub-model';
 import * as signalR from '@microsoft/signalr';
-import { Observable, of, retry, Subject, timeout } from 'rxjs';
 
 // TODO add signalr module ?? and  signalr routing ??
 
@@ -41,7 +40,6 @@ export class SignalrService {
       this._connection.on(`SendNotification`, (data: NotificationsHubModel) => {
         this.data.push(data);
       });
-
     } catch (error) {
       console.log(`SignalR connection error: ${error}`);
     }
@@ -49,8 +47,9 @@ export class SignalrService {
 
   public async stopConnection(): Promise<void> {
     await this._connection?.stop();
-    console.log(`SignalR connection terminated ${this._connection?.connectionId}`);
-
+    console.log(
+      `SignalR connection terminated ${this._connection?.connectionId}`
+    );
   }
 
   //public startConnection = (): void => {

@@ -13,7 +13,7 @@ import { HomeModule } from './home/home.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
-  declarations: [AppComponent, ErrorComponent, ],
+  declarations: [AppComponent, ErrorComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -26,7 +26,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
   ],
   exports: [AppMaterialModule],
   providers: [
-    jwtInterceptorProvider
+    jwtInterceptorProvider,
     //{
     //  //TODO
     //  provide: APP_INITIALIZER,
@@ -39,4 +39,4 @@ import { DashboardModule } from './dashboard/dashboard.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

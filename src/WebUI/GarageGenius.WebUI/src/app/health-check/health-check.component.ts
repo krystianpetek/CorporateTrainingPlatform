@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HealthCheckService } from './health-check.service';
-import { SignalrService } from '../signalr-service/service/signalr.service';
+import { SignalrService } from '../shared/services/signalr/signalr.service';
 
 @Component({
   selector: 'app-health-check',

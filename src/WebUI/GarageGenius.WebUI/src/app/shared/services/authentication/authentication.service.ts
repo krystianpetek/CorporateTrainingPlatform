@@ -8,7 +8,7 @@ import { AuthenticationResponseModel } from './models/authentication-response.mo
 import {
   IStorageService,
   StorageService,
-} from 'src/app/storage/storage.service';
+} from 'src/app/shared/services/storage/storage.service';
 
 /**
  *  Interface for authentication service base
