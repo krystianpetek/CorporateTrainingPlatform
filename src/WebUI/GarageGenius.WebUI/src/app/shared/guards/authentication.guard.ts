@@ -3,19 +3,24 @@ import { AuthenticationService } from '../services/authentication/authentication
 import { inject } from '@angular/core';
 
 export const authenticationGuard: CanActivateFn = async (route, state) => {
-  const authenticationService: AuthenticationService = inject(AuthenticationService);
+  const authenticationService: AuthenticationService = inject(
+    AuthenticationService
+  );
   const router: Router = inject(Router);
 
-    const user = authenticationService.getUserInfo();
-    if (user) {
-      return true;
-    }
+  const user = authenticationService.getUserInfo();
+  if (user) {
+    return true;
+  }
 
-  await router.navigate(['/sign-in'], { replaceUrl: true, queryParams: { returnUrl: state.url } });
-    return false;
-  } 
+  await router.navigate(['authentication/sign-in'], {
+    replaceUrl: true,
+    queryParams: { returnUrl: state.url },
+  });
+  return false;
+};
 
-  //if (authenticationService.getAuthenticationToken() !== null)
-  //  return true;
+//if (authenticationService.getAuthenticationToken() !== null)
+//  return true;
 
-  //return router.parseUrl(`/`);
+//return router.parseUrl(`/`);
