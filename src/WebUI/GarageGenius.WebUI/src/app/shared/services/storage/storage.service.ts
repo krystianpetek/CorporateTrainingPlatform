@@ -1,43 +1,38 @@
 import { Injectable } from '@angular/core';
-
-/**
- *  Interface for storage service base
- */
-export interface IStorageService {
-  cleanStorage(): void;
-  getKey<T>(key: string): T;
-  setKey<T>(key: string, value: T): void;
-}
-
-/**
- *  Abstract class for storage service
- */
-@Injectable({ providedIn: 'root' })
-export abstract class StorageServiceBase implements IStorageService {
-  abstract cleanStorage(): void;
-  abstract getKey<T>(key: string): T;
-  abstract setKey<T>(key: string, value: T): void;
-}
+import { BaseStorageService } from './models/base-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StorageService extends StorageServiceBase {
-  public static readonly USER_KEY = 'authenticated-user';
-  public static readonly JWT_KEY = 'access-token';
+export class StorageService extends BaseStorageService {
+  private storage: Storage;
+
+  constructor() {
+    super();
+    this.storage = window.sessionStorage;
+  }
 
   public override getKey<T>(key: string): T {
-    const value: T | null = window.sessionStorage.getItem(key) as T;
-    const deserializedValue: T = JSON.parse(value as string);
-    return deserializedValue;
-  }
-  public override setKey<T>(key: string, value: T): void {
-    window.sessionStorage.removeItem(key);
-    const serializedJson: string = JSON.stringify(value);
-    window.sessionStorage.setItem(key, serializedJson);
+    const getValue: string | null = this.storage.getItem(key);
+    const parsedValue: T = JSON.parse(getValue as string);
+    return parsedValue;
   }
 
-  public override cleanStorage(): void {
-    window.sessionStorage.clear();
+  public override setKey<T>(key: string, value: T): boolean {
+    this.storage.removeItem(key);
+    const serializedJson: string = JSON.stringify(value);
+    this.storage.setItem(key, serializedJson);
+    if (this.storage.getItem(key) === serializedJson) {
+      return true;
+    }
+    return false;
+  }
+
+  public override deleteKey(key: string): boolean {
+    this.storage.removeItem(key);
+    if (this.storage.getItem(key) === null) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,14 +1,18 @@
 <div class="button-container">
-  <button mat-flat-button routerLink="/" routerLinkActive="active-link">Home</button>
+  <div>
+    <button mat-flat-button routerLink="/" routerLinkActive="active-link">Home</button>
 
-  <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
-    <button (click)="this.signOut()" mat-flat-button routerLink="/authentication/sign-out">Sign out</button>
-  </ng-container>
-  <ng-template #elseTemplate>
-    <button mat-flat-button routerLink="/authentication/sign-in">Sign in</button>
-  </ng-template>
-  <button mat-flat-button routerLink="/authentication/sign-up">Sign up</button>
+    <button mat-raised-button color="primary" routerLink="/health-check">Health check</button>
+  </div>
+  <div>
+    <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
+      <button (click)="this.signOut()" mat-flat-button routerLink="/authentication/sign-out">Sign out</button>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <button mat-flat-button routerLink="/authentication/sign-in">Sign in</button>
+    </ng-template>
+    <button mat-flat-button routerLink="/authentication/sign-up">Sign up</button>
 
-  <button mat-raised-button color="primary" routerLink="/health-check">Health check</button>
+  </div>
 </div>
 <router-outlet></router-outlet>

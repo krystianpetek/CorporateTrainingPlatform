@@ -7,8 +7,9 @@ import { SignInModel } from './models/sign-in.model';
 import { AuthenticationResponseModel } from './models/authentication-response.model';
 import {
   IStorageService,
-  StorageService,
-} from 'src/app/shared/services/storage/storage.service';
+  BaseStorageService,
+} from '../storage/models/base-storage.service';
+import { StorageService } from '../storage/storage.service';
 
 /**
  *  Interface for authentication service base
@@ -21,7 +22,7 @@ export interface IAuthenticationService {
   setAuthenticationToken(jwt: string): void;
   getAuthenticationToken(): string;
   setUserInfo(userInfo: unknown): void;
-  getUserInfo(): unknown;
+  getUserInfo(): string;
 }
 /**
  *  Abstract class for authentication service
@@ -40,7 +41,7 @@ export abstract class AuthenticationServiceBase
   abstract getAuthenticationToken(): string;
   // TODO - change to user service
   abstract setUserInfo(userInfo: unknown): void;
-  abstract getUserInfo(): unknown;
+  abstract getUserInfo(): string;
 }
 
 @Injectable({
@@ -83,17 +84,18 @@ export class AuthenticationService extends AuthenticationServiceBase {
   }
 
   public override signOutUser(): Observable<void> {
-    this._storageService.cleanStorage();
+    this._storageService.deleteKey(BaseStorageService.JWT_KEY);
+    this._storageService.deleteKey(BaseStorageService.USER_KEY);
     return this._httpClient.post<void>(this._signOutPath, {}, this.httpOptions);
   }
 
   public override setAuthenticationToken(jwt: string): void {
-    this._storageService.setKey<string>(StorageService.JWT_KEY, jwt);
+    this._storageService.setKey<string>(BaseStorageService.JWT_KEY, jwt);
   }
 
   public override getAuthenticationToken(): string {
     // TODO - change store jwt into cookie instead localStorage?
-    return this._storageService.getKey<string>(StorageService.JWT_KEY);
+    return this._storageService.getKey<string>(BaseStorageService.JWT_KEY);
   }
 
   public override showMe(): Observable<unknown> {
@@ -103,9 +105,9 @@ export class AuthenticationService extends AuthenticationServiceBase {
   }
 
   override setUserInfo(userInfo: unknown): void {
-    this._storageService.setKey<unknown>(StorageService.USER_KEY, userInfo);
+    this._storageService.setKey<unknown>(BaseStorageService.USER_KEY, userInfo);
   }
-  override getUserInfo(): unknown {
-    return this._storageService.getKey<string>(StorageService.USER_KEY);
+  override getUserInfo(): string {
+    return this._storageService.getKey<string>(BaseStorageService.USER_KEY);
   }
 }
