@@ -1,6 +1,9 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://localhost:7283/',
+  // SignalR
+  notificationHubUrl: '/notifications',
+
+  // API
   usersApiUrl: `users-module/`,
   vehiclesApiUrl: `vehicles-module/`,
   customersApiUrl: `customers-module/`,
@@ -8,4 +11,6 @@ export const environment = {
   signUpUrl: `users-module/users/sign-up`,
   signInUrl: `users-module/users/sign-in`,
   signOutUrl: `users-module/users/sign-out`,
+
+  baseUrl: 'https://localhost:7283/',
 };
