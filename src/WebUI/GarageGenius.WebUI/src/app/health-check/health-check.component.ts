@@ -89,10 +89,10 @@ export class HealthCheckComponent implements OnDestroy {
         };
       },
     });
-    signalrService.startConnection();
+    signalrService.createHubConnection();
   }
-  ngOnDestroy(): void {
-    this.signalrService.stopConnection();
+  async ngOnDestroy(): Promise<void> {
+    await this.signalrService.stopHubConnection();
   }
 }
 export interface HealthCheck {
@@ -104,6 +104,11 @@ export interface HealthCheckDisplay {
   name: string;
 }
 
-export type Modules = 'Users' | 'Vehicles' | 'Customers' | 'Notifications' | 'Reservations';
+export type Modules =
+  | 'Users'
+  | 'Vehicles'
+  | 'Customers'
+  | 'Notifications'
+  | 'Reservations';
 // https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type
 // https://blog.angular-university.io/rxjs-error-handling/
