@@ -49,7 +49,6 @@ export abstract class AuthenticationServiceBase
 })
 export class AuthenticationService extends AuthenticationServiceBase {
   private _httpClient: HttpClient;
-  private basePath: string = environment.baseUrl;
   private _signUpPath: string = environment.signUpUrl;
   private _signInPath: string = environment.signInUrl;
   private _signOutPath: string = environment.signOutUrl;
@@ -67,7 +66,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
 
   public override signUpUser(signUpModel: SignUpModel): Observable<void> {
     return this._httpClient.post<void>(
-      this.basePath + this._signUpPath,
+      document.baseURI + this._signUpPath,
       signUpModel,
       this.httpOptions
     );
@@ -77,7 +76,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
     signInModel: SignInModel
   ): Observable<AuthenticationResponseModel> {
     return this._httpClient.post<AuthenticationResponseModel>(
-      this.basePath + this._signInPath,
+      document.baseURI + this._signInPath,
       signInModel,
       this.httpOptions
     );
@@ -86,7 +85,11 @@ export class AuthenticationService extends AuthenticationServiceBase {
   public override signOutUser(): Observable<void> {
     this._storageService.deleteKey(BaseStorageService.JWT_KEY);
     this._storageService.deleteKey(BaseStorageService.USER_KEY);
-    return this._httpClient.post<void>(this._signOutPath, {}, this.httpOptions);
+    return this._httpClient.post<void>(
+      document.baseURI + this._signOutPath,
+      {},
+      this.httpOptions
+    );
   }
 
   public override setAuthenticationToken(jwt: string): void {
@@ -100,7 +103,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
 
   public override showMe(): Observable<unknown> {
     return this._httpClient.get<AuthenticationResponseModel>(
-      this.basePath + `users-module/users/me`
+      document.baseURI + `users-module/users/me`
     );
   }
 
