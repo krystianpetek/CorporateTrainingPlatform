@@ -22,11 +22,15 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
 	public async Task SeedDatabaseAsync()
 	{
-		// if (_usersDbContext.Database.IsRelational())
-		// {
-		if (_usersDbContext.Database.GetPendingMigrations().Any())
-			await _usersDbContext.Database.MigrateAsync();
-		// }
+		if (_usersDbContext.Database.IsRelational())
+		{
+			if (_usersDbContext.Database.GetPendingMigrations().Any())
+				await _usersDbContext.Database.MigrateAsync();
+		}
+		else
+		{
+			_usersDbContext.Database.EnsureCreated();
+		}
 
 		if (await _usersDbContext.Roles.AnyAsync())
 		{
@@ -57,10 +61,10 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
 	private List<Role> _roles => new List<Role>()
 	{
-		new Role("Administrator", _permissions),
-		new Role("Manager", _permissions),
-		new Role("Employee", _permissions),
-		new Role("Customer", new List<string>())
+		new Role("administrator", _permissions),
+		new Role("manager", _permissions),
+		new Role("employee", _permissions),
+		new Role("customer", new List<string>())
 	};
 
 	// TODO : Move to config file ?
