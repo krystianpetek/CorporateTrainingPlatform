@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, Subject, from } from 'rxjs';
 import { IStorageService } from '../storage/models/base-storage.service';
 import { StorageService } from '../storage/storage.service';
-import { SnackBarService } from '../snack-bar-message/snack-bar-message.service';
+import { SnackBarMessageService } from '../snack-bar-message/snack-bar-message.service';
 
 // TODO add signalr module ?? and  signalr routing ??
 
@@ -15,14 +15,14 @@ export class SignalrService {
   private _hubConnection?: signalR.HubConnection;
   private _hubUrl: string;
   private _storageService: IStorageService;
-  private _snackBarService: SnackBarService;
+  private _snackBarService: SnackBarMessageService;
   private messageSource: Subject<string> = new Subject<string>();
   public messageReceived$: Observable<string> =
     this.messageSource.asObservable();
 
   constructor(
     storageService: StorageService,
-    snackBarService: SnackBarService
+    snackBarService: SnackBarMessageService
   ) {
     this._hubUrl = environment.notificationHubUrl;
     this._storageService = storageService;
@@ -54,12 +54,12 @@ export class SignalrService {
   public registerHandlers(): void {
     this._hubConnection?.on(`SendNotification`, (date, email) => {
       this.messageSource.next(email);
-      console.error(email);
       this._snackBarService.success(email, 5);
     });
   }
 
   public async stopHubConnection(): Promise<void> {
+    // this.messageSource.unsubscribe();
     await this._hubConnection?.stop();
     console.log(
       `SignalR connection terminated ${this._hubConnection?.connectionId}`

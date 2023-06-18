@@ -3,6 +3,8 @@
     <button mat-flat-button routerLink="/" routerLinkActive="active-link">Home</button>
 
     <button mat-raised-button color="primary" routerLink="/health-check">Health check</button>
+    <button *ngIf="this.isUserLoggedIn()" mat-raised-button color="primary" routerLink="/dashboard">Dashboard</button>
+
   </div>
   <div>
     <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
