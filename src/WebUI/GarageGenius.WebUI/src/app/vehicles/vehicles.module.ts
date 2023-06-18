@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { VehiclesRoutingModule } from './vehicles-routing.module';
 import { VehiclesComponent } from './vehicles.component';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 @NgModule({
-  declarations: [VehiclesComponent],
+  declarations: [VehiclesComponent, AddVehicleComponent],
   imports: [CommonModule, VehiclesRoutingModule],
 })
 export class VehiclesModule {}

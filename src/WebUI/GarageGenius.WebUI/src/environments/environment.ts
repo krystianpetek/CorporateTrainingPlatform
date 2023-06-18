@@ -5,7 +5,10 @@ export const environment = {
 
   // API
   usersApiUrl: `users-module/`,
+
+  // vehicles
   vehiclesApiUrl: `vehicles-module/`,
+
   customersApiUrl: `customers-module/`,
 
   signUpUrl: `users-module/users/sign-up`,
