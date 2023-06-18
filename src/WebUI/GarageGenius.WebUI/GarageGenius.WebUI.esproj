@@ -11,6 +11,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\GarageGenius.WebUI</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\shared\components\navigation\" />
+    <TypeScriptConfiguration Remove="src\app\shared\components\navigation\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\shared\components\navigation\**" />
   </ItemGroup>
 </Project>
