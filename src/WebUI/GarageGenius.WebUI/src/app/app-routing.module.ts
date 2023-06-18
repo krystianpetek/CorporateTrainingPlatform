@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, withDebugTracing } from '@angular/router';
 import { HealthCheckComponent } from './health-check/health-check.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { authenticationGuard } from './shared/guards/authentication.guard';
@@ -7,20 +7,20 @@ import { HomeComponent } from './home/home/home.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, },
+  { path: 'home', component: HomeComponent },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./dashboard/dashboard-routing.module').then(
-        (routing) => routing.DashboardRoutingModule
+      import('./dashboard/dashboard.module').then(
+        (routing) => routing.DashboardModule
       ),
-    canActivate: [authenticationGuard]
+    canActivate: [authenticationGuard],
   },
   {
     path: 'authentication',
     loadChildren: () =>
-      import('./authentication/authentication-routing.module').then(
-        (routing) => routing.AuthenticationRoutingModule
+      import('./authentication/authentication.module').then(
+        (routing) => routing.AuthenticationModule
       ),
   },
   { path: 'health-check', component: HealthCheckComponent },
@@ -29,7 +29,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(
+      routes
+      // { enableTracing: true }
+    ),
+  ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

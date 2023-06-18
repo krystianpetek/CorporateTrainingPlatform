@@ -10,14 +10,10 @@ import { jwtInterceptorProvider } from './shared/interceptors/json-web-token.int
 import { AppMaterialModule } from './shared/app-material.module';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { HomeModule } from './home/home.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { SnackBarMessageModule } from './shared/services/snack-bar-message/snack-bar-message.module';
-import { UsersModule } from './users/users.module';
-import { UsersRoutingModule } from './users/users-routing.module';
-import { VehiclesComponent } from './vehicles/vehicles.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorComponent, VehiclesComponent],
+  declarations: [AppComponent, ErrorComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
