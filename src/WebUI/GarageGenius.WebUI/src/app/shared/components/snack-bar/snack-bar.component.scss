@@ -1,0 +1,47 @@
+.custom-snack-bar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+  /* optional - so is the snack bar a little bit small */
+}
+
+#progress-bar {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+::ng-deep .success-snackbar {
+  margin-top: 75px !important;
+}
+
+::ng-deep .success-snackbar button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+}
+
+::ng-deep .mat-mdc-snack-bar-container {
+  &.success-snackbar {
+    --mdc-snackbar-container-color: rgb(29, 102, 29);
+    --mdc-snackbar-supporting-text-color: lightgreen;
+  }
+}
+
+::ng-deep .failed-snackbar {
+  margin-top: 75px !important;
+}
+
+::ng-deep .failed-snackbar button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+}
+
+::ng-deep .mat-mdc-snack-bar-container {
+  &.failed-snackbar {
+    --mdc-snackbar-container-color: rgb(153, 50, 50);
+    --mdc-snackbar-supporting-text-color: lightgoldenrodyellow;
+  }
+}

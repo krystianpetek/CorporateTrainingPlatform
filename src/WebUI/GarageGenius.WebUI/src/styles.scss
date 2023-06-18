@@ -9,23 +9,3 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-.green-snackbar {
-  color: white;
-  margin-top: 75px !important;
-}
-
-.green-snackbar button {
-  background-color: rgb(9, 48, 23);
-  color: white;
-  border: none;
-}
-
-.mat-mdc-snack-bar-container {
-  &.green-snackbar {
-    --mdc-snackbar-container-color: #067739;
-    --mat-mdc-snack-bar-button-color: #fff;
-    --mdc-snackbar-supporting-text-color: #fff;
-
-  }
-}

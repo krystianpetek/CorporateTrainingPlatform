@@ -27,8 +27,7 @@ internal sealed class UserCreatedHandler : IEventHandler<UserCreated>
 
 	public async Task HandleEventAsync(UserCreated @event, CancellationToken cancellationToken = default)
 	{
-		await _hubContextNotifications.Clients.All.SendAsync("SendNotification", DateTime.Now, @event.Email);
-
+		await _hubContextNotifications.Clients.All.SendAsync("SendNotification",  DateTime.Now, @event.Email, cancellationToken);
 		await _emailSenderService.SendEmailAsync(_currentUserService.UserId, "Account created","Account created successfully");
 
 		_logger.Information(

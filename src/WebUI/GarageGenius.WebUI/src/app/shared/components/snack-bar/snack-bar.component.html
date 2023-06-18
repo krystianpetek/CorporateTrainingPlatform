@@ -1,0 +1,10 @@
+<div id="custom-snack-bar-container green-snackbar">
+  <div class="custom-snack-bar-row">
+    <span class="example-snack-bar-message">
+      {{ snackBarData.message }}
+    </span>
+    <button id="action-button" (click)="dismissWithAction()" mat-button color="primary">{{snackBarData.action}}</button>
+  </div>
+
+  <mat-progress-bar id="progress-bar" mode="determinate" [value]="progress" color="accent"></mat-progress-bar>
+</div>

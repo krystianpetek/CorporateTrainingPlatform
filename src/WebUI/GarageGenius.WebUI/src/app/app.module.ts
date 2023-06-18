@@ -11,6 +11,7 @@ import { AppMaterialModule } from './shared/app-material.module';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { HomeModule } from './home/home.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SnackBarMessageModule } from './shared/services/snack-bar-message/snack-bar-message.module';
 
 @NgModule({
   declarations: [AppComponent, ErrorComponent],
@@ -23,6 +24,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     AuthenticationModule,
     HomeModule,
     DashboardModule,
+    SnackBarMessageModule,
   ],
   exports: [AppMaterialModule],
   providers: [
