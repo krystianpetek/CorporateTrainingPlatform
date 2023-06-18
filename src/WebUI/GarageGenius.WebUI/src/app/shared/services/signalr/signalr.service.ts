@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { NotificationsHubModel } from './models/notifications-hub-model';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject, from } from 'rxjs';
 import { IStorageService } from '../storage/models/base-storage.service';
 import { StorageService } from '../storage/storage.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '../snack-bar-message/snack-bar-message.service';
 
 // TODO add signalr module ?? and  signalr routing ??
 
@@ -16,17 +15,18 @@ export class SignalrService {
   private _hubConnection?: signalR.HubConnection;
   private _hubUrl: string;
   private _storageService: IStorageService;
-  private messageSource: Subject<NotificationsHubModel> =
-    new Subject<NotificationsHubModel>();
-  public messageReceived$: Observable<NotificationsHubModel> =
+  private _snackBarService: SnackBarService;
+  private messageSource: Subject<string> = new Subject<string>();
+  public messageReceived$: Observable<string> =
     this.messageSource.asObservable();
 
   constructor(
     storageService: StorageService,
-    private _matSnackBar: MatSnackBar
+    snackBarService: SnackBarService
   ) {
     this._hubUrl = environment.notificationHubUrl;
     this._storageService = storageService;
+    this._snackBarService = snackBarService;
     this.createHubConnection();
     this.establishHubConnection();
     this.registerHandlers();
@@ -52,13 +52,11 @@ export class SignalrService {
   }
 
   public registerHandlers(): void {
-    this._hubConnection?.on(
-      `SendNotification`,
-      (data: NotificationsHubModel) => {
-        this.messageSource.next(data);
-        console.log('event received');
-      }
-    );
+    this._hubConnection?.on(`SendNotification`, (date, email) => {
+      this.messageSource.next(email);
+      console.error(email);
+      this._snackBarService.success(email, 5);
+    });
   }
 
   public async stopHubConnection(): Promise<void> {
@@ -66,14 +64,6 @@ export class SignalrService {
     console.log(
       `SignalR connection terminated ${this._hubConnection?.connectionId}`
     );
-    this._matSnackBar.open('unsubscribed', 'close', {
-      duration: 2000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-      direction: 'ltr',
-      panelClass: ['green-snackbar', 'login-snackbar'],
-      // ['mat-toolbar', 'mat-primary']
-    });
   }
 
   //public isConnected: Observable<boolean> = new Observable<boolean>(() => {
