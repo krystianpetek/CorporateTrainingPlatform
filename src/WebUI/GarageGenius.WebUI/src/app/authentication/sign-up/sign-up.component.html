@@ -45,7 +45,7 @@
       <p *ngIf="error" class="error-block">
         {{error}}
       </p>
-
+      <p>Already have an account? <a [routerLink]="['/authentication/sign-in']">Sign in</a></p>
       <div class="button-container">
         <button type="button" (click)="signUpResetForm()" mat-button>Reset</button>
         <button type="submit" mat-raised-button color="primary">Sign up</button>
