@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VehiclesRoutingModule } from './vehicles-routing.module';
-import { VehiclesComponent } from './vehicles.component';
+import { VehiclesComponent } from './vehicle-list/vehicles.component';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 @NgModule({
