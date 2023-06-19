@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, withDebugTracing } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HealthCheckComponent } from './health-check/health-check.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { authenticationGuard } from './shared/guards/authentication.guard';

@@ -54,10 +54,6 @@ export class AuthenticationService extends AuthenticationServiceBase {
   private _signOutPath: string = environment.signOutUrl;
 
   private _storageService: IStorageService;
-
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
   constructor(httpClient: HttpClient, storageService: StorageService) {
     super();
     this._httpClient = httpClient;
@@ -67,8 +63,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
   public override signUpUser(signUpModel: SignUpModel): Observable<void> {
     return this._httpClient.post<void>(
       document.baseURI + this._signUpPath,
-      signUpModel,
-      this.httpOptions
+      signUpModel
     );
   }
 
@@ -77,8 +72,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
   ): Observable<AuthenticationResponseModel> {
     return this._httpClient.post<AuthenticationResponseModel>(
       document.baseURI + this._signInPath,
-      signInModel,
-      this.httpOptions
+      signInModel
     );
   }
 
@@ -87,8 +81,7 @@ export class AuthenticationService extends AuthenticationServiceBase {
     this._storageService.deleteKey(BaseStorageService.USER_KEY);
     return this._httpClient.post<void>(
       document.baseURI + this._signOutPath,
-      {},
-      this.httpOptions
+      {}
     );
   }
 

@@ -1,36 +1,50 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Injectable()
 export class JsonWebTokenInterceptor implements HttpInterceptor {
+  private readonly _authenticationSerivce: AuthenticationService;
 
-  constructor(private _authenticationSerivce: AuthenticationService) {
+  constructor(authenticationSerivce: AuthenticationService) {
+    this._authenticationSerivce = authenticationSerivce;
   }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const jsonWebToken: string = this._authenticationSerivce.getAuthenticationToken();
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    const jsonWebToken: string =
+      this._authenticationSerivce.getAuthenticationToken();
     const isUserLogged: boolean = jsonWebToken !== null;
 
     if (isUserLogged) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${jsonWebToken}`
-        }
+          Authorization: `Bearer ${jsonWebToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         // TODO - implement cookie storage?
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(tap((value) => console.log(value)));
   }
 }
 
 export const jwtInterceptorProvider = [
-{ provide: JsonWebTokenInterceptor, useClass: JsonWebTokenInterceptor, multi: true },
-]
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JsonWebTokenInterceptor,
+    deps: [AuthenticationService],
+    multi: true,
+  },
+];
