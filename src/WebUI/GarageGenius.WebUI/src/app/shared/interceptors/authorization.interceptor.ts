@@ -5,12 +5,14 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpStatusCode,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, throwError } from 'rxjs';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Injectable()
-export class JsonWebTokenInterceptor implements HttpInterceptor {
+export class AuthorizationInterceptor implements HttpInterceptor {
   private readonly _authenticationSerivce: AuthenticationService;
 
   constructor(authenticationSerivce: AuthenticationService) {
@@ -25,6 +27,7 @@ export class JsonWebTokenInterceptor implements HttpInterceptor {
       this._authenticationSerivce.getAuthenticationToken();
     const isUserLogged: boolean = jsonWebToken !== null;
 
+    // TODO - check whether this request url is the same
     if (isUserLogged) {
       request = request.clone({
         setHeaders: {
@@ -36,14 +39,23 @@ export class JsonWebTokenInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request).pipe(tap((value) => console.log(value)));
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === HttpStatusCode.Unauthorized) {
+          this._authenticationSerivce.signOutUser();
+          return EMPTY;
+        } else {
+          return throwError(() => error);
+        }
+      })
+    );
   }
 }
 
 export const jwtInterceptorProvider = [
   {
     provide: HTTP_INTERCEPTORS,
-    useClass: JsonWebTokenInterceptor,
+    useClass: AuthorizationInterceptor,
     deps: [AuthenticationService],
     multi: true,
   },
