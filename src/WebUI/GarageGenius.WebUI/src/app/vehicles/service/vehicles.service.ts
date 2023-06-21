@@ -16,13 +16,19 @@ export class VehiclesService extends BaseVehicleService {
     this._httpClient = httpClient;
   }
 
-  public getCustomerVehicles(
+  public override getCustomerVehicles(
     customerId: string
   ): Observable<Array<VehicleModel>> {
     return this._httpClient
       .get<Array<VehicleModel>>(
         environment.vehiclesApiUrl + `vehicles/${customerId}/vehicles`
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  override getVehicleById(vehicleId: string): Observable<VehicleModel> {
+    return this._httpClient
+      .get<VehicleModel>(environment.vehiclesApiUrl + `vehicles/${vehicleId}`)
       .pipe(catchError(this.handleError));
   }
 

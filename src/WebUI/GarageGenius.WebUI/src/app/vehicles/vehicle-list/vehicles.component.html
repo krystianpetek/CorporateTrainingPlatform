@@ -1,13 +1,20 @@
-<p>vehicles works!</p>
-<button [routerLink]="['new']">new</button>
+<div>
+  <h2>Vehicle list</h2>
+  <mat-action-list>
+    <mat-list-item *ngFor="let vehicle of vehicles">
+      <a mat-list-item [routerLink]="[vehicle.id]" class="cols">
+        <span class="cols">{{ vehicle.vin }} - {{vehicle.manufacturer}} {{ vehicle.model }} {{ vehicle.year }} {{
+          vehicle.licensePlate }}</span>
+      </a>
+    </mat-list-item>
+  </mat-action-list>
+</div>
+<div>
+  <button [routerLink]="['new']">new</button>
+</div>
 
 <div class="card">
-  <div class="card-header">
-    Users
-    <a class="btn btn-primary" style="float: right" routerLinkActive="active" [routerLink]="['/users/add']">
-      Add User
-    </a>
-  </div>
+
   <div class="card-body">
     <div class="table-responsive">
       <table class="table" *ngIf="vehicles && vehicles.length">
