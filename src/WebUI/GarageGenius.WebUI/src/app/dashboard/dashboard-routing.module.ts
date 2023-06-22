@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+const usersModule = () =>
+  import('../users/users.module').then((m) => m.UsersModule);
+const vehiclesModule = () =>
+  import('../vehicles/vehicles.module').then((m) => m.VehiclesModule);
+
 const routes: Routes = [
   {
     path: '',
@@ -10,17 +15,20 @@ const routes: Routes = [
     canActivate: [authenticationGuard],
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'vehicles',
+      },
+      {
         path: 'users',
         pathMatch: 'prefix',
-        loadChildren: () =>
-          import('../users/users.module').then((m) => m.UsersModule),
+        loadChildren: usersModule,
         canActivate: [authenticationGuard],
       },
       {
         path: 'vehicles',
         pathMatch: 'prefix',
-        loadChildren: () =>
-          import('../vehicles/vehicles.module').then((m) => m.VehiclesModule),
+        loadChildren: vehiclesModule,
         canActivate: [authenticationGuard],
       },
     ],
