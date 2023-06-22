@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from '../core/main/main.component';
+import { MainComponent } from '../core/main/main.component';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { jwtInterceptorProvider } from '../shared/interceptors/authorization.interceptor';
 import { AppMaterialModule } from '../shared/app-material.module';
@@ -17,7 +17,7 @@ import { HeaderComponent } from '../core/header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    MainComponent,
     ErrorComponent,
     LayoutComponent,
     HeaderComponent,
@@ -46,6 +46,6 @@ import { HeaderComponent } from '../core/header/header.component';
     //  deps: [SignalrService],
     //},
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [MainComponent],
 })
 export class AppModule {}
