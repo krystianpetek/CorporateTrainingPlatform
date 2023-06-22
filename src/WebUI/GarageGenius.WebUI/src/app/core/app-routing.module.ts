@@ -16,11 +16,6 @@ const authenticationModule = () =>
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
     path: 'home',
     component: HomeComponent,
   },
@@ -37,7 +32,10 @@ const routes: Routes = [
     path: 'health-check',
     component: HealthCheckComponent,
   },
-  { path: '**', component: ErrorComponent }, // fallback
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: ErrorComponent },
+  // { path: '**', redirectTo: '404' }, // hidden information about before routes after redirection
+  // { path: '404', component: ErrorComponent },
 ];
 
 @NgModule({
