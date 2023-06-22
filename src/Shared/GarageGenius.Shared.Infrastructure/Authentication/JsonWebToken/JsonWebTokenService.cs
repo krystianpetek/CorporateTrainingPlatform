@@ -55,7 +55,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
 
 		_logger.Information("Successfully created access token for user {userId}", userId);
 
-		return new JsonWebTokenResponse(userId, accessToken, operationDate, claims);
+		return new JsonWebTokenResponse(userId, accessToken, operationDate, role, claims);
 		// TODO save token after generate, in db ?
 	}
 
