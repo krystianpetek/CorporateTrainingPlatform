@@ -1,3 +1,13 @@
+:host {
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: #303030;
+  color: #fff;
+  padding: 1em;
+}
+
 .active-link {
   background-color: #fff;
   color: #303030;
@@ -6,7 +16,6 @@
 button {
   margin: 5px;
 }
-
 
 .button-container {
   display: flex;

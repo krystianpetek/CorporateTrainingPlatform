@@ -1,0 +1,24 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="layout-wrapper">
+  <div fxFlex="80%" fxFlex.lt-md="100%" class="flex-wrapper">
+    <div class="button-container">
+      <div>
+        <button mat-flat-button routerLink="/" routerLinkActive="active-link">Home</button>
+
+        <button mat-raised-button color="primary" routerLink="/health-check">Health check</button>
+        <button *ngIf="this.isUserLoggedIn()" mat-raised-button color="primary"
+          routerLink="/dashboard">Dashboard</button>
+
+      </div>
+      <div>
+        <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
+          <button (click)="this.signOut()" mat-flat-button routerLink="/authentication/sign-out">Sign out</button>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <button mat-flat-button routerLink="/authentication/sign-in">Sign in</button>
+        </ng-template>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+    <ng-content></ng-content>
+  </div>
+</div>
