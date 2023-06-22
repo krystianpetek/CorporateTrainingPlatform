@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SignInModel } from '../../shared/services/authentication/models/sign-in.model';
 import { AuthenticationResponseModel } from '../../shared/services/authentication/models/authentication-response.model';
 import { SignInFormModel } from './models/sign-in-form.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,25 +19,34 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
   private readonly _authenticationService: IAuthenticationService;
   private readonly _formBuilder: FormBuilder;
+  private readonly _router: Router;
+  private readonly _activatedRoute: ActivatedRoute;
+
   private isSignedIn: boolean;
   private isSignInFailed: boolean;
+  private _returnUrl: string;
   public error: string;
-  private readonly _router: Router;
 
   constructor(
     formBuilder: FormBuilder,
     authenticationService: AuthenticationServiceBase,
-    router: Router
+    router: Router,
+    activatedRoute: ActivatedRoute
   ) {
     this._authenticationService = authenticationService;
     this._formBuilder = formBuilder;
     this._router = router;
+    this._activatedRoute = activatedRoute;
     this.isSignedIn = false;
     this.isSignInFailed = false;
     this.error = '';
+    this._returnUrl = '';
   }
 
   ngOnInit(): void {
+    this._returnUrl =
+      this._activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+
     this.signInForm = this._formBuilder.group({
       email: [
         `krystianpetek2@gmail.com`,
@@ -109,7 +118,7 @@ export class SignInComponent implements OnInit {
           this._authenticationService.setUserInfo(response);
           this.isSignInFailed = false;
           this.isSignedIn = true;
-          this._router.navigate(['/dashboard']);
+          this._router.navigateByUrl(this._returnUrl);
         },
         error: (error: any): void => {
           this.error = error.error.message;

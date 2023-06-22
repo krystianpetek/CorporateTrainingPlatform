@@ -3,7 +3,7 @@ import { AuthenticationService } from '../services/authentication/authentication
 import { SnackBarMessageService } from '../services/snack-bar-message/snack-bar-message.service';
 import { inject } from '@angular/core';
 
-export const authenticationGuard: CanActivateFn = async (route, state) => {
+export const authenticationGuard: CanActivateFn = (route, state) => {
   const authenticationService: AuthenticationService = inject(
     AuthenticationService
   );
@@ -17,11 +17,14 @@ export const authenticationGuard: CanActivateFn = async (route, state) => {
     return true;
   }
 
-  snackBarMessageService.fail('You are not authorized to access this page, please log in', 5);
-   await router.navigate(['authentication/sign-in'], {
-     replaceUrl: true,
-     queryParams: { returnUrl: state.url },
-   });
+  snackBarMessageService.fail(
+    'You are not authorized to access this page, please log in',
+    5
+  );
+  router.navigate(['authentication/sign-in'], {
+    replaceUrl: true,
+    queryParams: { returnUrl: state.url },
+  });
   return false;
 };
 
