@@ -3,14 +3,17 @@ export const environment = {
   // SignalR
   notificationHubUrl: '/notifications',
 
-  // API
+  // users
   usersApiUrl: `users-module/`,
-  vehiclesApiUrl: `vehicles-module/`,
-  customersApiUrl: `customers-module/`,
-
   signUpUrl: `users-module/users/sign-up`,
   signInUrl: `users-module/users/sign-in`,
   signOutUrl: `users-module/users/sign-out`,
+
+  // vehicles
+  vehiclesApiUrl: `vehicles-module/`,
+
+  // customers
+  customersApiUrl: `customers-module/`,
 
   baseUrl: 'https://localhost:7283/',
 };
