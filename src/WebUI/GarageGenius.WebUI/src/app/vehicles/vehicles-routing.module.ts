@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VehiclesComponent } from './vehicle-list/vehicles.component';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.componentv';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: VehicleComponent,
+    component: VehicleDetailsComponent,
   },
 ];
 

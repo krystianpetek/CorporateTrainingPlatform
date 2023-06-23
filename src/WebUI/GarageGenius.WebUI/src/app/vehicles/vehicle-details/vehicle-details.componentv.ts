@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle',
-  templateUrl: './vehicle.component.html',
-  styleUrls: ['./vehicle.component.scss'],
+  templateUrl: './vehicle-details.component.html',
+  styleUrls: ['./vehicle-details.component.scss'],
 })
-export class VehicleComponent implements OnInit {
+export class VehicleDetailsComponent implements OnInit {
   private readonly _vehicleService: VehicleService;
   private readonly _router: ActivatedRoute;
   constructor(vehicleService: VehicleService, router: ActivatedRoute) {
