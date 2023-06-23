@@ -2,6 +2,7 @@
 
 export interface AuthenticationResponseModel {
   userId: string;
+  customerId: string;
   accessToken: string;
   expiry: Date;
   role: Role;

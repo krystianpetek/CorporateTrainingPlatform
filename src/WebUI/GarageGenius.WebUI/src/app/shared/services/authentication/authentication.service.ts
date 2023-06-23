@@ -22,7 +22,7 @@ export interface IAuthenticationService {
   setAuthenticationToken(jwt: string): void;
   getAuthenticationToken(): string;
   setUserInfo(userInfo: unknown): void;
-  getUserInfo(): string;
+  getUserInfo(): AuthenticationResponseModel;
 }
 /**
  *  Abstract class for authentication service
@@ -41,7 +41,7 @@ export abstract class AuthenticationServiceBase
   abstract getAuthenticationToken(): string;
   // TODO - change to user service
   abstract setUserInfo(userInfo: unknown): void;
-  abstract getUserInfo(): string;
+  abstract getUserInfo(): AuthenticationResponseModel;
 }
 
 @Injectable({
@@ -103,7 +103,9 @@ export class AuthenticationService extends AuthenticationServiceBase {
   override setUserInfo(userInfo: unknown): void {
     this._storageService.setKey<unknown>(BaseStorageService.USER_KEY, userInfo);
   }
-  override getUserInfo(): string {
-    return this._storageService.getKey<string>(BaseStorageService.USER_KEY);
+  override getUserInfo(): AuthenticationResponseModel {
+    return this._storageService.getKey<AuthenticationResponseModel>(
+      BaseStorageService.USER_KEY
+    );
   }
 }
