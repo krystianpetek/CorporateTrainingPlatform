@@ -4,7 +4,6 @@ using GarageGenius.Modules.Customers.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Customers.Api;
 internal class CustomersModule : IModule
@@ -13,11 +12,12 @@ internal class CustomersModule : IModule
 	public string Name => "Customers";
 	public IEnumerable<string>? Policies { get; } = new string[] { "customers" };
 
-	public void Register(IServiceCollection services)
+	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		services.AddCustomersCore();
-		services.AddCustomersApplication();
-		services.AddCustomersInfrastructure();
+		webApplicationBuilder.Services
+			.AddCustomersCore()
+			.AddCustomersApplication()
+			.AddCustomersInfrastructure(webApplicationBuilder.Environment);
 	}
 
 	public void Use(WebApplication app)

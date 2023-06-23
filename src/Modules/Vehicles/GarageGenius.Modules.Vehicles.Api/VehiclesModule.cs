@@ -13,11 +13,12 @@ internal class VehiclesModule : IModule
 	public string Name => "Vehicles";
 	public IEnumerable<string>? Policies { get; } = new string[] { "vehicles" };
 
-	public void Register(IServiceCollection services)
+	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		services.AddVehiclesCore();
-		services.AddVehiclesApplication();
-		services.AddVehiclesInfrastructure();
+		webApplicationBuilder.Services
+			.AddVehiclesCore()
+			.AddVehiclesApplication()
+			.AddVehiclesInfrastructure(webApplicationBuilder.Environment);
 	}
 
 	public void Use(WebApplication app)

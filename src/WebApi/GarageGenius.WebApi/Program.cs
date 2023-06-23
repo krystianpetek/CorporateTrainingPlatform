@@ -41,7 +41,7 @@ public static class Program
 			builder.Services.AddSharedInfrastructure(builder.Configuration, assemblies.ToList(), modules.ToList());
 			foreach (IModule module in modules)
 			{
-				module.Register(builder.Services);
+				module.Register(builder);
 				Log.Information($"Loaded module: {module.Name}");
 			}
 			builder.Services.AddControllers();

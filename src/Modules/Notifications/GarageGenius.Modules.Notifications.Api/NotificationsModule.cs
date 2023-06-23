@@ -2,7 +2,6 @@
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Notifications.Api;
 internal class NotificationsModule : IModule
@@ -11,9 +10,9 @@ internal class NotificationsModule : IModule
 	public string Name { get; } = "Notifications";
 	public IEnumerable<string> Policies { get; } = new string[] { "notifications" };
 
-	public void Register(IServiceCollection services)
+	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		services.AddNotificationsCore();
+		webApplicationBuilder.Services.AddNotificationsCore();
 	}
 
 	public void Use(WebApplication app)

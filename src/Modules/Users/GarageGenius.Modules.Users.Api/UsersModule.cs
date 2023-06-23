@@ -11,9 +11,10 @@ internal class UsersModule : IModule
 	public string Name { get; } = "Users";
 	public IEnumerable<string> Policies { get; } = new string[] { "users" };
 
-	public void Register(IServiceCollection services)
+	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		services.AddUsersCore().GetAwaiter().GetResult();
+		webApplicationBuilder.Services.AddUsersCore(webApplicationBuilder.Environment).GetAwaiter().GetResult();
+		// TODO - this is a hack, need to redesign the seeder to be more generic and to better approach, idk yet
 	}
 
 	public void Use(WebApplication app)

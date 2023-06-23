@@ -13,11 +13,12 @@ internal class ReservationsModule : IModule
 	public string Name => "Reservations";
 	public IEnumerable<string>? Policies { get; } = new string[] { "reservations" };
 
-	public void Register(IServiceCollection services)
+	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		services.AddReservationsCore();
-		services.AddReservationsApplication();
-		services.AddReservationsInfrastructure();
+		webApplicationBuilder.Services
+			.AddReservationsCore()
+			.AddReservationsApplication()
+			.AddReservationsInfrastructure(webApplicationBuilder.Environment);
 	}
 
 	public void Use(WebApplication app)

@@ -4,17 +4,18 @@ using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Core.ServiceMapper;
 using GarageGenius.Shared.Abstractions.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Users.Core;
 
 internal static class Extensions
 {
-	public static async Task<IServiceCollection> AddUsersCore(this IServiceCollection services)
+	public static async Task<IServiceCollection> AddUsersCore(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
 		services.AddScoped<IRoleRepository, RoleRepository>();
 		services.AddScoped<IUserRepository, UserRepository>();
-		services.AddMsSqlServerDbContext<UsersDbContext>();
+		services.AddMsSqlServerDbContext<UsersDbContext>(webHostEnvironment);
 		services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
 		services.AddScoped<IUserServiceMapper, UserServiceMapper>();
 
