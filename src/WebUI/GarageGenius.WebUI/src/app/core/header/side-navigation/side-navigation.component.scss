@@ -1,0 +1,18 @@
+a {
+  text-decoration: none;
+  display: flex;
+}
+
+mat-list-item .sideNav-container:hover {
+  color: lightgray;
+}
+
+.sideNav-caption {
+  display: inline-block;
+  padding-left: 6px;
+}
+
+.sideNav-container {
+  display: flex;
+  flex-direction: row;
+}

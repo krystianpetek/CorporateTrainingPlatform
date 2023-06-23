@@ -14,6 +14,7 @@ import { HomeModule } from '../home/home.module';
 import { SnackBarMessageModule } from '../shared/services/snack-bar-message/snack-bar-message.module';
 import { LayoutComponent } from '../core/layout/layout.component';
 import { HeaderComponent } from '../core/header/header.component';
+import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HeaderComponent } from '../core/header/header.component';
     ErrorComponent,
     LayoutComponent,
     HeaderComponent,
+    SideNavigationComponent,
   ],
   imports: [
     BrowserModule,

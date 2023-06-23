@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  AuthenticationServiceBase,
   IAuthenticationService,
+  AuthenticationServiceBase,
 } from 'src/app/shared/services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: 'app-side-navigation',
+  templateUrl: './side-navigation.component.html',
+  styleUrls: ['./side-navigation.component.scss'],
 })
-export class HeaderComponent {
+export class SideNavigationComponent {
   private readonly _authenticationService: IAuthenticationService;
   private readonly _router: Router;
 
-  @Output() public sideNavigationToggle = new EventEmitter();
+  @Output() public sideNavigationClose = new EventEmitter();
 
   constructor(
     authenticationService: AuthenticationServiceBase,
@@ -24,8 +24,8 @@ export class HeaderComponent {
     this._router = router;
   }
 
-  public onToggleSideNavigation = () => {
-    this.sideNavigationToggle.emit();
+  public onCloseSideNavigation = () => {
+    this.sideNavigationClose.emit();
   };
 
   public isUserLoggedIn(): boolean {
@@ -38,6 +38,7 @@ export class HeaderComponent {
 
   public signOut(): void {
     this._authenticationService.signOutUser();
+    this.onCloseSideNavigation();
     this._router.navigate(['/home']);
   }
 }

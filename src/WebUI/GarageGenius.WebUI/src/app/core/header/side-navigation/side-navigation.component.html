@@ -1,0 +1,54 @@
+<mat-nav-list>
+  <a mat-list-item>GarageGenius</a>
+  <a mat-list-item routerLink="/" (click)="onCloseSideNavigation()">
+    <div class="sideNav-container">
+      <mat-icon>home</mat-icon>
+      <span class="sideNav-caption">Home</span>
+    </div>
+  </a>
+
+  <mat-list-item class="dashboard-item" *ngIf="this.isUserLoggedIn()" [matMenuTriggerFor]="menu">
+    <div class="sideNav-container">
+      <mat-icon>unfold_more</mat-icon>
+      <a mat-line class="sideNav-caption">Dashboard</a>
+    </div>
+  </mat-list-item>
+  <mat-menu #menu>
+    <button mat-menu-item routerLink="/dashboard/vehicles" (click)="onCloseSideNavigation()">
+      <mat-icon>dashboard</mat-icon>
+      <span class="sideNav-caption">Vehicles</span>
+    </button>
+    <button mat-menu-item routerLink="/dashboard/users" (click)="onCloseSideNavigation()">
+      <mat-icon>dashboard</mat-icon>
+      <span class="sideNav-caption">Users</span>
+    </button>
+    <button mat-menu-item routerLink="/dashboard/customers" (click)="onCloseSideNavigation()">
+      <mat-icon>dashboard</mat-icon>
+      <span class="sideNav-caption">Customers</span>
+    </button>
+  </mat-menu>
+
+  <a mat-list-item routerLink="/health-check" (click)="onCloseSideNavigation()">
+    <div class="sideNav-container">
+      <mat-icon>info</mat-icon>
+      <span class="sideNav-caption">Health check</span>
+    </div>
+  </a>
+
+  <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
+    <a mat-list-item (click)="signOut()">
+      <div class="sideNav-container">
+        <mat-icon>logout</mat-icon>
+        <span class="sideNav-caption">Sign out</span>
+      </div>
+    </a>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <a mat-list-item (click)="this.onCloseSideNavigation()" routerLink="/authentication/sign-in">
+      <div class="sideNav-container">
+        <mat-icon>login</mat-icon>
+        <span class="sideNav-caption">Sign in</span>
+      </div>
+    </a>
+  </ng-template>
+</mat-nav-list>

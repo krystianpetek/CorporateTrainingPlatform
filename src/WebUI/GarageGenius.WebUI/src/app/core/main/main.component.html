@@ -1,9 +1,10 @@
 <app-layout>
   <mat-sidenav-container hasBackdrop="true" role="navigation">
-    <mat-sidenav #sidenav opened="false" mode="over" position="start">
+    <mat-sidenav #sideNavigation opened="false" mode="over" position="start">
+      <app-side-navigation (sideNavigationClose)="this.sideNavigation.close()"></app-side-navigation>
     </mat-sidenav>
     <mat-sidenav-content>
-      <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+      <app-header (sideNavigationToggle)="sideNavigation.toggle()"></app-header>
       <main>
         <router-outlet></router-outlet>
       </main>

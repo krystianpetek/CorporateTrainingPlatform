@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 const materialModules = [
   MatButtonModule,
@@ -21,6 +22,7 @@ const materialModules = [
   MatProgressBarModule,
   MatListModule,
   MatToolbarModule,
+  MatMenuModule,
 ];
 
 @NgModule({
