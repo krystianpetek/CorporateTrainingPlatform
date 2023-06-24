@@ -20,7 +20,7 @@ public class VehiclesController : BaseController
 	}
 
 	[HttpGet("{vehicleId:guid}")]
-	[Authorize(Policy = "vehicles-r")]
+	[Authorize]
 	[SwaggerOperation("Get vehicle")]
 	public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
 	{
@@ -30,7 +30,7 @@ public class VehiclesController : BaseController
 	}
 
 	[HttpGet("{customerId:guid}/vehicles")]
-	[Authorize(Policy = "administrator")]
+	[Authorize]
 	[SwaggerOperation("Get customer vehicles")]
 	public async Task<ActionResult> GetCustomerVehiclesAsync(Guid customerId)
 	{
@@ -70,5 +70,5 @@ public class VehiclesController : BaseController
 		return Ok();
 	}
 
-	// TODO Controllers response types
+	// TODO Controllers response types, produces types
 }

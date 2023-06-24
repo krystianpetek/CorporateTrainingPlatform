@@ -12,11 +12,10 @@ internal sealed class Vehicle : AuditableEntity
 	public LicensePlate LicensePlate { get; private set; }
 	public Vin? Vin { get; private set; }
 	public Year? Year { get; private set; }
-	internal UserId? UserId { get; private set; }
 
 	private Vehicle() { }
 
-	public Vehicle(CustomerId customerId, Manufacturer manufacturer, Model model, LicensePlate licensePlate, Vin? vin, Year? year, UserId? userId)
+	public Vehicle(CustomerId customerId, Manufacturer manufacturer, Model model, LicensePlate licensePlate, Vin? vin, Year? year)
 	{
 		VehicleId = new VehicleId(Guid.NewGuid());
 		CustomerId = customerId;
@@ -25,7 +24,6 @@ internal sealed class Vehicle : AuditableEntity
 		LicensePlate = licensePlate;
 		Vin = vin;
 		Year = year;
-		UserId = userId;
 	}
 
 	internal void UpdateVehicle(Vin? vin, Year? year)
@@ -42,5 +40,6 @@ internal sealed class Vehicle : AuditableEntity
 	internal void ChangeOwner(CustomerId customerId)
 	{
 		CustomerId = customerId;
+		// TODO - how to change customer vehicle ?
 	}
 }

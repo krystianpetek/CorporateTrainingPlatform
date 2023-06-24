@@ -43,8 +43,5 @@ internal class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 		builder.Property(x => x.Year)
 			.HasMaxLength(8)
 			.HasConversion(conversion => conversion.Value, value => value != default ? new Year(value) : null);
-
-		builder.Property(x => x.UserId)
-			.HasConversion(conversion => conversion.Value, value => new UserId(value));
 	}
 }

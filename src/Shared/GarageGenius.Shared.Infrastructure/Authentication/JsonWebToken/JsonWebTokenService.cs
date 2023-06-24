@@ -42,7 +42,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
 				new Claim(JwtRegisteredClaimNames.Jti, $"{Guid.NewGuid()}"),
 				new Claim(JwtRegisteredClaimNames.Email, email),
 				new Claim(ClaimTypes.Role, role),
-				new Claim("customerId", $"{customerId}")
+				new Claim(JwtClaimTypes.CustomerId, $"{customerId}")
 			}),
 			NotBefore = operationDate,
 			IssuedAt = operationDate,

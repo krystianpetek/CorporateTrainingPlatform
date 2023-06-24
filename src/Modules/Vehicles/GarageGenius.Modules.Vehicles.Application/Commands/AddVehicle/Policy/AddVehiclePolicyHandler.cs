@@ -1,12 +1,13 @@
-using GarageGenius.Modules.Vehicles.Core.Entities;
+using GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle.Policy;
+using GarageGenius.Modules.Vehicles.Core.Types;
 using GarageGenius.Modules.Vehicles.Shared;
+using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Vehicles.Application.Policies.AddVehicle;
 
-internal class AddVehiclePolicyHandler : AuthorizationHandler<AddVehiclePolicyRequirement, Vehicle>
+internal class AddVehiclePolicyHandler : AuthorizationHandler<AddVehiclePolicyRequirement, CustomerId>
 {
 	private readonly Serilog.ILogger _logger;
 
@@ -15,7 +16,7 @@ internal class AddVehiclePolicyHandler : AuthorizationHandler<AddVehiclePolicyRe
 		_logger = logger;
 	}
 
-	protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AddVehiclePolicyRequirement requirement, Vehicle resource)
+	protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AddVehiclePolicyRequirement requirement, CustomerId resource)
 	{
 		// if requirement operation is not create, fail
 		if (requirement._operationAuthorizationRequirement != AuthorizationSharedConstants.CreateRequirement)
@@ -33,14 +34,15 @@ internal class AddVehiclePolicyHandler : AuthorizationHandler<AddVehiclePolicyRe
 		}
 
 		// if user is a customer, allow add new vehicle if the vehicle belongs to him
-		if (context.User.Identity.Name == $"{resource.UserId}")
+		string customerId = context.User.Claims.Where(x => x.Type.Equals(JwtClaimTypes.CustomerId)).FirstOrDefault().Value;
+		if (customerId == $"{resource}")
 		{
 			context.Succeed(requirement);
 			return Task.CompletedTask;
 		}
 
 		context.Fail();
-		_logger.Warning("User {UserId} is not authorized to add a new vehicle for customer {CustomerId}", context.User.Identity.Name, resource.CustomerId);
+		_logger.Warning("User {UserId} is not authorized to add a new vehicle for customer {CustomerId}", context.User.Identity.Name, resource);
 		return Task.CompletedTask;
 	}
 }
