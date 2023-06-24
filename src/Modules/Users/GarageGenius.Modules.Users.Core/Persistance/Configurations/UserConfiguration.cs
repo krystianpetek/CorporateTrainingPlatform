@@ -14,6 +14,9 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
 		builder.Property(property => property.UserId)
 			.IsRequired();
 
+		builder.Property(property => property.CustomerId)
+			.IsRequired();
+
 		builder.Property(property => property.RoleName)
 			.IsRequired();
 
