@@ -24,7 +24,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
 		_systemDateService = systemDateService;
 	}
 
-	public JsonWebTokenResponse GenerateToken(Guid userId, string email, string role, IDictionary<string, object> claims)
+	public JsonWebTokenResponse GenerateToken(Guid userId, Guid customerId, string email, string role, IDictionary<string, object> claims)
 	{
 		SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jsonWebTokenOptions.IssuerSigningKey));
 		SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
@@ -42,6 +42,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
 				new Claim(JwtRegisteredClaimNames.Jti, $"{Guid.NewGuid()}"),
 				new Claim(JwtRegisteredClaimNames.Email, email),
 				new Claim(ClaimTypes.Role, role),
+				new Claim("customerId", $"{customerId}")
 			}),
 			NotBefore = operationDate,
 			IssuedAt = operationDate,
@@ -55,7 +56,7 @@ internal class JsonWebTokenService : IJsonWebTokenService
 
 		_logger.Information("Successfully created access token for user {userId}", userId);
 
-		return new JsonWebTokenResponse(userId, accessToken, operationDate, role, claims);
+		return new JsonWebTokenResponse(userId, customerId, accessToken, operationDate, role, claims);
 		// TODO save token after generate, in db ?
 	}
 

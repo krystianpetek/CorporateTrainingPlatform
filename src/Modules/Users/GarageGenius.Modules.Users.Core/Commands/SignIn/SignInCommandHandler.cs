@@ -45,7 +45,7 @@ internal class SignInCommandHandler : ICommandHandler<SignInCommand>
 		user.VerifyUserState();
 
 		Dictionary<string, object> claims = new Dictionary<string, object> { ["permissions"] = user.Role.Permissions };
-		JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.UserId, user.Email, user.RoleName, claims);
+		JsonWebTokenResponse token = _jwtTokenService.GenerateToken(user.UserId, user.CustomerId, user.Email, user.RoleName, claims);
 
 		_jwtTokenStorage.SetToken(token);
 		_logger.Information(

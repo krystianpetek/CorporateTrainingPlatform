@@ -3,8 +3,10 @@
 /// <summary>
 /// Represent the information about access token, its expiration and subject with claims
 /// </summary>
-/// <param name="UserId">Subject identifier</param>
+/// <param name="UserId">Subject user identifier</param>
+/// <param name="CustomerId">Subject customer identifier</param>
+/// <param name="Role">Subject role</param>
 /// <param name="AccessToken">Access Token in JSON Web Token</param>
 /// <param name="Expiry">Date when the access token expires</param>
 /// <param name="Claims">Subject claims attached to access token</param>
-public record JsonWebTokenResponse(Guid UserId, string AccessToken, DateTime Expiry, string role, IDictionary<string, object> Claims);
+public record JsonWebTokenResponse(Guid UserId, Guid CustomerId, string AccessToken, DateTime Expiry, string Role, IDictionary<string, object> Claims);
