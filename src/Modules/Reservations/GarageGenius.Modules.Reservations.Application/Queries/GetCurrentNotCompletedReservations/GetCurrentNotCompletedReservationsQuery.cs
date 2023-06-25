@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;

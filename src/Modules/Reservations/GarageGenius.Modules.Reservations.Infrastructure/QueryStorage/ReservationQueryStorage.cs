@@ -73,13 +73,13 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 			.AsQueryable()
 			.Where(reservation => reservation.ReservationDate < _systemDateService.GetCurrentDate())
 			.Where(reservation => !(reservation.ReservationDeleted))
-			.Where(reservation => 
-				reservation.ReservationState != ReservationState.Completed && 
+			.Where(reservation =>
+				reservation.ReservationState != ReservationState.Completed &&
 				reservation.ReservationState != ReservationState.Canceled)
-			.Select<Reservation, CurrentNotCompletedReservationsDto>(reservation => 
+			.Select<Reservation, CurrentNotCompletedReservationsDto>(reservation =>
 				new CurrentNotCompletedReservationsDto(
-					reservation.ReservationId, 
-					reservation.VehicleId, 
+					reservation.ReservationId,
+					reservation.VehicleId,
 					reservation.CustomerId,
 					reservation.ReservationState,
 					reservation.ReservationDate.Value,

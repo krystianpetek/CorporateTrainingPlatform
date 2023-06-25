@@ -4,7 +4,6 @@ using GarageGenius.Modules.Reservations.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Reservations.Api;
 internal class ReservationsModule : IModule

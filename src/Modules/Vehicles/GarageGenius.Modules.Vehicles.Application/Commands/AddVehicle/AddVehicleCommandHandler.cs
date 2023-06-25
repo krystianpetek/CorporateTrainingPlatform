@@ -43,7 +43,7 @@ internal class AddVehicleCommandHandler : ICommandHandler<AddVehicleCommand>
 
 		IReadOnlyList<SearchVehiclesQueryDto> vehicleQuery = await _vehicleQueryStorage.SearchVehicleAsync(new Core.Models.SearchVehiclesParameters(command.Vin, null), cancellationToken);
 		if (vehicleQuery.Any(x => x.Vin == command.Vin)) throw new VehicleAlreadyExistsException(command.Vin);
-		
+
 		await _vehiclesRepository.AddVehicleAsync(vehicle, cancellationToken);
 		_logger.Information(
 			messageTemplate: "Command {CommandName} handled by {ModuleName} module, added new vehicle with ID: {VehicleId} to customer with ID: {CustomerId}",

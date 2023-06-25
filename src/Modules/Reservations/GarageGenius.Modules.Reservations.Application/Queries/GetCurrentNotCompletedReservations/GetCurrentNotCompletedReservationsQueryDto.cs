@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
-using GarageGenius.Shared.Abstractions.Helpers;
+﻿using GarageGenius.Shared.Abstractions.Helpers;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;
 public sealed record class GetCurrentNotCompletedReservationsQueryDto

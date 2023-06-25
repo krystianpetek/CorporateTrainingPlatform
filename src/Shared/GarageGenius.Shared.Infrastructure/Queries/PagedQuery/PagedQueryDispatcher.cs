@@ -1,5 +1,4 @@
-﻿using GarageGenius.Shared.Abstractions.Queries;
-using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
+﻿using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 

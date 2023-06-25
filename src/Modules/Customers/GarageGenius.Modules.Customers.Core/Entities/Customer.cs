@@ -8,7 +8,7 @@ internal sealed class Customer : AuditableEntity
 	// TODO validation domain entity
 	internal CustomerId CustomerId { get; private set; }
 	public UserId? UserId { get; private set; } // TODO linking to user if customer created separately, but how ?
-	// TODO - remove userId? and GetCustomerByUserId
+												// TODO - remove userId? and GetCustomerByUserId
 	public FirstName? FirstName { get; private set; }
 	public LastName? LastName { get; private set; }
 	public PhoneNumber? PhoneNumber { get; private set; }

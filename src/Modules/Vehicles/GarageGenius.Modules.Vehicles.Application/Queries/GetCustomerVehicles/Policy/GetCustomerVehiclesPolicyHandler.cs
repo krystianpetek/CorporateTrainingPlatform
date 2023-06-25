@@ -1,5 +1,4 @@
 using GarageGenius.Modules.Vehicles.Application.Queries.GetCustomerVehicles.Policy;
-using GarageGenius.Modules.Vehicles.Core.Entities;
 using GarageGenius.Modules.Vehicles.Shared;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Authorization;

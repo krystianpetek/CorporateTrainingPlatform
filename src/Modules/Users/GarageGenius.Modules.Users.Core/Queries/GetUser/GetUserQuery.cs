@@ -2,4 +2,4 @@
 
 namespace GarageGenius.Modules.Users.Core.Queries.GetUser;
 
-public record GetUserQuery(Guid id) : IQuery<GetUserQueryDto>;
+public record GetUserQuery(Guid Id) : IQuery<GetUserQueryDto>;

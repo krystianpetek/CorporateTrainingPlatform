@@ -1,5 +1,4 @@
-﻿using GarageGenius.Modules.Vehicles.Application.Policies;
-using GarageGenius.Modules.Vehicles.Application.Policies.AddVehicle;
+﻿using GarageGenius.Modules.Vehicles.Application.Policies.AddVehicle;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 

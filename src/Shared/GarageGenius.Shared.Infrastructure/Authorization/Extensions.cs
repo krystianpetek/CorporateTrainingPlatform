@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Administrator;
+using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Customer;
+using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Employee;
+using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Manager;
+using GarageGenius.Shared.Abstractions.Modules;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using GarageGenius.Shared.Abstractions.Modules;
-using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Manager;
-using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Administrator;
-using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Employee;
-using GarageGenius.Shared.Abstractions.Authorization.RoleBasedPolicies.Customer;
 
 namespace GarageGenius.Shared.Infrastructure.Authorization;
 public static class Extensions

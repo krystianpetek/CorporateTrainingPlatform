@@ -5,11 +5,11 @@ namespace GarageGenius.Modules.Vehicles.Application.Commands.AddVehicle.Policy;
 
 public class AddVehiclePolicyRequirement : IAuthorizationRequirement
 {
-    public readonly OperationAuthorizationRequirement _operationAuthorizationRequirement;
+	public readonly OperationAuthorizationRequirement _operationAuthorizationRequirement;
 
-    public AddVehiclePolicyRequirement(OperationAuthorizationRequirement operationAuthorizationRequirement)
-    {
-        _operationAuthorizationRequirement = operationAuthorizationRequirement;
-    }
+	public AddVehiclePolicyRequirement(OperationAuthorizationRequirement operationAuthorizationRequirement)
+	{
+		_operationAuthorizationRequirement = operationAuthorizationRequirement;
+	}
 }
 

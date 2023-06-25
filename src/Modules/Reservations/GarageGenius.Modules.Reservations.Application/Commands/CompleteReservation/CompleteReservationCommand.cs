@@ -1,6 +1,5 @@
 ﻿using GarageGenius.Shared.Abstractions.Commands;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace GarageGenius.Modules.Reservations.Application.Commands.CompleteReservation;

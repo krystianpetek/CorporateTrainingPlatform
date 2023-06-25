@@ -22,7 +22,7 @@ internal class GetUserQueryHandler : IQueryHandler<GetUserQuery, GetUserQueryDto
 	}
 	public async Task<GetUserQueryDto> HandleQueryAsync(GetUserQuery query, CancellationToken cancellationToken = default)
 	{
-		User user = await _userRepository.GetAsync(query.id, cancellationToken) ?? throw new UserNotFoundException(query.id);
+		User user = await _userRepository.GetAsync(query.Id, cancellationToken) ?? throw new UserNotFoundException(query.Id);
 		GetUserQueryDto mappedUser = _userServiceMapper.MapToGetUserQueryDto(user);
 
 		_logger.Information(

@@ -74,7 +74,7 @@ public static class Program
 						var exceptionType = exceptionHandlerFeature?.Error;
 						if (exceptionType is not null)
 						{
-							(string Title, string Detail, int StatusCode) details = exceptionType switch
+							(string Title, string Detail, int StatusCode) = exceptionType switch
 							{
 								GarageGeniusException customException =>
 								(
@@ -94,9 +94,9 @@ public static class Program
 								HttpContext = context,
 								ProblemDetails =
 								{
-									Title = details.Title,
-									Detail = details.Detail,
-									Status = details.StatusCode
+									Title = Title,
+									Detail = Detail,
+									Status = StatusCode
 								}
 							};
 							if (builder.Environment.IsDevelopment())

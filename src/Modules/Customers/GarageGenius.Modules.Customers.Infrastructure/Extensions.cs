@@ -4,7 +4,6 @@ using GarageGenius.Modules.Customers.Infrastructure.Persistance.Repositories;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GarageGenius.Modules.Customers.Infrastructure;
 
