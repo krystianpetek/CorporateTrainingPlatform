@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HealthCheckComponent } from '../health-check/health-check.component';
 import { ErrorComponent } from '../shared/components/error/error.component';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { HomeComponent } from '../home/home/home.component';
-import { Role } from '../shared/services/authentication/models/role.model';
-import { adminGuard } from '../shared/guards/admin.guard';
 
 const dashboardModule = () =>
   import('../dashboard/dashboard.module').then(
@@ -14,6 +11,10 @@ const dashboardModule = () =>
 const authenticationModule = () =>
   import('../authentication/authentication.module').then(
     (routing) => routing.AuthenticationModule
+  );
+const healthCheckModule = () =>
+  import('../health-check/health-check.module').then(
+    (routing) => routing.HealthCheckModule
   );
 
 const routes: Routes = [
@@ -31,10 +32,9 @@ const routes: Routes = [
     canActivate: [authenticationGuard],
   },
   {
-    path: 'health-check',
-    component: HealthCheckComponent,
-    canActivate: [adminGuard],
-    data: { roles: [Role.Administrator] },
+    path: 'check-health',
+    loadChildren: healthCheckModule,
+    canActivate: [authenticationGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },

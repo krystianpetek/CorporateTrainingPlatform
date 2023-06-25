@@ -5,14 +5,14 @@ import {
   HttpErrorResponse,
   HttpStatusCode,
 } from '@angular/common/http';
-import { HealthCheck } from './health-check.component';
+import { HealthCheckResponseModel } from '../models/health-check-response.model';
 
 export interface IHealthCheckService {
-  healthCheckUsers(): Observable<HealthCheck>;
-  healthCheckCustomers(): Observable<HealthCheck>;
-  healthCheckVehicles(): Observable<HealthCheck>;
-  healthCheckNotifications(): Observable<HealthCheck>;
-  healthCheckReservations(): Observable<HealthCheck>;
+  healthCheckUsers(): Observable<HealthCheckResponseModel>;
+  healthCheckCustomers(): Observable<HealthCheckResponseModel>;
+  healthCheckVehicles(): Observable<HealthCheckResponseModel>;
+  healthCheckNotifications(): Observable<HealthCheckResponseModel>;
+  healthCheckReservations(): Observable<HealthCheckResponseModel>;
 }
 
 @Injectable({
@@ -30,24 +30,24 @@ export class HealthCheckService implements IHealthCheckService {
     this.httpClient = httpClient;
   }
 
-  public healthCheckUsers(): Observable<HealthCheck> {
+  public healthCheckUsers(): Observable<HealthCheckResponseModel> {
     return this.handleRequest(this.users);
   }
-  public healthCheckCustomers(): Observable<HealthCheck> {
+  public healthCheckCustomers(): Observable<HealthCheckResponseModel> {
     return this.handleRequest(this.customers);
   }
-  public healthCheckVehicles(): Observable<HealthCheck> {
+  public healthCheckVehicles(): Observable<HealthCheckResponseModel> {
     return this.handleRequest(this.vehicles);
   }
-  public healthCheckNotifications(): Observable<HealthCheck> {
+  public healthCheckNotifications(): Observable<HealthCheckResponseModel> {
     return this.handleRequest(this.notifications);
   }
-  public healthCheckReservations(): Observable<HealthCheck> {
+  public healthCheckReservations(): Observable<HealthCheckResponseModel> {
     return this.handleRequest(this.reservations);
   }
 
-  private handleRequest(url: string): Observable<HealthCheck> {
-    return this.httpClient.get<HealthCheck>(url).pipe(
+  private handleRequest(url: string): Observable<HealthCheckResponseModel> {
+    return this.httpClient.get<HealthCheckResponseModel>(url).pipe(
       map((response) => response),
       retry(2),
       catchError(this.handleError)

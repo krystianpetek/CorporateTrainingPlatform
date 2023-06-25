@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from '../core/main/main.component';
-import { AuthenticationModule } from '../authentication/authentication.module';
 import { jwtInterceptorProvider } from '../shared/interceptors/authorization.interceptor';
 import { AppMaterialModule } from '../shared/app-material.module';
 import { ErrorComponent } from '../shared/components/error/error.component';
@@ -15,6 +14,9 @@ import { SnackBarMessageModule } from '../shared/services/snack-bar-message/snac
 import { LayoutComponent } from '../core/layout/layout.component';
 import { HeaderComponent } from '../core/header/header.component';
 import { SideNavigationComponent } from './header/side-navigation/side-navigation.component';
+import { HealthCheckModule } from '../health-check/health-check.module';
+import { DashboardModule } from '../dashboard/dashboard.module';
+import { AuthenticationModule } from '../authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { SideNavigationComponent } from './header/side-navigation/side-navigatio
     SnackBarMessageModule,
     AuthenticationModule,
     HomeModule,
+    DashboardModule,
+    HealthCheckModule,
   ],
   exports: [AppMaterialModule],
   providers: [

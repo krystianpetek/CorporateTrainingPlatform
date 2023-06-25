@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { HealthCheckService } from './health-check.service';
-import { SignalrService } from '../shared/services/signalr/signalr.service';
+import { HealthCheckService } from '../services/health-check.service';
+import { SignalrService } from '../../shared/services/signalr/signalr.service';
+import { HealthCheckDisplayModel } from '../models/heallth-check-display.model';
+import { ModulesModel } from '../models/modules.model';
+import { HealthCheckResponseModel } from '../models/health-check-response.model';
 
 @Component({
   selector: 'app-health-check',
@@ -9,7 +12,7 @@ import { SignalrService } from '../shared/services/signalr/signalr.service';
 })
 export class HealthCheckComponent implements OnDestroy {
   private healthCheckService: HealthCheckService;
-  public moduleHealths: Record<Modules, HealthCheckDisplay> = {
+  public moduleHealths: Record<ModulesModel, HealthCheckDisplayModel> = {
     Vehicles: {
       module: { message: 'Loading...' },
       name: 'Vehicles',
@@ -32,7 +35,6 @@ export class HealthCheckComponent implements OnDestroy {
     },
   };
   public signalrService: SignalrService;
-
   constructor(
     healthCheckService: HealthCheckService,
     signalrService: SignalrService
@@ -40,7 +42,7 @@ export class HealthCheckComponent implements OnDestroy {
     this.signalrService = signalrService;
     this.healthCheckService = healthCheckService;
     this.healthCheckService.healthCheckVehicles().subscribe({
-      next: (response: HealthCheck) => {
+      next: (response: HealthCheckResponseModel) => {
         this.moduleHealths.Vehicles.module = response;
       },
       error: (error: void) => {
@@ -50,7 +52,7 @@ export class HealthCheckComponent implements OnDestroy {
       },
     });
     this.healthCheckService.healthCheckCustomers().subscribe({
-      next: (response: HealthCheck) => {
+      next: (response: HealthCheckResponseModel) => {
         this.moduleHealths.Customers.module = response;
       },
       error: (error: void) => {
@@ -60,7 +62,7 @@ export class HealthCheckComponent implements OnDestroy {
       },
     });
     this.healthCheckService.healthCheckUsers().subscribe({
-      next: (response: HealthCheck) => {
+      next: (response: HealthCheckResponseModel) => {
         this.moduleHealths.Users.module = response;
       },
       error: (error: void) => {
@@ -70,7 +72,7 @@ export class HealthCheckComponent implements OnDestroy {
       },
     });
     this.healthCheckService.healthCheckNotifications().subscribe({
-      next: (response: HealthCheck) => {
+      next: (response: HealthCheckResponseModel) => {
         this.moduleHealths.Notifications.module = response;
       },
       error: (error: void) => {
@@ -80,7 +82,7 @@ export class HealthCheckComponent implements OnDestroy {
       },
     });
     this.healthCheckService.healthCheckReservations().subscribe({
-      next: (response: HealthCheck) => {
+      next: (response: HealthCheckResponseModel) => {
         this.moduleHealths.Reservations.module = response;
       },
       error: (error: void) => {
@@ -95,20 +97,6 @@ export class HealthCheckComponent implements OnDestroy {
     await this.signalrService.stopHubConnection();
   }
 }
-export interface HealthCheck {
-  message: string;
-}
 
-export interface HealthCheckDisplay {
-  module: HealthCheck;
-  name: string;
-}
-
-export type Modules =
-  | 'Users'
-  | 'Vehicles'
-  | 'Customers'
-  | 'Notifications'
-  | 'Reservations';
 // https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type
 // https://blog.angular-university.io/rxjs-error-handling/

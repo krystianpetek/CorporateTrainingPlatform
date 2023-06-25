@@ -1,12 +1,12 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/health",
       "/users-module",
       "/vehicles-module",
       "/customers-module",
       "/notifications-module",
-      "/reservation-module"
+      "/reservation-module",
+      "/health",
     ],
     target: "https://localhost:7283",
     secure: false,
