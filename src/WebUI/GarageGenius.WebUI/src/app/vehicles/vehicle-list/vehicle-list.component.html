@@ -1,7 +1,7 @@
 <div>
-  <div class="bar">
+  <div class="title-bar">
     <h2>Vehicle list</h2>
-    <button mat-icon-button [routerLink]="['new']"><mat-icon fontIcon="add"></mat-icon></button>
+    <button color="primary" mat-mini-fab [routerLink]="['new']"><mat-icon fontIcon="add"></mat-icon></button>
   </div>
   <mat-action-list>
     <mat-list-item *ngFor="let vehicle of vehicles">
@@ -70,7 +70,7 @@
 </ng-template> -->
 
 <div class="responsive-table">
-  <table mat-table [dataSource]="this.dataSource">
+  <table mat-table [dataSource]="this.dataSource" aria-label="vehicle-list">
     <ng-container *ngIf="true" matColumnDef="id">
       <th hidden mat-header-cell *matHeaderCellDef> Id </th>
       <td hidden mat-cell *matCellDef="let element">{{element.id}}</td>
