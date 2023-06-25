@@ -5,50 +5,12 @@
   </div>
   <mat-action-list>
     <mat-list-item *ngFor="let vehicle of vehicles">
-      <a mat-list-item [routerLink]="[vehicle.id]" class="cols">
-        <span class="cols">{{ vehicle.vin }} - {{vehicle.manufacturer}} {{ vehicle.model }} {{ vehicle.year }} {{
+      <a mat-list-item [routerLink]="[vehicle.id]">
+        <span>{{ vehicle.vin }} - {{vehicle.manufacturer}} {{ vehicle.model }} {{ vehicle.year }} {{
           vehicle.licensePlate }}</span>
       </a>
     </mat-list-item>
   </mat-action-list>
-</div>
-
-<div class="card">
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table" *ngIf="vehicles && vehicles.length">
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Email</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let vehicle of vehicles">
-            <td>
-              <a [routerLink]="['/users', vehicle]">
-                {{ vehicle.model }}
-              </a>
-            </td>
-            <td>{{ vehicle.manufacturer }}</td>
-            <td>
-              <a class="btn btn-primary" routerLinkActive="active" [routerLink]="['/users/edit', vehicle.id]">
-                Edit
-              </a>
-              &nbsp;
-              <button type="button" class="btn btn-primary btn-danger">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-<div *ngIf="errorMessage" class="alert alert-danger">
-  Error: {{ errorMessage }}
 </div>
 
 <!-- <ng-template #deletetemplate>
@@ -106,3 +68,58 @@
     </div>
   </div>
 </ng-template> -->
+
+<div class="responsive-table">
+  <table mat-table [dataSource]="this.dataSource">
+    <ng-container *ngIf="true" matColumnDef="id">
+      <th hidden mat-header-cell *matHeaderCellDef> Id </th>
+      <td hidden mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="manufacturer">
+      <th class="vehicle-table" mat-header-cell *matHeaderCellDef> manufacturer </th>
+      <td class="vehicle-table" mat-cell *matCellDef="let element">{{element.manufacturer}}</td>
+    </ng-container>
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> model </th>
+      <td mat-cell *matCellDef="let element">{{element.model}}</td>
+    </ng-container>
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef> year </th>
+      <td mat-cell *matCellDef="let element">{{element.year}}</td>
+    </ng-container>
+    <ng-container matColumnDef="vin">
+      <th mat-header-cell *matHeaderCellDef> vin </th>
+      <td mat-cell *matCellDef="let element">{{element.vin}}</td>
+    </ng-container>
+    <ng-container matColumnDef="licensePlate">
+      <th mat-header-cell *matHeaderCellDef> licensePlate </th>
+      <td mat-cell *matCellDef="let element">{{element.licensePlate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="this.redirectToDetails(element.id)">
+          <mat-icon class="mat-18">reorder</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> Update </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="this.redirectToUpdate(element.id)">
+          <mat-icon class="mat-18">system_update</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="this.redirectToDelete(element.id)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+  </table>
+</div>

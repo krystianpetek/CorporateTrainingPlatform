@@ -13,12 +13,14 @@ const routes: Routes = [
     canActivate: [authenticationGuard],
   },
   {
-    path: 'new',
+    path: 'add',
     component: VehicleAddComponent,
+    canActivate: [authenticationGuard],
   },
   {
     path: ':id',
     component: VehicleDetailsComponent,
+    canActivate: [authenticationGuard],
   },
 ];
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+
 import { VehicleResponseModel } from '../models/vehicle.model';
 import { VehiclesService } from '../service/vehicles.service';
 import { IVehiclesService } from '../models/base-vehicle.service';
@@ -6,6 +8,7 @@ import {
   AuthenticationService,
   IAuthenticationService,
 } from 'src/app/shared/services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -15,15 +18,29 @@ import {
 export class VehicleListComponent implements OnInit {
   private _vehiclesService: IVehiclesService;
   private _authenticationService: IAuthenticationService;
+  private _router: Router;
   public vehicles?: Array<VehicleResponseModel>;
-  public errorMessage?: string;
+  public dataSource = new MatTableDataSource<VehicleResponseModel>();
+  public displayedColumns: string[] = [
+    'id',
+    'manufacturer',
+    'model',
+    'year',
+    'vin',
+    'licensePlate',
+    'details',
+    'update',
+    'delete',
+  ];
 
   public constructor(
     vehiclesService: VehiclesService,
-    authenticationService: AuthenticationService
+    authenticationService: AuthenticationService,
+    router: Router
   ) {
     this._vehiclesService = vehiclesService;
     this._authenticationService = authenticationService;
+    this._router = router;
   }
 
   ngOnInit(): void {
@@ -31,6 +48,20 @@ export class VehicleListComponent implements OnInit {
 
     this._vehiclesService
       .getCustomerVehicles(user.customerId)
-      .subscribe((vehicles) => (this.vehicles = vehicles));
+      .subscribe((vehicles) => {
+        this.vehicles = vehicles;
+        this.dataSource.data = vehicles as Array<VehicleResponseModel>;
+      });
   }
+
+  public redirectToDetails = (id: string) => {
+    this._router.navigate(['dashboard/vehicles/', id]);
+    console.log(`details ${id}`);
+  };
+  public redirectToUpdate = (id: string) => {
+    console.log(`update ${id}`);
+  };
+  public redirectToDelete = (id: string) => {
+    console.log(`delete ${id}`);
+  };
 }

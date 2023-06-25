@@ -1,23 +1,41 @@
 .container {
   display: flex;
+  gap: 0.5rem;
 }
 
 .inner-navbar {
-  margin: 0.5rem;
   display: flex;
   flex-direction: column;
+  width: 20%;
+  flex-grow: 1;
+  margin-top: 0.5rem;
 
   & button {
-    margin: 0.2rem;
+    margin-top: 0.2rem;
     padding: 1.5rem;
   }
 }
 
 .inner-content {
-  display: block;
-  width: 100%;
-  background-color: #505050;
-  padding: 1rem;
+  flex-grow: 4;
+  width: 80%;
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
   border-radius: 0.5rem;
-  margin: 0.5rem;
+}
+
+@media(max-width: 959px) {
+  .container {
+    display: block;
+  }
+
+  .inner-navbar {
+    width: 100%;
+  }
+
+  .inner-content {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
