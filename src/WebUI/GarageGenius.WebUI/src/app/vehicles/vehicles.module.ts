@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VehiclesRoutingModule } from './vehicles-routing.module';
-import { VehiclesComponent } from './vehicle-list/vehicles.component';
-import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { AppMaterialModule } from '../shared/app-material.module';
-import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.componentv';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
-    VehiclesComponent,
-    AddVehicleComponent,
+    VehicleListComponent,
+    VehicleAddComponent,
     VehicleDetailsComponent,
   ],
   imports: [CommonModule, VehiclesRoutingModule, AppMaterialModule],

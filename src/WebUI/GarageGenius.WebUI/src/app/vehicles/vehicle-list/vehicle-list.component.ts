@@ -8,11 +8,11 @@ import {
 } from 'src/app/shared/services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-vehicles',
-  templateUrl: './vehicles.component.html',
-  styleUrls: ['./vehicles.component.scss'],
+  selector: 'app-vehicle-list',
+  templateUrl: './vehicle-list.component.html',
+  styleUrls: ['./vehicle-list.component.scss'],
 })
-export class VehiclesComponent implements OnInit {
+export class VehicleListComponent implements OnInit {
   private _vehiclesService: IVehiclesService;
   private _authenticationService: IAuthenticationService;
   public vehicles?: Array<VehicleResponseModel>;
