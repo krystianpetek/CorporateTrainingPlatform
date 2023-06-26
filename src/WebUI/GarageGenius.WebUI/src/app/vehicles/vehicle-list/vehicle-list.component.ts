@@ -9,6 +9,9 @@ import {
   IAuthenticationService,
 } from 'src/app/shared/services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { VehicleAddComponent } from '../vehicle-add/vehicle-add.component';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -36,7 +39,8 @@ export class VehicleListComponent implements OnInit {
   public constructor(
     vehiclesService: VehiclesService,
     authenticationService: AuthenticationService,
-    router: Router
+    router: Router,
+    public dialog: MatDialog
   ) {
     this._vehiclesService = vehiclesService;
     this._authenticationService = authenticationService;
@@ -52,6 +56,19 @@ export class VehicleListComponent implements OnInit {
         this.vehicles = vehicles;
         this.dataSource.data = vehicles as Array<VehicleResponseModel>;
       });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(VehicleAddComponent, {
+      data: {
+        customerId: this._authenticationService.getUserInfo().customerId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
 
   public redirectToDetails = (id: string) => {

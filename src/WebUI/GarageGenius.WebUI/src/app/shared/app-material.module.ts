@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const materialModules = [
   MatButtonModule,
@@ -25,6 +26,7 @@ const materialModules = [
   MatToolbarModule,
   MatMenuModule,
   MatTableModule,
+  MatDialogModule,
 ];
 
 @NgModule({

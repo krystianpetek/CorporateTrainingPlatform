@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .inner-navbar {
@@ -9,17 +9,20 @@
   width: 20%;
   flex-grow: 1;
   margin-top: 0.5rem;
+  gap: 0.4rem;
 
   & button {
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
     padding: 1.5rem;
+    min-width: 120px;
+    ;
   }
 }
 
 .inner-content {
   flex-grow: 4;
   width: 80%;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 0.5rem;
   margin-top: 0.5rem;
   border-radius: 0.5rem;
@@ -34,7 +37,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
   }
 
   .inner-content {

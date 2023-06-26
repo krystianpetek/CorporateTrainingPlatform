@@ -6,6 +6,7 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { AppMaterialModule } from '../shared/app-material.module';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,11 @@ import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.compo
     VehicleAddComponent,
     VehicleDetailsComponent,
   ],
-  imports: [CommonModule, VehiclesRoutingModule, AppMaterialModule],
+  imports: [
+    CommonModule,
+    VehiclesRoutingModule,
+    AppMaterialModule,
+    ReactiveFormsModule,
+  ],
 })
 export class VehiclesModule {}
