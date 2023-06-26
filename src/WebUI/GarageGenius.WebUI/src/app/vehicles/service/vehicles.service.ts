@@ -58,8 +58,8 @@ export class VehiclesService extends BaseVehicleService {
 
   public override postVehicleForCustomer(
     customerId: string,
-    vehicle: VehicleResponseModel
-  ): Observable<VehicleRequestModel> {
+    vehicle: VehicleRequestModel
+  ): Observable<VehicleResponseModel> {
     return this._httpClient
       .post<VehicleResponseModel>(
         environment.vehiclesApiUrl + `vehicles/customers/${customerId}/vehicle`,

@@ -22,6 +22,8 @@ export class SignUpComponent implements OnInit {
   private readonly _formBuilder: FormBuilder;
   private isSuccessful: boolean;
   private isSignedUpFailed: boolean;
+
+  public signUpForm!: FormGroup<SignUpFormModel>;
   public error: string;
 
   constructor(
@@ -87,8 +89,6 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-  public signUpForm!: FormGroup<SignUpFormModel>;
-
   public get email(): SignUpFormModel['email'] {
     return this.signUpForm.controls.email;
   }
@@ -118,7 +118,6 @@ export class SignUpComponent implements OnInit {
     this._authenticationService
       .signUpUser(signUpModel)
       .pipe(
-
         catchError((err: HttpErrorResponse) => {
           let errorMessage = '';
           if (err.error instanceof ErrorEvent) {
@@ -127,7 +126,7 @@ export class SignUpComponent implements OnInit {
             errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
           }
           this.error = err.error.detail;
-          return throwError(errorMessage);
+          return throwError(() => errorMessage);
         })
       )
       .subscribe({
@@ -138,7 +137,7 @@ export class SignUpComponent implements OnInit {
         error: (err) => {
           this.isSignedUpFailed = true;
           this.error = err.error.detail;
-        }
+        },
       });
   }
 }

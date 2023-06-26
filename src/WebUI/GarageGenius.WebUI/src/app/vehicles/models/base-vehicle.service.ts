@@ -16,7 +16,7 @@ export abstract class BaseVehicleService implements IVehiclesService {
   abstract postVehicleForCustomer(
     customerId: string,
     vehicle: VehicleRequestModel
-  ): Observable<VehicleRequestModel>;
+  ): Observable<VehicleResponseModel>;
 
   abstract updateVehicleCustomer(
     vehicleId: string,
@@ -38,7 +38,7 @@ export interface IVehiclesService {
   postVehicleForCustomer(
     customerId: string,
     vehicle: VehicleRequestModel
-  ): Observable<VehicleRequestModel>;
+  ): Observable<VehicleResponseModel>;
 
   updateVehicleCustomer(
     vehicleId: string,
