@@ -8,10 +8,11 @@ const usersModule = () =>
 const vehiclesModule = () =>
   import('../vehicles/vehicles.module').then((m) => m.VehiclesModule);
 const customersModule = () =>
-  import('../customers/customers.module').then(
-    (routing) => routing.CustomersModule
+  import('../customers/customers.module').then((m) => m.CustomersModule);
+const reservationsModule = () =>
+  import('../reservations/reservations.module').then(
+    (m) => m.ReservationsModule
   );
-
 const routes: Routes = [
   {
     path: '',
@@ -38,6 +39,11 @@ const routes: Routes = [
       {
         path: 'customers',
         loadChildren: customersModule,
+        canActivate: [authenticationGuard],
+      },
+      {
+        path: 'reservations',
+        loadChildren: reservationsModule,
         canActivate: [authenticationGuard],
       },
     ],

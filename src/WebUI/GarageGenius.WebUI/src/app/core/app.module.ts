@@ -17,7 +17,6 @@ import { SideNavigationComponent } from './header/side-navigation/side-navigatio
 import { HealthCheckModule } from '../health-check/health-check.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
-import { CustomersModule } from '../customers/customers.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { CustomersModule } from '../customers/customers.module';
     HomeModule,
     DashboardModule,
     HealthCheckModule,
-    CustomersModule,
   ],
   exports: [AppMaterialModule],
   providers: [

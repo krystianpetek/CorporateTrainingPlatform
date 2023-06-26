@@ -26,6 +26,10 @@
       <mat-icon>dashboard</mat-icon>
       <span class="sideNav-caption">Customers</span>
     </button>
+    <button mat-menu-item routerLink="/dashboard/reservations" (click)="onCloseSideNavigation()">
+      <mat-icon>dashboard</mat-icon>
+      <span class="sideNav-caption">Reservations</span>
+    </button>
   </mat-menu>
 
   <a mat-list-item routerLink="/check-health" (click)="onCloseSideNavigation()">
