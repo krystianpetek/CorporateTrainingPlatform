@@ -7,6 +7,10 @@ const usersModule = () =>
   import('../users/users.module').then((m) => m.UsersModule);
 const vehiclesModule = () =>
   import('../vehicles/vehicles.module').then((m) => m.VehiclesModule);
+const customersModule = () =>
+  import('../customers/customers.module').then(
+    (routing) => routing.CustomersModule
+  );
 
 const routes: Routes = [
   {
@@ -29,6 +33,11 @@ const routes: Routes = [
         path: 'vehicles',
         pathMatch: 'prefix',
         loadChildren: vehiclesModule,
+        canActivate: [authenticationGuard],
+      },
+      {
+        path: 'customers',
+        loadChildren: customersModule,
         canActivate: [authenticationGuard],
       },
     ],
