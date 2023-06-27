@@ -1,12 +1,43 @@
-<div>
-  <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon></button>
-  <div *ngIf="vehicle">
-    <h2>{{ vehicleResponse!.vin }}</h2>
-    <div><span>id: </span>{{ vehicleResponse!.id }}</div>
-    <div>
-      <label>name:
-        <span placeholder="name">{{ vehicleResponse!.manufacturer }}</span>
-      </label>
-    </div>
+<div class="container" *ngIf="vehicleResponse">
+  <div class="title-bar">
+    <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon>
+    </button>
+    <h2 class="title-bar_model">{{ vehicleResponse.manufacturer }} {{ vehicleResponse.model }}</h2>
+  </div>
+
+  <div class="vehicle-property-container">
+    <strong class="vehicle-property-name">Manufacturer:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property-container">
+    <strong class="vehicle-property-name">Model:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.model }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property-container">
+    <strong class="vehicle-property-name">Year:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.year }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property-container">
+    <strong class="vehicle-property-name">License plate:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.licensePlate }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property-container">
+    <strong class="vehicle-property-name">VIN number:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.vin }}</i>
   </div>
 </div>
+<!-- <mat-form-field>
+  <mat-select placeholder="Show accounts" (selectionChange)="onChange($event)">
+    <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
+      {{opt.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
