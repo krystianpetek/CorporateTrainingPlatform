@@ -1,1 +1,12 @@
-<p>vehicle works!</p>
+<div>
+  <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon></button>
+  <div *ngIf="vehicle">
+    <h2>{{ vehicleResponse!.vin }}</h2>
+    <div><span>id: </span>{{ vehicleResponse!.id }}</div>
+    <div>
+      <label>name:
+        <span placeholder="name">{{ vehicleResponse!.manufacturer }}</span>
+      </label>
+    </div>
+  </div>
+</div>

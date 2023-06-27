@@ -7,6 +7,7 @@ import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { AppMaterialModule } from '../shared/app-material.module';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     VehiclesRoutingModule,
     AppMaterialModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
 })
 export class VehiclesModule {}

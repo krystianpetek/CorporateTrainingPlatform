@@ -11,7 +11,8 @@ import {
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VehicleAddComponent } from '../vehicle-add/vehicle-add.component';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -32,7 +33,7 @@ export class VehicleListComponent implements OnInit {
     'vin',
     'licensePlate',
     'details',
-    'update',
+    // 'update',
     'delete',
   ];
 
@@ -52,9 +53,10 @@ export class VehicleListComponent implements OnInit {
 
     this._vehiclesService
       .getCustomerVehicles(user.customerId)
+      .pipe(catchError(this.handleError))
       .subscribe((vehicles) => {
         this.vehicles = vehicles;
-        this.dataSource.data = vehicles as Array<VehicleResponseModel>;
+        this.dataSource.data = vehicles;
       });
   }
 
@@ -81,4 +83,16 @@ export class VehicleListComponent implements OnInit {
   public redirectToDelete = (id: string) => {
     console.log(`delete ${id}`);
   };
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+      errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
+    }
+    console.error(errorMessage);
+    // TODO - add a remote logging service like in backend - Serilog with Seq sink
+    return throwError(() => errorMessage);
+  }
 }
