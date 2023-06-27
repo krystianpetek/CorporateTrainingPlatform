@@ -66,6 +66,19 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		return getCustomerReservationsQueryDto;
 	}
 
+	public async Task<GetVehicleReservationsQueryDto> GetVehicleReservationsAsync(Guid vehicleId, CancellationToken cancellationToken = default)
+	{
+		List<VehicleReservationsDto> vehicleReservationsDto = await _reservationsDbContext.Reservations
+		.AsNoTracking()
+		.AsQueryable()
+		.Where<Reservation>(reservation => reservation.VehicleId == vehicleId)
+		.Select<Reservation, VehicleReservationsDto>(reservation => new VehicleReservationsDto(reservation.ReservationId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
+		.ToListAsync<VehicleReservationsDto>(cancellationToken);
+
+		GetVehicleReservationsQueryDto getVehicleReservationsQueryDto = new GetVehicleReservationsQueryDto(vehicleId, vehicleReservationsDto);
+		return getVehicleReservationsQueryDto;
+	}
+
 	public async Task<GetCurrentNotCompletedReservationsQueryDto> GetCurrentNotCompletedReservationsAsync(GetCurrentNotCompletedReservationsQuery getCurrentNotCompletedReservationsQuery, CancellationToken cancellationToken)
 	{
 		PaginatedList<CurrentNotCompletedReservationsDto> currentNotCompletedReservationsDtos = await _reservationsDbContext.Reservations

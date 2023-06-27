@@ -67,6 +67,16 @@ public class ReservationsController : BaseController
 		return Ok(getCustomerReservationsQueryDto);
 	}
 
+	[HttpGet("vehicle/{vehicleId:guid}/reservations")]
+	[Authorize]
+	[SwaggerOperation("Get vehicle reservations")]
+	public async Task<ActionResult> GetVehicleReservationsAsync(Guid vehicleId)
+	{
+		GetVehicleReservationsQuery getVehicleReservationsQuery = new GetVehicleReservationsQuery(vehicleId);
+		GetVehicleReservationsQueryDto getVehicleReservationsQueryDto = await _dispatcher.DispatchQueryAsync(getVehicleReservationsQuery);
+		return Ok(getVehicleReservationsQueryDto);
+	}
+
 	[HttpGet("not-completed")]
 	[Authorize]
 	[SwaggerOperation("Get current not completed reservations")]
