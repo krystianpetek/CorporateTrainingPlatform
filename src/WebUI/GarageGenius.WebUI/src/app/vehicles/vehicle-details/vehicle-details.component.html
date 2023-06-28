@@ -35,18 +35,11 @@
   </div>
 
   <div class="add-reservation_button">
-    <button mat-stroked-button type="button" (click)="this.getVehicleReservations(this.vehicleResponse.id)">Show all
+    <button mat-stroked-button type="button" (click)="this.openDialog()">Show all
       reservations</button>
   </div>
 </div>
-<div *ngIf="this.vehicleReservationsResponse">
-  <div *ngFor="let reservation of this.vehicleReservationsResponse.vehicleReservationsDto">
-    <p>{{ reservation.reservationId }}</p>
-    <p>{{ reservation.reservationDate }}</p>
-    <p>{{ reservation.reservationState }}</p>
-    <p>{{ reservation.comment }}</p>
-  </div>
-</div>
+
 <!-- <mat-form-field>
   <mat-select placeholder="Show accounts" (selectionChange)="onChange($event)">
     <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">

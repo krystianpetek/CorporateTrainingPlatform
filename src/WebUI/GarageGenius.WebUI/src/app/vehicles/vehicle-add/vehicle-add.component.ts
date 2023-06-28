@@ -20,6 +20,7 @@ export class VehicleAddComponent implements OnInit {
   private readonly _formBuilder: FormBuilder;
   private readonly _vehiclesService: IVehiclesService;
   private readonly _authenticationService: IAuthenticationService;
+  private readonly _dialogRef: MatDialogRef<VehicleAddComponent>;
   private isSuccessful: boolean;
 
   public vehicleAddForm!: FormGroup<VehicleAddFormModel>;
@@ -29,19 +30,20 @@ export class VehicleAddComponent implements OnInit {
     formBuilder: FormBuilder,
     vehiclesService: VehiclesService,
     authenticationService: AuthenticationService,
-    private dialogRef: MatDialogRef<VehicleAddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: VehicleAddModalProperties
+    dialogRef: MatDialogRef<VehicleAddComponent>,
+    @Inject(MAT_DIALOG_DATA) public matDialogData: VehicleAddModalProperties
   ) {
     this._formBuilder = formBuilder;
     this._vehiclesService = vehiclesService;
     this._authenticationService = authenticationService;
+    this._dialogRef = dialogRef;
     this.isSuccessful = false;
     this.error = '';
   }
   ngOnInit(): void {
     this.vehicleAddForm = this._formBuilder.group({
       customerId: [
-        this.data.customerId,
+        this.matDialogData.customerId,
         {
           validators: [],
           nonNullable: false,
@@ -122,7 +124,7 @@ export class VehicleAddComponent implements OnInit {
       .subscribe({
         next: () => {
           this.isSuccessful = true;
-          this.dialogRef.close();
+          this._dialogRef.close();
         },
         error: (err) => {
           this.isSuccessful = false;

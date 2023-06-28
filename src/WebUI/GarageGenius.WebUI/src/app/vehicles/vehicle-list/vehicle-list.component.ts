@@ -11,8 +11,6 @@ import {
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VehicleAddComponent } from '../vehicle-add/vehicle-add.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -69,6 +67,7 @@ export class VehicleListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       console.log(result);
+      // TODO - change handling of this to refresh the list of vehicles ?
     });
   }
 

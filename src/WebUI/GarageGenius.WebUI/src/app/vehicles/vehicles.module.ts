@@ -8,12 +8,14 @@ import { AppMaterialModule } from '../shared/app-material.module';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { VehicleReservationsComponent } from './vehicle-reservations/vehicle-reservations.component';
 
 @NgModule({
   declarations: [
     VehicleListComponent,
     VehicleAddComponent,
     VehicleDetailsComponent,
+    VehicleReservationsComponent,
   ],
   imports: [
     CommonModule,

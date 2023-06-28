@@ -73,6 +73,7 @@ public class ReservationsController : BaseController
 	[SwaggerOperation("Get vehicle reservations")]
 	public async Task<ActionResult> GetVehicleReservationsAsync(Guid vehicleId)
 	{
+		// TODO - order by reservation date
 		GetVehicleReservationsQuery getVehicleReservationsQuery = new GetVehicleReservationsQuery(vehicleId);
 		GetVehicleReservationsQueryDto getVehicleReservationsQueryDto = await _dispatcher.DispatchQueryAsync(getVehicleReservationsQuery);
 		return Ok(getVehicleReservationsQueryDto);
