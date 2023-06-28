@@ -5,7 +5,7 @@ const PROXY_CONFIG = [
       "/vehicles-module",
       "/customers-module",
       "/notifications-module",
-      "/reservation-module",
+      "/reservations-module",
       "/health",
     ],
     target: "https://localhost:7283",

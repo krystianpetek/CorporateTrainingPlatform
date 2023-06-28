@@ -34,6 +34,7 @@ public class ReservationsController : BaseController
 	[SwaggerOperation("Add reservation")]
 	public async Task<IActionResult> AddReservation(AddReservationCommand command)
 	{
+		// TODO add reservation date to command parameters with date validation
 		await _dispatcher.DispatchCommandAsync(command);
 		return Ok();
 	}

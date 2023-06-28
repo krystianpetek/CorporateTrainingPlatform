@@ -2,12 +2,12 @@
 public sealed record class GetVehicleReservationsQueryDto
 {
 	public Guid VehicleId { get; init; }
-	public List<VehicleReservationsDto> CustomerReservationsDto { get; init; }
+	public List<VehicleReservationsDto> VehicleReservationsDto { get; init; }
 
-	public GetVehicleReservationsQueryDto(Guid VehicleId, List<VehicleReservationsDto> CustomerReservationsDto)
+	public GetVehicleReservationsQueryDto(Guid VehicleId, List<VehicleReservationsDto> VehicleReservationsDto)
 	{
 		this.VehicleId = VehicleId;
-		this.CustomerReservationsDto = CustomerReservationsDto;
+		this.VehicleReservationsDto = VehicleReservationsDto;
 	}
 }
 

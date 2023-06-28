@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleResponseModel } from '../models/vehicle.model';
-import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ReservationsService } from 'src/app/reservations/services/reservations.service';
+import { VehicleReservationsResponseModel } from 'src/app/reservations/models/vehicle-reservations-response.model';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -12,16 +12,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class VehicleDetailsComponent implements OnInit {
   private readonly _vehicleService: VehicleService;
+  private readonly _reservationsService: ReservationsService;
   private readonly _activatedRoute: ActivatedRoute;
   private readonly _router: Router;
   public vehicleResponse?: VehicleResponseModel;
+  public vehicleReservationsResponse?: Array<VehicleReservationsResponseModel>;
 
   constructor(
     vehicleService: VehicleService,
+    reservationsService: ReservationsService,
     activatedRoute: ActivatedRoute,
     router: Router
   ) {
     this._vehicleService = vehicleService;
+    this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._router = router;
   }
@@ -33,27 +37,20 @@ export class VehicleDetailsComponent implements OnInit {
   }
 
   public vehicle(id: string) {
-    return this._vehicleService
-      .getVehicleById(id)
-      .pipe(catchError(this.handleError))
-      .subscribe((vehicle) => {
-        this.vehicleResponse = vehicle;
-      });
+    return this._vehicleService.getVehicleById(id).subscribe((vehicle) => {
+      this.vehicleResponse = vehicle;
+    });
   }
 
   public goBack(): void {
     this._router.navigate(['dashboard/vehicles']);
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${error.error.message}`;
-    } else {
-      errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
-    }
-    console.error(errorMessage);
-    // TODO - add a remote logging service like in backend - Serilog with Seq sink
-    return throwError(() => errorMessage);
+  public getVehicleReservations(vehicleId: string) {
+    this._reservationsService
+      .getVehicleReservations(vehicleId)
+      .subscribe((reservations) => {
+        this.vehicleReservationsResponse = reservations;
+      });
   }
 }

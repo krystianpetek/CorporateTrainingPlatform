@@ -27,12 +27,12 @@ export class VehicleListComponent implements OnInit {
   public dataSource = new MatTableDataSource<VehicleResponseModel>();
   public displayedColumns: string[] = [
     'id',
+    'details',
     'manufacturer',
     'model',
-    'year',
-    'vin',
     'licensePlate',
-    'details',
+    'vin',
+    'year',
     // 'update',
     'delete',
   ];
@@ -53,7 +53,6 @@ export class VehicleListComponent implements OnInit {
 
     this._vehiclesService
       .getCustomerVehicles(user.customerId)
-      .pipe(catchError(this.handleError))
       .subscribe((vehicles) => {
         this.vehicles = vehicles;
         this.dataSource.data = vehicles;
@@ -83,16 +82,4 @@ export class VehicleListComponent implements OnInit {
   public redirectToDelete = (id: string) => {
     console.log(`delete ${id}`);
   };
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${error.error.message}`;
-    } else {
-      errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
-    }
-    console.error(errorMessage);
-    // TODO - add a remote logging service like in backend - Serilog with Seq sink
-    return throwError(() => errorMessage);
-  }
 }

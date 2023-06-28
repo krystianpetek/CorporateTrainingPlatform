@@ -21,20 +21,22 @@
   }
 }
 
-.vehicle-property-container {
+.vehicle-property {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
   gap: 1rem;
   justify-items: left;
+
+  &-name {
+    grid-column: 2/3;
+  }
+
+  &-value {
+    grid-column: 4/5;
+  }
 }
 
-.vehicle-property-name {
-  grid-column: 2/3;
-}
 
-.vehicle-property-value {
-  grid-column: 4/5;
-}
 
 mat-card-content,
 mat-card-title,
@@ -55,7 +57,7 @@ hr {
 
 @media(max-width: 959px) {
 
-  .vehicle-property-container {
+  .vehicle-property {
     display: flex;
     flex-direction: row;
     gap: 1rem;

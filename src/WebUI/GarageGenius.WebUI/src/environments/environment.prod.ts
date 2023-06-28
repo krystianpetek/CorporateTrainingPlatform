@@ -15,5 +15,8 @@ export const environment = {
   // customers
   customersApiUrl: `customers-module/`,
 
+  // reservations
+  reservationsApiUrl: `reservations-module/`,
+
   baseUrl: 'https://localhost:7283/',
 };

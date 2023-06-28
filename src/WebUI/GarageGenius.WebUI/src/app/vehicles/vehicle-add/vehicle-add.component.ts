@@ -9,8 +9,7 @@ import {
   IAuthenticationService,
 } from 'src/app/shared/services/authentication/authentication.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { VehicleAddModalProperties } from './models/vehicle-add-modal-properties.model';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -31,7 +30,7 @@ export class VehicleAddComponent implements OnInit {
     vehiclesService: VehiclesService,
     authenticationService: AuthenticationService,
     private dialogRef: MatDialogRef<VehicleAddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogValues
+    @Inject(MAT_DIALOG_DATA) public data: VehicleAddModalProperties
   ) {
     this._formBuilder = formBuilder;
     this._vehiclesService = vehiclesService;
@@ -120,7 +119,6 @@ export class VehicleAddComponent implements OnInit {
 
     this._vehiclesService
       .postVehicleForCustomer(customerId, vehicleAddModel)
-      .pipe(catchError(this.handleError))
       .subscribe({
         next: () => {
           this.isSuccessful = true;
@@ -129,23 +127,8 @@ export class VehicleAddComponent implements OnInit {
         error: (err) => {
           this.isSuccessful = false;
           this.error = err.error.detail;
+          // TODO - check if its work because in vehicle service is also error handling
         },
       });
   }
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${error.error.message}`;
-    } else {
-      errorMessage = `Server returned code: ${error.status}, error message is: ${error.message}`;
-    }
-    console.error(errorMessage);
-    // TODO - add a remote logging service like in backend - Serilog with Seq sink
-    return throwError(() => errorMessage);
-  }
-}
-
-export interface DialogValues {
-  customerId: string;
 }
