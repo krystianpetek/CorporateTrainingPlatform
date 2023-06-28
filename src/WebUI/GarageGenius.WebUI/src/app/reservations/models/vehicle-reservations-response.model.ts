@@ -1,6 +1,6 @@
 export interface VehicleReservationsResponseModel {
   vehicleId: string;
-  customerReservationsDto: Array<VehicleReservationsDto>;
+  vehicleReservationsDto: Array<VehicleReservationsDto>;
 }
 
 export interface VehicleReservationsDto {

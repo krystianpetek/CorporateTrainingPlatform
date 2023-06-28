@@ -4,11 +4,11 @@ import { VehicleReservationsResponseModel } from './vehicle-reservations-respons
 export abstract class BaseReservationsService implements IReservationsService {
   abstract getVehicleReservations(
     vehicleId: string
-  ): Observable<Array<VehicleReservationsResponseModel>>;
+  ): Observable<VehicleReservationsResponseModel>;
 }
 
 export interface IReservationsService {
   getVehicleReservations(
     vehicleId: string
-  ): Observable<Array<VehicleReservationsResponseModel>>;
+  ): Observable<VehicleReservationsResponseModel>;
 }

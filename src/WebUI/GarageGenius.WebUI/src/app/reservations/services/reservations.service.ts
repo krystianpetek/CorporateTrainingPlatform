@@ -17,9 +17,9 @@ export class ReservationsService extends BaseReservationsService {
 
   override getVehicleReservations(
     vehicleId: string
-  ): Observable<Array<VehicleReservationsResponseModel>> {
+  ): Observable<VehicleReservationsResponseModel> {
     return this._httpClient
-      .get<Array<VehicleReservationsResponseModel>>(
+      .get<VehicleReservationsResponseModel>(
         environment.reservationsApiUrl +
           `Reservations/vehicle/${vehicleId}/reservations`
       )

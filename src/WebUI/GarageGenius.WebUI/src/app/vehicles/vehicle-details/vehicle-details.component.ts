@@ -16,7 +16,7 @@ export class VehicleDetailsComponent implements OnInit {
   private readonly _activatedRoute: ActivatedRoute;
   private readonly _router: Router;
   public vehicleResponse?: VehicleResponseModel;
-  public vehicleReservationsResponse?: Array<VehicleReservationsResponseModel>;
+  public vehicleReservationsResponse?: VehicleReservationsResponseModel;
 
   constructor(
     vehicleService: VehicleService,

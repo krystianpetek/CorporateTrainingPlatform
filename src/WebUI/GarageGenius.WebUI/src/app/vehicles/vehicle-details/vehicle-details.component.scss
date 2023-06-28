@@ -36,7 +36,11 @@
   }
 }
 
-
+.add-reservation_button {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
 
 mat-card-content,
 mat-card-title,
