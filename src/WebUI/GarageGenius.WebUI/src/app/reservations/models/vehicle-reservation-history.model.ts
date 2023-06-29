@@ -1,9 +1,9 @@
 export interface VehicleReservationHistoryModel {
   reservationId: string;
-  reservationHistoriesDtos: ReservationHistoryResponseModel;
+  reservationHistoriesDtos: ReservationHistoryDto;
 }
 
-export interface ReservationHistoryResponseModel {
+export interface ReservationHistoryDto {
   reservationHistoryId: string;
   reservationState: string;
   comment: string;
