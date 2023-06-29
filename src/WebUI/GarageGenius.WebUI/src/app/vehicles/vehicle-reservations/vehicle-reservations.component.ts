@@ -27,6 +27,11 @@ export class VehicleReservationsComponent implements OnInit {
   ngOnInit(): void {
     this.getVehicleReservations(this.matDialogData.vehicleId);
   }
+  // TODO - spinner or something while waiting for response
+
+  public closeDialog() {
+    this.dialogRef.close();
+  }
 
   private getVehicleReservations(vehicleId: string) {
     this._reservationsService

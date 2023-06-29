@@ -1,13 +1,15 @@
 <h1 mat-dialog-title class="mat-dialog-title">Vehicle reservations</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <div *ngIf="this.vehicleReservationsResponse?.vehicleReservationsDto!.length > 0 else template">
-    <div *ngFor="let reservation of this.vehicleReservationsResponse?.vehicleReservationsDto; let i = index">
-      <p>{{i+1}}</p>
-      <p>{{ reservation.reservationId }}</p>
-      <p>{{ reservation.reservationDate }}</p>
-      <p>{{ reservation.reservationState }}</p>
-      <p>{{ reservation.comment }}</p>
-    </div>
+    <mat-action-list>
+      <button mat-list-item
+        *ngFor="let reservation of this.vehicleReservationsResponse?.vehicleReservationsDto; let i = index"
+        [routerLink]="'dashboard/reservations/'+reservation.reservationId" (click)="closeDialog()">
+        <h3 matListItemTitle>{{i+1}}. {{ reservation.reservationState }}</h3>
+        <p matListItemMeta>{{ reservation.reservationDate | date:'shortDate' }}</p>
+        <p matListItemLine>{{ reservation.comment }}</p>
+      </button>
+    </mat-action-list>
   </div>
   <ng-template #template>
     <p>No reservations found</p>
