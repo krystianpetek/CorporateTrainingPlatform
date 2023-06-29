@@ -48,3 +48,16 @@
     box-sizing: border-box;
   }
 }
+
+.active {
+  background-color: $color-primary;
+  color: white;
+}
+
+.button-inner-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}

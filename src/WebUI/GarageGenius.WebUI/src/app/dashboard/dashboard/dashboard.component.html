@@ -1,9 +1,28 @@
 <div class="container">
   <div class="inner-navbar">
-    <button mat-flat-button [routerLink]="['vehicles']">Vehicles</button>
-    <button mat-flat-button [routerLink]="['users']">Users</button>
-    <button mat-flat-button [routerLink]="['customers']">Customers</button>
-    <button mat-flat-button [routerLink]="['reservations']">Reservations</button>
+    <button mat-flat-button [routerLink]="['vehicles']" routerLinkActive="active">
+      <div class="button-inner-container">
+        <mat-icon>directions_car</mat-icon>Vehicles
+      </div>
+    </button>
+
+    <button mat-flat-button [routerLink]="['users']" routerLinkActive="active">
+      <div class="button-inner-container">
+        <mat-icon>person</mat-icon>Users
+      </div>
+    </button>
+
+    <button mat-flat-button [routerLink]="['customers']" routerLinkActive="active">
+      <div class="button-inner-container">
+        <mat-icon>person_pin_circle</mat-icon>Customers
+      </div>
+    </button>
+
+    <button mat-flat-button [routerLink]="['reservations']" routerLinkActive="active">
+      <div class="button-inner-container">
+        <mat-icon>schedule</mat-icon>Reservations
+      </div>
+    </button>
   </div>
   <div class="inner-content">
     <router-outlet></router-outlet>
