@@ -54,6 +54,7 @@ public class ReservationsController : BaseController
 	[SwaggerOperation("Get reservation history")]
 	public async Task<ActionResult> GetReservationHistoryAsync(Guid reservationId)
 	{
+		// TODO - date
 		GetReservationHistoryQuery query = new GetReservationHistoryQuery(reservationId);
 		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = await _dispatcher.DispatchQueryAsync(query);
 		return Ok(getReservationHistoryQueryDto);

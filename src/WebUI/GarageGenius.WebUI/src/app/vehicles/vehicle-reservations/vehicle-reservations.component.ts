@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ReservationsService } from 'src/app/reservations/services/reservations.service';
 import { VehicleReservationsModalProperties } from './models/vehicle-reservations-modal-properties.model';
 import { VehicleReservationsResponseModel } from 'src/app/reservations/models/vehicle-reservations-response.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-reservations',
@@ -12,16 +13,19 @@ import { VehicleReservationsResponseModel } from 'src/app/reservations/models/ve
 export class VehicleReservationsComponent implements OnInit {
   private readonly _reservationsService: ReservationsService;
   private readonly dialogRef: MatDialogRef<VehicleReservationsComponent>;
+  private readonly _router: Router;
   public vehicleReservationsResponse?: VehicleReservationsResponseModel;
 
   constructor(
     reservationsService: ReservationsService,
     dialogRef: MatDialogRef<VehicleReservationsComponent>,
+    router: Router,
     @Inject(MAT_DIALOG_DATA)
     public matDialogData: VehicleReservationsModalProperties
   ) {
     this._reservationsService = reservationsService;
     this.dialogRef = dialogRef;
+    this._router = router;
   }
 
   ngOnInit(): void {
@@ -29,7 +33,10 @@ export class VehicleReservationsComponent implements OnInit {
   }
   // TODO - spinner or something while waiting for response
 
-  public closeDialog() {
+  public redirectToReservationDetails(reservationId: string) {
+    this._router.navigate(['dashboard/reservations', reservationId], {
+      queryParams: { reservationId: reservationId },
+    });
     this.dialogRef.close();
   }
 
@@ -38,7 +45,6 @@ export class VehicleReservationsComponent implements OnInit {
       .getVehicleReservations(vehicleId)
       .subscribe((reservations) => {
         this.vehicleReservationsResponse = reservations;
-        console.log(this.vehicleReservationsResponse);
       });
   }
 }

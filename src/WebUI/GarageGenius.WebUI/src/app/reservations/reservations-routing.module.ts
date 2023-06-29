@@ -8,6 +8,7 @@ import { ReservationAddComponent } from './reservation-add/reservation-add.compo
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: ReservationListComponent,
     canActivate: [authenticationGuard],
   },

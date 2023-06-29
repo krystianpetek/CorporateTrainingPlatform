@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleResponseModel } from '../models/vehicle.model';
-import { ReservationsService } from 'src/app/reservations/services/reservations.service';
-import { VehicleReservationsResponseModel } from 'src/app/reservations/models/vehicle-reservations-response.model';
 import { VehicleReservationsComponent } from '../vehicle-reservations/vehicle-reservations.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,7 +12,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class VehicleDetailsComponent implements OnInit {
   private readonly _vehicleService: VehicleService;
-  private readonly _reservationsService: ReservationsService;
   private readonly _activatedRoute: ActivatedRoute;
   private readonly _router: Router;
   private readonly _dialog: MatDialog;
@@ -22,13 +19,11 @@ export class VehicleDetailsComponent implements OnInit {
 
   constructor(
     vehicleService: VehicleService,
-    reservationsService: ReservationsService,
     activatedRoute: ActivatedRoute,
     router: Router,
     dialog: MatDialog
   ) {
     this._vehicleService = vehicleService;
-    this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._router = router;
     this._dialog = dialog;
@@ -59,7 +54,6 @@ export class VehicleDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      console.log(result);
     });
   }
 }

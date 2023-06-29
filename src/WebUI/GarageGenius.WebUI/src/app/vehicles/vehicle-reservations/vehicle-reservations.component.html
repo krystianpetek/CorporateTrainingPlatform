@@ -4,7 +4,7 @@
     <mat-action-list>
       <button mat-list-item
         *ngFor="let reservation of this.vehicleReservationsResponse?.vehicleReservationsDto; let i = index"
-        [routerLink]="'dashboard/reservations/'+reservation.reservationId" (click)="closeDialog()">
+        (click)="redirectToReservationDetails(reservation.reservationId)">
         <h3 matListItemTitle>{{i+1}}. {{ reservation.reservationState }}</h3>
         <p matListItemMeta>{{ reservation.reservationDate | date:'shortDate' }}</p>
         <p matListItemLine>{{ reservation.comment }}</p>

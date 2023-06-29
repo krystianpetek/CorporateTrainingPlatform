@@ -4,6 +4,7 @@ import { BaseReservationsService } from '../models/base-reservations.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { VehicleReservationsResponseModel } from '../models/vehicle-reservations-response.model';
 import { environment } from 'src/environments/environment';
+import { VehicleReservationHistoryModel } from '../models/vehicle-reservation-history.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,17 @@ export class ReservationsService extends BaseReservationsService {
     return this._httpClient
       .get<VehicleReservationsResponseModel>(
         environment.reservationsApiUrl +
-          `Reservations/vehicle/${vehicleId}/reservations`
+          `reservations/vehicle/${vehicleId}/reservations`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  override getReservationHistory(
+    reservationId: string
+  ): Observable<VehicleReservationHistoryModel> {
+    return this._httpClient
+      .get<VehicleReservationHistoryModel>(
+        environment.reservationsApiUrl + `reservations/${reservationId}/history`
       )
       .pipe(catchError(this.handleError));
   }

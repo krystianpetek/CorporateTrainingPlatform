@@ -21,7 +21,7 @@ export class VehicleAddComponent implements OnInit {
   private readonly _vehiclesService: IVehiclesService;
   private readonly _authenticationService: IAuthenticationService;
   private readonly _dialogRef: MatDialogRef<VehicleAddComponent>;
-  private isSuccessful: boolean;
+  private isSuccessful: boolean; // ??
 
   public vehicleAddForm!: FormGroup<VehicleAddFormModel>;
   public error: string;
