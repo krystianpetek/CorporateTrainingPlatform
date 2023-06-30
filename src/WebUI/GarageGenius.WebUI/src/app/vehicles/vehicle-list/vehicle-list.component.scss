@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .title-bar {
   display: flex;
   flex-direction: row;
@@ -15,6 +17,10 @@ table {
 th.mat-header-cell {
   text-align: left;
   max-width: 300px;
+}
+
+.mdc-data-table__cell {
+  border-top: 0.5px solid $theme-text;
 }
 
 .responsive-table {

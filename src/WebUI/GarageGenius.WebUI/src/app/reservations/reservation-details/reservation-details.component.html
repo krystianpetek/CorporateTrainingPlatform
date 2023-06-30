@@ -1,1 +1,40 @@
-<p>reservation-details works!</p>
+<div class="container" *ngIf="this.reservationDetails">
+  <div class="title-bar">
+    <!-- <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon></button> -->
+    <h2 class="title-bar_model">{{ this.reservationDetails.reservationState }}</h2>
+  </div>
+
+  <!-- <div class="vehicle-property">
+    <strong class="vehicle-property-name">Manufacturer:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.manufacturer }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property">
+    <strong class="vehicle-property-name">Model:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.model }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property">
+    <strong class="vehicle-property-name">Year:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.year }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property">
+    <strong class="vehicle-property-name">License plate:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.licensePlate }}</i>
+  </div>
+  <hr />
+
+  <div class="vehicle-property">
+    <strong class="vehicle-property-name">VIN number:</strong>
+    <i class="vehicle-property-value">{{ vehicleResponse.vin }}</i>
+  </div>
+
+  <div class="add-reservation_button">
+    <button mat-stroked-button type="button" (click)="this.openDialog()">Show all
+      reservations</button>
+  </div> -->
+</div>

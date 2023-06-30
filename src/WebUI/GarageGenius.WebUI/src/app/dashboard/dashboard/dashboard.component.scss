@@ -17,17 +17,19 @@
     margin-top: 0.1rem;
     padding: 1.5rem;
     min-width: 120px;
-    ;
+    color: $theme-text;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   }
 }
 
 .inner-content {
   flex-grow: 4;
   width: 80%;
-  background-color: #fff;
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-sizing: border-box;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  color: $theme-text;
 }
 
 @media(max-width: 959px) {
@@ -50,8 +52,8 @@
 }
 
 .active {
-  background-color: $color-primary;
-  color: white;
+  background-color: $theme-selected-background !important;
+  color: $theme-side !important;
 }
 
 .button-inner-container {

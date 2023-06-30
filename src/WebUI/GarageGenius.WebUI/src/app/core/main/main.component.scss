@@ -11,10 +11,10 @@ mat-sidenav-content {
   flex-direction: column;
   justify-content: stretch;
   height: 100%;
-  background-color: #444;
+  background-color: $theme-outer-background;
 }
 
 mat-sidenav {
-  background-color: $theme-inner-background;
+  background-color: $theme-outer-background;
   width: 250px;
 }
