@@ -13,13 +13,13 @@ const routes: Routes = [
     canActivate: [authenticationGuard],
   },
   {
-    path: ':id',
-    component: ReservationDetailsComponent,
+    path: 'add',
+    component: ReservationAddComponent,
     canActivate: [authenticationGuard],
   },
   {
-    path: 'add',
-    component: ReservationAddComponent,
+    path: ':id',
+    component: ReservationDetailsComponent,
     canActivate: [authenticationGuard],
   },
 ];

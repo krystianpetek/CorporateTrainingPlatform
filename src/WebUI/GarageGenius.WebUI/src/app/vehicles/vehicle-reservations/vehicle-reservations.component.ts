@@ -40,6 +40,13 @@ export class VehicleReservationsComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public addNewReservation() {
+    this._router.navigate(['dashboard/reservations/add'], {
+      queryParams: { vehicleId: this.matDialogData.vehicleId },
+    });
+    this.dialogRef.close();
+  }
+
   private getVehicleReservations(vehicleId: string) {
     this._reservationsService
       .getVehicleReservations(vehicleId)
