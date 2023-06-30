@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   IAuthenticationService,
   AuthenticationServiceBase,
@@ -40,5 +40,14 @@ export class SideNavigationComponent {
     this._authenticationService.signOutUser();
     this.onCloseSideNavigation();
     this._router.navigate(['/home']);
+  }
+
+  public nestedMenu(): boolean {
+    let containsDashboard = false;
+    if (this._router.url.includes('dashboard')) {
+      containsDashboard = true;
+    }
+
+    return containsDashboard;
   }
 }

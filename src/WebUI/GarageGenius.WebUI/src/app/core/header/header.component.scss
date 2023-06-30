@@ -1,11 +1,13 @@
+@import '../../../styles/variables.scss';
+
 a {
   text-decoration: none;
-  color: white;
+  color: $theme-text;
 }
 
 a:hover,
 a:active {
-  color: lightgray;
+  color: $theme-selected-background;
 }
 
 .navigation-items {
@@ -16,6 +18,12 @@ a:active {
 
 mat-toolbar {
   border-radius: 3px;
+  height: 100%;
+}
+
+.logo a {
+  display: flex;
+  padding: 0.5rem;
 }
 
 @media(max-width: 959px) {

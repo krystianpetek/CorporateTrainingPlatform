@@ -1,10 +1,8 @@
+@import '../../../../styles/variables.scss';
+
 a {
   text-decoration: none;
   display: flex;
-}
-
-mat-list-item .sideNav-container:hover {
-  color: lightgray;
 }
 
 .sideNav-caption {
@@ -15,4 +13,31 @@ mat-list-item .sideNav-container:hover {
 .sideNav-container {
   display: flex;
   flex-direction: row;
+  color: $theme-text;
+}
+
+.active {
+  background-color: $theme-selected-background;
+}
+
+.active:hover {
+  background-color: $theme-selected-background;
+}
+
+.active-text {
+  color: $theme-side;
+}
+
+::ng-deep .nested-dashboard-menu {
+  background-color: $theme-foreground;
+  color: $theme-text;
+
+  div mat-icon {
+    color: $theme-text !important;
+  }
+
+  div .active-text {
+    color: $theme-side !important;
+
+  }
 }
