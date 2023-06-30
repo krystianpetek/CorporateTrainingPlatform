@@ -21,7 +21,6 @@ export class VehicleListComponent implements OnInit {
   private _vehiclesService: IVehiclesService;
   private _authenticationService: IAuthenticationService;
   private _router: Router;
-  public vehicles?: Array<VehicleResponseModel>;
   public dataSource = new MatTableDataSource<VehicleResponseModel>();
   public displayedColumns: string[] = [
     'id',
@@ -52,7 +51,6 @@ export class VehicleListComponent implements OnInit {
     this._vehiclesService
       .getCustomerVehicles(user.customerId)
       .subscribe((vehicles) => {
-        this.vehicles = vehicles;
         this.dataSource.data = vehicles;
       });
   }
@@ -65,7 +63,8 @@ export class VehicleListComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((vehicle) => {
+      this.dataSource.data = [...this.dataSource.data, vehicle];
       // TODO - change handling of this to refresh the list of vehicles ?
     });
   }

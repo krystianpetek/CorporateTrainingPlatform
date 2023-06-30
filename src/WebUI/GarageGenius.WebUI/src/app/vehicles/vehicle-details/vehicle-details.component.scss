@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -40,6 +42,11 @@
   margin-top: 1rem;
   display: flex;
   justify-content: center;
+
+  & button {
+    color: $theme-side;
+    background-color: $theme-selected-background;
+  }
 }
 
 mat-card-content,

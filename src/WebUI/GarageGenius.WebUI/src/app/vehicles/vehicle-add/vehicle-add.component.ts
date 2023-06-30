@@ -124,7 +124,7 @@ export class VehicleAddComponent implements OnInit {
       .subscribe({
         next: () => {
           this.isSuccessful = true;
-          this._dialogRef.close();
+          this._dialogRef.close(vehicleAddModel);
         },
         error: (err) => {
           this.isSuccessful = false;

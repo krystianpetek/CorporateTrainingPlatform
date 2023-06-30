@@ -53,7 +53,7 @@ export class VehicleDetailsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      // todo - refresh vehicle details etc
     });
   }
 }
