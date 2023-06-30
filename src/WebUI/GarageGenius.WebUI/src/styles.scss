@@ -1,4 +1,7 @@
 @import "./styles/variables.scss";
+// @import './app/vehicles/vehicle-add/vehicle-add.component.scss';
+// @include myPanel();
+
 /* You can add global styles to this file, and also import other style files */
 
 html,
@@ -28,6 +31,6 @@ body {
   color: $theme-selected-foreground;
 }
 
-.text-tertiary-color {
-  color: $theme-selected-background;
+.text-error-color {
+  color: $theme-light-error;
 }

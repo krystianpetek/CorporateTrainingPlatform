@@ -2,7 +2,7 @@
   <div class="title-bar">
     <h2>Vehicle list</h2>
     <!-- <button color="primary" mat-mini-fab [routerLink]="['add']"><mat-icon fontIcon="add"></mat-icon></button> -->
-    <button color="primary" mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
+    <button mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
   </div>
   <!-- <mat-action-list>
     <mat-list-item *ngFor="let vehicle of vehicles">
@@ -112,14 +112,14 @@
         </button>
       </td>
     </ng-container> -->
-    <ng-container matColumnDef="delete">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Delete </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn" (click)="this.redirectToDelete(element.id)">
+    <!-- <ng-container matColumnDef="delete">
+      <th class="text-primary-color " mat-header-cell *matHeaderCellDef> Delete </th>
+      <td class="text-error-color" mat-cell *matCellDef="let element">
+        <button mat-icon-button class (click)="this.redirectToDelete(element.id)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
-    </ng-container>
+    </ng-container> -->
     <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
   </table>

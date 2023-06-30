@@ -1,5 +1,16 @@
+@import '../../../styles/variables.scss';
+
 mat-form-field {
   width: 50vw;
   min-width: 250px;
   max-width: 600px;
+
+}
+
+.mat-dialog-title {
+  margin: 0;
+}
+
+.mat-dialog-content {
+  padding-top: 1rem;
 }

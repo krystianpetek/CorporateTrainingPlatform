@@ -32,7 +32,7 @@ export class VehicleListComponent implements OnInit {
     'vin',
     'year',
     // 'update',
-    'delete',
+    // 'delete',
   ];
 
   public constructor(
@@ -61,12 +61,11 @@ export class VehicleListComponent implements OnInit {
     const dialogRef = this.dialog.open(VehicleAddComponent, {
       data: {
         customerId: this._authenticationService.getUserInfo().customerId,
+        panelClass: 'classas',
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
       // TODO - change handling of this to refresh the list of vehicles ?
     });
   }

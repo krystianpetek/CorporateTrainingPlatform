@@ -5,6 +5,11 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem 1rem 0 0.5rem;
+
+  & button {
+    background-color: $theme-selected-background;
+    color: $theme-side;
+  }
 }
 
 table {
