@@ -23,6 +23,7 @@ export class ReservationListComponent implements OnInit {
   public displayedColumns: string[] = [
     'details',
     `vehicleId`,
+    `vehicleName`,
     `reservationId`,
     `reservationState`,
     `reservationDate`,

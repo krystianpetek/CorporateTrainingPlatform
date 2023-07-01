@@ -7,7 +7,7 @@
 
 <div class="responsive-table">
   <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="customer-reservation-list">
-    <ng-container *ngIf="true" matColumnDef="reservationId">
+    <ng-container matColumnDef="reservationId">
       <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation ID </th>
       <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationId}}</td>
     </ng-container>
@@ -20,8 +20,12 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="vehicleId">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Vehicle ID </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.vehicleId}}</td>
+      <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Vehicle ID </th>
+      <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.vehicleId}}</td>
+    </ng-container>
+    <ng-container hidden matColumnDef="vehicleName">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Vehicle Name </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.vehicleName}}</td>
     </ng-container>
     <ng-container matColumnDef="reservationState">
       <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation state </th>
