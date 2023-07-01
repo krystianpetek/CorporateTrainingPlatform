@@ -18,11 +18,17 @@
     </div>
   </div>
 
-  <div class="vehicle-property">
-    <span class="vehicle-property-name">ID:</span>
-    <ng-container *ngIf="this.editMode else customer_edit">
+  <h1 *ngIf="editMode">TODO edit mode</h1>
 
-      <input class="vehicle-property-value" [value]="vehicleResponse!.id" />
+  <div class="vehicle-property">
+    <span class="vehicle-property-name">Vehicle ID:</span>
+    <ng-container *ngIf="this.editMode else customer_edit">
+      <mat-form-field>
+        <mat-label>Vehicle ID</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.id" matInput />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Change vehicle ID</mat-hint>
+      </mat-form-field>
     </ng-container>
     <ng-template #customer_edit>
       <i class="vehicle-property-value">{{ vehicleResponse!.id }}</i>
@@ -32,14 +38,7 @@
 
   <div class="vehicle-property">
     <span class="vehicle-property-name">Manufacturer:</span>
-    <ng-container *ngIf="this.editMode else manufacturer_edit">
-      <mat-form-field class="input-field" appearance="outline">
-        <input class="vehicle-property-value input-field" [value]="vehicleResponse!.manufacturer" matInput />
-      </mat-form-field>
-    </ng-container>
-    <ng-template #manufacturer_edit>
-      <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
-    </ng-template>
+    <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
   </div>
   <hr />
 
