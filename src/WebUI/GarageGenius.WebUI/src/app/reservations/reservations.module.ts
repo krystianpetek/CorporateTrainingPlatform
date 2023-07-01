@@ -5,17 +5,14 @@ import { ReservationsRoutingModule } from './reservations-routing.module';
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
-
+import { AppMaterialModule } from '../shared/app-material.module';
 
 @NgModule({
   declarations: [
     ReservationAddComponent,
     ReservationListComponent,
-    ReservationDetailsComponent
+    ReservationDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    ReservationsRoutingModule
-  ]
+  imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule],
 })
-export class ReservationsModule { }
+export class ReservationsModule {}

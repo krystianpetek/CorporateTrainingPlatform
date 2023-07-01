@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationsService } from '../services/reservations.service';
+import { ReservationService } from '../services/reservation.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { VehicleReservationHistoryModel } from '../models/vehicle-reservation-history.model';
 import { VehicleReservationResponseModel } from '../models/vehicle-reservation-response.model';
@@ -10,13 +10,13 @@ import { VehicleReservationResponseModel } from '../models/vehicle-reservation-r
   styleUrls: ['./reservation-details.component.scss'],
 })
 export class ReservationDetailsComponent implements OnInit {
-  private readonly _reservationsService: ReservationsService;
+  private readonly _reservationsService: ReservationService;
   private readonly _activatedRoute: ActivatedRoute;
   public reservationDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
 
   constructor(
-    reservationsService: ReservationsService,
+    reservationsService: ReservationService,
     activatedRoute: ActivatedRoute
   ) {
     this._reservationsService = reservationsService;

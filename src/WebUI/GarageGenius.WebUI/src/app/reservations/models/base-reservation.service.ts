@@ -2,8 +2,9 @@ import { Observable } from 'rxjs';
 import { VehicleReservationsResponseModel } from './vehicle-reservations-response.model';
 import { VehicleReservationHistoryModel } from './vehicle-reservation-history.model';
 import { VehicleReservationResponseModel } from './vehicle-reservation-response.model';
+import { CustomerReservationsResponseModel } from './customer-reservations-response.model';
 
-export abstract class BaseReservationsService implements IReservationsService {
+export abstract class BaseReservationService implements IReservationService {
   abstract getVehicleReservations(
     vehicleId: string
   ): Observable<VehicleReservationsResponseModel>;
@@ -13,9 +14,12 @@ export abstract class BaseReservationsService implements IReservationsService {
   abstract getReservationHistory(
     reservationId: string
   ): Observable<VehicleReservationHistoryModel>;
+  abstract getCustomerReservations(
+    customerId: string
+  ): Observable<CustomerReservationsResponseModel>;
 }
 
-export interface IReservationsService {
+export interface IReservationService {
   getVehicleReservations(
     vehicleId: string
   ): Observable<VehicleReservationsResponseModel>;
@@ -25,4 +29,7 @@ export interface IReservationsService {
   getReservationHistory(
     reservationId: string
   ): Observable<VehicleReservationHistoryModel>;
+  getCustomerReservations(
+    customerId: string
+  ): Observable<CustomerReservationsResponseModel>;
 }

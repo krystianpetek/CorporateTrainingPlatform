@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ReservationsService } from 'src/app/reservations/services/reservations.service';
+import { ReservationService } from 'src/app/reservations/services/reservation.service';
 import { VehicleReservationsModalProperties } from './models/vehicle-reservations-modal-properties.model';
 import { VehicleReservationsResponseModel } from 'src/app/reservations/models/vehicle-reservations-response.model';
 import { Router } from '@angular/router';
@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./vehicle-reservations.component.scss'],
 })
 export class VehicleReservationsComponent implements OnInit {
-  private readonly _reservationsService: ReservationsService;
+  private readonly _reservationsService: ReservationService;
   private readonly dialogRef: MatDialogRef<VehicleReservationsComponent>;
   private readonly _router: Router;
   public vehicleReservationsResponse?: VehicleReservationsResponseModel;
 
   constructor(
-    reservationsService: ReservationsService,
+    reservationsService: ReservationService,
     dialogRef: MatDialogRef<VehicleReservationsComponent>,
     router: Router,
     @Inject(MAT_DIALOG_DATA)

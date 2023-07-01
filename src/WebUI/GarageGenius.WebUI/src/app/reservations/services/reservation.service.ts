@@ -1,16 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseReservationsService } from '../models/base-reservations.service';
+import { BaseReservationService } from '../models/base-reservation.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { VehicleReservationsResponseModel } from '../models/vehicle-reservations-response.model';
 import { environment } from 'src/environments/environment';
 import { VehicleReservationHistoryModel } from '../models/vehicle-reservation-history.model';
 import { VehicleReservationResponseModel } from '../models/vehicle-reservation-response.model';
+import { CustomerReservationsResponseModel } from '../models/customer-reservations-response.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReservationsService extends BaseReservationsService {
+export class ReservationService extends BaseReservationService {
   private _httpClient: HttpClient;
   constructor(httpClient: HttpClient) {
     super();
@@ -44,6 +45,21 @@ export class ReservationsService extends BaseReservationsService {
     return this._httpClient
       .get<VehicleReservationHistoryModel>(
         environment.reservationsApiUrl + `reservations/${reservationId}/history`
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  override getCustomerReservations(
+    customerId: string
+  ): Observable<CustomerReservationsResponseModel> {
+    return this._httpClient
+      .get<CustomerReservationsResponseModel>(
+        environment.reservationsApiUrl + `reservations/customer`,
+        {
+          params: {
+            customerId: customerId,
+          },
+        }
       )
       .pipe(catchError(this.handleError));
   }

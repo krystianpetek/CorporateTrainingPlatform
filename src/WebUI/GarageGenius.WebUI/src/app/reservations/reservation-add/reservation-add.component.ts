@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationsService } from '../services/reservations.service';
+import { ReservationService } from '../services/reservation.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,10 +8,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./reservation-add.component.scss'],
 })
 export class ReservationAddComponent implements OnInit {
-  private readonly _reservationsService: ReservationsService;
+  private readonly _reservationsService: ReservationService;
   private readonly _activatedRoute: ActivatedRoute;
   constructor(
-    reservationsService: ReservationsService,
+    reservationsService: ReservationService,
     activatedRoute: ActivatedRoute
   ) {
     this._reservationsService = reservationsService;
