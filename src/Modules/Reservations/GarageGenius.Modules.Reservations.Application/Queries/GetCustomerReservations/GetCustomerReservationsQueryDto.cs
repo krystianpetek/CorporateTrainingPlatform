@@ -13,4 +13,4 @@ public sealed record class GetCustomerReservationsQueryDto
 	}
 }
 
-public sealed record class CustomerReservationsDto(Guid ReservationId, string ReservationState, DateTime ReservationDate, string Comment);
+public sealed record class CustomerReservationsDto(Guid ReservationId, Guid VehicleId, string ReservationState, DateTime ReservationDate, string Comment);

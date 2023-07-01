@@ -19,6 +19,10 @@
         </button>
       </td>
     </ng-container>
+    <ng-container matColumnDef="vehicleId">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Vehicle ID </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.vehicleId}}</td>
+    </ng-container>
     <ng-container matColumnDef="reservationState">
       <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation state </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationState}}</td>

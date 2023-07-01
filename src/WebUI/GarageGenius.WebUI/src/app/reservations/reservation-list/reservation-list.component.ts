@@ -22,6 +22,7 @@ export class ReservationListComponent implements OnInit {
   public dataSource = new MatTableDataSource<CustomerReservationsItem>();
   public displayedColumns: string[] = [
     'details',
+    `vehicleId`,
     `reservationId`,
     `reservationState`,
     `reservationDate`,

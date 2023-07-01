@@ -58,7 +58,7 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.AsNoTracking()
 		.AsQueryable()
 		.Where<Reservation>(reservation => reservation.CustomerId == getCustomerReservationsQuery.CustomerId)
-		.Select<Reservation, CustomerReservationsDto>(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
+		.Select<Reservation, CustomerReservationsDto>(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
 		.PaginateAsync<CustomerReservationsDto>(getCustomerReservationsQuery.PageNumber, getCustomerReservationsQuery.PageSize, cancellationToken);
 
 		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = new GetCustomerReservationsQueryDto(getCustomerReservationsQuery.CustomerId, customerReservationsDtos);

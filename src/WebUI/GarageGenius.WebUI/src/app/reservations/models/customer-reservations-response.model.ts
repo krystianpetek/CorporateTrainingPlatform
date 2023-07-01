@@ -12,6 +12,7 @@ export interface CustomerReservationsDto {
 }
 export interface CustomerReservationsItem {
   reservationId: string;
+  vehicleId: string;
   reservationState: string;
   reservationDate: string;
   comment: string;
