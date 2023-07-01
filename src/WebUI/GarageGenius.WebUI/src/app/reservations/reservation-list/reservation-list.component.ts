@@ -51,6 +51,6 @@ export class ReservationListComponent implements OnInit {
   }
 
   public redirectToDetails(reservationId: string): void {
-    this._router.navigate([`dashboard/reservations/${reservationId}`]);
+    this._router.navigate([`dashboard/reservations`, reservationId]);
   }
 }
