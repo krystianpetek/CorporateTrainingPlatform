@@ -1,13 +1,45 @@
 <div class="container" *ngIf="vehicleResponse">
   <div class="title-bar">
-    <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon>
-    </button>
-    <h2 class="title-bar_model">{{ vehicleResponse.manufacturer }} {{ vehicleResponse.model }}</h2>
+    <div>
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <h2 class="title-bar_model">{{ vehicleResponse.manufacturer }} {{ vehicleResponse.model }}</h2>
+    </div>
+    <div>
+      <button *ngIf="!this.editMode" mat-icon-button type="button"
+        (click)="this.editVehicle()"><mat-icon>edit</mat-icon></button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editVehicle()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
   </div>
 
   <div class="vehicle-property">
+    <span class="vehicle-property-name">ID:</span>
+    <ng-container *ngIf="this.editMode else customer_edit">
+
+      <input class="vehicle-property-value" [value]="vehicleResponse!.id" />
+    </ng-container>
+    <ng-template #customer_edit>
+      <i class="vehicle-property-value">{{ vehicleResponse!.id }}</i>
+    </ng-template>
+  </div>
+  <hr />
+
+  <div class="vehicle-property">
     <span class="vehicle-property-name">Manufacturer:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
+    <ng-container *ngIf="this.editMode else manufacturer_edit">
+      <mat-form-field class="input-field" appearance="outline">
+        <input class="vehicle-property-value input-field" [value]="vehicleResponse!.manufacturer" matInput />
+      </mat-form-field>
+    </ng-container>
+    <ng-template #manufacturer_edit>
+      <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
+    </ng-template>
   </div>
   <hr />
 
@@ -35,8 +67,9 @@
   </div>
 
   <div class="add-reservation_button">
-    <button mat-stroked-button type="button" (click)="this.openDialog()">Show all
-      reservations</button>
+    <button mat-stroked-button type="button" (click)="this.openDialog()">
+      Show reservations
+    </button>
   </div>
 </div>
 

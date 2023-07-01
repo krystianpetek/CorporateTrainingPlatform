@@ -17,10 +17,19 @@
   flex-direction: row;
   gap: 0.5rem;
   align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
 
   &_model {
     margin: 0;
   }
+
 }
 
 .vehicle-property {

@@ -16,6 +16,7 @@ export class VehicleDetailsComponent implements OnInit {
   private readonly _router: Router;
   private readonly _dialog: MatDialog;
   public vehicleResponse?: VehicleResponseModel;
+  public editMode: boolean;
 
   constructor(
     vehicleService: VehicleService,
@@ -27,6 +28,7 @@ export class VehicleDetailsComponent implements OnInit {
     this._activatedRoute = activatedRoute;
     this._router = router;
     this._dialog = dialog;
+    this.editMode = false;
   }
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
@@ -55,5 +57,13 @@ export class VehicleDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       // todo - refresh vehicle details etc
     });
+  }
+
+  public editVehicle(): void {
+    this.editMode = !this.editMode;
+  }
+
+  public updateVehicle(): void {
+    // TODO - update vehicle
   }
 }

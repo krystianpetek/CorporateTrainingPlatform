@@ -64,6 +64,9 @@ export class VehicleListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((vehicle) => {
+      if (!vehicle) {
+        return;
+      }
       this.dataSource.data = [...this.dataSource.data, vehicle];
       // TODO - change handling of this to refresh the list of vehicles ?
     });
