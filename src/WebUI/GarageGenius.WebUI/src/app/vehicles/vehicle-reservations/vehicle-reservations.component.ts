@@ -34,9 +34,7 @@ export class VehicleReservationsComponent implements OnInit {
   // TODO - spinner or something while waiting for response
 
   public redirectToReservationDetails(reservationId: string) {
-    this._router.navigate(['dashboard/reservations', reservationId], {
-      queryParams: { reservationId: reservationId },
-    });
+    this._router.navigate(['dashboard/reservations', reservationId]);
     this.dialogRef.close();
   }
 

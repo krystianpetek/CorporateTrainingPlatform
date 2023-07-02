@@ -1,10 +1,11 @@
 export interface VehicleReservationHistoryModel {
   reservationId: string;
-  reservationHistoriesDtos: ReservationHistoryDto;
+  reservationHistoriesDtos: Array<ReservationHistoryDto>;
 }
 
 export interface ReservationHistoryDto {
   reservationHistoryId: string;
+  updateDate: Date;
   reservationState: string;
   comment: string;
 }
