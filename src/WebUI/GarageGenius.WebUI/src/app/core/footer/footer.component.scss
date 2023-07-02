@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+:host {
+  height: 60px;
+  background-color: $theme-side;
+  color: $theme-text;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $theme-text;
+}
+
+a {
+  color: white;
+  margin: 0 15px;
+  outline: none;
+  scale: 130%;
+}
+
+a:hover,
+a:active {
+  color: $theme-selected-background;
+}
+
+.line {
+  margin: 0 20px;
+  height: 30px;
+  width: 1px;
+  background-color: white;
+}

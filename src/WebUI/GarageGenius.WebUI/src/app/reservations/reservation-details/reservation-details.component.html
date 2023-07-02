@@ -1,10 +1,52 @@
 <div class="container" *ngIf="this.reservationDetails">
   <div class="title-bar">
     <!-- <button mat-icon-button (click)="goBack()"><mat-icon>undo</mat-icon></button> -->
-    <h2 class="title-bar_model">{{ this.reservationDetails.reservationState }}</h2>
+    <h2 class="title-bar_model">{{ this.reservationDetails.reservationId }}</h2>
   </div>
 
-  <!-- <div class="vehicle-property">
+  <div class="reservation-details">
+    <div class="reservation-details_item">
+      <div class="reservation-details_item__id">
+        <span>Reservation ID:</span>
+        <i>{{ this.reservationDetails.reservationId }}</i>
+      </div>
+      <div class="reservation-details_item__date">
+        <span>Reservation date:</span>
+        <!-- <i>{{ this.reservationDetails.reservationDate }}</i> -->
+      </div>
+      <div class="reservation-details_item__state">
+        <span>Reservation state:</span>
+        <i>{{ this.reservationDetails.reservationState }}</i>
+      </div>
+      <div class="reservation-details_item__comment">
+        <span>Comment:</span>
+        <i>{{ this.reservationDetails.comment }}</i>
+      </div>
+    </div>
+
+    <div *ngIf="this.reservationHistory">
+      <div class="reservation-history">
+        <div class="reservation-history_item"
+          *ngFor="let reservation of this.reservationHistory.reservationHistoriesDtos">
+          <div class="reservation-history_item__id">
+            <span>Reservation history ID:</span>
+            <i>{{ reservation.reservationHistoryId }}</i>
+            <div class="reservation-history_item__date">
+              <span>Reservation history state:</span>
+              <i>{{ reservation.reservationState }}</i>
+            </div>
+            <div class="reservation-history_item__time">
+              <span>Reservation history date:</span>
+              <i>{{ reservation.updateDate }}</i>
+            </div>
+            <div class="reservation-history_item__state">
+              <span>Reservation history comment:</span>
+              <i>{{ reservation.comment }}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="vehicle-property">
     <strong class="vehicle-property-name">Manufacturer:</strong>
     <i class="vehicle-property-value">{{ vehicleResponse.manufacturer }}</i>
   </div>
@@ -37,4 +79,4 @@
     <button mat-stroked-button type="button" (click)="this.openDialog()">Show all
       reservations</button>
   </div> -->
-</div>
+    </div>

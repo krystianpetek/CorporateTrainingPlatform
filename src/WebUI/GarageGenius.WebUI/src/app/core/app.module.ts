@@ -17,6 +17,7 @@ import { SideNavigationComponent } from './header/side-navigation/side-navigatio
 import { HealthCheckModule } from '../health-check/health-check.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthenticationModule } from '../authentication/authentication.module';
     LayoutComponent,
     HeaderComponent,
     SideNavigationComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
