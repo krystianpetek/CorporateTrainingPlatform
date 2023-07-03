@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GarageGenius.Modules.Customers.Core\GarageGenius.Modules.Customers.Core.csproj" />
     <ProjectReference Include="..\..\Users\GarageGenius.Modules.Users.Shared\GarageGenius.Modules.Users.Shared.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Customers.Shared\GarageGenius.Modules.Customers.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
