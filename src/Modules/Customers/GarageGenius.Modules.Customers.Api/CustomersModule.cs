@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Modules.Customers.Application;
-using GarageGenius.Modules.Customers.Core;
 using GarageGenius.Modules.Customers.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
@@ -15,7 +14,6 @@ internal class CustomersModule : IModule
 	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
 		webApplicationBuilder.Services
-			.AddCustomersCore()
 			.AddCustomersApplication()
 			.AddCustomersInfrastructure(webApplicationBuilder.Environment);
 	}

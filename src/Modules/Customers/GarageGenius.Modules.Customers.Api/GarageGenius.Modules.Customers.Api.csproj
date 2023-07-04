@@ -20,5 +20,11 @@
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties customers_1settings_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
+  
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>GarageGenius.Modules.Customers.ArchitectureTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
 </Project>

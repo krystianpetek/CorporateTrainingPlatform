@@ -24,7 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Customers\GarageGenius.Modules.Customers.Api\GarageGenius.Modules.Customers.Api.csproj" />
+    <ProjectReference Include="..\Modules\Customers\GarageGenius.Modules.Customers.Application\GarageGenius.Modules.Customers.Application.csproj" />
     <ProjectReference Include="..\Modules\Customers\GarageGenius.Modules.Customers.Core\GarageGenius.Modules.Customers.Core.csproj" />
+    <ProjectReference Include="..\Modules\Customers\GarageGenius.Modules.Customers.Infrastructure\GarageGenius.Modules.Customers.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Customers\GarageGenius.Modules.Customers.Shared\GarageGenius.Modules.Customers.Shared.csproj" />
   </ItemGroup>
 
 </Project>
