@@ -5,23 +5,20 @@ namespace GarageGenius.Modules.Customers.ArchitectureTests;
 
 public class ArchitectureTests
 {
-	private const string ModuleName = "GarageGenius.Modules.Customers";
-	private const string Core = ModuleName + ".Core";
-	private const string Application = ModuleName + ".Application";
-	private const string Infrastructure = ModuleName + ".Infrastructure";
-	private const string Api = ModuleName + ".Api";
-	private const string Shared = ModuleName + ".Shared";
+	private const string CustomersCore = "GarageGenius.Modules.Customers.Core";
+	private const string CustomersApplication = "GarageGenius.Modules.Customers.Application";
+	private const string CustomersInfrastructure = "GarageGenius.Modules.Customers.Infrastructure";
+	private const string CustomersApi = "GarageGenius.Modules.Customers.Api";
+	private const string CustomersShared = "GarageGenius.Modules.Customers.Shared";
 
 	[Fact]
-	public void Core_Should_Not_HaveDependencyOnProjectsFromList()
+	public void CustomersCore_Should_Not_HaveDependencyOnProjectsFromList()
 	{
 		// arrange
-		string[] projects = { Application, Infrastructure, Api };
+		string[] projects = { CustomersApplication, CustomersInfrastructure, CustomersApi, CustomersShared };
 
 		// act
-		var testResult = Types.InCurrentDomain()
-			.That()
-			.ResideInNamespace(Core)
+		var testResult = Types.InAssembly(Core.AssemblyCustomersCore.AssemblyReference)
 			.ShouldNot()
 			.HaveDependencyOnAny(projects)
 			.GetResult();
@@ -31,15 +28,13 @@ public class ArchitectureTests
 	}
 
 	[Fact]
-	public void Application_Should_Not_HaveDependencyOnProjectsFromList()
+	public void CustomersApplication_Should_Not_HaveDependencyOnProjectsFromList()
 	{
 		// arrange
-		string[] projects = { Infrastructure, Api };
+		string[] projects = { CustomersInfrastructure, CustomersApi };
 
 		// act
-		var testResult = Types.InCurrentDomain()
-			.That()
-			.ResideInNamespace(Application)
+		var testResult = Types.InAssembly(Application.AssemblyCustomersApplication.AssemblyReference)
 			.ShouldNot()
 			.HaveDependencyOnAny(projects)
 			.GetResult();
@@ -50,15 +45,45 @@ public class ArchitectureTests
 
 
 	[Fact]
-	public void Infrastructure_Should_Not_HaveDependencyOnProjectsFromList()
+	public void CustomersInfrastructure_Should_Not_HaveDependencyOnProjectsFromList()
 	{
 		// arrange
-		string[] projects = { Api, "GarageGenius.Shared.Infrastructure" };
+		string[] projects = { CustomersApi, CustomersShared };
 
 		// act
-		var testResult = Types.InCurrentDomain()
-			.That()
-			.ResideInNamespace(Infrastructure)
+		var testResult = Types.InAssembly(Infrastructure.AssemblyCustomersInfrastructure.AssemblyReference)
+			.ShouldNot()
+			.HaveDependencyOnAny(projects)
+			.GetResult();
+
+		// assert
+		testResult.IsSuccessful.Should().BeTrue();
+	}
+
+	[Fact]
+	public void CustomersApi_Should_Not_HaveDependencyOnProjectsFromList()
+	{
+		// arrange
+		string[] projects = { CustomersCore, CustomersShared };
+
+		// act
+		var testResult = Types.InAssembly(Api.AssemblyCustomersApi.AssemblyReference)
+			.ShouldNot()
+			.HaveDependencyOnAny(projects)
+			.GetResult();
+
+		// assert
+		testResult.IsSuccessful.Should().BeTrue();
+	}
+
+	[Fact]
+	public void CustomersShared_Should_Not_HaveDependencyOnAnyCustomersProject()
+	{
+		// arrange
+		string[] projects = { CustomersCore, CustomersApplication, CustomersInfrastructure, CustomersApi };
+
+		// act
+		var testResult = Types.InAssembly(Shared.AssemblyCustomersShared.AssemblyReference)
 			.ShouldNot()
 			.HaveDependencyOnAny(projects)
 			.GetResult();

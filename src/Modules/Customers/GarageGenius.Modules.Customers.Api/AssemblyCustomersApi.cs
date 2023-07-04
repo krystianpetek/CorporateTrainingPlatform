@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 namespace GarageGenius.Modules.Customers.Api;
-internal class AssemblyCustomersApi
+internal static class AssemblyCustomersApi
 {
 	public static Assembly AssemblyReference => typeof(AssemblyCustomersApi).Assembly;
 }

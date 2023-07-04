@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 namespace GarageGenius.Modules.Customers.Shared;
-internal class AssemblyCustomersShared
+internal static class AssemblyCustomersShared
 {
 	public static Assembly AssemblyReference => typeof(AssemblyCustomersShared).Assembly;
 }

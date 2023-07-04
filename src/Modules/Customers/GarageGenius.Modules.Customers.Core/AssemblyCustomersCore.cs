@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 namespace GarageGenius.Modules.Customers.Core;
-internal class AssemblyCustomersCore
+internal static class AssemblyCustomersCore
 {
 	public static Assembly AssemblyReference => typeof(AssemblyCustomersCore).Assembly;
 }
