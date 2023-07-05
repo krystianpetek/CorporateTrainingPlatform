@@ -1,4 +1,8 @@
-﻿using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
+﻿using FluentValidation;
+using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
+using GarageGenius.Modules.Users.Core.Commands.SignIn;
+using GarageGenius.Modules.Users.Core.Commands.SignUp;
+using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 using GarageGenius.Modules.Users.Core.Persistance.Repositories;
 using GarageGenius.Modules.Users.Core.Repositories;
 using GarageGenius.Modules.Users.Core.ServiceMapper;
@@ -18,6 +22,10 @@ internal static class Extensions
 		services.AddMsSqlServerDbContext<UsersDbContext>(webHostEnvironment);
 		services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
 		services.AddScoped<IUserServiceMapper, UserServiceMapper>();
+
+		services.AddScoped<IValidator<DeactivateUserCommand>, DeactivateUserCommandValidator>();
+		services.AddScoped<IValidator<SignInCommand>, SignInCommandValidator>();
+		services.AddScoped<IValidator<SignUpCommand>, SignUpCommandValidator>();
 
 		using IServiceScope? serviceScope = services.BuildServiceProvider().CreateScope();
 		var dbSeeder = serviceScope.ServiceProvider.GetService<IDbContextSeeder>();

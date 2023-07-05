@@ -25,7 +25,7 @@ public class ReservationsController : BaseController
 	[SwaggerOperation(Summary = "Update reservation", Description = "Allow customer to update reservation when its state is other than ...?")]
 	public async Task<ActionResult> UpdateReservation(UpdateReservationCommand command)
 	{
-		await _dispatcher.DispatchCommandAsync(command);
+		await _dispatcher.DispatchCommandAsync<UpdateReservationCommand>(command);
 		return Ok();
 	}
 
@@ -35,7 +35,7 @@ public class ReservationsController : BaseController
 	public async Task<IActionResult> AddReservation(AddReservationCommand command)
 	{
 		// TODO add reservation date to command parameters with date validation
-		await _dispatcher.DispatchCommandAsync(command);
+		await _dispatcher.DispatchCommandAsync<AddReservationCommand>(command);
 		return Ok();
 	}
 
@@ -95,7 +95,7 @@ public class ReservationsController : BaseController
 	public async Task<ActionResult> CompleteReservationAsync(Guid reservationId, CompleteReservationCommand completeReservationCommand)
 	{
 		completeReservationCommand.ReservationId = reservationId;
-		await _dispatcher.DispatchCommandAsync(completeReservationCommand);
+		await _dispatcher.DispatchCommandAsync<CompleteReservationCommand>(completeReservationCommand);
 		return Ok();
 	}
 

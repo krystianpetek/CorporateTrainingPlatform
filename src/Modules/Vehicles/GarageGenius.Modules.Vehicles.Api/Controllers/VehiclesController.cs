@@ -56,7 +56,7 @@ public class VehiclesController : BaseController
 	public async Task<ActionResult> AddVehicleAsync(Guid customerId, AddVehicleCommand addVehicleCommand)
 	{
 		addVehicleCommand.CustomerId = customerId;
-		await _dispatcher.DispatchCommandAsync(addVehicleCommand);
+		await _dispatcher.DispatchCommandAsync<AddVehicleCommand>(addVehicleCommand);
 		return Accepted();
 	}
 
@@ -66,7 +66,7 @@ public class VehiclesController : BaseController
 	public async Task<ActionResult> UpdateVehicleOwner(Guid vehicleId, UpdateVehicleOwnerCommand updateVehicleOwnerCommand)
 	{
 		updateVehicleOwnerCommand.VehicleId = vehicleId;
-		await _dispatcher.DispatchCommandAsync(updateVehicleOwnerCommand);
+		await _dispatcher.DispatchCommandAsync<UpdateVehicleOwnerCommand>(updateVehicleOwnerCommand);
 		return Ok();
 	}
 
