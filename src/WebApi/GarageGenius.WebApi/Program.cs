@@ -6,6 +6,7 @@ using GarageGenius.WebApi.Middlewares.ErrorHandling;
 using Microsoft.AspNetCore.Diagnostics;
 using Serilog;
 using Serilog.Events;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace GarageGenius.WebApi;
@@ -104,6 +105,10 @@ public static class Program
 									Detail = Detail,
 									Status = StatusCode,
 									Instance = context.Request.Path,
+									Extensions =
+									{
+										["traceId"] = Activity.Current?.Id ?? context?.TraceIdentifier
+									}
 								},
 							};
 							if (builder.Environment.IsDevelopment())

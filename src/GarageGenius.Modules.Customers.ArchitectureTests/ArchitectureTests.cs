@@ -91,5 +91,43 @@ public class ArchitectureTests
 		// assert
 		testResult.IsSuccessful.Should().BeTrue();
 	}
+
+	[Fact]
+	public void Handlers_Should_Have_DependencyOnDomain()
+	{
+		// arrange
+		var assembly = Application.AssemblyCustomersApplication.AssemblyReference;
+
+		// act
+		var testResult = Types.InAssembly(assembly)
+			.That()
+			.HaveNameEndingWith("Handler")
+			.Should()
+			.HaveDependencyOn(CustomersCore)
+			.GetResult();
+
+		// assert
+		testResult.IsSuccessful.Should().BeTrue();
+	}
+
+	[Fact]
+	public void Controllers_Should_DependencyOnApplication()
+	{
+		// arrange
+		var assembly = Api.AssemblyCustomersApi.AssemblyReference;
+
+		//act
+		var testResult = Types.InAssembly(assembly)
+			.That()
+			.DoNotHaveNameStartingWith("BaseController")
+			.And()
+			.HaveNameEndingWith("Controller")
+			.Should()
+			.HaveDependencyOn(CustomersApplication)
+			.GetResult();
+
+		// assert
+		testResult.IsSuccessful.Should().BeTrue();
+	}
 }
 // TODO - Add tests for Api and Shared projects, check other projects for dependencies on this module
