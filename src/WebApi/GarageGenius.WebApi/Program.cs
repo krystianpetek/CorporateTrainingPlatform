@@ -76,11 +76,17 @@ public static class Program
 						{
 							(string Title, string Detail, int StatusCode) = exceptionType switch
 							{
-								GarageGeniusException customException =>
+								GarageGeniusException garageGeniusException =>
 								(
 									exceptionType.GetType().Name,
 									exceptionType.Message,
-									context.Response.StatusCode = (int)customException.StatusCode
+									context.Response.StatusCode = (int)garageGeniusException.StatusCode
+								),
+								GarageGeniusValidationException garageGeniusValidationException => 
+								(
+									exceptionType.GetType().Name,
+									garageGeniusValidationException.Errors.FirstOrDefault().ErrorMessage, 
+									context.Response.StatusCode = StatusCodes.Status400BadRequest									
 								),
 								_ =>
 								(
@@ -96,8 +102,9 @@ public static class Program
 								{
 									Title = Title,
 									Detail = Detail,
-									Status = StatusCode
-								}
+									Status = StatusCode,
+									Instance = context.Request.Path,
+								},
 							};
 							if (builder.Environment.IsDevelopment())
 							{
