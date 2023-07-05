@@ -1,11 +1,10 @@
-﻿using GarageGenius.Modules.Customers.Shared.Queries.GetUserIdByCustomerId;
+﻿using GarageGenius.Modules.Vehicles.Application.Queries.GetVehicle;
 using GarageGenius.Modules.Vehicles.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Core.Exceptions;
-using GarageGenius.Modules.Vehicles.Core.Types;
 using GarageGenius.Modules.Vehicles.Shared.Queries.GetVehicleById;
 using GarageGenius.Shared.Abstractions.Queries.Query;
 
-namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicle;
+namespace GarageGenius.Modules.Vehicles.Application.Queries.GetVehicleById;
 internal class GetVehicleByIdQueryHandler : IQueryHandler<GetVehicleByIdQuery, GetVehicleByIdQueryDto>
 {
 	private readonly Serilog.ILogger _logger;

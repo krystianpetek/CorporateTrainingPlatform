@@ -82,11 +82,11 @@ public static class Program
 									exceptionType.Message,
 									context.Response.StatusCode = (int)garageGeniusException.StatusCode
 								),
-								GarageGeniusValidationException garageGeniusValidationException => 
+								GarageGeniusValidationException garageGeniusValidationException =>
 								(
 									exceptionType.GetType().Name,
-									garageGeniusValidationException.Errors.FirstOrDefault().ErrorMessage, 
-									context.Response.StatusCode = StatusCodes.Status400BadRequest									
+									garageGeniusValidationException.Errors.FirstOrDefault().ErrorMessage,
+									context.Response.StatusCode = StatusCodes.Status400BadRequest
 								),
 								_ =>
 								(

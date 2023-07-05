@@ -1,7 +1,7 @@
 ﻿using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Shared.Abstractions.Queries.Query;
 
-namespace GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
+namespace GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
 internal class GetVehicleReservationsQueryHandler : IQueryHandler<GetVehicleReservationsQuery, GetVehicleReservationsQueryDto>
 {
 	private readonly Serilog.ILogger _logger;

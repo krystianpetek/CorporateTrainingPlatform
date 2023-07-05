@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
+using GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
 
 namespace GarageGenius.Modules.Reservations.Application.QueryStorage;
 public interface IReservationQueryStorage

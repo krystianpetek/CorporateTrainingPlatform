@@ -23,10 +23,10 @@ internal class GetCustomerReservationsQueryHandler : IPagedQueryHandler<GetCusto
 	public async Task<GetCustomerReservationsQueryDto> HandlePagedQueryAsync(GetCustomerReservationsQuery query, CancellationToken cancellationToken = default)
 	{
 		GetCustomerReservationsQueryDto getCustomerReservationsQueryDto = await _reservationQueryStorage.GetCustomerReservationsAsync(query, cancellationToken);
-		foreach(var vehicle in getCustomerReservationsQueryDto?.CustomerReservationsDto?.Items)
+		foreach (var vehicle in getCustomerReservationsQueryDto?.CustomerReservationsDto?.Items)
 		{
 			// TODO - cache for vehicles
-			var dispatchedVehicle = await _queryDispatcher.DispatchQueryAsync<GetVehicleByIdQueryDto>(new GetVehicleByIdQuery(vehicle.VehicleId),cancellationToken);
+			var dispatchedVehicle = await _queryDispatcher.DispatchQueryAsync<GetVehicleByIdQueryDto>(new GetVehicleByIdQuery(vehicle.VehicleId), cancellationToken);
 			vehicle.VehicleName = $"{dispatchedVehicle.Manufacturer} {dispatchedVehicle.Model}";
 		}
 

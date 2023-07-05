@@ -16,7 +16,7 @@ internal static class Extensions
 
 		services.AddScoped<IValidator<AddVehicleCommand>, AddVehicleCommandValidator>();
 		services.AddScoped<IValidator<UpdateVehicleOwnerCommand>, UpdateVehicleOwnerCommandValidator>();
-		
+
 		services.AddAuthorization(authorizationOptions =>
 		{
 			authorizationOptions.AddVehiclePolicy();

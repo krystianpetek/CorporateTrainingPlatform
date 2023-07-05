@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Shared.Abstractions.Commands;
+using GarageGenius.Shared.Abstractions.Commands.Decorators;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -9,11 +10,13 @@ public static class Extensions
 	{
 		services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
 
-		IEnumerable<Type> types = assemblies.SelectMany(x => x.GetTypes().Where(t => t.GetInterfaces().Any(any => any.IsGenericType && any.GetGenericTypeDefinition() == typeof(ICommandHandler<>))));
-		foreach (var type in types)
+		IEnumerable<Type> commandHandlersWithoutDecorators = assemblies.SelectMany(x => x.GetTypes().Where(t => t.GetInterfaces().Any(any => any.IsGenericType && any.GetGenericTypeDefinition() == typeof(ICommandHandler<>) && t.GetCustomAttribute<CommandHandlerDecoratorAttribute>() == null)));
+		foreach (var type in commandHandlersWithoutDecorators)
 		{
 			services.AddScoped(type.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>)), type);
 		}
+
+		services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationCommandHandlerDecorator<>));
 		return services;
 	}
 }

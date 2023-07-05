@@ -1,4 +1,4 @@
-﻿namespace GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
+﻿namespace GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
 public sealed record class GetVehicleReservationsQueryDto
 {
 	public Guid VehicleId { get; init; }

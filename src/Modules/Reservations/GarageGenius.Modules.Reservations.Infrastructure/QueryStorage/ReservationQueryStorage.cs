@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
+using GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
 using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Reservations.Core.ReservationHistories.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
@@ -43,7 +44,7 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.AsNoTracking()
 		.AsQueryable()
 		.Where<ReservationHistory>(reservationHistory => reservationHistory.ReservationId == reservationId)
-		.Select<ReservationHistory, ReservationHistoriesDto>(reservationHistory => new ReservationHistoriesDto(reservationHistory.ReservationHistoryId, reservationHistory.Created ,reservationHistory.ReservationState, reservationHistory.Comment))
+		.Select<ReservationHistory, ReservationHistoriesDto>(reservationHistory => new ReservationHistoriesDto(reservationHistory.ReservationHistoryId, reservationHistory.Created, reservationHistory.ReservationState, reservationHistory.Comment))
 		.ToListAsync(cancellationToken);
 
 		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = new GetReservationHistoryQueryDtos(reservationId, reservationHistoriesDto);

@@ -5,6 +5,7 @@ using GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotComplet
 using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservations;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
+using GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

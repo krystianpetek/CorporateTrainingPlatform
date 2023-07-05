@@ -11,7 +11,7 @@ internal class UserServiceMapper : IUserServiceMapper
 {
 	public GetUserQueryDto MapToGetUserQueryDto(User entity)
 	{
-		return new GetUserQueryDto(entity.UserId,entity.CustomerId, entity?.Role?.Name, entity?.Email, entity?.State, entity.Created);
+		return new GetUserQueryDto(entity.UserId, entity.CustomerId, entity?.Role?.Name, entity?.Email, entity?.State, entity.Created);
 	}
 }
 
