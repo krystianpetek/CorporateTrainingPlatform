@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Customers.Core;
+using GarageGenius.Shared.Abstractions.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GarageGenius.Modules.Customers.Application;
