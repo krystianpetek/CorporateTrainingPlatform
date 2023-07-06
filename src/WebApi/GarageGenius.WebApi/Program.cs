@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace GarageGenius.WebApi;
 
-public static class Program
+public class Program
 {
 	public async static Task<int> Main(string[] args)
 	{

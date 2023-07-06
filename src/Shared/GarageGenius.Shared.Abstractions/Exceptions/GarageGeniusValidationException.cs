@@ -3,10 +3,15 @@
 namespace GarageGenius.Shared.Abstractions.Exceptions;
 public class GarageGeniusValidationException : Exception
 {
-	public GarageGeniusValidationException(IEnumerable<ValidationFailure> errors)
+	public IEnumerable<string> Errors { get; }
+
+	public GarageGeniusValidationException() : base("One or more validation failures have occurred.")
 	{
-		Errors = errors;
+		Errors = new List<string>();
 	}
 
-	public IEnumerable<ValidationFailure> Errors { get; }
+	public GarageGeniusValidationException(IEnumerable<ValidationFailure> errors): this()
+	{
+		Errors = errors.Select(e => e.ErrorMessage).ToList();
+	}
 }

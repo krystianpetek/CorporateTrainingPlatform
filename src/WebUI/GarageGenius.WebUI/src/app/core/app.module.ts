@@ -44,6 +44,9 @@ import { FooterComponent } from './footer/footer.component';
   exports: [AppMaterialModule],
   providers: [
     jwtInterceptorProvider,
+    // TODO - logging interceptor
+    // TODO - error interceptor
+
     //{
     //  //TODO
     //  provide: APP_INITIALIZER,
