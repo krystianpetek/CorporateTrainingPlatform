@@ -19,7 +19,7 @@ internal sealed class LastName : IEquatable<LastName>
 			throw new InvalidLastNameException(value);
 		}
 
-		Value = value.ToLowerInvariant();
+		Value = value;
 	}
 
 	public static implicit operator string(LastName value)

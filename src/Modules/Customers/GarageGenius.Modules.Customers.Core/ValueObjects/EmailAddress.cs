@@ -23,7 +23,7 @@ internal sealed class EmailAddress : IEquatable<EmailAddress>
 			throw new InvalidEmailException(email);
 		}
 
-		Value = email.ToLower();
+		Value = email;
 	}
 
 	public static implicit operator string(EmailAddress email)

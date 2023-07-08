@@ -21,7 +21,7 @@ internal sealed class PhoneNumber : IEquatable<PhoneNumber>
 			throw new InvalidPhoneNumberException(phoneNumber);
 		}
 
-		Value = phoneNumber.ToLowerInvariant();
+		Value = phoneNumber;
 	}
 
 	public static implicit operator string(PhoneNumber phoneNumber)
