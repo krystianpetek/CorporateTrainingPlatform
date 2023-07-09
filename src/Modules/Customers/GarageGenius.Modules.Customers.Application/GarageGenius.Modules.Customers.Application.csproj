@@ -19,6 +19,12 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>GarageGenius.Modules.Customers.ArchitectureTests</_Parameter1>
     </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>GarageGenius.Modules.Customers.IntegrationTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>GarageGenius.Modules.Customers.UnitTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
   
 </Project>
