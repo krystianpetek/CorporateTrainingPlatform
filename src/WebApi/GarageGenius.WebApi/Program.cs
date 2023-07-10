@@ -86,7 +86,7 @@ public class Program
 								GarageGeniusValidationException garageGeniusValidationException =>
 								(
 									exceptionType.GetType().Name,
-									garageGeniusValidationException.Errors.FirstOrDefault().ErrorMessage,
+									garageGeniusValidationException.Errors.FirstOrDefault(),
 									context.Response.StatusCode = StatusCodes.Status400BadRequest
 								),
 								_ =>
