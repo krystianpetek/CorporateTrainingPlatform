@@ -36,7 +36,7 @@ public class CreateCustomerCommandValidatorTests
 
 		// assert
 		Assert.False(result.IsValid);
-		result.ShouldHaveValidationErrorFor(emailAddress => emailAddress.EmailAddress); 
+		result.ShouldHaveValidationErrorFor(emailAddress => emailAddress.EmailAddress);
 		result.ShouldNotHaveValidationErrorFor(phoneNumber => phoneNumber.PhoneNumber);
 		result.ShouldNotHaveValidationErrorFor(firstName => firstName.FirstName);
 		result.ShouldNotHaveValidationErrorFor(lastName => lastName.LastName);

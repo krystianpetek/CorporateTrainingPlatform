@@ -1,8 +1,8 @@
-using Xunit;
+using GarageGenius.WebApi;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 using System.Net.Http.Json;
-using GarageGenius.WebApi;
+using Xunit;
 
 namespace GarageGenius.Modules.Customers.IntegrationTests;
 

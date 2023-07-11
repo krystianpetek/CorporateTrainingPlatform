@@ -54,6 +54,6 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 	"Handled {CommandName} in {ModuleName} module, signed up user with ID: {UserId}",
 	nameof(SignUpCommand), nameof(Users), user.UserId);
 
-		await _messageBroker.PublishAsync(new UserCreated(user.UserId, user.CustomerId, user.Email), cancellationToken);
+		await _messageBroker.PublishAsync(new UserCreatedEvent(user.UserId, user.CustomerId, user.Email), cancellationToken);
 	}
 }

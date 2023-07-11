@@ -23,7 +23,7 @@ internal class CreateCustomerCommandValidator : AbstractValidator<CreateCustomer
 				.WithMessage("Phone number must not exceed 14 characters.")
 			.Matches(new Regex(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"))
 				.WithMessage("Phone number is not valid.");
-		
+
 		RuleFor(createCustomerCommand => createCustomerCommand.FirstName)
 			.NotEmpty()
 			.NotNull()

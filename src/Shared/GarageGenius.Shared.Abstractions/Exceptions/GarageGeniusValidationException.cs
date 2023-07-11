@@ -10,7 +10,7 @@ public class GarageGeniusValidationException : Exception
 		Errors = new List<string>();
 	}
 
-	public GarageGeniusValidationException(IEnumerable<ValidationFailure> errors): this()
+	public GarageGeniusValidationException(IEnumerable<ValidationFailure> errors) : this()
 	{
 		Errors = errors.Select(e => e.ErrorMessage).ToList();
 	}

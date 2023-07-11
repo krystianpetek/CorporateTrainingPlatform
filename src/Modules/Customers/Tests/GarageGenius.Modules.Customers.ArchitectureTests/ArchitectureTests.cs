@@ -1,6 +1,6 @@
-using Xunit;
 using FluentAssertions;
 using NetArchTest.Rules;
+using Xunit;
 
 namespace GarageGenius.Modules.Customers.ArchitectureTests;
 
