@@ -8,8 +8,8 @@ internal class CurrentUserService : ICurrentUserService
 {
 	public CurrentUserService(IHttpContextAccessor httpContextAccessor)
 	{
-		IsAuthenticated = UserId is not null;
 		UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? "Anonymous";
+		IsAuthenticated = UserId is not null and not "Anonymous";
 		Role = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Role);
 	}
 

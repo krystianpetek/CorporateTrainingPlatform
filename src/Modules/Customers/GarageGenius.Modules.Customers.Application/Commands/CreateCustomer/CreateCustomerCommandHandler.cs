@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Customers.Core.Entities;
+﻿using GarageGenius.Modules.Customers.Application.MapperService;
+using GarageGenius.Modules.Customers.Core.Entities;
 using GarageGenius.Modules.Customers.Core.Repositories;
 using GarageGenius.Shared.Abstractions.Commands;
 
@@ -7,18 +8,21 @@ internal class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComm
 {
 	private readonly Serilog.ILogger _logger;
 	private readonly ICustomerRepository _customerRepository;
+	private readonly ICustomerMapperService _customerMapperService;
 
 	public CreateCustomerCommandHandler(
 		Serilog.ILogger logger,
-		ICustomerRepository customerRepository)
+		ICustomerRepository customerRepository,
+		ICustomerMapperService customerMapperService)
 	{
 		_logger = logger;
 		_customerRepository = customerRepository;
+		_customerMapperService = customerMapperService;
 	}
 
 	public async Task HandleCommandAsync(CreateCustomerCommand command, CancellationToken cancellationToken = default)
 	{
-		Customer customer = new Customer(command.FirstName, command.LastName, command.PhoneNumber, command.EmailAddress);
+		Customer customer = _customerMapperService.MapToCustomer(command);
 		await _customerRepository.AddCustomerAsync(customer, cancellationToken);
 
 		_logger.Information("Handled {CommandName} in {ModuleName} module, created customer with email: {Email}", nameof(CreateCustomerCommand), nameof(Customers), command.EmailAddress);
