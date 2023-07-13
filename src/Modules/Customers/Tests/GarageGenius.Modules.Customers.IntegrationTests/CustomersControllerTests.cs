@@ -24,7 +24,7 @@ public class CustomersControllerTests
 	}
 
 	[Fact]
-	public async Task TestAuthorization()
+	public async Task TestAuthorization_ToChange()
 	{
 		var signUp = new SignUpDto("krystianpetek2@gmail.com", "Password!23","Administrator");
 		var bodySignUp = JsonContent.Create(signUp);
