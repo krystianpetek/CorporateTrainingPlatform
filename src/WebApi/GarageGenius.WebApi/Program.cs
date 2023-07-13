@@ -26,7 +26,8 @@ public class Program
 		{
 			Log.Information("Starting web host");
 			WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
-			builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) => loggerConfiguration
+            builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json");
+            builder.Host.UseSerilog((hostBuilderContext, serviceProvider, loggerConfiguration) => loggerConfiguration
 				.ReadFrom.Configuration(hostBuilderContext.Configuration)
 				.ReadFrom.Services(serviceProvider)
 				.Enrich.FromLogContext(),
