@@ -27,7 +27,7 @@ public class CreateCustomerCommandHandlerTests
         };
         Customer customer = new Customer(command.FirstName, command.LastName, command.PhoneNumber, command.EmailAddress);
         _customerMapperServiceMock.Setup(x => x.MapToCustomer(command)).Returns(customer);
-        _customerRepositoryMock.Setup(x => x.GetCustomerByIdAsync(customer.CustomerId.Value, new CancellationToken(false))).ReturnsAsync(customer);
+        _customerRepositoryMock.Setup(x => x.AddCustomerAsync(customer, It.IsAny<CancellationToken>()));
         _handler = new CreateCustomerCommandHandler(_loggerMock.Object, _customerRepositoryMock.Object, _customerMapperServiceMock.Object);
 
         // act
@@ -35,6 +35,6 @@ public class CreateCustomerCommandHandlerTests
 
         // assert
         _customerMapperServiceMock.Verify(x => x.MapToCustomer(It.IsAny<CreateCustomerCommand>()), Times.Once);
-        _customerRepositoryMock.Verify(x => x.AddCustomerAsync(It.IsAny<Customer>(), new CancellationToken()), Times.Once);
+        _customerRepositoryMock.Verify(x => x.AddCustomerAsync(It.IsAny<Customer>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }
