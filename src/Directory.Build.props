@@ -15,37 +15,37 @@
 			Include="SonarAnalyzer.CSharp" 
 			Version="9.5.0.73987" 
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 		<PackageReference 
 			Include="Microsoft.VisualStudio.Threading.Analyzers" 
 			Version="17.6.40" 
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 		<PackageReference 
 			Include="AsyncFixer" 
 			Version="1.6.0"
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>		
 		<PackageReference 
 			Include="Roslynator.Analyzers" 
 			Version="4.3.0"
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>		
 		<PackageReference 
-			Include="Roslynator.CodeAnalysis.Analyzers" 
+			Include="Roslynator.CodeAnalysis.Analyzers"
 			Version="4.3.0"
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 		<PackageReference 
 			Include="Roslynator.Formatting.Analyzers" 
 			Version="4.3.0"
 			PrivateAssets="all" 
-			Condition="$(MSBuildProjectExtension) == '.csproj'"
+			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 	</ItemGroup>
 </Project>
