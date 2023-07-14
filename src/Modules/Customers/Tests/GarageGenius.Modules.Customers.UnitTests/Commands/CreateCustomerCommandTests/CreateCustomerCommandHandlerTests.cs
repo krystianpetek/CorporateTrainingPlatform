@@ -9,10 +9,17 @@ using Xunit;
 namespace GarageGenius.Modules.Customers.UnitTests.Commands.CreateCustomerCommandTests;
 public class CreateCustomerCommandHandlerTests
 {
-    private readonly Mock<ICustomerRepository> _customerRepositoryMock = new Mock<ICustomerRepository>();
-    private readonly Mock<ICustomerMapperService> _customerMapperServiceMock = new Mock<ICustomerMapperService>();
-    private readonly Mock<Serilog.ILogger> _loggerMock = new Mock<Serilog.ILogger>();
-    private ICommandHandler<CreateCustomerCommand> _handler;
+    private readonly Mock<ICustomerRepository> _customerRepositoryMock;
+    private readonly Mock<ICustomerMapperService> _customerMapperServiceMock;
+    private readonly Mock<Serilog.ILogger> _loggerMock;
+    private ICommandHandler<CreateCustomerCommand>? _handler;
+
+    public CreateCustomerCommandHandlerTests()
+    {
+        _customerRepositoryMock = new Mock<ICustomerRepository>();
+        _customerMapperServiceMock = new Mock<ICustomerMapperService>();
+        _loggerMock = new Mock<Serilog.ILogger>();
+    }
 
     [Fact]
     public async Task HandleCommand_CreateCustomer_Should_CreateNewCustomer()

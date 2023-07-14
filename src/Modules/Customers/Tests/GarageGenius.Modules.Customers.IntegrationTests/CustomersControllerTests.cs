@@ -10,12 +10,12 @@ namespace GarageGenius.Modules.Customers.IntegrationTests;
 
 public class CustomersControllerTests
 {
-	private record class SignUpDto(string email, string password, string role);
-	private record class SignInDto(string email, string password);
-    private record class SignInResponseDto(Guid userId, Guid customerId, string accessToken, DateTime expiry, string role, Dictionary<string, List<string>> claims);
+    private record class SignUpDto(string Email, string Password, string Role);
+    private record class SignInDto(string Email, string Password);
+    private record class SignInResponseDto(Guid UserId, Guid CustomerId, string AccessToken, DateTime Expiry, string Role, Dictionary<string, List<string>> Claims);
 
 	private readonly HttpClient _client;
-	private string _token = string.Empty;
+	private string? _token = string.Empty;
 
 	public CustomersControllerTests()
 	{
@@ -37,7 +37,7 @@ public class CustomersControllerTests
         responseSignIn.EnsureSuccessStatusCode();
 
 		var signInResponse = await responseSignIn.Content.ReadFromJsonAsync<SignInResponseDto>();
-		_token = signInResponse.accessToken;
+		_token = signInResponse?.AccessToken;
 
 		_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 

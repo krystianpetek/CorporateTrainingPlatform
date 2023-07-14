@@ -62,8 +62,8 @@ internal class JsonWebTokenService : IJsonWebTokenService
 
 	public ClaimsPrincipal GetPrincipalFromToken(string token)
 	{
+		// TODO ?
 		throw new NotImplementedException();
-
 		JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 		SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jsonWebTokenOptions.IssuerSigningKey));
 		SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
