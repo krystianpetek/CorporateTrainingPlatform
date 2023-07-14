@@ -17,7 +17,7 @@ public class Program
     {
         // ensure logging before configuration is loaded
         Log.Logger = new LoggerConfiguration()
-        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateBootstrapLogger();
