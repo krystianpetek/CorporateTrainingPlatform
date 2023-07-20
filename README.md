@@ -7,6 +7,8 @@
  GarageGenius is an application to improve the management of the service process in a car workshop
 </h3>
 
+> **Note:** The application is still under development, so some features may not work properly.
+
 The aim of the project is to create a web application for a car garage that will enable easy management of service processes in the company and will allow customers to conveniently and quickly report the need to repair their vehicle, which will improve communication between the garage and the customer.
 
 The application will solve many problems, including:
