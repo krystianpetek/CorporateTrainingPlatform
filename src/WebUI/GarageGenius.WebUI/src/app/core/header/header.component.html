@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <div fxHide.gt-xs>
     <button mat-icon-button (click)="this.onToggleSideNavigation()">
       <mat-icon>menu</mat-icon>
@@ -14,9 +14,11 @@
       <li>
         <a routerLink="/check-health">Health check</a>
       </li>
+      <li *ngIf="this.isUserLoggedIn()">|</li>
       <li *ngIf="this.isUserLoggedIn()">
-        <button mat-raised-button routerLink="/dashboard">Dashboard</button>
+        <a routerLink="/dashboard">Dashboard</a>
       </li>
+      <li>|</li>
       <li>
         <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
           <a routerLink="/authentication/sign-out" (click)="this.signOut()">Sign out</a>

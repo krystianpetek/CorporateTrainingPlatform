@@ -2,7 +2,7 @@
 
 :host {
   height: 60px;
-  background-color: $theme-side;
+  background-color: $theme-header-footer;
   color: $theme-text;
   display: flex;
   justify-content: center;
@@ -25,9 +25,6 @@
 a {
   text-decoration: none;
   color: $theme-text;
-}
-
-a {
   color: white;
   margin: 0 15px;
   outline: none;
@@ -36,7 +33,7 @@ a {
 
 a:hover,
 a:active {
-  color: $theme-selected-background;
+  color: $theme-selected-hover-foreground;
 }
 
 .line {
