@@ -6,6 +6,7 @@ using GarageGenius.WebApi.Middlewares.ErrorHandling;
 using Microsoft.AspNetCore.Diagnostics;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -19,7 +20,7 @@ public class Program
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
-            .WriteTo.Console()
+            .WriteTo.Console(theme: AnsiConsoleTheme.Code)
             .CreateBootstrapLogger();
 
         try

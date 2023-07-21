@@ -1,6 +1,6 @@
 <br/>
 <h1 align="center">
-  <img src="./assets/logo.svg" width="400"/>
+  <img src="./assets/logo/LOGO.svg" width="350"/>
 </h1>
 
 <h3 align="center">
@@ -31,11 +31,14 @@ Technologies used - RestAPI backend in `ASP.NET Core`, `Angular` frontend, `Micr
 
 ### How application actually looks like
 
-![web](./assets/real-first-version.png)
+![web](./assets/screenshots/first-version/real-first-version.png)
 
 WEB
 
-![responsible](./assets/mobile-real-first-version.png)
+![responsible](./assets/screenshots/first-version/mobile-real-first-version.png)
 
 MOBILE
 
+![colors](./assets/colors.svg)
+
+NEW COLORS

@@ -25,6 +25,8 @@ internal class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComm
 		Customer customer = _customerMapperService.MapToCustomer(command);
 		await _customerRepository.AddCustomerAsync(customer, cancellationToken);
 
+		// TODO - validate if customer email exists
+
 		_logger.Information("Handled {CommandName} in {ModuleName} module, created customer with email: {Email}", nameof(CreateCustomerCommand), nameof(Customers), command.EmailAddress);
 	}
 }
