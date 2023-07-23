@@ -31,11 +31,13 @@ Technologies used - RestAPI backend in `ASP.NET Core`, `Angular` frontend, `Micr
 
 ### How application actually looks like
 
-![web](./assets/screenshots/first-version/real-first-version.png)
+![web](./assets/screenshots/two-version/web-second-version.png)
 
 WEB
 
-![responsible](./assets/screenshots/first-version/mobile-real-first-version.png)
+| | | |
+| :-------------------------:|:-------------------------:|:-------------------------: |
+| ![](./assets/screenshots/two-version/mobile-second-version1.png)  |  ![](./assets/screenshots/two-version/mobile-second-version2.png) | ![](./assets/screenshots/two-version/mobile-second-version3.png) |
 
 MOBILE
 

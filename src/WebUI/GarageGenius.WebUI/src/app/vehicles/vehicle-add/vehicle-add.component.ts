@@ -125,10 +125,12 @@ export class VehicleAddComponent implements OnInit {
         next: () => {
           this.isSuccessful = true;
           this._dialogRef.close(vehicleAddModel);
+          // TODO - fix this to fetch another time vehicles after add new vehicle
         },
         error: (err) => {
           this.isSuccessful = false;
           this.error = err.error.detail;
+          // TODO - something to fix after reset button !
           // TODO - check if its work because in vehicle service is also error handling
         },
       });
