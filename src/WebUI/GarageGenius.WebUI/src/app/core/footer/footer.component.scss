@@ -12,8 +12,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
+  min-height: 50px;
 
   a {
     display: flex;
@@ -28,7 +28,7 @@ a {
   color: white;
   margin: 0 15px;
   outline: none;
-  scale: 130%;
+  font-size: 1.2rem;
 }
 
 a:hover,
@@ -41,4 +41,14 @@ a:active {
   height: 30px;
   width: 1px;
   background-color: white;
+}
+
+@media(max-width: 959px) {
+    .line{
+        margin: 0 10px;
+    }
+    a{
+        margin: 0 7px;
+        font-size: 1rem;
+    }
 }
