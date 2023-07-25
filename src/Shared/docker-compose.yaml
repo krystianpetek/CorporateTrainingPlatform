@@ -6,3 +6,10 @@ services:
       ACCEPT_EULA: Y
     ports:
       - 25421:80
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+        ACCEPT_EULA: 'Y'
+        SA_PASSWORD: 'NotAll0wedForPublic'
+    ports:
+    - 25411:1433

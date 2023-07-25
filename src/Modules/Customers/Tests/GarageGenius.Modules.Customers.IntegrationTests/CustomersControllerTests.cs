@@ -8,19 +8,20 @@ using Xunit;
 
 namespace GarageGenius.Modules.Customers.IntegrationTests;
 
-public class CustomersControllerTests
+public class CustomersControllerTests : IClassFixture<TestWebApplication<Program>>
 {
     private record class SignUpDto(string Email, string Password, string Role);
     private record class SignInDto(string Email, string Password);
     private record class SignInResponseDto(Guid UserId, Guid CustomerId, string AccessToken, DateTime Expiry, string Role, Dictionary<string, List<string>> Claims);
 
+	private readonly WebApplicationFactory<Program> _mockWebApplication;
 	private readonly HttpClient _client;
 	private string? _token = string.Empty;
 
-	public CustomersControllerTests()
+	public CustomersControllerTests(TestWebApplication<Program> fixture)
 	{
-		WebApplicationFactory<Program> mockWebApplication = new TestWebApplication<Program>();
-		_client = mockWebApplication.CreateClient();
+        _mockWebApplication = fixture;
+        _client = _mockWebApplication.CreateClient();
 	}
 
 	[Fact]
