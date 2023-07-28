@@ -10,7 +10,11 @@ public static class Extensions
 	{
 		services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
 
-		IEnumerable<Type> commandHandlersWithoutDecorators = assemblies.SelectMany(x => x.GetTypes().Where(t => t.GetInterfaces().Any(any => any.IsGenericType && any.GetGenericTypeDefinition() == typeof(ICommandHandler<>) && t.GetCustomAttribute<CommandHandlerDecoratorAttribute>() == null)));
+		IEnumerable<Type> commandHandlersWithoutDecorators = assemblies.SelectMany(
+			x => x.GetTypes()
+			.Where(t => t.GetInterfaces()
+			.Any(any => any.IsGenericType && any.GetGenericTypeDefinition() == typeof(ICommandHandler<>) && t.GetCustomAttribute<CommandHandlerDecoratorAttribute>() == null)));
+
 		foreach (var type in commandHandlersWithoutDecorators)
 		{
 			services.AddScoped(type.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>)), type);

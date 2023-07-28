@@ -14,10 +14,12 @@ namespace GarageGenius.Modules.Customers.UnitTests.Controllers;
 public class CustomersControllerTests
 {
     private readonly Mock<IDispatcher> _dispatcher;
+    private readonly Mock<CancellationTokenSource> _cancellationToken;
 
     public CustomersControllerTests()
     {
         _dispatcher = new Mock<IDispatcher>();
+        _cancellationToken = new Mock<CancellationTokenSource>(TimeSpan.FromSeconds(3));
     }
 
     [Theory]
@@ -36,7 +38,7 @@ public class CustomersControllerTests
             FirstName = firstName,
             LastName = lastName,
             PhoneNumber = phoneNumber,
-        });
+        }, _cancellationToken.Object.Token);
 
         // assert
         Assert.IsType<NoContentResult>(result);
@@ -57,7 +59,7 @@ public class CustomersControllerTests
             LastName = lastName,
             PhoneNumber = phoneNumber,
             EmailAddress = emailAddress
-        });
+        }, _cancellationToken.Object.Token);
 
         // assert
         Assert.IsType<AcceptedResult>(result);
@@ -74,7 +76,7 @@ public class CustomersControllerTests
 
         // act
         CustomersController customersController = new CustomersController(_dispatcher.Object);
-        ActionResult<GetCustomerByUserIdDto> result = await customersController.GetCustomerByUserIdAsync(guid);
+        ActionResult<GetCustomerByUserIdDto> result = await customersController.GetCustomerByUserIdAsync(guid, _cancellationToken.Object.Token);
         var resultValue = result.Result as OkObjectResult;
 
         // assert
@@ -97,7 +99,7 @@ public class CustomersControllerTests
 
         // act
         CustomersController customersController = new CustomersController(_dispatcher.Object);
-        ActionResult<GetCustomerByIdDto> result = await customersController.GetCustomerByIdAsync(Guid.NewGuid());
+        ActionResult<GetCustomerByIdDto> result = await customersController.GetCustomerByIdAsync(Guid.NewGuid(), _cancellationToken.Object.Token);
         var resultValue = result.Result as OkObjectResult;
 
         // assert

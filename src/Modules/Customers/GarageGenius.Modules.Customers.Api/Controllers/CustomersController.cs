@@ -20,36 +20,37 @@ public class CustomersController : BaseController
 	[HttpGet("{id:guid}")]
 	[Authorize]
 	[SwaggerOperation("Get customer id")]
-	public async Task<ActionResult> GetCustomerByIdAsync(Guid id)
+	public async Task<ActionResult> GetCustomerByIdAsync(Guid id, CancellationToken cancellationToken)
 	{
-		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id));
+		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByIdDto>(new GetCustomerByIdQuery(id), cancellationToken);
 		return Ok(customer);
 	}
 
 	[HttpGet("user/{id:guid}")]
 	[Authorize]
 	[SwaggerOperation("Get customer by user id")]
-	public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id)
+	public async Task<ActionResult> GetCustomerByUserIdAsync(Guid id, CancellationToken cancellationToken)
 	{
-		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id));
+		var customer = await _dispatcher.DispatchQueryAsync<GetCustomerByUserIdDto>(new GetCustomerByUserIdQuery(id), cancellationToken);
 		return Ok(customer);
 	}
 
 	[HttpPost]
 	[Authorize]
 	[SwaggerOperation("Create customer")]
-	public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand)
+	public async Task<ActionResult> CreateCustomerAsync(CreateCustomerCommand createCustomerCommand, CancellationToken cancellationToken)
 	{
-		await _dispatcher.DispatchCommandAsync<CreateCustomerCommand>(createCustomerCommand);
+		await _dispatcher.DispatchCommandAsync<CreateCustomerCommand>(createCustomerCommand, cancellationToken);
 		return Accepted();
 	}
 
 	[HttpPut]
 	[Authorize]
 	[SwaggerOperation("Update customer")]
-	public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand)
+	public async Task<ActionResult> UpdateCustomerAsync(UpdateCustomerCommand updateCustomerCommand, CancellationToken cancellationToken)
 	{
-		await _dispatcher.DispatchCommandAsync<UpdateCustomerCommand>(updateCustomerCommand);
+		await _dispatcher.DispatchCommandAsync<UpdateCustomerCommand>(updateCustomerCommand, cancellationToken);
 		return NoContent();
 	}
 }
+	// TODO - handling for timeout / cancel request

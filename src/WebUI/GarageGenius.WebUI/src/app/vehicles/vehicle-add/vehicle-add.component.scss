@@ -4,7 +4,6 @@ mat-form-field {
   width: 50vw;
   min-width: 250px;
   max-width: 600px;
-
 }
 
 .mat-dialog-title {
@@ -13,4 +12,10 @@ mat-form-field {
 
 .mat-dialog-content {
   padding-top: 1rem;
+  color: $theme-text;
+}
+
+.mat-custom {
+  color: $theme-text;
+  background-color: $theme-header-footer;
 }
