@@ -7,20 +7,24 @@
       <h2 class="title-bar_model">{{ vehicleResponse.manufacturer }} {{ vehicleResponse.model }}</h2>
     </div>
     <div>
-      <button *ngIf="!this.editMode" mat-icon-button type="button"
-        (click)="this.editVehicle()"><mat-icon>edit</mat-icon></button>
-      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editVehicle()">
+        <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
+          <mat-icon>event_note</mat-icon>
+        </button>
+      <button *ngIf="!this.editMode" mat-icon-button type="button" matTooltip="Edit vehicle"
+              (click)="this.editVehicle()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editVehicle()" matTooltip="Cancel">
         <mat-icon>clear</mat-icon>
       </button>
-      <button *ngIf="this.editMode" mat-icon-button type="button">
+      <button *ngIf="this.editMode" mat-icon-button type="button" matTooltip="Save">
         <mat-icon>check</mat-icon>
       </button>
     </div>
   </div>
 
-  <h1 *ngIf="editMode">TODO edit mode</h1>
-
-  <div class="vehicle-property">
+  <h3 *ngIf="editMode">TODO edit mode</h3>
+  <div class="vehicle-property" *ngIf="editMode">
     <span class="vehicle-property-name">Vehicle ID:</span>
     <ng-container *ngIf="this.editMode else customer_edit">
       <mat-form-field>
@@ -34,7 +38,6 @@
       <i class="vehicle-property-value">{{ vehicleResponse!.id }}</i>
     </ng-template>
   </div>
-  <hr />
 
   <div class="vehicle-property">
     <span class="vehicle-property-name">Manufacturer:</span>
@@ -63,12 +66,6 @@
   <div class="vehicle-property">
     <span class="vehicle-property-name">VIN number:</span>
     <i class="vehicle-property-value">{{ vehicleResponse.vin }}</i>
-  </div>
-
-  <div class="add-reservation_button">
-    <button mat-stroked-button type="button" (click)="this.openDialog()">
-      Show reservations
-    </button>
   </div>
 </div>
 
