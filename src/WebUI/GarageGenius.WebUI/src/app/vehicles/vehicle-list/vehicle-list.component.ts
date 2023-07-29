@@ -67,7 +67,11 @@ export class VehicleListComponent implements OnInit {
       if (!vehicle) {
         return;
       }
-      this.dataSource.data = [...this.dataSource.data, vehicle];
+      const currentUrl = this._router.url;
+      this._router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this._router.navigate([currentUrl]);
+      });
+
       // TODO - change handling of this to refresh the list of vehicles ?
     });
   }

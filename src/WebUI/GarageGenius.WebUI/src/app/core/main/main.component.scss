@@ -5,6 +5,10 @@ main {
   flex-grow: 1;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 mat-sidenav-container,
 mat-sidenav-content {
   display: flex;

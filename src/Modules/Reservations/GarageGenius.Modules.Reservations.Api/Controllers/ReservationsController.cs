@@ -24,7 +24,7 @@ public class ReservationsController : BaseController
 	[HttpPut]
 	[Authorize]
 	[SwaggerOperation(Summary = "Update reservation", Description = "Allow customer to update reservation when its state is other than ...?")]
-	public async Task<ActionResult> UpdateReservation(UpdateReservationCommand command)
+	public async Task<ActionResult> UpdateReservationAsync(UpdateReservationCommand command)
 	{
 		await _dispatcher.DispatchCommandAsync<UpdateReservationCommand>(command);
 		return Ok();
@@ -33,7 +33,7 @@ public class ReservationsController : BaseController
 	[HttpPost]
 	[Authorize]
 	[SwaggerOperation("Add reservation")]
-	public async Task<IActionResult> AddReservation(AddReservationCommand command)
+	public async Task<IActionResult> AddReservationAsync(AddReservationCommand command)
 	{
 		// TODO add reservation date to command parameters with date validation
 		await _dispatcher.DispatchCommandAsync<AddReservationCommand>(command);
