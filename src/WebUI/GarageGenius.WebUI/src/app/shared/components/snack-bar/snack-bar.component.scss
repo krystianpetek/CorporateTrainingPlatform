@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 .custom-snack-bar-row {
   display: flex;
   justify-content: space-between;
@@ -12,26 +14,19 @@
   bottom: 0px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+
 }
 
-::ng-deep .success-snackbar {
-  margin-top: 75px !important;
-}
-
-::ng-deep .success-snackbar button {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
+::ng-deep .success-snackbar,
+::ng-deep .failed-snackbar {
+  margin-top: 5px !important;
 }
 
 ::ng-deep .mat-mdc-snack-bar-container {
   &.success-snackbar {
-    --mdc-snackbar-container-color: rgb(29, 102, 29);
-    --mdc-snackbar-supporting-text-color: lightgreen;
+    --mdc-snackbar-container-color: #2aa391;
+    --mdc-snackbar-supporting-text-color: white;
   }
-}
-
-::ng-deep .failed-snackbar {
-  margin-top: 75px !important;
 }
 
 ::ng-deep .failed-snackbar button {
@@ -41,7 +36,17 @@
 
 ::ng-deep .mat-mdc-snack-bar-container {
   &.failed-snackbar {
-    --mdc-snackbar-container-color: rgb(153, 50, 50);
-    --mdc-snackbar-supporting-text-color: lightgoldenrodyellow;
+    --mdc-snackbar-container-color: rgb(238, 64, 64);
+    --mdc-snackbar-supporting-text-color: white;
   }
+}
+
+.mat-mdc-progress-bar {
+  --mdc-linear-progress-active-indicator-color: #0e5bc0;
+  --mdc-linear-progress-track-color: white; // background color
+}
+
+.mat-custom {
+  color: black;
+  background-color: #ffffff;
 }

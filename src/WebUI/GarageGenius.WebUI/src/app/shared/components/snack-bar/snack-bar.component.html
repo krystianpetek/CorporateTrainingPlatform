@@ -3,8 +3,8 @@
     <span class="example-snack-bar-message">
       {{ snackBarData.message }}
     </span>
-    <button id="action-button" (click)="dismissWithAction()" mat-button color="primary">{{snackBarData.action}}</button>
+    <button id="action-button" (click)="dismissWithAction()" mat-button color="custom">{{snackBarData.action}}</button>
   </div>
 
-  <mat-progress-bar id="progress-bar" mode="determinate" [value]="progress" color="accent"></mat-progress-bar>
+  <mat-progress-bar id="progress-bar" mode="determinate" [value]="progress" color="custom"></mat-progress-bar>
 </div>
