@@ -34,16 +34,23 @@
 
 .vehicle-property {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
   gap: 1rem;
-  justify-items: left;
 
   &-name {
     grid-column: 2/3;
   }
 
   &-value {
-    grid-column: 4/5;
+    grid-column: 3/4;
+  }
+}
+
+mat-form-field {
+
+  mat-label,
+  input {
+    color: white !important;
   }
 }
 
@@ -69,12 +76,6 @@ mat-card-content {
   padding-bottom: 20px;
 }
 
-hr {
-  background-color: antiquewhite;
-  width: 95%;
-  color: antiquewhite;
-}
-
 @media(max-width: 959px) {
 
   .vehicle-property {
@@ -84,4 +85,10 @@ hr {
     justify-content: space-between;
     padding: 0 1rem;
   }
+}
+
+.comunicate {
+  color: $theme-selected-foreground;
+  text-align: center;
+  padding: 0.5rem;
 }

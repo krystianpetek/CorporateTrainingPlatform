@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleResponseModel } from '../models/vehicle.model';
 import { VehicleReservationsComponent } from '../vehicle-reservations/vehicle-reservations.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackBarMessageService } from 'src/app/shared/services/snack-bar-message/snack-bar-message.service';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -17,18 +18,21 @@ export class VehicleDetailsComponent implements OnInit {
   private readonly _dialog: MatDialog;
   public vehicleResponse?: VehicleResponseModel;
   public editMode: boolean;
+  private readonly _snackbarService: SnackBarMessageService;
 
   constructor(
     vehicleService: VehicleService,
     activatedRoute: ActivatedRoute,
     router: Router,
-    dialog: MatDialog
+    dialog: MatDialog,
+    snackbarService: SnackBarMessageService
   ) {
     this._vehicleService = vehicleService;
     this._activatedRoute = activatedRoute;
     this._router = router;
     this._dialog = dialog;
     this.editMode = false;
+    this._snackbarService = snackbarService;
   }
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
@@ -63,7 +67,7 @@ export class VehicleDetailsComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
-  public updateVehicle(): void {
-    // TODO - update vehicle
+  public saveVehicle(): void {
+    this._snackbarService.fail('Not implemented yet!', 2);
   }
 }
