@@ -19,6 +19,7 @@ export class VehicleDetailsComponent implements OnInit {
   public vehicleResponse?: VehicleResponseModel;
   public editMode: boolean;
   private readonly _snackbarService: SnackBarMessageService;
+  public vehicleId: string;
 
   constructor(
     vehicleService: VehicleService,
@@ -33,11 +34,12 @@ export class VehicleDetailsComponent implements OnInit {
     this._dialog = dialog;
     this.editMode = false;
     this._snackbarService = snackbarService;
+    this.vehicleId = '';
   }
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
-      const vehicleId = params['id'];
-      this.vehicle(vehicleId);
+      this.vehicleId = params['id'];
+      this.vehicle(this.vehicleId);
     });
   }
 

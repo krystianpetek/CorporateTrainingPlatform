@@ -22,9 +22,9 @@
 
 
 <div class="reservation-header">
-  <h2>Vehicle reservations</h2>
-  <button mat-icon-button type="button" color="custom" matTooltip="Add reservation" (click)="this.addNewReservation()">
-    <mat-icon>add</mat-icon>
+  <h3>Reservations</h3>
+  <button mat-mini-fab type="button" color="custom" matTooltip="Add reservation" (click)="this.addNewReservation()">
+    <mat-icon fontIcon="add"></mat-icon>
   </button>
 </div>
 <div class="reservation-content">
@@ -40,6 +40,6 @@
     </mat-action-list>
   </div>
   <ng-template #template>
-    <p>No reservations found</p>
+    <h5>No reservations found</h5>
   </ng-template>
 </div>

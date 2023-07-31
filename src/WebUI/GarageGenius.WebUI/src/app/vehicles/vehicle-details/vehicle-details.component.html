@@ -1,4 +1,4 @@
-<div class="container" *ngIf="vehicleResponse">
+<div class="container-title" *ngIf="vehicleResponse">
   <div class="title-bar">
     <div>
       <button mat-icon-button (click)="goBack()">
@@ -7,9 +7,9 @@
       <h2 class="title-bar_model">{{ vehicleResponse.manufacturer }} {{ vehicleResponse.model }}</h2>
     </div>
     <div>
-      <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
+      <!-- <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
         <mat-icon>event_note</mat-icon>
-      </button>
+      </button> -->
       <button *ngIf="!this.editMode" mat-icon-button type="button" matTooltip="Edit vehicle"
         (click)="this.editVehicle()">
         <mat-icon>edit</mat-icon>
@@ -22,95 +22,101 @@
       </button>
     </div>
   </div>
+  <div class="line"></div>
 
-  <div class="vehicle-property" *ngIf="false">
-    <span class="vehicle-property-name">Vehicle ID:</span>
-    <ng-container *ngIf="this.editMode else customer_edit">
-      <mat-form-field appearance="outline">
-        <mat-label>Vehicle ID</mat-label>
-        <input class="vehicle-property-value" [value]="vehicleResponse!.id" matInput />
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Change vehicle ID</mat-hint>
+  <div class="container-content">
+    <div class="vehicle-property" *ngIf="false">
+      <span class="vehicle-property-name">Vehicle ID:</span>
+      <ng-container *ngIf="this.editMode else customer_edit">
+        <mat-form-field class="vehicle-property-edit" appearance="outline">
+          <mat-label>Vehicle ID</mat-label>
+          <input class="vehicle-property-value" [value]="vehicleResponse!.id" matInput />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Change vehicle ID</mat-hint>
+        </mat-form-field>
+      </ng-container>
+      <ng-template #customer_edit>
+        <i class="vehicle-property-value">{{ vehicleResponse!.id }}</i>
+      </ng-template>
+    </div>
+
+    <div class="vehicle-property" *ngIf="!this.editMode; else manufacturerTemplate">
+      <span class="vehicle-property-name">Manufacturer:</span>
+      <h4 class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</h4>
+    </div>
+    <ng-template #manufacturerTemplate>
+      <mat-form-field class="vehicle-property-edit" appearance="outline">
+        <mat-label>Manufacturer</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.manufacturer" matInput />
+        <mat-icon matSuffix>info</mat-icon>
+        <mat-hint>Change vehicle manufacturer</mat-hint>
       </mat-form-field>
-    </ng-container>
-    <ng-template #customer_edit>
-      <i class="vehicle-property-value">{{ vehicleResponse!.id }}</i>
     </ng-template>
+
+    <div class="vehicle-property" *ngIf="!this.editMode; else modelTemplate">
+      <span class="vehicle-property-name">Model:</span>
+      <h4 class="vehicle-property-value">{{ vehicleResponse.model }}</h4>
+    </div>
+    <ng-template #modelTemplate>
+      <mat-form-field class="vehicle-property-edit" appearance="outline">
+        <mat-label>Model</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.model" matInput />
+        <mat-icon matSuffix>assessment</mat-icon>
+        <mat-hint>Change vehicle model</mat-hint>
+      </mat-form-field>
+    </ng-template>
+
+    <div class="vehicle-property" *ngIf="!this.editMode; else yearTemplate">
+      <span class="vehicle-property-name">Year:</span>
+      <h4 class="vehicle-property-value">{{ vehicleResponse.year }}</h4>
+    </div>
+    <ng-template #yearTemplate>
+      <mat-form-field class="vehicle-property-edit" appearance="outline">
+        <mat-label>Year</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.year" matInput />
+        <mat-icon matSuffix>date_range</mat-icon>
+        <mat-hint>Change vehicle year</mat-hint>
+      </mat-form-field>
+    </ng-template>
+
+    <div class="vehicle-property" *ngIf="!this.editMode; else plateTemplate">
+      <span class="vehicle-property-name">License plate:</span>
+      <h4 class="vehicle-property-value">{{ vehicleResponse.licensePlate }}</h4>
+    </div>
+    <ng-template #plateTemplate>
+      <mat-form-field class="vehicle-property-edit" appearance="outline">
+        <mat-label>Licence plate</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.licensePlate" matInput />
+        <mat-icon matSuffix>directions_car</mat-icon>
+        <mat-hint>Change vehicle licence plate</mat-hint>
+      </mat-form-field>
+    </ng-template>
+
+    <div class="vehicle-property" *ngIf="!this.editMode; else vinTemplate">
+      <span class="vehicle-property-name">VIN number:</span>
+      <h4 class="vehicle-property-value">{{ vehicleResponse.vin }}</h4>
+    </div>
+    <ng-template #vinTemplate>
+      <mat-form-field class="vehicle-property-edit" appearance="outline">
+        <mat-label>VIN number</mat-label>
+        <input class="vehicle-property-value" [value]="vehicleResponse!.vin" matInput />
+        <mat-icon matSuffix>confirmation_number</mat-icon>
+        <mat-hint>Change vehicle vin number</mat-hint>
+      </mat-form-field>
+    </ng-template>
+
+    <div class="comunicate" *ngIf="this.editMode">I don't know how to change input outline color in Material</div>
+
   </div>
 
-  <div class="vehicle-property" *ngIf="!this.editMode; else manufacturerTemplate">
-    <span class="vehicle-property-name">Manufacturer:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</i>
-  </div>
-  <ng-template #manufacturerTemplate>
-    <mat-form-field appearance="outline">
-      <mat-label>Manufacturer</mat-label>
-      <input class="vehicle-property-value" [value]="vehicleResponse!.manufacturer" matInput />
-      <mat-icon matSuffix>info</mat-icon>
-      <mat-hint>Change vehicle manufacturer</mat-hint>
-    </mat-form-field>
-  </ng-template>
-
-  <div class="vehicle-property" *ngIf="!this.editMode; else modelTemplate">
-    <span class="vehicle-property-name">Model:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse.model }}</i>
-  </div>
-  <ng-template #modelTemplate>
-    <mat-form-field appearance="outline">
-      <mat-label>Model</mat-label>
-      <input class="vehicle-property-value" [value]="vehicleResponse!.model" matInput />
-      <mat-icon matSuffix>assessment</mat-icon>
-      <mat-hint>Change vehicle model</mat-hint>
-    </mat-form-field>
-  </ng-template>
-
-  <div class="vehicle-property" *ngIf="!this.editMode; else yearTemplate">
-    <span class="vehicle-property-name">Year:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse.year }}</i>
-  </div>
-  <ng-template #yearTemplate>
-    <mat-form-field appearance="outline">
-      <mat-label>Year</mat-label>
-      <input class="vehicle-property-value" [value]="vehicleResponse!.year" matInput />
-      <mat-icon matSuffix>date_range</mat-icon>
-      <mat-hint>Change vehicle year</mat-hint>
-    </mat-form-field>
-  </ng-template>
-
-  <div class="vehicle-property" *ngIf="!this.editMode; else plateTemplate">
-    <span class="vehicle-property-name">License plate:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse.licensePlate }}</i>
-  </div>
-  <ng-template #plateTemplate>
-    <mat-form-field appearance="outline">
-      <mat-label>Licence plate</mat-label>
-      <input class="vehicle-property-value" [value]="vehicleResponse!.licensePlate" matInput />
-      <mat-icon matSuffix>directions_car</mat-icon>
-      <mat-hint>Change vehicle licence plate</mat-hint>
-    </mat-form-field>
-  </ng-template>
-
-  <div class="vehicle-property" *ngIf="!this.editMode; else vinTemplate">
-    <span class="vehicle-property-name">VIN number:</span>
-    <i class="vehicle-property-value">{{ vehicleResponse.vin }}</i>
-  </div>
-  <ng-template #vinTemplate>
-    <mat-form-field appearance="outline">
-      <mat-label>VIN number</mat-label>
-      <input class="vehicle-property-value" [value]="vehicleResponse!.vin" matInput />
-      <mat-icon matSuffix>confirmation_number</mat-icon>
-      <mat-hint>Change vehicle vin number</mat-hint>
-    </mat-form-field>
-  </ng-template>
-
-  <div class="comunicate">I don't know how to change input outline color in Material</div>
-
-</div>
-
-<!-- <mat-form-field>
+  <!-- <mat-form-field>
   <mat-select placeholder="Show accounts" (selectionChange)="onChange($event)">
     <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
       {{opt.name}}
     </mat-option>
   </mat-select>
 </mat-form-field> -->
+
+  <app-vehicle-reservations class="vehicle-reservation" *ngIf="!this.editMode"
+    [vehicleId]="this.vehicleId"></app-vehicle-reservations>
+</div>
