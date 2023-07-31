@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ReservationService } from 'src/app/reservations/services/reservation.service';
 import { VehicleReservationsModalProperties } from './models/vehicle-reservations-modal-properties.model';
@@ -12,37 +12,39 @@ import { Router } from '@angular/router';
 })
 export class VehicleReservationsComponent implements OnInit {
   private readonly _reservationsService: ReservationService;
-  private readonly dialogRef: MatDialogRef<VehicleReservationsComponent>;
   private readonly _router: Router;
   public vehicleReservationsResponse?: VehicleReservationsResponseModel;
+  @Input() public vehicleId: string;
+  // private readonly dialogRef: MatDialogRef<VehicleReservationsComponent>;
 
   constructor(
     reservationsService: ReservationService,
-    dialogRef: MatDialogRef<VehicleReservationsComponent>,
-    router: Router,
-    @Inject(MAT_DIALOG_DATA)
-    public matDialogData: VehicleReservationsModalProperties
+    router: Router
+    // dialogRef: MatDialogRef<VehicleReservationsComponent>,
+    // @Inject(MAT_DIALOG_DATA)
+    // public matDialogData: VehicleReservationsModalProperties
   ) {
     this._reservationsService = reservationsService;
-    this.dialogRef = dialogRef;
     this._router = router;
+    this.vehicleId = '';
+    // this.dialogRef = dialogRef;
   }
 
   ngOnInit(): void {
-    this.getVehicleReservations(this.matDialogData.vehicleId);
+    this.getVehicleReservations(this.vehicleId);
   }
   // TODO - spinner or something while waiting for response
 
   public redirectToReservationDetails(reservationId: string) {
     this._router.navigate(['dashboard/reservations', reservationId]);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   public addNewReservation() {
     this._router.navigate(['dashboard/reservations/add'], {
-      queryParams: { vehicleId: this.matDialogData.vehicleId },
+      queryParams: { vehicleId: this.vehicleId },
     });
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   private getVehicleReservations(vehicleId: string) {

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="mat-dialog-title">Vehicle reservations</h1>
+<!-- <h1 mat-dialog-title class="mat-dialog-title">Vehicle reservations</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <div *ngIf="this.vehicleReservationsResponse?.vehicleReservationsDto!.length > 0 else template">
     <mat-action-list>
@@ -18,4 +18,28 @@
     <button type="button" mat-raised-button color="primary" (click)="addNewReservation()">Create</button>
     <button mat-dialog-close type="button" mat-stroked-button>Close</button>
   </mat-dialog-actions>
+</div> -->
+
+
+<div class="reservation-header">
+  <h2>Vehicle reservations</h2>
+  <button mat-icon-button type="button" color="custom" matTooltip="Add reservation" (click)="this.addNewReservation()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="reservation-content">
+  <div *ngIf="this.vehicleReservationsResponse?.vehicleReservationsDto!.length > 0 else template">
+    <mat-action-list>
+      <button mat-list-item lines="3"
+        *ngFor="let reservation of this.vehicleReservationsResponse?.vehicleReservationsDto; let i = index"
+        (click)="redirectToReservationDetails(reservation.reservationId)">
+        <h3 matListItemTitle>{{i+1}}. {{ reservation.reservationState }}</h3>
+        <p matListItemMeta>{{ reservation.reservationDate | date:'shortDate' }}</p>
+        <p matListItemLine>{{ reservation.comment }}</p>
+      </button>
+    </mat-action-list>
+  </div>
+  <ng-template #template>
+    <p>No reservations found</p>
+  </ng-template>
 </div>

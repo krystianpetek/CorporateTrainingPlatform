@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleResponseModel } from '../models/vehicle.model';
