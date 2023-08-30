@@ -44,3 +44,22 @@ MOBILE
 ![colors](./assets/colors.svg)
 
 NEW COLORS
+
+<!-- | | | |
+| :-------------------------:|:-------------------------:|:-------------------------: |
+| ![](./assets/screens/1.png)  |  ![](./assets/screens/2.png) | ![](./assets/screens/3.png) | -->
+
+<!-- 5. You can **launch microservices** as below urls: -->
+
+<!-- - logo -->
+<!-- - title -->
+<!-- - description -->
+<!-- - requirements -->
+<!-- - usage -->
+<!-- - architektura -->
+<!-- - technologies (Build with) -->
+<!-- - features -->
+<!-- - TOC - table of contents
+- folder structure ??
+- app screenshots
+- API (table of api endpoints - swagger) -->
