@@ -10,4 +10,12 @@
     <ProjectReference Include="..\..\..\Shared\GarageGenius.Shared.Abstractions\GarageGenius.Shared.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.7.30" />
+    <PackageReference Update="Roslynator.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.Formatting.Analyzers" Version="4.5.0" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.8.0.76515" />
+  </ItemGroup>
+
 </Project>

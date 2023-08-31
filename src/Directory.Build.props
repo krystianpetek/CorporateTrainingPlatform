@@ -13,13 +13,13 @@
 	<ItemGroup>
 		<PackageReference 
 			Include="SonarAnalyzer.CSharp" 
-			Version="9.5.0.73987" 
+			Version="9.8.0.76515" 
 			PrivateAssets="all" 
 			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 		<PackageReference 
 			Include="Microsoft.VisualStudio.Threading.Analyzers" 
-			Version="17.6.40" 
+			Version="17.7.30" 
 			PrivateAssets="all" 
 			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
@@ -31,19 +31,19 @@
 		/>		
 		<PackageReference 
 			Include="Roslynator.Analyzers" 
-			Version="4.3.0"
+			Version="4.5.0"
 			PrivateAssets="all" 
 			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>		
 		<PackageReference 
 			Include="Roslynator.CodeAnalysis.Analyzers"
-			Version="4.3.0"
+			Version="4.5.0"
 			PrivateAssets="all" 
 			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>
 		<PackageReference 
 			Include="Roslynator.Formatting.Analyzers" 
-			Version="4.3.0"
+			Version="4.5.0"
 			PrivateAssets="all" 
 			Condition="$(MSBuildProjectExtension) == '.csproj' AND !$(MSBuildProjectName.Contains('Tests'))"
 		/>

@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -35,6 +35,14 @@
 
   <ItemGroup>
     <None Include="C:\Repositories\GarageGenius\src\WebApi\GarageGenius.WebApi\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.7.30" />
+    <PackageReference Update="Roslynator.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.Formatting.Analyzers" Version="4.5.0" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.8.0.76515" />
   </ItemGroup>
 
 </Project>

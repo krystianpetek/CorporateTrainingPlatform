@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
@@ -17,6 +17,14 @@
   
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.7.30" />
+    <PackageReference Update="Roslynator.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0" />
+    <PackageReference Update="Roslynator.Formatting.Analyzers" Version="4.5.0" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.8.0.76515" />
   </ItemGroup>
 
 </Project>
