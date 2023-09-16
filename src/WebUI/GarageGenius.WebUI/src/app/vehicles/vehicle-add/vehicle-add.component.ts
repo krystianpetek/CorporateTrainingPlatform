@@ -122,9 +122,10 @@ export class VehicleAddComponent implements OnInit {
     this._vehiclesService
       .postVehicleForCustomer(customerId, vehicleAddModel)
       .subscribe({
-        next: () => {
+        next: (response) => {
           this.isSuccessful = true;
           this._dialogRef.close(vehicleAddModel);
+          // TODO - add response handling
           // TODO - fix this to fetch another time vehicles after add new vehicle
         },
         error: (err) => {
