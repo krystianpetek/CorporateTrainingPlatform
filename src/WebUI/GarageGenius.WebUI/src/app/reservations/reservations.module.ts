@@ -6,6 +6,7 @@ import { ReservationAddComponent } from './reservation-add/reservation-add.compo
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 import { AppMaterialModule } from '../shared/app-material.module';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,6 @@ import { AppMaterialModule } from '../shared/app-material.module';
     ReservationListComponent,
     ReservationDetailsComponent,
   ],
-  imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule],
+    imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule, FormsModule, ReactiveFormsModule],
 })
 export class ReservationsModule {}
