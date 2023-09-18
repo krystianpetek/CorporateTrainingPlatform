@@ -1,1 +1,65 @@
-<p>reservation-add works!</p>
+<!-- TODO - more communicates when validation, maybe after first submitted? -->
+<h1 mat-dialog-title class="mat-dialog-title">Adding a new vehicle</h1>
+<div mat-dialog-content class="mat-dialog-content">
+  <form [formGroup]="this.reservationAddForm" (ngSubmit)="this.reservationAddSubmitForm()">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>customerId</mat-label>
+        <input type="text" id="customerId" matInput placeholder="CustomerId" formControlName="customerId" />
+      </mat-form-field>
+      <div class="error-validation-message" *ngIf="this.customerId.touched && this.customerId.invalid">
+        The CustomerID value is not valid
+      </div>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>vehicleId</mat-label>
+        <input type="text" id="vehicleId" matInput placeholder="VehicleId" formControlName="vehicleId">
+      </mat-form-field>
+      <span class="error-validation-message" *ngIf="this.vehicleId.touched && this.vehicleId.invalid ">
+        <!-- && manufacturer.errors?.['manufacturerStrength'] -->
+        Your vehicleId ...
+      </span>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>reservationState</mat-label>
+        <input type="text" id="reservationState" matInput placeholder="Reservation State" formControlName="reservationState">
+      </mat-form-field>
+      <div class="error-validation-message" *ngIf="this.reservationState.touched && this.reservationState.invalid">
+        reservationState model
+      </div>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>comment</mat-label>
+        <input type="text" id="comment" matInput placeholder="Comment" formControlName="comment">
+      </mat-form-field>
+      <div class="error-validation-message" *ngIf="this.comment.touched && this.comment.invalid">
+        comment model
+      </div>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>reservationDate</mat-label>
+        <input type="number" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate">
+      </mat-form-field>
+      <div class="error-validation-message" *ngIf="this.reservationDate.touched && this.reservationDate.invalid">
+        reservationDate model
+      </div>
+    </div>
+
+    <p *ngIf="error" class="error-block">
+      {{error}}
+    </p>
+    <mat-dialog-actions [align]="'end'">
+      <button type="button" (click)="reservationAddResetForm()" mat-button>Reset</button>
+      <button type="button" mat-dialog-close mat-raised-button color="warn">Close</button>
+      <button type="submit" mat-raised-button color="custom">Sign up</button>
+    </mat-dialog-actions>
+  </form>
+</div>

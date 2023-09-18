@@ -1,10 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
 import { ActivatedRoute } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReservationAddFormModel} from "../models/reservation-add-form.model";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ReservationAddModalProperties} from "../models/reservation-add-modal-properties.model";
+import {
+  ReservationAddRequestModel,
+} from "../models/vehicle-reservation-response.model";
 
 @Component({
   selector: 'app-reservation-add',
@@ -17,10 +20,11 @@ export class ReservationAddComponent implements OnInit {
   private readonly _formBuilder: FormBuilder;
   private readonly _dialogRef: MatDialogRef<ReservationAddComponent>;
   private _vehicleId: string = "";
+  public error: string;
 
   constructor(
     formBuilder: FormBuilder,
-    dialogRef: MatDialogRef<ReservationAddComponent>,
+    @Optional() dialogRef: MatDialogRef<ReservationAddComponent>,
     reservationsService: ReservationService,
     activatedRoute: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public matDialogData: ReservationAddModalProperties
@@ -29,6 +33,7 @@ export class ReservationAddComponent implements OnInit {
     this._dialogRef = dialogRef;
     this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
+    this.error = '';
   }
 
   public reservationAddForm!: FormGroup<ReservationAddFormModel>;
@@ -65,7 +70,15 @@ export class ReservationAddComponent implements OnInit {
     })
   }
 
-  reservationAddSubmitForm():void {
+  public reservationAddSubmitForm(): void {
+    this.error = ``;
+    const reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
+
+    // TODO request to add reservation
+  }
+
+  public reservationAddResetForm(): void {
+    this.reservationAddForm.reset();
   }
 
   public get customerId(): ReservationAddFormModel['customerId'] {

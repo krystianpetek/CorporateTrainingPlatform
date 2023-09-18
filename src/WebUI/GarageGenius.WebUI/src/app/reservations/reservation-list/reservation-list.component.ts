@@ -8,6 +8,8 @@ import {
 } from 'src/app/shared/services/authentication/authentication.service';
 import { IReservationService } from '../models/base-reservation.service';
 import { ReservationService } from '../services/reservation.service';
+import {MatDialog} from "@angular/material/dialog";
+import {ReservationAddComponent} from "../reservation-add/reservation-add.component";
 
 @Component({
   selector: 'app-reservation-list',
@@ -33,7 +35,8 @@ export class ReservationListComponent implements OnInit {
   public constructor(
     router: Router,
     authenticationService: AuthenticationService,
-    reservationService: ReservationService
+    reservationService: ReservationService,
+    public dialog: MatDialog,
   ) {
     this._router = router;
     this._authenticationService = authenticationService;
@@ -53,4 +56,13 @@ export class ReservationListComponent implements OnInit {
   public redirectToDetails(reservationId: string): void {
     this._router.navigate([`dashboard/reservations`, reservationId]);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ReservationAddComponent, {
+      data: {
+        customerId: this._authenticationService.getUserInfo().customerId
+      },
+    });
+  }
+
 }
