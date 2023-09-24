@@ -1,13 +1,11 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
-import { ReservationService } from '../services/reservation.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReservationAddFormModel} from "../models/reservation-add-form.model";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ReservationAddModalProperties} from "../models/reservation-add-modal-properties.model";
 import {
   ReservationAddRequestModel,
 } from "../models/vehicle-reservation-response.model";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-reservation-add',
@@ -15,34 +13,24 @@ import {
   styleUrls: ['./reservation-add.component.scss'],
 })
 export class ReservationAddComponent implements OnInit {
-  private readonly _reservationsService: ReservationService;
-  private readonly _activatedRoute: ActivatedRoute;
   private readonly _formBuilder: FormBuilder;
   private readonly _dialogRef: MatDialogRef<ReservationAddComponent>;
-  private _vehicleId: string = "";
+  private _vehicleId = "";
   public error: string;
 
   constructor(
     formBuilder: FormBuilder,
-    @Optional() dialogRef: MatDialogRef<ReservationAddComponent>,
-    reservationsService: ReservationService,
-    activatedRoute: ActivatedRoute,
+    dialogRef: MatDialogRef<ReservationAddComponent>,
     @Inject(MAT_DIALOG_DATA) public matDialogData: ReservationAddModalProperties
   ) {
     this._formBuilder = formBuilder;
     this._dialogRef = dialogRef;
-    this._reservationsService = reservationsService;
-    this._activatedRoute = activatedRoute;
     this.error = '';
   }
 
   public reservationAddForm!: FormGroup<ReservationAddFormModel>;
 
   public ngOnInit(): void {
-    this._activatedRoute.queryParams.subscribe((params) => {
-      this._vehicleId = params['vehicleId'];
-    });
-
     this.reservationAddForm = this._formBuilder.group({
       customerId: [
         this.matDialogData.customerId,
@@ -52,7 +40,7 @@ export class ReservationAddComponent implements OnInit {
         },
       ],
       vehicleId:[
-        this._vehicleId,
+        this.matDialogData.vehicleId,
         {
           validators: [Validators.required],
           nonNullable: false
@@ -73,7 +61,6 @@ export class ReservationAddComponent implements OnInit {
   public reservationAddSubmitForm(): void {
     this.error = ``;
     const reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
-
     // TODO request to add reservation
   }
 
