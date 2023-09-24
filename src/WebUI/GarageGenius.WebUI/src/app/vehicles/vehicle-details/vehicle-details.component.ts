@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VehiclesService as VehicleService } from '../service/vehicles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleResponseModel } from '../models/vehicle.model';
-import { VehicleReservationsComponent } from '../vehicle-reservations/vehicle-reservations.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackBarMessageService } from 'src/app/shared/services/snack-bar-message/snack-bar-message.service';
 
@@ -51,18 +50,6 @@ export class VehicleDetailsComponent implements OnInit {
 
   public goBack(): void {
     this._router.navigate(['dashboard/vehicles']);
-  }
-
-  openDialog(): void {
-    const dialogRef = this._dialog.open(VehicleReservationsComponent, {
-      data: {
-        vehicleId: this.vehicleResponse?.id,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // todo - refresh vehicle details etc
-    });
   }
 
   public editVehicle(): void {

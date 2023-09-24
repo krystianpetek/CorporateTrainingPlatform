@@ -21,7 +21,7 @@ export class VehicleAddComponent implements OnInit {
   private readonly _vehiclesService: IVehiclesService;
   private readonly _authenticationService: IAuthenticationService;
   private readonly _dialogRef: MatDialogRef<VehicleAddComponent>;
-  private isSuccessful: boolean; // ??
+  private _isSuccessful: boolean; // ??
 
   public vehicleAddForm!: FormGroup<VehicleAddFormModel>;
   public error: string;
@@ -37,7 +37,7 @@ export class VehicleAddComponent implements OnInit {
     this._vehiclesService = vehiclesService;
     this._authenticationService = authenticationService;
     this._dialogRef = dialogRef;
-    this.isSuccessful = false;
+    this._isSuccessful = false;
     this.error = '';
   }
   ngOnInit(): void {
@@ -123,13 +123,13 @@ export class VehicleAddComponent implements OnInit {
       .postVehicleForCustomer(customerId, vehicleAddModel)
       .subscribe({
         next: (response) => {
-          this.isSuccessful = true;
+          this._isSuccessful = true;
           this._dialogRef.close(vehicleAddModel);
           // TODO - add response handling
           // TODO - fix this to fetch another time vehicles after add new vehicle
         },
         error: (err) => {
-          this.isSuccessful = false;
+          this._isSuccessful = false;
           this.error = err.error.detail;
           // TODO - something to fix after reset button !
           // TODO - check if its work because in vehicle service is also error handling

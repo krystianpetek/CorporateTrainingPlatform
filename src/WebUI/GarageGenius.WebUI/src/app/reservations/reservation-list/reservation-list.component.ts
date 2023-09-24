@@ -8,8 +8,8 @@ import {
 } from 'src/app/shared/services/authentication/authentication.service';
 import { IReservationService } from '../models/base-reservation.service';
 import { ReservationService } from '../services/reservation.service';
-import {MatDialog} from "@angular/material/dialog";
-import {ReservationAddComponent} from "../reservation-add/reservation-add.component";
+import { MatDialog } from "@angular/material/dialog";
+import { ReservationAddComponent } from "../reservation-add/reservation-add.component";
 
 @Component({
   selector: 'app-reservation-list',
@@ -62,6 +62,7 @@ export class ReservationListComponent implements OnInit {
       data: {
         customerId: this._authenticationService.getUserInfo().customerId
       },
+      // TODO response after close
     });
   }
 

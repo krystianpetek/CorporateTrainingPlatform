@@ -4,7 +4,7 @@
   <form [formGroup]="this.vehicleAddForm" (ngSubmit)="this.vehicleAddSubmitForm()">
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>customerid</mat-label>
+        <mat-label>customerId</mat-label>
         <input type="text" id="customerId" matInput placeholder="CustomerId" formControlName="customerId" />
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.customerId.touched && this.customerId.invalid">

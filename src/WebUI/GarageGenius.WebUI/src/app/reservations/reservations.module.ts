@@ -8,13 +8,12 @@ import { ReservationAddComponent } from './reservation-add/reservation-add.compo
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 
-
 @NgModule({
   declarations: [
     ReservationAddComponent,
     ReservationListComponent,
     ReservationDetailsComponent,
   ],
-    imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule, ReactiveFormsModule],
+  imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule, ReactiveFormsModule],
 })
 export class ReservationsModule {}
