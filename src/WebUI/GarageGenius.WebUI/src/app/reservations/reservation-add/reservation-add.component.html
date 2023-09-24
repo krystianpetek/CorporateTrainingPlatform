@@ -1,5 +1,5 @@
 <!-- TODO - more communicates when validation, maybe after first submitted? -->
-<h1 mat-dialog-title class="mat-dialog-title">Adding a new vehicle</h1>
+<h1 mat-dialog-title class="mat-dialog-title">Adding a new reservation</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <form [formGroup]="this.reservationAddForm" (ngSubmit)="this.reservationAddSubmitForm()">
     <div>
@@ -46,7 +46,10 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>reservationDate</mat-label>
-        <input type="number" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate">
+        <input [matDatepicker]="picker" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.reservationDate.touched && this.reservationDate.invalid">
         reservationDate model

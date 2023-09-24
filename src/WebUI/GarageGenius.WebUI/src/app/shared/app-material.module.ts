@@ -13,6 +13,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 const materialModules = [
   MatButtonModule,
@@ -28,7 +30,9 @@ const materialModules = [
   MatMenuModule,
   MatTableModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
