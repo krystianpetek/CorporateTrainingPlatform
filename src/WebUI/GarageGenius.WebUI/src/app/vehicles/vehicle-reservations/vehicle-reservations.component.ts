@@ -1,9 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ReservationService } from 'src/app/reservations/services/reservation.service';
 import { VehicleReservationsModalProperties } from './models/vehicle-reservations-modal-properties.model';
 import { VehicleReservationsResponseModel } from 'src/app/reservations/models/vehicle-reservations-response.model';
 import { Router } from '@angular/router';
+import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
+import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
 
 @Component({
   selector: 'app-vehicle-reservations',
@@ -12,22 +14,23 @@ import { Router } from '@angular/router';
 })
 export class VehicleReservationsComponent implements OnInit {
   private readonly _reservationsService: ReservationService;
+  private readonly _authenticationService: AuthenticationService;
   private readonly _router: Router;
   public vehicleReservationsResponse?: VehicleReservationsResponseModel;
   @Input() public vehicleId: string;
-  // private readonly dialogRef: MatDialogRef<VehicleReservationsComponent>;
+  private readonly matDialog: MatDialog;
 
   constructor(
     reservationsService: ReservationService,
-    router: Router
-    // dialogRef: MatDialogRef<VehicleReservationsComponent>,
-    // @Inject(MAT_DIALOG_DATA)
-    // public matDialogData: VehicleReservationsModalProperties
+    authenticationService: AuthenticationService,
+    router: Router,
+    matDialog: MatDialog
   ) {
     this._reservationsService = reservationsService;
+    this._authenticationService = authenticationService;
     this._router = router;
     this.vehicleId = '';
-    // this.dialogRef = dialogRef;
+    this.matDialog = matDialog
   }
 
   ngOnInit(): void {
@@ -37,14 +40,19 @@ export class VehicleReservationsComponent implements OnInit {
 
   public redirectToReservationDetails(reservationId: string) {
     this._router.navigate(['dashboard/reservations', reservationId]);
-    // this.dialogRef.close();
   }
 
   public addNewReservation() {
-    this._router.navigate(['dashboard/reservations/add'], {
-      queryParams: { vehicleId: this.vehicleId },
+    const dialogRef = this.matDialog.open(ReservationAddComponent, {
+      data: {
+        vehicleId: this.vehicleId,
+        customerId: this._authenticationService.getUserInfo().customerId,
+      },
     });
-    // this.dialogRef.close();
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // todo - refresh vehicle details etc
+    });
   }
 
   private getVehicleReservations(vehicleId: string) {
