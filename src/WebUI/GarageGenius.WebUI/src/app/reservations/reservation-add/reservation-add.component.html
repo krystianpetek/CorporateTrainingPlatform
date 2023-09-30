@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <p *ngIf="error" class="error-block">
+    <p *ngIf="reservationAddForm.touched" class="error-block">
       {{error}}
     </p>
     <mat-dialog-actions [align]="'end'">

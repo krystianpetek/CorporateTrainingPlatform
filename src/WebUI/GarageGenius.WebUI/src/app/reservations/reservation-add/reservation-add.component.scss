@@ -19,3 +19,14 @@ mat-form-field {
   color: $theme-text;
   background-color: $theme-header-footer;
 }
+
+.error-block {
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  color: red;
+  background-color: #FF000015;
+  border: 1px red solid;
+  text-align: center;
+  border-radius: 5px;
+}
