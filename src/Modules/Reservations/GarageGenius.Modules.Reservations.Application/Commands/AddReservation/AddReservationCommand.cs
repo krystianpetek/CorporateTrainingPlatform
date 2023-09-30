@@ -12,5 +12,5 @@ public record AddReservationCommand : ICommand
 
 	[Required]
 	[MaxLength(2000)]
-	public string ReservationNote { get; init; }
+	public string Comment { get; init; }
 }
