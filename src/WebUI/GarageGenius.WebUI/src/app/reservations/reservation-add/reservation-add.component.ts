@@ -6,6 +6,9 @@ import {
   ReservationAddRequestModel,
 } from "../models/vehicle-reservation-response.model";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {IReservationService} from "../models/base-reservation.service";
+import {ReservationService} from "../services/reservation.service";
+import {SnackBarMessageService} from "../../shared/services/snack-bar-message/snack-bar-message.service";
 
 @Component({
   selector: 'app-reservation-add',
@@ -15,17 +18,23 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 export class ReservationAddComponent implements OnInit {
   private readonly _formBuilder: FormBuilder;
   private readonly _dialogRef: MatDialogRef<ReservationAddComponent>;
+  private readonly _reservationService: IReservationService;
   private _vehicleId = "";
   public error: string;
+  private _isSuccess: boolean;
 
   constructor(
+    private snackbar: SnackBarMessageService,
     formBuilder: FormBuilder,
+    reservationService: ReservationService,
     dialogRef: MatDialogRef<ReservationAddComponent>,
     @Inject(MAT_DIALOG_DATA) public matDialogData: ReservationAddModalProperties
   ) {
     this._formBuilder = formBuilder;
+    this._reservationService = reservationService;
     this._dialogRef = dialogRef;
     this.error = '';
+    this._isSuccess = true;
   }
 
   public reservationAddForm!: FormGroup<ReservationAddFormModel>;
@@ -47,7 +56,7 @@ export class ReservationAddComponent implements OnInit {
         }
       ],
       comment:[
-        "s"
+        ""
       ],
       reservationDate:[
         new Date()
@@ -62,6 +71,18 @@ export class ReservationAddComponent implements OnInit {
     this.error = ``;
     const reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
     // TODO request to add reservation
+
+    this._reservationService.addReservation(reservationAddModel).subscribe(
+      {
+        next: (response) => {
+          this._dialogRef.close(reservationAddModel);
+          window.location.reload();
+        },
+        error: (err) => {
+          let error = Object.values(err.error.errors)[0] as Array<string>;
+          this.error = error[0] as string;
+        }
+      });
   }
 
   public reservationAddResetForm(): void {
