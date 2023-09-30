@@ -5,7 +5,9 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { VehicleReservationsResponseModel } from '../models/vehicle-reservations-response.model';
 import { environment } from 'src/environments/environment';
 import { VehicleReservationHistoryModel } from '../models/vehicle-reservation-history.model';
-import { VehicleReservationResponseModel } from '../models/vehicle-reservation-response.model';
+import { ReservationAddRequestModel,
+  VehicleReservationResponseModel
+} from '../models/vehicle-reservation-response.model';
 import { CustomerReservationsResponseModel } from '../models/customer-reservations-response.model';
 
 @Injectable({
@@ -61,6 +63,11 @@ export class ReservationService extends BaseReservationService {
           },
         }
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  override addReservation(reservation: ReservationAddRequestModel): Observable<void> {
+    return this._httpClient.post<void>(environment.reservationsApiUrl + `reservations`, reservation)
       .pipe(catchError(this.handleError));
   }
 
