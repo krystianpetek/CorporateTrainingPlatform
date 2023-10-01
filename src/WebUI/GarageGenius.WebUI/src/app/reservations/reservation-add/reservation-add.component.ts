@@ -21,7 +21,7 @@ export class ReservationAddComponent implements OnInit {
   private readonly _reservationService: IReservationService;
   private _vehicleId = "";
   public error: string;
-  private _isSuccess: boolean;
+  public isSuccess: boolean;
 
   constructor(
     private snackbar: SnackBarMessageService,
@@ -34,7 +34,7 @@ export class ReservationAddComponent implements OnInit {
     this._reservationService = reservationService;
     this._dialogRef = dialogRef;
     this.error = '';
-    this._isSuccess = true;
+    this.isSuccess = true;
   }
 
   public reservationAddForm!: FormGroup<ReservationAddFormModel>;
@@ -69,6 +69,7 @@ export class ReservationAddComponent implements OnInit {
 
   public reservationAddSubmitForm(): void {
     this.error = ``;
+    this.isSuccess = true;
     const reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
     // TODO request to add reservation
 
@@ -79,6 +80,7 @@ export class ReservationAddComponent implements OnInit {
           window.location.reload();
         },
         error: (err) => {
+          this.isSuccess = false;
           let error = Object.values(err.error.errors)[0] as Array<string>;
           this.error = error[0] as string;
         }
