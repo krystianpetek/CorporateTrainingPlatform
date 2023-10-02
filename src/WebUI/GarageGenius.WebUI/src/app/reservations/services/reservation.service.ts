@@ -68,7 +68,7 @@ export class ReservationService extends BaseReservationService {
 
   override addReservation(reservation: ReservationAddRequestModel): Observable<void> {
     return this._httpClient.post<void>(environment.reservationsApiUrl + `reservations`, reservation)
-      .pipe(catchError(this.handleError));
+      //.pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
