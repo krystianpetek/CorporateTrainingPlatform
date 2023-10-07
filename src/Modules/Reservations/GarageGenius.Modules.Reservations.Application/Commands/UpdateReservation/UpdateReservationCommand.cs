@@ -13,4 +13,6 @@ public record UpdateReservationCommand : ICommand
 	[Required]
 	[MaxLength(2000)]
 	public string ReservationNote { get; init; }
+
+	public DateTime ReservationDate { get; init; }
 }
