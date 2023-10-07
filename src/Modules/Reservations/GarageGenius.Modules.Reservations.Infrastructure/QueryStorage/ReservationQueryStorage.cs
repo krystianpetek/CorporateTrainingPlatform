@@ -32,7 +32,7 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.AsNoTracking()
 		.AsQueryable()
 		.Where(reservation => reservation.ReservationId == reservationId)
-		.Select<Reservation, GetReservationQueryDto>(reservation => new GetReservationQueryDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationDate.Value))
+		.Select<Reservation, GetReservationQueryDto>(reservation => new GetReservationQueryDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
 		.SingleOrDefaultAsync<GetReservationQueryDto>(cancellationToken)
 		.ConfigureAwait(false);
 
