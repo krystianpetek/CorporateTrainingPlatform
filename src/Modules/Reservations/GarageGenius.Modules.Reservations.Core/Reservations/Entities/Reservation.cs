@@ -41,6 +41,7 @@ internal sealed class Reservation : AuditableEntity
 	internal void ChangeStateCanceled() { ReservationState = ReservationState.Canceled; }
 	internal void ChangeStateCompleted() { ReservationState = ReservationState.Completed; }
 	internal void ChangeStateWaitingForCustomer() { ReservationState = ReservationState.WaitingForCustomer; }
+	internal void ChangeStateWorkInProgress() { ReservationState = ReservationState.WorkInProgress; }
 
 	internal void ReservationDeactivate() { ReservationDeleted = true; }
 
@@ -68,6 +69,9 @@ internal sealed class Reservation : AuditableEntity
 				break;
 			case "WaitingForCustomer":
 				ChangeStateWaitingForCustomer();
+				break;
+			case "WorkInProgress":
+				ChangeStateWorkInProgress();
 				break;
 			default:
 				throw new InvalidReservationStateException(reservationState);

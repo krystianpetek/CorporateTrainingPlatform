@@ -6,6 +6,7 @@ using GarageGenius.Modules.Reservations.Application.Queries.GetCustomerReservati
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservation;
 using GarageGenius.Modules.Reservations.Application.Queries.GetReservationHistory;
 using GarageGenius.Modules.Reservations.Application.Queries.GetVehicleReservations;
+using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,13 @@ public class ReservationsController : BaseController
 	public ReservationsController(IDispatcher dispatcher)
 	{
 		_dispatcher = dispatcher;
+	}
+
+	[HttpGet("states")]
+	[SwaggerOperation(Summary = "Get reservation states", Description = "Get all available reservation states, that can be used to update reservation state.)")]
+	public IActionResult GetReservationStates()
+	{
+		return Ok(new { ReservationStates = ReservationState.GetAvailableStates });
 	}
 
 	[HttpPut]
