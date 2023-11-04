@@ -10,7 +10,6 @@ public record UpdateReservationCommand : ICommand
 	[Required]
 	public string ReservationState { get; init; }
 
-	[Required]
 	[MaxLength(2000)]
 	public string ReservationNote { get; init; }
 
