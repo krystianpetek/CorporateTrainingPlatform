@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersComponent } from './users.component';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { CommonModule } from '@angular/common';
+import {UserListComponent} from "./user-list/user-list.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UsersComponent,
+    component: UserListComponent,
     canActivate: [authenticationGuard],
   },
 ];
