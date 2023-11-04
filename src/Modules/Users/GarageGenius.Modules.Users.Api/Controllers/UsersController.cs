@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Users.Core.Commands.SignIn;
 using GarageGenius.Modules.Users.Core.Commands.SignUp;
 using GarageGenius.Modules.Users.Core.Queries.GetUser;
+using GarageGenius.Modules.Users.Core.Queries.GetUsers;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
@@ -49,7 +50,8 @@ public class UsersController : BaseController
 	public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
 	{
 		Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
-		return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+		var user = await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+		return Ok(user);
 	}
 
 	[Authorize]
@@ -57,7 +59,8 @@ public class UsersController : BaseController
 	[SwaggerOperation("Get user by ID")]
 	public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
 	{
-		return await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
+		var user = await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
+		return Ok(user);
 	}
 
 	[Authorize]
@@ -76,6 +79,15 @@ public class UsersController : BaseController
 	{
 		await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
 		return NoContent();
+	}
+
+	[Authorize]
+	[HttpGet("users")]
+	[SwaggerOperation("Get all users")]
+	public async Task<ActionResult<GetUsersQueryDto>> GetUsersAsync()
+	{
+		var users = await _dispatcher.DispatchQueryAsync<IReadOnlyList<GetUsersQueryDto>>(new GetUsersQuery());
+		return Ok(users);
 	}
 
 	//[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
