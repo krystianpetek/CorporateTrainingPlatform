@@ -86,7 +86,7 @@ public class UsersController : BaseController
 	[SwaggerOperation("Get all users")]
 	public async Task<ActionResult<GetUsersQueryDto>> GetUsersAsync()
 	{
-		var users = await _dispatcher.DispatchQueryAsync<IReadOnlyList<GetUsersQueryDto>>(new GetUsersQuery());
+		var users = await _dispatcher.DispatchQueryAsync<GetUsersQueryDto>(new GetUsersQuery());
 		return Ok(users);
 	}
 

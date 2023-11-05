@@ -9,5 +9,5 @@ internal interface IUserRepository
 	Task AddAsync(User user, CancellationToken cancellationToken = default);
 	Task UpdateAsync(User user, CancellationToken cancellationToken = default);
 	Task DeactivateUserAsync(Guid id, CancellationToken cancellationToken = default);
-	Task<IReadOnlyList<GetUsersQueryDto>> GetUsersAsync(CancellationToken cancellationToken = default);
+	Task<GetUsersQueryDto> GetUsersAsync(CancellationToken cancellationToken = default);
 }

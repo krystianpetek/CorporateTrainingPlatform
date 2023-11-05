@@ -70,16 +70,16 @@ internal class UserRepository : IUserRepository
         return _usersDbContext.SaveChangesAsync(cancellationToken);
     }
 
-	public async Task<IReadOnlyList<GetUsersQueryDto>> GetUsersAsync(CancellationToken cancellationToken = default)
+	public async Task<GetUsersQueryDto> GetUsersAsync(CancellationToken cancellationToken = default)
 	{
 		var users = await _usersDbContext.Users
 			.AsQueryable()
 			.AsNoTracking()
 			.Include(user => user.Role)
-			.Select(user => new GetUsersQueryDto(user.UserId, user.CustomerId, user.Role.Name, user.Email, user.State, user.Created))
+			.Select(user => new GetUsersDto(user.UserId, user.CustomerId, user.Role.Name, user.Email, user.State, user.Created))
 			.ToListAsync(cancellationToken)
 			.ConfigureAwait(false);
 
-		return users;
+		return new GetUsersQueryDto(users);
 	}
 }

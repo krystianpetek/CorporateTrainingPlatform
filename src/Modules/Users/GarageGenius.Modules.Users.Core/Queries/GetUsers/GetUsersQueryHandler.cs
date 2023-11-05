@@ -4,7 +4,7 @@ using Serilog;
 
 namespace GarageGenius.Modules.Users.Core.Queries.GetUsers;
 
-internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, IReadOnlyList<GetUsersQueryDto>>
+internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, GetUsersQueryDto>
 {
     private readonly ILogger _logger;
     private readonly IUserRepository _userRepository;
@@ -17,7 +17,7 @@ internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, IReadOnlyList
         _userRepository = userRepository;
     }
 
-    public async Task<IReadOnlyList<GetUsersQueryDto>> HandleQueryAsync(GetUsersQuery query, CancellationToken cancellationToken = default)
+    public async Task<GetUsersQueryDto> HandleQueryAsync(GetUsersQuery query, CancellationToken cancellationToken = default)
     {
         var users = await _userRepository.GetUsersAsync(cancellationToken);
         

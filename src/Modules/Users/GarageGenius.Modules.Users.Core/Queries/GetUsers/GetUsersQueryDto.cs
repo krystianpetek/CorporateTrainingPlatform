@@ -1,4 +1,4 @@
-﻿using GarageGenius.Modules.Users.Core.Queries.GetUser;
+﻿namespace GarageGenius.Modules.Users.Core.Queries.GetUsers;
+public record GetUsersQueryDto(IReadOnlyList<GetUsersDto> Users);
 
-namespace GarageGenius.Modules.Users.Core.Queries.GetUsers;
-public record GetUsersQueryDto(Guid Id, Guid CustomerId, string Role, string Email, string State, DateTime Created);
+public sealed record GetUsersDto(Guid Id, Guid CustomerId, string Role, string Email, string State, DateTime Created);
