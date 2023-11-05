@@ -24,7 +24,7 @@ internal class GetCustomerVehiclesPolicyHandler : AuthorizationHandler<GetCustom
 			return Task.CompletedTask;
 		}
 
-		// if user is an administrator or employee, allow add new vehicle
+		// if user is an administrator or employee, allow get all users
 		if (context.User.IsInRole(AuthorizationSharedConstants.AdministratorRequirement) ||
 			context.User.IsInRole(AuthorizationSharedConstants.EmployeeRequirement))
 		{
