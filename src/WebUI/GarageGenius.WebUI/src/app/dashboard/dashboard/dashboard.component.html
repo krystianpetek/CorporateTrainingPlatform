@@ -6,6 +6,12 @@
       </div>
     </button>
 
+    <button mat-flat-button [routerLink]="['reservations']" routerLinkActive="active" class="foreground-color">
+      <div class="button-inner-container">
+        <mat-icon>schedule</mat-icon>Reservations
+      </div>
+    </button>
+
     <button mat-flat-button [routerLink]="['users']" routerLinkActive="active" class="foreground-color">
       <div class="button-inner-container">
         <mat-icon>person</mat-icon>Users
@@ -18,11 +24,6 @@
       </div>
     </button>
 
-    <button mat-flat-button [routerLink]="['reservations']" routerLinkActive="active" class="foreground-color">
-      <div class="button-inner-container">
-        <mat-icon>schedule</mat-icon>Reservations
-      </div>
-    </button>
   </div>
   <div class="foreground-color inner-content">
     <router-outlet></router-outlet>
