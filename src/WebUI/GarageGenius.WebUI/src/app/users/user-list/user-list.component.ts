@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
+import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
+import {MatDialog} from "@angular/material/dialog";
+import {UserAddComponent} from "../user-add/user-add.component";
 
 @Component({
   selector: 'app-user-list',
@@ -7,7 +10,9 @@ import {UserService} from "../services/user.service";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  constructor(private _userService: UserService) {
+  constructor(
+    private _userService: UserService,
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -17,5 +22,13 @@ export class UserListComponent implements OnInit {
       })
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UserAddComponent, {
+      data: {
+        //customerId: this._authenticationService.getUserInfo().customerId
+      },
+      // TODO response after close
+    });
+  }
 
 }
