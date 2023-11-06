@@ -3,6 +3,8 @@ import {UserService} from "../services/user.service";
 import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
 import {MatDialog} from "@angular/material/dialog";
 import {UserAddComponent} from "../user-add/user-add.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {CustomerReservationsItem} from "../../reservations/models/customer-reservations-response.model";
 
 @Component({
   selector: 'app-user-list',
@@ -10,6 +12,17 @@ import {UserAddComponent} from "../user-add/user-add.component";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+
+  public dataSource = new MatTableDataSource();
+  public displayedColumns: string[] = [
+    `id`,
+    'email',
+    `customerId`,
+    `role`,
+    `state`,
+    `created`,
+  ];
+
   constructor(
     private _userService: UserService,
     public dialog: MatDialog) {

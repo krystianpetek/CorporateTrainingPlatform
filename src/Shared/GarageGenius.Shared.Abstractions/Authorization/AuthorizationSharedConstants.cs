@@ -3,7 +3,7 @@
 namespace GarageGenius.Shared.Abstractions.Authorization;
 public static class AuthorizationSharedConstants
 {
-	public static readonly string AdministratorRequirement = "administrator";
+	public static readonly string AdministratorRequirement = "Administrator";
 	public static readonly string ManagerRequirement = "manager";
 	public static readonly string EmployeeRequirement = "employee";
 	public static readonly string CustomerRequirement = "customer";

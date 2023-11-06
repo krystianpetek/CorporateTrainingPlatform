@@ -4,3 +4,49 @@
     <button mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
   </div>
 </div>
+
+<div class="responsive-table">
+  <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="customer-reservation-list">
+    <ng-container matColumnDef="reservationId">
+      <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation ID </th>
+      <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="details">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>
+      <td class="text-secondary-color" mat-cell *matCellDef="let element">
+        <button mat-icon-button>
+<!--(click)="this.redirectToDetails(element.reservationId)"-->
+          <mat-icon>reorder</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> UserId </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+    <ng-container hidden matColumnDef="email">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Email </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.email}}</td>
+    </ng-container>
+    <ng-container matColumnDef="customerId">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> CustomerId </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.customerId}}</td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th class="text-primary-color" class="text-primary-color" mat-header-cell *matHeaderCellDef> Role </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.role | date:'shortDate' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> State </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.state}}</td>
+    </ng-container>
+    <ng-container matColumnDef="created">
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Creation date </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.created}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+  </table>
+</div>
