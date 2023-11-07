@@ -12,13 +12,13 @@
       </div>
     </button>
 
-    <button mat-flat-button [routerLink]="['users']" routerLinkActive="active" class="foreground-color">
+    <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['users']" routerLinkActive="active" class="foreground-color">
       <div class="button-inner-container">
         <mat-icon>person</mat-icon>Users
       </div>
     </button>
 
-    <button mat-flat-button [routerLink]="['customers']" routerLinkActive="active" class="foreground-color">
+    <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['customers']" routerLinkActive="active" class="foreground-color">
       <div class="button-inner-container">
         <mat-icon>person_pin_circle</mat-icon>Customers
       </div>

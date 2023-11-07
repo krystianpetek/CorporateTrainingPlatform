@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { CommonModule } from '@angular/common';
 import {UserListComponent} from "./user-list/user-list.component";
+import {staffGuard} from "../shared/guards/staff.guard";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     component: UserListComponent,
-    canActivate: [authenticationGuard],
+    canActivate: [staffGuard],
   },
 ];
 
