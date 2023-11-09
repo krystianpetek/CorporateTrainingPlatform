@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
-import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
 import {MatDialog} from "@angular/material/dialog";
 import {UserAddComponent} from "../user-add/user-add.component";
 import {MatTableDataSource} from "@angular/material/table";
-import {CustomerReservationsItem} from "../../reservations/models/customer-reservations-response.model";
 
 @Component({
   selector: 'app-user-list',
@@ -30,8 +28,8 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this._userService.getUsers()
-      .subscribe(response => {
-        console.log(response.users);
+      .subscribe(users => {
+        this.dataSource.data = users.users;
       })
   }
 
