@@ -9,4 +9,4 @@
 /// <param name="AccessToken">Access Token in JSON Web Token</param>
 /// <param name="Expiry">Date when the access token expires</param>
 /// <param name="Claims">Subject claims attached to access token</param>
-public record JsonWebTokenResponse(Guid UserId, Guid CustomerId, string AccessToken, DateTime Expiry, string Role, IDictionary<string, object> Claims);
+public record JsonWebTokenResponse(Guid UserId, Guid CustomerId, string AccessToken, DateTime Expiry, string Role, string Email, IDictionary<string, object> Claims);
