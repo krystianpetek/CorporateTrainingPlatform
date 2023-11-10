@@ -9,4 +9,5 @@ export interface AuthenticationResponseModel {
   claims: {
     permissions: Array<string>;
   };
+  email: string;
 }
