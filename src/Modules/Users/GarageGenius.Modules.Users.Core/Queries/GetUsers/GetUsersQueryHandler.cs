@@ -1,4 +1,5 @@
 ﻿using GarageGenius.Modules.Users.Core.Repositories;
+using GarageGenius.Modules.Users.Shared;
 using GarageGenius.Shared.Abstractions.Exceptions;
 using GarageGenius.Shared.Abstractions.Queries.Query;
 using Microsoft.AspNetCore.Authorization;
@@ -27,9 +28,9 @@ internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, GetUsersQuery
 
     public async Task<GetUsersQueryDto> HandleQueryAsync(GetUsersQuery query, CancellationToken cancellationToken = default)
     {
-        AuthorizationResult authorizationResult = await _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, "GetUsersPolicy");
+        AuthorizationResult authorizationResult = await _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, UsersPolicyConstants.GetUsersPolicy);
         if (!authorizationResult.Succeeded)
-            throw new AuthorizationRequirementException("GetUsersPolicy");
+            throw new AuthorizationRequirementException(UsersPolicyConstants.GetUsersPolicy);
 
         var users = await _userRepository.GetUsersAsync(cancellationToken);
 

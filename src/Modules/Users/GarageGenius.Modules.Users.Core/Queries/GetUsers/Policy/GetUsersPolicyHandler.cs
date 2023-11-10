@@ -1,3 +1,4 @@
+using GarageGenius.Modules.Users.Shared;
 using GarageGenius.Shared.Abstractions.Authorization;
 using Microsoft.AspNetCore.Authorization;
 
@@ -40,7 +41,7 @@ public static partial class Extensions
 	public static void GetUsersPolicy(this AuthorizationOptions options)
 	{
 		options.AddPolicy(
-			   "GetUsersPolicy",
+			   UsersPolicyConstants.GetUsersPolicy,
 			   authorizationPolicyBuilder => authorizationPolicyBuilder.Requirements.Add(new GetUsersPolicyRequirement(AuthorizationSharedConstants.ReadRequirement)));
 	}
 }
