@@ -18,7 +18,8 @@ internal class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, GetUsersQuery
     public GetUsersQueryHandler(
         ILogger logger,
         IUserRepository userRepository,
-        IAuthorizationService authorizationService, IHttpContextAccessor httpContextAccessor)
+        IAuthorizationService authorizationService,
+        IHttpContextAccessor httpContextAccessor)
     {
         _logger = logger;
         _userRepository = userRepository;
