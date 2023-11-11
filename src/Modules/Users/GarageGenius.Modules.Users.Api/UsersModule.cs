@@ -12,7 +12,7 @@ internal class UsersModule : IModule
 
 	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		webApplicationBuilder.Services.AddUsersCore(webApplicationBuilder.Environment).GetAwaiter().GetResult();
+		webApplicationBuilder.Services.AddUsersCoreAsync(webApplicationBuilder.Environment).GetAwaiter().GetResult();
 		// TODO - this is a hack, need to redesign the seeder to be more generic and to better approach, idk yet
 	}
 

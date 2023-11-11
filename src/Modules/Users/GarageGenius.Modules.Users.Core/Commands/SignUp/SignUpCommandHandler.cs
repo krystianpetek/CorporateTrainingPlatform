@@ -1,10 +1,14 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Exceptions;
 using GarageGenius.Modules.Users.Core.Repositories;
+using GarageGenius.Modules.Users.Shared;
 using GarageGenius.Modules.Users.Shared.Events;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Commands;
+using GarageGenius.Shared.Abstractions.Exceptions;
 using GarageGenius.Shared.Abstractions.MessageBroker;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace GarageGenius.Modules.Users.Core.Commands.SignUp;
 internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
@@ -14,23 +18,35 @@ internal class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 	private readonly IRoleRepository _roleRepository;
 	private readonly IPasswordManager _passwordManager;
 	private readonly IMessageBroker _messageBroker;
+	private readonly IAuthorizationService _authorizationService;
+	private readonly IHttpContextAccessor _httpContextAccessor;
 
 	public SignUpCommandHandler(
 		Serilog.ILogger logger,
 		IUserRepository userRepository,
 		IRoleRepository roleRepository,
 		IPasswordManager passwordManager,
-		IMessageBroker messageBroker)
+		IMessageBroker messageBroker,
+		IAuthorizationService authorizationService, 
+		IHttpContextAccessor httpContextAccessor)
 	{
 		_logger = logger;
 		_userRepository = userRepository;
 		_roleRepository = roleRepository;
 		_passwordManager = passwordManager;
 		_messageBroker = messageBroker;
+		_authorizationService = authorizationService;
+		_httpContextAccessor = httpContextAccessor;
 	}
 
 	public async Task HandleCommandAsync(SignUpCommand command, CancellationToken cancellationToken = default)
 	{
+		AuthorizationResult authorizationResult =
+			await _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, command.Role,
+				UsersPolicyConstants.SignUpPolicy);
+		if (!authorizationResult.Succeeded)
+			throw new AuthorizationRequirementException(UsersPolicyConstants.SignUpPolicy);
+
 		if (string.IsNullOrWhiteSpace(command.Email))
 			throw new InvalidEmailException(command.Email);
 

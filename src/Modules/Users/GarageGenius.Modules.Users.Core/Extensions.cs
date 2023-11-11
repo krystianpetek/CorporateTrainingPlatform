@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
 using GarageGenius.Modules.Users.Core.Commands.SignIn;
 using GarageGenius.Modules.Users.Core.Commands.SignUp;
+using GarageGenius.Modules.Users.Core.Commands.SignUp.Policy;
 using GarageGenius.Modules.Users.Core.Persistance.DbContexts;
 using GarageGenius.Modules.Users.Core.Persistance.Repositories;
 using GarageGenius.Modules.Users.Core.Queries.GetUsers.Policy;
@@ -17,7 +18,7 @@ namespace GarageGenius.Modules.Users.Core;
 
 internal static class Extensions
 {
-	public static async Task<IServiceCollection> AddUsersCore(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
+	public static async Task<IServiceCollection> AddUsersCoreAsync(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
 		services.AddScoped<IRoleRepository, RoleRepository>();
 		services.AddScoped<IUserRepository, UserRepository>();
@@ -26,9 +27,11 @@ internal static class Extensions
 		services.AddScoped<IUserServiceMapper, UserServiceMapper>();
 
 		services.AddScoped<IAuthorizationHandler, GetUsersPolicyHandler>();
-		
+		services.AddScoped<IAuthorizationHandler, SignUpPolicyHandler>();
+
 		services.AddAuthorization(authorizationOptions =>
 		{
+			authorizationOptions.SignUpPolicy();
 			authorizationOptions.GetUsersPolicy();
 		});
 
