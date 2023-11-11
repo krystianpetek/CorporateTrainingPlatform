@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Core;
+﻿using GarageGenius.Modules.Users.Application;
+using GarageGenius.Modules.Users.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,9 @@ internal class UsersModule : IModule
 
 	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		webApplicationBuilder.Services.AddUsersCoreAsync(webApplicationBuilder.Environment).GetAwaiter().GetResult();
+		webApplicationBuilder.Services
+			.AddUsersApplication()
+			.AddUsersInfrastructureAsync(webApplicationBuilder.Environment).GetAwaiter().GetResult();
 		// TODO - this is a hack, need to redesign the seeder to be more generic and to better approach, idk yet
 	}
 

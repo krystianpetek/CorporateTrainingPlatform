@@ -1,8 +1,8 @@
-﻿using GarageGenius.Modules.Users.Core.Commands.DeactivateUser;
-using GarageGenius.Modules.Users.Core.Commands.SignIn;
-using GarageGenius.Modules.Users.Core.Commands.SignUp;
-using GarageGenius.Modules.Users.Core.Queries.GetUser;
-using GarageGenius.Modules.Users.Core.Queries.GetUsers;
+﻿using GarageGenius.Modules.Users.Application.Commands.DeactivateUser;
+using GarageGenius.Modules.Users.Application.Commands.SignIn;
+using GarageGenius.Modules.Users.Application.Commands.SignUp;
+using GarageGenius.Modules.Users.Application.Queries.GetUser;
+using GarageGenius.Modules.Users.Application.Queries.GetUsers;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;

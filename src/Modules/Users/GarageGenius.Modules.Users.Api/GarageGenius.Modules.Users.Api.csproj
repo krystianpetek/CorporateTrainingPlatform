@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GarageGenius.Modules.Users.Application\GarageGenius.Modules.Users.Application.csproj" />
     <ProjectReference Include="..\GarageGenius.Modules.Users.Core\GarageGenius.Modules.Users.Core.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Users.Infrastructure\GarageGenius.Modules.Users.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

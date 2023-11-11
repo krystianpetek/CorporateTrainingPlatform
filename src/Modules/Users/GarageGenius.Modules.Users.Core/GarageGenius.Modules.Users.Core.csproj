@@ -17,6 +17,12 @@
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>GarageGenius.Modules.Users.Api</_Parameter1>
+    </AssemblyAttribute>    
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+    <_Parameter1>GarageGenius.Modules.Users.Application</_Parameter1>
+  </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>GarageGenius.Modules.Users.Infrastructure</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

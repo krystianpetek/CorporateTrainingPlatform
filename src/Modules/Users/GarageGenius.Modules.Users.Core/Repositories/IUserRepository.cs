@@ -1,5 +1,4 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
-using GarageGenius.Modules.Users.Core.Queries.GetUsers;
 
 namespace GarageGenius.Modules.Users.Core.Repositories;
 internal interface IUserRepository
@@ -9,5 +8,5 @@ internal interface IUserRepository
 	Task AddAsync(User user, CancellationToken cancellationToken = default);
 	Task UpdateAsync(User user, CancellationToken cancellationToken = default);
 	Task DeactivateUserAsync(Guid id, CancellationToken cancellationToken = default);
-	Task<GetUsersQueryDto> GetUsersAsync(CancellationToken cancellationToken = default);
+	Task<IEnumerable<User>> GetUsersAsync(CancellationToken cancellationToken = default);
 }
