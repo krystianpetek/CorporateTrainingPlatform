@@ -35,11 +35,3 @@ export interface Column {
   isLink?: boolean;
   url?: string;
 }
-
-export interface Element {
-  // position: number,
-  // name: string,
-  // weight: number,
-  // symbol: string
-  created: string
-}

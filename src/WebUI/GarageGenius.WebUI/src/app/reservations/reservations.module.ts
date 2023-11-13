@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ReservationAddComponent } from './reservation-add/reservation-add.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
+import {TableGgComponent} from "../shared/components/table-gg/table-gg.component";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,6 @@ import { ReservationDetailsComponent } from './reservation-details/reservation-d
     ReservationListComponent,
     ReservationDetailsComponent,
   ],
-  imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule, ReactiveFormsModule],
+    imports: [CommonModule, ReservationsRoutingModule, AppMaterialModule, ReactiveFormsModule, TableGgComponent],
 })
 export class ReservationsModule {}

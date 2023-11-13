@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { VehicleReservationHistoryModel } from '../models/vehicle-reservation-history.model';
+import {ReservationHistoryDto, VehicleReservationHistoryModel} from '../models/vehicle-reservation-history.model';
 import { VehicleReservationResponseModel } from '../models/vehicle-reservation-response.model';
 import { VehiclesService } from 'src/app/vehicles/service/vehicles.service';
 import { IVehiclesService } from 'src/app/vehicles/models/base-vehicle.service';
 import { VehicleResponseModel } from 'src/app/vehicles/models/vehicle.model';
+import {Column} from "../../shared/components/table-gg/table-gg.component";
 
 @Component({
   selector: 'app-reservation-details',
@@ -20,12 +21,36 @@ export class ReservationDetailsComponent implements OnInit {
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
 
+  tableColumns : Array<Column> = [
+    {
+      columnDef: 'reservationHistoryId',
+      header: 'ID',
+      cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId}`,
+    },
+    {
+      columnDef: 'updateDate',
+      header: 'Date',
+      cell: (element: ReservationHistoryDto) => `${element.updateDate}`,
+    },
+    {
+      columnDef: 'reservationState',
+      header: 'State',
+      cell: (element: ReservationHistoryDto) => `${element.reservationState}`,
+    },
+    {
+      columnDef: 'comment',
+      header: 'Comment',
+      cell: (element: ReservationHistoryDto) => `${element.comment}`,
+    }
+  ]
+
+  tableData: Array<ReservationHistoryDto> = [];
+
   constructor(
     reservationsService: ReservationService,
     activatedRoute: ActivatedRoute,
     vehicleService: VehiclesService
-  ) {
-    this._reservationsService = reservationsService;
+  ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
   }
@@ -46,6 +71,7 @@ export class ReservationDetailsComponent implements OnInit {
       .getReservationHistory(reservationId)
       .subscribe((reservation) => {
         this.reservationHistory = reservation;
+        this.tableData = reservation.reservationHistoriesDtos;
       });
   }
 
