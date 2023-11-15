@@ -14,7 +14,7 @@ namespace GarageGenius.WebApi;
 
 public class Program
 {
-    public async static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         // ensure logging before configuration is loaded
         Log.Logger = new LoggerConfiguration()
