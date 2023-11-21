@@ -1,19 +1,20 @@
-
 <table
+  class="foreground-color"
   mat-table
-  [dataSource]="dataSource"
-  class="mat-elevation-z8">
+  [dataSource]="dataSource">
 
   <ng-container
     *ngFor="let disCol of tableColumns let colIndex = index;"
     matColumnDef="{{disCol.columnDef}}">
     <th mat-header-cell
+        class="text-primary-color"
         *matHeaderCellDef>
       {{ disCol.header }}
     </th>
 
     <td
       mat-cell
+      class="text-primary-color"
       *matCellDef="let element">
         <span
           *ngIf="!disCol.isLink; else link">
