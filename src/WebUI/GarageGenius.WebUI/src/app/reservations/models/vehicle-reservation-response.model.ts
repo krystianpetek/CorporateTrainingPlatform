@@ -3,6 +3,7 @@ export interface VehicleReservationResponseModel {
   reservationState: string;
   reservationDate: Date;
   comment: string;
+  vehicleId: string;
 }
 
 export interface ReservationAddRequestModel{

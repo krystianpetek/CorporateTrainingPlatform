@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../services/reservation.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import {ActivatedRoute, Params, Router } from '@angular/router';
 import {ReservationHistoryDto, VehicleReservationHistoryModel} from '../models/vehicle-reservation-history.model';
 import { VehicleReservationResponseModel } from '../models/vehicle-reservation-response.model';
 import { VehiclesService } from 'src/app/vehicles/service/vehicles.service';
@@ -17,6 +17,7 @@ export class ReservationDetailsComponent implements OnInit {
   private readonly _reservationsService: ReservationService;
   private readonly _vehicleService: IVehiclesService;
   private readonly _activatedRoute: ActivatedRoute;
+  private readonly _router: Router;
   public reservationDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
@@ -49,10 +50,12 @@ export class ReservationDetailsComponent implements OnInit {
   constructor(
     reservationsService: ReservationService,
     activatedRoute: ActivatedRoute,
-    vehicleService: VehiclesService
+    vehicleService: VehiclesService,
+    router: Router,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
+    this._router = router;
   }
 
   public ngOnInit(): void {
@@ -79,5 +82,9 @@ export class ReservationDetailsComponent implements OnInit {
     this._vehicleService.getVehicleById(vehicleId).subscribe((vehicle) => {
       this.vehicleDetails = vehicle;
     });
+  }
+
+  public goBack(): void {
+    this._router.navigate(['dashboard/vehicles/' + this.reservationDetails?.vehicleId]);
   }
 }
