@@ -6,10 +6,10 @@ export function RoleValidator(): ValidatorFn {
     if (!value) return null;
 
     const roleValid =
-      value === 'Customer' ||
-      value === 'Employee' ||
-      value === 'Manager' ||
-      value === 'Administrator';
+      value === 'customer' ||
+      value === 'employee' ||
+      value === 'manager' ||
+      value === 'administrator';
     return !roleValid ? { role: true } : null;
   };
 }

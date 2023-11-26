@@ -2,8 +2,8 @@
 
 public static class Roles
 {
-    public static string Administrator = "Administrator";
-    public static string Manager = "Manager";
-    public static string Employee = "Employee";
-    public static string Customer = "Customer";
+    public static string Administrator = "administrator";
+    public static string Manager = "manager";
+    public static string Employee = "employee";
+    public static string Customer = "customer";
 }

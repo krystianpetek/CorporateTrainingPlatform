@@ -51,7 +51,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
 	private List<User> _users => new List<User>()
 	{
-		new User(new EmailAddress("admin@garagegenius.com"), _passwordManager.Generate("garageGenius"), "Administrator")
+		new User(new EmailAddress("admin@garagegenius.com"), _passwordManager.Generate("garageGenius"), "administrator")
 	};
 
 	private async Task AddRolesAsync()

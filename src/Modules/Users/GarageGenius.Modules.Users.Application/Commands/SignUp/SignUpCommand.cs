@@ -15,7 +15,7 @@ public record SignUpCommand : ICommand
 	[DefaultValue("Password!23")]
 	public string Password { get; init; }
 
-	[DefaultValue("Administrator")]
+	[DefaultValue("administrator")]
 	public string Role { get; init; }
 
 	public SignUpCommand(string email, string password, string role)
