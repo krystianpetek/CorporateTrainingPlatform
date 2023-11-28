@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HealthCheckService } from '../services/health-check.service';
-import { SignalrService } from '../../shared/services/signalr/signalr.service';
 import { HealthCheckDisplayModel } from '../models/heallth-check-display.model';
 import { ModulesModel } from '../models/modules.model';
 import { HealthCheckResponseModel } from '../models/health-check-response.model';
@@ -10,7 +9,7 @@ import { HealthCheckResponseModel } from '../models/health-check-response.model'
   templateUrl: './health-check.component.html',
   styleUrls: ['./health-check.component.scss'],
 })
-export class HealthCheckComponent implements OnDestroy {
+export class HealthCheckComponent {
   private healthCheckService: HealthCheckService;
   public moduleHealths: Record<ModulesModel, HealthCheckDisplayModel> = {
     Vehicles: {
@@ -34,12 +33,9 @@ export class HealthCheckComponent implements OnDestroy {
       name: 'Reservations',
     },
   };
-  public signalrService: SignalrService;
   constructor(
     healthCheckService: HealthCheckService,
-    signalrService: SignalrService
   ) {
-    this.signalrService = signalrService;
     this.healthCheckService = healthCheckService;
     this.healthCheckService.healthCheckVehicles().subscribe({
       next: (response: HealthCheckResponseModel) => {
@@ -91,10 +87,6 @@ export class HealthCheckComponent implements OnDestroy {
         };
       },
     });
-    signalrService.createHubConnection();
-  }
-  async ngOnDestroy(): Promise<void> {
-    await this.signalrService.stopHubConnection();
   }
 }
 
