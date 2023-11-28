@@ -11,15 +11,27 @@ public class NotificationsHub : Hub<INotificationsHub>
 		_logger = logger;
 	}
 
-	public override async Task OnConnectedAsync()
+	public override Task OnConnectedAsync()
 	{
 		_logger.Information("Connected with SignalR NotificationsHub");
-		await base.OnConnectedAsync();
+        return base.OnConnectedAsync();
+    }
+
+	public async Task JoinToHub(string groupName)
+	{
+		await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+		_logger.Information("Joining to group: {groupName}", groupName);
+	}
+	
+	public Task SendMessage(string user, string message)
+	{
+		return Clients.All.SendMessage(user, message);
 	}
 
-	public async Task PackageAsync(NotificationsHubModel notificationsHubModel)
+	public Task PackageAsync(NotificationsHubModel notificationsHubModel)
 	{
 		_logger.Information("Package received: {data}", notificationsHubModel);
-		await Clients.Caller.SendMessageAsync(notificationsHubModel);
-	}
+		//return Clients.All.SendAsync("ReceiveMessage", notificationsHubModel);
+        return Clients.Caller.SendMessageAsync(notificationsHubModel);
+    }
 }

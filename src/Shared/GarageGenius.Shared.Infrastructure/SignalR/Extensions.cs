@@ -11,6 +11,7 @@ public static class Extensions
 		{
 			hubOptions.EnableDetailedErrors = true;
 			hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(15);
+			hubOptions.DisableImplicitFromServicesParameters = true;
 		}).AddJsonProtocol(jsonHubProtocolOptions =>
 		{
 			jsonHubProtocolOptions.PayloadSerializerOptions.WriteIndented = true;
