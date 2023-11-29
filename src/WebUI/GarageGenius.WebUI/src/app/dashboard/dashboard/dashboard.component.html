@@ -45,5 +45,8 @@
   </div>
   <div class="foreground-color inner-content">
     <router-outlet></router-outlet>
+    <button mat-raised-button (click)="this._signalRService.join()">join</button>
+    <button mat-raised-button (click)="this._signalRService.leave()">leave</button>
+    <button mat-raised-button (click)="this._signalRService.invoke()">invoke</button>
   </div>
 </div>

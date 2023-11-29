@@ -53,14 +53,22 @@ export class SignalRService implements OnDestroy {
   }
 
   public registerHandlers(): void {
-    this._hubConnection?.on(`SendNotification`, (date, email) => {
+    this._hubConnection?.on(`SendMessage`, (date, email) => {
       this.messageSource.next(email);
       this._snackBarService.success(email, 5);
     });
   }
 
+  public async join(): Promise<void> {
+    await this._hubConnection?.invoke(`JoinToHub`, `testGroup`);
+  }
+
+  public async leave(): Promise<void> {
+    await this._hubConnection?.invoke(`LeaveFromHub`, `testGroup`);
+  }
+
   public async invoke(): Promise<void> {
-    await this._hubConnection?.invoke(`SendMessage `, 'test,', 'test');
+    await this._hubConnection?.invoke(`SendMessage`, `testUser`, `testMessage`);
   }
 
   public async stopHubConnection(): Promise<void> {

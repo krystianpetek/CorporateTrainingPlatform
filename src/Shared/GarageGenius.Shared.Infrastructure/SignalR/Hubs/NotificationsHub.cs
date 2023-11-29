@@ -20,12 +20,18 @@ public class NotificationsHub : Hub<INotificationsHub>
 	public async Task JoinToHub(string groupName)
 	{
 		await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-		_logger.Information("Joining to group: {groupName}", groupName);
+		_logger.Information("User {connectionId}, has joined to group: {groupName}", Context.ConnectionId, groupName);
 	}
-	
+
+	public async Task LeaveFromHub(string groupName)
+	{
+		await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+		_logger.Information("User {connectionId}, has leaved from group: {groupName}", Context.ConnectionId, groupName);
+	}
+
 	public Task SendMessage(string user, string message)
 	{
-		return Clients.All.SendMessage(user, message);
+		return Clients.Group("testGroup").SendMessage("a", "b");
 	}
 
 	public Task PackageAsync(NotificationsHubModel notificationsHubModel)

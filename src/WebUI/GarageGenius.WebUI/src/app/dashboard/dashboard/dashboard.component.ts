@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public userName?: string;
   public constructor(
     private _authenticationService: AuthenticationService,
-    private _signalRService: SignalRService) { }
+    public _signalRService: SignalRService) { }
 
   public get isAuthenticated(): boolean
   {
