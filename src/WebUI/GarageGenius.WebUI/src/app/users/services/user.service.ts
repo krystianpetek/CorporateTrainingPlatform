@@ -4,6 +4,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {GetUsersResponseModel} from "../models/get-users-response-model";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
+import {UserRequestModel, UserResponseModel} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,12 @@ export class UserService extends BaseUserService {
     return this._httpClient
       .get<GetUsersResponseModel>(environment.getUsersUrl)
       .pipe(catchError(this.handleError))
+  }
+
+  postUser(user: UserRequestModel): Observable<UserResponseModel> {
+    return this._httpClient
+      .post<UserResponseModel>(environment.postUserUrl, user)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

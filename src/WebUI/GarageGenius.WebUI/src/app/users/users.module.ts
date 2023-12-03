@@ -6,9 +6,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { UserAddComponent } from './user-add/user-add.component';
 import {MatTableModule} from "@angular/material/table";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [UserListComponent, UserAddComponent],
-  imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule],
+    imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 })
 export class UsersModule {}
