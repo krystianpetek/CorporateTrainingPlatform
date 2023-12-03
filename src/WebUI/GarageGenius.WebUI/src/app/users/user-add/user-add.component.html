@@ -5,7 +5,7 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>manufacturer</mat-label>
+        <mat-label>Email</mat-label>
         <input type="text" id="email" matInput placeholder="Email" formControlName="email">
       </mat-form-field>
       <span class="error-validation-message" *ngIf="this.email.touched && this.email.invalid ">
@@ -16,11 +16,11 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>model</mat-label>
+        <mat-label>Role</mat-label>
         <input type="text" id="role" matInput placeholder="Role" formControlName="role">
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.role.touched && this.role.invalid">
-        innvalid role
+        invalid role
       </div>
     </div>
 
