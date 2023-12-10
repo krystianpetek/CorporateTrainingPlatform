@@ -1,4 +1,5 @@
-﻿using GarageGenius.Modules.Users.Application.Commands.DeactivateUser;
+﻿using GarageGenius.Modules.Users.Application.Commands.CreateUser;
+using GarageGenius.Modules.Users.Application.Commands.DeactivateUser;
 using GarageGenius.Modules.Users.Application.Commands.SignIn;
 using GarageGenius.Modules.Users.Application.Commands.SignUp;
 using GarageGenius.Modules.Users.Application.Queries.GetUser;
@@ -11,25 +12,16 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace GarageGenius.Modules.Users.Api.Controllers;
-public class UsersController : BaseController
-{
-	private readonly IJsonWebTokenStorage _jsonWebTokenStorage;
-	private readonly IDispatcher _dispatcher;
-
-	public UsersController(
+public class UsersController(
 		IJsonWebTokenStorage jsonWebTokenStorage,
-		IDispatcher dispatcher)
-	{
-		_jsonWebTokenStorage = jsonWebTokenStorage;
-		_dispatcher = dispatcher;
-	}
-
+		IDispatcher dispatcher) : BaseController
+{
 	[HttpPost("sign-up")]
 	[AllowAnonymous]
 	[SwaggerOperation("Sign up user")]
 	public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
 	{
-		await _dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
+		await dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
 		return Accepted();
 	}
 
@@ -38,9 +30,9 @@ public class UsersController : BaseController
 	[SwaggerOperation("Sign in user")]
 	public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
 	{
-		await _dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
+		await dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
 
-		JsonWebTokenResponse? token = _jsonWebTokenStorage.GetToken();
+		JsonWebTokenResponse? token = jsonWebTokenStorage.GetToken();
 		return Ok(token);
 	}
 
@@ -50,7 +42,7 @@ public class UsersController : BaseController
 	public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
 	{
 		Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
-		var user = await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
+		var user = await dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(userId));
 		return Ok(user);
 	}
 
@@ -59,7 +51,7 @@ public class UsersController : BaseController
 	[SwaggerOperation("Get user by ID")]
 	public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
 	{
-		var user = await _dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
+		var user = await dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
 		return Ok(user);
 	}
 
@@ -68,7 +60,7 @@ public class UsersController : BaseController
 	[SwaggerOperation("Sign out user")]
 	public new IActionResult SignOut()
 	{
-		_jsonWebTokenStorage.RemoveToken();
+		jsonWebTokenStorage.RemoveToken();
 		return Ok();
 	}
 
@@ -77,7 +69,7 @@ public class UsersController : BaseController
 	[SwaggerOperation("Deactivate user")]
 	public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
 	{
-		await _dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
+		await dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
 		return NoContent();
 	}
 
@@ -86,8 +78,17 @@ public class UsersController : BaseController
 	[SwaggerOperation("Get all users")]
 	public async Task<ActionResult<GetUsersQueryDto>> GetUsersAsync()
 	{
-		var users = await _dispatcher.DispatchQueryAsync<GetUsersQueryDto>(new GetUsersQuery());
+		var users = await dispatcher.DispatchQueryAsync<GetUsersQueryDto>(new GetUsersQuery());
 		return Ok(users);
+	}
+
+	[Authorize]
+	[HttpPost("users")]
+	[SwaggerOperation("Create new user")]
+	public async Task<ActionResult> CreateUserAsync(CreateUserCommand createUserCommand)
+	{
+		await dispatcher.DispatchCommandAsync<CreateUserCommand>(createUserCommand);
+		return Ok();
 	}
 
 	//[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types

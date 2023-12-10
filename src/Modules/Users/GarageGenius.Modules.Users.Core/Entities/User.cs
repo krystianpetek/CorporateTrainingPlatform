@@ -5,34 +5,36 @@ using GarageGenius.Shared.Abstractions.Common;
 namespace GarageGenius.Modules.Users.Core.Entities;
 internal sealed class User : AuditableEntity
 {
-	internal Guid UserId { get; private set; } // TODO userid as Types
-	internal Guid CustomerId { get; private set; } // TODO customerId as Types
-	public string RoleName { get; private set; } // TODO ValueObject
-	public EmailAddress Email { get; private set; }
-	public string Password { get; private set; } // TODO maybe ValueObject
+    internal Guid UserId { get; } // TODO userid as Types
+    internal Guid CustomerId { get; } // TODO customerId as Types
+    public string RoleName { get; } // TODO ValueObject
+    public EmailAddress Email { get; }
+    public string Password { get; private set; } // TODO maybe ValueObject
 	public UserState State { get; private set; }
-	public Role Role { get; private set; }
+    public Role Role { get; set; }
 
-	public User(EmailAddress email, string password, string role)
+    public User(EmailAddress email, string password, string role)
 	{
 		UserId = Guid.NewGuid();
 		CustomerId = Guid.NewGuid();
 		Email = email;
 		Password = password;
 		RoleName = role;
-		this.Activate();
+		Activate();
 	}
 
 	private User() { }
 
-	internal void Deactivate()
+	internal User Deactivate()
 	{
 		State = UserState.Unactive;
+		return this;
 	}
 
-	internal void Activate()
+	private User Activate()
 	{
 		State = UserState.Active;
+		return this;
 	}
 
 	internal void VerifyUserState()
