@@ -3,6 +3,7 @@ import {UserService} from "../services/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {UserAddComponent} from "../user-add/user-add.component";
 import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-list',
@@ -23,6 +24,7 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private _userService: UserService,
+    private _router: Router,
     public dialog: MatDialog) {
   }
 
@@ -34,12 +36,18 @@ export class UserListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(UserAddComponent, {
-      data: {
-        //customerId: this._authenticationService.getUserInfo().customerId
-      },
-      // TODO response after close
+    const dialogRef = this.dialog.open(UserAddComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+
+      const currentUrl = this._router.url;
+      this._router.navigateByUrl('/', {skipLocationChange: true})
+        .then(() => {
+          this._router.navigate([currentUrl]);
+      });
     });
   }
-
 }
