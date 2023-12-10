@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GarageGenius.Modules.Users.Application.Commands.CreateUser;
 using GarageGenius.Modules.Users.Application.Commands.DeactivateUser;
 using GarageGenius.Modules.Users.Application.Commands.SignIn;
 using GarageGenius.Modules.Users.Application.Commands.SignUp;
@@ -25,6 +26,7 @@ internal static class Extensions
         services.AddScoped<IValidator<DeactivateUserCommand>, DeactivateUserCommandValidator>();
         services.AddScoped<IValidator<SignInCommand>, SignInCommandValidator>();
         services.AddScoped<IValidator<SignUpCommand>, SignUpCommandValidator>();
+        services.AddScoped<IValidator<CreateUserCommand>, CreateUserCommandValidator>();
 
         services.AddScoped<IUserServiceMapper, UserServiceMapper>();
 
