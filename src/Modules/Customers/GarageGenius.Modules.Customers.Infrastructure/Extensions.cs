@@ -2,6 +2,7 @@
 using GarageGenius.Modules.Customers.Infrastructure.Persistance.DbContexts;
 using GarageGenius.Modules.Customers.Infrastructure.Persistance.Repositories;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
+using GarageGenius.Shared.Infrastructure.Persistance.PostgreSql;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,8 @@ internal static class Extensions
 {
 	public static IServiceCollection AddCustomersInfrastructure(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
-		services.AddMsSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
+		// services.AddMsSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
+		services.AddPostgreSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 		return services;

@@ -5,6 +5,7 @@ using GarageGenius.Modules.Reservations.Infrastructure.Persistance.DbContexts;
 using GarageGenius.Modules.Reservations.Infrastructure.Persistance.Repositories;
 using GarageGenius.Modules.Reservations.Infrastructure.QueryStorage;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
+using GarageGenius.Shared.Infrastructure.Persistance.PostgreSql;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +15,8 @@ internal static class Extensions
 {
 	public static IServiceCollection AddReservationsInfrastructure(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
-		services.AddMsSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
+		//services.AddMsSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
+		services.AddPostgreSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
 		services.AddScoped<IReservationRepository, ReservationRepository>();
 		services.AddScoped<IReservationHistoryRepository, ReservationHistoryRepository>();
 		services.AddScoped<IReservationQueryStorage, ReservationQueryStorage>();

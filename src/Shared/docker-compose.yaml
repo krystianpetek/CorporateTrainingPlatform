@@ -13,3 +13,9 @@ services:
         SA_PASSWORD: 'NotAll0wedForPublic'
     ports:
     - 25411:1433
+  postgres:
+    image: postgres
+    ports:
+        - "5401:5432"
+    environment:
+      - POSTGRES_PASSWORD=NotAll0wedForPublic
