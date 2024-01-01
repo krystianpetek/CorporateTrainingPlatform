@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Modules.Reservations.Application.QueryStorage;
 using GarageGenius.Modules.Vehicles.Shared.Queries.GetVehicleById;
+using GarageGenius.Shared.Abstractions.Exceptions;
 using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
 using GarageGenius.Shared.Abstractions.Queries.Query;
 
@@ -26,8 +27,19 @@ internal class GetCustomerReservationsQueryHandler : IPagedQueryHandler<GetCusto
 		foreach (var vehicle in getCustomerReservationsQueryDto?.CustomerReservationsDto?.Items)
 		{
 			// TODO - cache for vehicles
-			var dispatchedVehicle = await _queryDispatcher.DispatchQueryAsync<GetVehicleByIdQueryDto>(new GetVehicleByIdQuery(vehicle.VehicleId), cancellationToken);
-			vehicle.VehicleName = $"{dispatchedVehicle.Manufacturer} {dispatchedVehicle.Model}";
+			try
+			{
+				var dispatchedVehicle =
+					await _queryDispatcher.DispatchQueryAsync<GetVehicleByIdQueryDto>(
+						new GetVehicleByIdQuery(vehicle.VehicleId), cancellationToken);
+				vehicle.VehicleName = $"{dispatchedVehicle.Manufacturer} {dispatchedVehicle.Model}";
+			}
+			catch (GarageGeniusException ex)
+			{
+				_logger.Warning("Vehicle with ID {VehicleId} not found", vehicle.VehicleId);
+				// TODO - remove when exception occured
+			}
+
 		}
 
 		_logger.Information(
