@@ -12,8 +12,8 @@ internal static class Extensions
 {
 	public static IServiceCollection AddCustomersInfrastructure(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
-		// services.AddMsSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
-		services.AddPostgreSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
+		services.AddMsSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
+		//services.AddPostgreSqlServerDbContext<CustomersDbContext>(webHostEnvironment);
 		services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 		return services;

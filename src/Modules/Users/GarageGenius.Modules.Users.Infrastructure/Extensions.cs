@@ -15,8 +15,8 @@ internal static class Extensions
 	{
 		services.AddScoped<IRoleRepository, RoleRepository>();
 		services.AddScoped<IUserRepository, UserRepository>();
-		//services.AddMsSqlServerDbContext<UsersDbContext>(webHostEnvironment);
-		services.AddPostgreSqlServerDbContext<UsersDbContext>(webHostEnvironment);
+		services.AddMsSqlServerDbContext<UsersDbContext>(webHostEnvironment);
+		//services.AddPostgreSqlServerDbContext<UsersDbContext>(webHostEnvironment);
 		services.AddTransient<IDbContextSeeder, UsersDbContextSeeder>();
 
 		using IServiceScope? serviceScope = services.BuildServiceProvider().CreateScope();
