@@ -15,8 +15,8 @@ internal static class Extensions
 {
 	public static IServiceCollection AddReservationsInfrastructure(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
-		//services.AddMsSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
-		services.AddPostgreSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
+		services.AddMsSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
+		//services.AddPostgreSqlServerDbContext<ReservationsDbContext>(webHostEnvironment);
 		services.AddScoped<IReservationRepository, ReservationRepository>();
 		services.AddScoped<IReservationHistoryRepository, ReservationHistoryRepository>();
 		services.AddScoped<IReservationQueryStorage, ReservationQueryStorage>();

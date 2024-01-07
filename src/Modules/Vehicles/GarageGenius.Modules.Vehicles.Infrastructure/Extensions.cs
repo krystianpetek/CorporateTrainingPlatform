@@ -14,8 +14,8 @@ internal static class Extensions
 {
 	public static IServiceCollection AddVehiclesInfrastructure(this IServiceCollection services, IWebHostEnvironment webHostEnvironment)
 	{
-		// services.AddMsSqlServerDbContext<VehiclesDbContext>(webHostEnvironment);
-		services.AddPostgreSqlServerDbContext<VehiclesDbContext>(webHostEnvironment);
+		services.AddMsSqlServerDbContext<VehiclesDbContext>(webHostEnvironment);
+		//services.AddPostgreSqlServerDbContext<VehiclesDbContext>(webHostEnvironment);
 		services.AddScoped<IVehicleRepository, VehicleRepository>();
 		services.AddScoped<IVehicleQueryStorage, VehicleQueryStorage>();
 		return services;
