@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {
+  PendingReservationsComponent
+} from "../pending-reservations/pending-reservations/pending-reservations.component";
 
 const usersModule = () =>
   import('../users/users.module').then((m) => m.UsersModule);
@@ -46,6 +49,11 @@ const routes: Routes = [
         loadChildren: reservationsModule,
         canActivate: [authenticationGuard],
       },
+      {
+        path: 'pending-reservations',
+        component: PendingReservationsComponent,
+        canActivate: [authenticationGuard],
+      }
     ],
   },
 ];

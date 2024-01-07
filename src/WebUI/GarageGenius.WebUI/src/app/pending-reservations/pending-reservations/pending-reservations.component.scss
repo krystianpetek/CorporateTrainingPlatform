@@ -1,0 +1,55 @@
+@import '../../../styles/variables.scss';
+
+.title-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0 0.5rem;
+
+  & button {
+    background-color: $theme-selected-background;
+    color: $theme-side;
+  }
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+.mdc-data-table__cell {
+  border-top: 0.5px solid $theme-text;
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+// custom scrollbar
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}

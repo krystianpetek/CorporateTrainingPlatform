@@ -41,6 +41,12 @@
           <mat-icon>person_pin_circle</mat-icon>Customers
         </div>
       </button>
+
+      <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['pending-reservations']" routerLinkActive="active" class="foreground-color">
+        <div class="button-inner-container">
+          <mat-icon>work</mat-icon>Pending reservations
+        </div>
+      </button>
     </div>
   </div>
   <div class="foreground-color inner-content">
