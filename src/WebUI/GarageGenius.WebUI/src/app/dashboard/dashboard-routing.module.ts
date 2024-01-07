@@ -3,8 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { authenticationGuard } from '../shared/guards/authentication.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {
-  PendingReservationsComponent
-} from "../pending-reservations/pending-reservations/pending-reservations.component";
+  PendingReservationDetailsComponent
+} from "../pending-reservations/pending-reservation-details/pending-reservation-details.component";
+import {
+  PendingReservationListComponent
+} from "../pending-reservations/pending-reservation-list/pending-reservation-list.component";
 
 const usersModule = () =>
   import('../users/users.module').then((m) => m.UsersModule);
@@ -51,7 +54,13 @@ const routes: Routes = [
       },
       {
         path: 'pending-reservations',
-        component: PendingReservationsComponent,
+        component: PendingReservationListComponent,
+        canActivate: [authenticationGuard],
+      },
+      {
+        path: 'pending-reservations/:id',
+        pathMatch: 'full',
+        component: PendingReservationDetailsComponent,
         canActivate: [authenticationGuard],
       }
     ],

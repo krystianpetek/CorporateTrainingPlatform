@@ -1,0 +1,31 @@
+﻿<div class="container" *ngIf="this.reservationDetails">
+  <div class="title-bar">
+    <button (click)="goBack()" mat-icon-button><mat-icon>undo</mat-icon></button>
+    <h2 class="title-bar_model">{{ this.reservationDetails.reservationId }}</h2>
+  </div>
+
+  <div class="reservation-details">
+    <div class="reservation-details_item">
+      <div class="reservation-details_item__id">
+        <span>Reservation ID:</span>
+        <i>{{ this.reservationDetails.reservationId }}</i>
+      </div>
+      <div class="reservation-details_item__date">
+        <span>Reservation date:</span>
+        <i>{{ this.reservationDetails.reservationDate }}</i>
+      </div>
+      <div class="reservation-details_item__state">
+        <span>Reservation state:</span>
+        <i>{{ this.reservationDetails.reservationState }}</i>
+      </div>
+      <div class="reservation-details_item__comment">
+        <span>Comment:</span>
+        <i>{{ this.reservationDetails.comment }}</i>
+      </div>
+    </div>
+
+    <div *ngIf="this.reservationHistory">
+      <app-table-gg [tableColumns]="this.tableColumns" [tableData]="tableData"> </app-table-gg>
+    </div>
+  </div>
+</div>

@@ -15,13 +15,13 @@ import {MatDialog} from "@angular/material/dialog";
 import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
 
 @Component({
-  selector: 'app-pending-reservations',
+  selector: 'app-pending-reservation-list',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, MatTableModule],
-  templateUrl: './pending-reservations.component.html',
-  styleUrl: './pending-reservations.component.scss'
+  templateUrl: './pending-reservation-list.component.html',
+  styleUrl: './pending-reservation-list.component.scss'
 })
-export class PendingReservationsComponent implements OnInit {
+export class PendingReservationListComponent implements OnInit {
   private _router: Router;
   private _authenticationService: IAuthenticationService;
   private _reservationService: IReservationService;
@@ -56,16 +56,6 @@ export class PendingReservationsComponent implements OnInit {
   }
 
   public redirectToDetails(reservationId: string): void {
-    this._router.navigate([`dashboard/reservations`, reservationId]);
+    this._router.navigate([`dashboard/pending-reservations`, reservationId]);
   }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ReservationAddComponent, {
-      data: {
-        customerId: this._authenticationService.getUserInfo().customerId
-      },
-      // TODO response after close
-    });
-  }
-
 }
