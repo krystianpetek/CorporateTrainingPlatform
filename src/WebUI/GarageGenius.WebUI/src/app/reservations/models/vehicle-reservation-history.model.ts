@@ -8,4 +8,5 @@ export interface ReservationHistoryDto {
   updateDate: Date;
   reservationState: string;
   comment: string;
+  userId: string;
 }
