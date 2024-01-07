@@ -3,6 +3,9 @@ import { VehicleReservationsResponseModel } from './vehicle-reservations-respons
 import { VehicleReservationHistoryModel } from './vehicle-reservation-history.model';
 import {ReservationAddRequestModel, VehicleReservationResponseModel} from './vehicle-reservation-response.model';
 import { CustomerReservationsResponseModel } from './customer-reservations-response.model';
+import {
+  CurrentNotCompletedReservationsResponseModel
+} from "../../pending-reservations/models/customer-reservations-response.model";
 
 export abstract class BaseReservationService implements IReservationService {
   abstract getVehicleReservations(
@@ -20,6 +23,7 @@ export abstract class BaseReservationService implements IReservationService {
   abstract addReservation(
     reservation: ReservationAddRequestModel
   ): Observable<void>;
+  abstract getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel>;
 }
 
 export interface IReservationService {
@@ -38,4 +42,5 @@ export interface IReservationService {
   addReservation(
     reservation: ReservationAddRequestModel
   ): Observable<void>;
+  getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel>;
 }
