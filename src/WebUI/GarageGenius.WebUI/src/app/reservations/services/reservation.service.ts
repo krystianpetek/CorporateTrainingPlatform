@@ -12,6 +12,7 @@ import { CustomerReservationsResponseModel } from '../models/customer-reservatio
 import {
   CurrentNotCompletedReservationsResponseModel
 } from "../../pending-reservations/models/customer-reservations-response.model";
+import {UpdateReservationRequestModel} from "../models/update-reservation-request.model";
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +77,10 @@ export class ReservationService extends BaseReservationService {
 
   override getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel> {
     return this._httpClient.get<CurrentNotCompletedReservationsResponseModel>(environment.reservationsApiUrl + `reservations/not-completed`)
+  }
+
+  override updateReservation(reservation: UpdateReservationRequestModel): Observable<void> {
+    return this._httpClient.put<void>(environment.reservationsApiUrl + `reservations`, reservation)
   }
 
   private handleError(error: HttpErrorResponse) {
