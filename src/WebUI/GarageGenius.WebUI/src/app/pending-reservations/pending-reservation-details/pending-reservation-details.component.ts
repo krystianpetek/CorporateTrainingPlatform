@@ -14,6 +14,7 @@ import {
   VehicleReservationHistoryModel
 } from "../../reservations/models/vehicle-reservation-history.model";
 import {AppMaterialModule} from "../../shared/app-material.module";
+import {UpdateReservationRequestModel} from "../../reservations/models/update-reservation-request.model";
 
 @Component({
   selector: 'app-pending-reservation-details',
@@ -27,6 +28,7 @@ export class PendingReservationDetailsComponent implements OnInit {
   private readonly _vehicleService: IVehiclesService;
   private readonly _activatedRoute: ActivatedRoute;
   private readonly _router: Router;
+  public editMode: boolean;
   public reservationDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
@@ -70,6 +72,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
     this._router = router;
+    this.editMode = false;
   }
 
   public ngOnInit(): void {
@@ -93,9 +96,26 @@ export class PendingReservationDetailsComponent implements OnInit {
   }
 
   public getVehicleDetails(vehicleId: string): void {
-    this._vehicleService.getVehicleById(vehicleId).subscribe((vehicle) => {
-      this.vehicleDetails = vehicle;
+    this._vehicleService.getVehicleById(vehicleId)
+      .subscribe((vehicle) => {
+        this.vehicleDetails = vehicle;
     });
+  }
+
+  public updateReservation(): void {
+    const updatedReservation: UpdateReservationRequestModel = {
+      reservationId: this.reservationDetails!.reservationId,
+      reservationDate: this.reservationDetails!.reservationDate,
+      reservationNote: this.reservationDetails!.comment,
+      reservationState: this.reservationDetails!.reservationState
+    }
+    this._reservationsService.updateReservation(updatedReservation)
+      .subscribe((reservation) => {
+    });
+  }
+
+  public editReservation(): void {
+    this.editMode = !this.editMode;
   }
 
   public goBack(): void {

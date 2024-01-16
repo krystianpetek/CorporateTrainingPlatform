@@ -1,8 +1,28 @@
-﻿<div class="container" *ngIf="this.reservationDetails">
+﻿<div class="container-title" *ngIf="this.reservationDetails">
   <div class="title-bar">
-    <button (click)="goBack()" mat-icon-button><mat-icon>undo</mat-icon></button>
-    <h2 class="title-bar_model">{{ this.reservationDetails.reservationId }}</h2>
+    <div>
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <h2 class="title-bar_model">{{ reservationDetails?.reservationId }}</h2>
+    </div>
+    <div>
+      <!-- <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
+        <mat-icon>event_note</mat-icon>
+      </button> -->
+      <button *ngIf="!this.editMode" mat-icon-button type="button" matTooltip="Edit vehicle"
+              (click)="this.editReservation()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editReservation()" matTooltip="Cancel">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.updateReservation()" matTooltip="Save">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
   </div>
+  <div class="line"></div>
 
   <div class="reservation-details">
     <div class="reservation-details_item">
