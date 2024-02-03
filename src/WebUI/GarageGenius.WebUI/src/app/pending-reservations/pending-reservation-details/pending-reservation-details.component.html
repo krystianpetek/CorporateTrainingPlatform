@@ -47,5 +47,43 @@
     <div *ngIf="this.reservationHistory">
       <app-table-gg [tableColumns]="this.tableColumns" [tableData]="tableData"> </app-table-gg>
     </div>
+
+    <div class="line"></div>
+    <div class="container-content">
+
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+          <mat-label>Reservation state</mat-label>
+          <mat-select class="reservation-property-value" [value]="reservationUpdateDetails!.reservationState">
+            <mat-option *ngFor="let state of this.reservationStates" [value]="state">
+              {{ state }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>info</mat-icon>
+          <mat-hint>Change vehicle manufacturer</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+          <mat-label>Reservation date</mat-label>
+          <input class="reservation-property-value" matInput [matDatepicker]="picker2"
+                 [value]="reservationUpdateDetails?.reservationDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+          <mat-label>Reservation comment</mat-label>
+          <input class="reservation-property-value" matInput [value]="reservationUpdateDetails?.comment">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </div>
+
   </div>
 </div>

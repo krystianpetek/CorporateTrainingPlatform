@@ -15,11 +15,12 @@ import {
 } from "../../reservations/models/vehicle-reservation-history.model";
 import {AppMaterialModule} from "../../shared/app-material.module";
 import {UpdateReservationRequestModel} from "../../reservations/models/update-reservation-request.model";
+import {MatSelectModule} from "@angular/material/select";
 
 @Component({
   selector: 'app-pending-reservation-details',
   standalone: true,
-  imports: [CommonModule, TableGgComponent, AppMaterialModule],
+  imports: [CommonModule, TableGgComponent, AppMaterialModule, MatSelectModule],
   templateUrl: './pending-reservation-details.component.html',
   styleUrl: './pending-reservation-details.component.scss'
 })
@@ -30,8 +31,10 @@ export class PendingReservationDetailsComponent implements OnInit {
   private readonly _router: Router;
   public editMode: boolean;
   public reservationDetails?: VehicleReservationResponseModel;
+  public reservationUpdateDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
+  public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
 
   tableColumns : Array<Column> = [
     {
@@ -116,6 +119,14 @@ export class PendingReservationDetailsComponent implements OnInit {
 
   public editReservation(): void {
     this.editMode = !this.editMode;
+
+    this.reservationUpdateDetails = {
+      reservationId: this.reservationDetails!.reservationId,
+      vehicleId : this.reservationDetails!.vehicleId,
+      reservationState: this.reservationDetails!.reservationState,
+      reservationDate: new Date(),
+      comment: '',
+    };
   }
 
   public goBack(): void {
