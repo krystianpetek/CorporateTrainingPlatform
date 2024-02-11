@@ -16,11 +16,13 @@ import {
 import {AppMaterialModule} from "../../shared/app-material.module";
 import {UpdateReservationRequestModel} from "../../reservations/models/update-reservation-request.model";
 import {MatSelectModule} from "@angular/material/select";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {UpdateReservationFormModel} from "../models/update-reservation-form.model";
 
 @Component({
   selector: 'app-pending-reservation-details',
   standalone: true,
-  imports: [CommonModule, TableGgComponent, AppMaterialModule, MatSelectModule],
+  imports: [CommonModule, TableGgComponent, AppMaterialModule, MatSelectModule, ReactiveFormsModule],
   templateUrl: './pending-reservation-details.component.html',
   styleUrl: './pending-reservation-details.component.scss'
 })
@@ -31,10 +33,10 @@ export class PendingReservationDetailsComponent implements OnInit {
   private readonly _router: Router;
   public editMode: boolean;
   public reservationDetails?: VehicleReservationResponseModel;
-  public reservationUpdateDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
+  public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
 
   tableColumns : Array<Column> = [
     {
@@ -71,6 +73,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     activatedRoute: ActivatedRoute,
     vehicleService: VehiclesService,
     router: Router,
+    private _formBuilder: FormBuilder,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -96,6 +99,14 @@ export class PendingReservationDetailsComponent implements OnInit {
         this.reservationHistory = reservation;
         this.tableData = reservation.reservationHistoriesDtos;
       });
+
+    this.updateReservationForm = this._formBuilder.group({
+      reservationId: [''],
+      reservationState: [''],
+      reservationDate: [new Date()],
+      comment: [''],
+      vehicleId: [''],
+    });
   }
 
   public getVehicleDetails(vehicleId: string): void {
@@ -107,11 +118,13 @@ export class PendingReservationDetailsComponent implements OnInit {
 
   public updateReservation(): void {
     const updatedReservation: UpdateReservationRequestModel = {
-      reservationId: this.reservationDetails!.reservationId,
-      reservationDate: this.reservationDetails!.reservationDate,
-      reservationNote: this.reservationDetails!.comment,
-      reservationState: this.reservationDetails!.reservationState
-    }
+      reservationState : this.updateReservationForm.value.reservationState!,
+      reservationDate: this.updateReservationForm.value.reservationDate!,
+      reservationId: this.reservationDetails?.reservationId!,
+      reservationNote: this.updateReservationForm.value.comment!,
+    };
+
+
     this._reservationsService.updateReservation(updatedReservation)
       .subscribe((reservation) => {
     });
@@ -120,13 +133,13 @@ export class PendingReservationDetailsComponent implements OnInit {
   public editReservation(): void {
     this.editMode = !this.editMode;
 
-    this.reservationUpdateDetails = {
-      reservationId: this.reservationDetails!.reservationId,
-      vehicleId : this.reservationDetails!.vehicleId,
-      reservationState: this.reservationDetails!.reservationState,
-      reservationDate: new Date(),
-      comment: '',
-    };
+    // this.updateReservationForm = this._formBuilder.group({
+    //   reservationId: [this.reservationDetails!.reservationId],
+    //   reservationState: [this.reservationDetails!.reservationState],
+    //   reservationDate: [this.reservationDetails!.reservationDate],
+    //   comment: [this.reservationDetails!.comment],
+    //   vehicleId: [this.reservationDetails!.vehicleId],
+    // });
   }
 
   public goBack(): void {

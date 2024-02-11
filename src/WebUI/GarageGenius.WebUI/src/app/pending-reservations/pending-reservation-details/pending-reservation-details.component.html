@@ -4,7 +4,7 @@
       <button mat-icon-button (click)="goBack()">
         <mat-icon>undo</mat-icon>
       </button>
-      <h2 class="title-bar_model">{{ reservationDetails?.reservationId }}</h2>
+      <h2 class="title-bar_model">{{ reservationDetails!.reservationId }}</h2>
     </div>
     <div>
       <!-- <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
@@ -50,14 +50,18 @@
 
     <div class="line"></div>
     <div class="container-content">
-
+    <form [formGroup]="updateReservationForm">
       <div class="reservation-property" *ngIf="this.editMode">
         <mat-form-field class="reservation-property-edit" appearance="outline">
           <mat-label>Reservation state</mat-label>
-          <mat-select class="reservation-property-value" [value]="reservationUpdateDetails!.reservationState">
-            <mat-option *ngFor="let state of this.reservationStates" [value]="state">
-              {{ state }}
-            </mat-option>
+          <mat-select class="reservation-property-value" formControlName="reservationState">
+            @for (state of this.reservationStates; track state)
+            {
+              <mat-option [value]="state">
+                {{ state }}
+              </mat-option>
+            }
+
           </mat-select>
           <mat-icon matSuffix>info</mat-icon>
           <mat-hint>Change vehicle manufacturer</mat-hint>
@@ -68,7 +72,7 @@
         <mat-form-field class="reservation-property-edit" appearance="outline">
           <mat-label>Reservation date</mat-label>
           <input class="reservation-property-value" matInput [matDatepicker]="picker2"
-                 [value]="reservationUpdateDetails?.reservationDate">
+                 formControlName="reservationDate">
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
@@ -78,11 +82,13 @@
       <div class="reservation-property" *ngIf="this.editMode">
         <mat-form-field class="reservation-property-edit" appearance="outline">
           <mat-label>Reservation comment</mat-label>
-          <input class="reservation-property-value" matInput [value]="reservationUpdateDetails?.comment">
+          <input class="reservation-property-value" matInput
+                 formControlName="comment">
           <mat-hint>MM/DD/YYYY</mat-hint>
         </mat-form-field>
       </div>
 
+    </form>
     </div>
 
   </div>
