@@ -127,6 +127,7 @@ export class PendingReservationDetailsComponent implements OnInit {
 
     this._reservationsService.updateReservation(updatedReservation)
       .subscribe((reservation) => {
+        window.location.reload();
     });
   }
 
