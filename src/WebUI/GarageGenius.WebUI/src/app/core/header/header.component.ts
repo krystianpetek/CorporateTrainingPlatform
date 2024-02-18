@@ -4,6 +4,7 @@ import {
   AuthenticationServiceBase,
   IAuthenticationService,
 } from 'src/app/shared/services/authentication/authentication.service';
+import {Role} from "../../shared/services/authentication/models/role.model";
 
 @Component({
   selector: 'app-header',
@@ -30,6 +31,14 @@ export class HeaderComponent {
 
   public isUserLoggedIn(): boolean {
     const user = this._authenticationService.getUserInfo();
+    if (user) {
+      return true;
+    }
+    return false;
+  }
+
+  public isAdmin(): boolean {
+    let user = this._authenticationService.getUserInfo()?.role === Role.Administrator;
     if (user) {
       return true;
     }

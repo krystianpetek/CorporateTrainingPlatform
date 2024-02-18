@@ -12,21 +12,24 @@
   <div fxHide.xs fxFlex fxLayout fxLayoutAlign="end">
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
       <li>
-        <a routerLink="/check-health">Health check</a>
+        <a *ngIf="this.isAdmin()" routerLink="/check-health">Health check</a>
+      </li>
+      <li *ngIf="this.isAdmin()">|</li>
+      <li *ngIf="this.isUserLoggedIn()">
+<!--        <a routerLink="/dashboard">Dashboard</a>-->
+        <a routerLink="/dashboard">Panel użytkownika</a>
       </li>
       <li *ngIf="this.isUserLoggedIn()">|</li>
-      <li *ngIf="this.isUserLoggedIn()">
-        <a routerLink="/dashboard">Dashboard</a>
-      </li>
-      <li>|</li>
       <li>
         <ng-container *ngIf="this.isUserLoggedIn() else elseTemplate">
-          <a routerLink="/authentication/sign-out" (click)="this.signOut()">Sign out</a>
+<!--          <a routerLink="/authentication/sign-out" (click)="this.signOut()">Sign out</a>-->
+          <a routerLink="/authentication/sign-out" (click)="this.signOut()">Wyloguj się</a>
         </ng-container>
       </li>
       <li>
         <ng-template #elseTemplate>
-          <a routerLink="/authentication/sign-in">Sign in</a>
+          <a routerLink="/authentication/sign-in">Zaloguj się</a>
+<!--          <a routerLink="/authentication/sign-in">Sign in</a>-->
         </ng-template>
       </li>
     </ul>
