@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+
+
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth'});
   }
