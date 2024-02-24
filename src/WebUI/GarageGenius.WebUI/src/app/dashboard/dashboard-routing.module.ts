@@ -28,7 +28,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'vehicles',
+        redirectTo: 'reservations',
       },
       {
         path: 'users',

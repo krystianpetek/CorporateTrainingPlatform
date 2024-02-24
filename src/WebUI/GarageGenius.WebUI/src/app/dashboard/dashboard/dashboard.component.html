@@ -15,15 +15,15 @@
 
     <p class="userNameBar">{{ this.userName }}</p>
     <div class="inner-navbar">
-      <button mat-flat-button [routerLink]="['vehicles']" routerLinkActive="active" class="foreground-color">
-        <div class="button-inner-container">
-          <mat-icon>directions_car</mat-icon>Vehicles
-        </div>
-      </button>
-
       <button mat-flat-button [routerLink]="['reservations']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
           <mat-icon>schedule</mat-icon>Reservations
+        </div>
+      </button>
+
+      <button mat-flat-button [routerLink]="['vehicles']" routerLinkActive="active" class="foreground-color">
+        <div class="button-inner-container">
+          <mat-icon>directions_car</mat-icon>Vehicles
         </div>
       </button>
     </div>
