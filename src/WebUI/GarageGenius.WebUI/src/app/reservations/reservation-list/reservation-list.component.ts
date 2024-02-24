@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CustomerReservationsItem } from '../models/customer-reservations-response.model';
@@ -20,6 +20,7 @@ export class ReservationListComponent implements OnInit {
   private _router: Router;
   private _authenticationService: IAuthenticationService;
   private _reservationService: IReservationService;
+  showMode: 'all' | 'pending' = 'pending';
 
   public dataSource = new MatTableDataSource<CustomerReservationsItem>();
   public displayedColumns: string[] = [
@@ -47,7 +48,17 @@ export class ReservationListComponent implements OnInit {
     const user = this._authenticationService.getUserInfo();
 
     this._reservationService
-      .getCustomerReservations(user.customerId)
+      .getCustomerReservations(user.customerId, this.showMode === 'pending')
+      .subscribe((reservations) => {
+        this.dataSource.data = reservations.customerReservationsDto.items;
+      });
+  }
+
+  changedValue(event: Event): void {
+    const user = this._authenticationService.getUserInfo();
+
+    this._reservationService
+      .getCustomerReservations(user.customerId, this.showMode === 'pending')
       .subscribe((reservations) => {
         this.dataSource.data = reservations.customerReservationsDto.items;
       });

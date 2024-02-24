@@ -56,11 +56,19 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 
 	public async Task<GetCustomerReservationsQueryDto> GetCustomerReservationsAsync(GetCustomerReservationsQuery getCustomerReservationsQuery, CancellationToken cancellationToken = default)
 	{
-		PaginatedList<CustomerReservationsDto> customerReservationsDtos = await _reservationsDbContext.Reservations
+		var customerReservationsDtosQuery = _reservationsDbContext.Reservations
 		.AsNoTracking()
 		.AsQueryable()
-		.Where(reservation => reservation.CustomerId == getCustomerReservationsQuery.CustomerId)
-		.OrderByDescending(reservation => reservation.ReservationDate)
+		.Where(reservation => reservation.CustomerId == getCustomerReservationsQuery.CustomerId);
+
+		if (getCustomerReservationsQuery.OnlyPending)
+        {
+            customerReservationsDtosQuery = customerReservationsDtosQuery
+				.Where(reservation => reservation.ReservationState != ReservationState.Completed &&
+				                      reservation.ReservationState != ReservationState.Canceled);
+        }
+
+        PaginatedList<CustomerReservationsDto> customerReservationsDtos = await customerReservationsDtosQuery.OrderByDescending(reservation => reservation.ReservationDate)
 		.Select(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
 		.PaginateAsync(getCustomerReservationsQuery.PageNumber, getCustomerReservationsQuery.PageSize, cancellationToken)
 		.ConfigureAwait(false);

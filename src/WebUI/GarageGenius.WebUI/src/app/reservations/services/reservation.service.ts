@@ -56,7 +56,8 @@ export class ReservationService extends BaseReservationService {
   }
 
   override getCustomerReservations(
-    customerId: string
+    customerId: string,
+    onlyPending: boolean
   ): Observable<CustomerReservationsResponseModel> {
     return this._httpClient
       .get<CustomerReservationsResponseModel>(
@@ -64,6 +65,7 @@ export class ReservationService extends BaseReservationService {
         {
           params: {
             customerId: customerId,
+            onlyPending: onlyPending
           },
         }
       )

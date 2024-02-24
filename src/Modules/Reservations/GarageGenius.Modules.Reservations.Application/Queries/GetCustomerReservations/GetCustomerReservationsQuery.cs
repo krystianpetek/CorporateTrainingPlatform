@@ -7,8 +7,11 @@ public sealed record class GetCustomerReservationsQuery : IPagedQuery<GetCustome
 {
 	[Required]
 	public Guid CustomerId { get; set; }
+	
+	[DefaultValue(false)]
+    public bool OnlyPending { get; init; }
 
-	[DefaultValue(1)]
+    [DefaultValue(1)]
 	public int PageNumber { get; init; }
 
 	[DefaultValue(10)]

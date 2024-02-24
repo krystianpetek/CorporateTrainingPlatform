@@ -19,7 +19,8 @@ export abstract class BaseReservationService implements IReservationService {
     reservationId: string
   ): Observable<VehicleReservationHistoryModel>;
   abstract getCustomerReservations(
-    customerId: string
+    customerId: string,
+    onlyPending?: boolean
   ): Observable<CustomerReservationsResponseModel>;
   abstract addReservation(
     reservation: ReservationAddRequestModel
@@ -39,7 +40,8 @@ export interface IReservationService {
     reservationId: string
   ): Observable<VehicleReservationHistoryModel>;
   getCustomerReservations(
-    customerId: string
+    customerId: string,
+    onlyPending?: boolean
   ): Observable<CustomerReservationsResponseModel>;
   addReservation(
     reservation: ReservationAddRequestModel
