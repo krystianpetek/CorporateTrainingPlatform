@@ -30,6 +30,8 @@ internal class UpdateReservationCommandHandler : ICommandHandler<UpdateReservati
 	public async Task HandleCommandAsync(UpdateReservationCommand command, CancellationToken cancellationToken = default)
 	{
 		Reservation reservation = await _reservationRepository.GetReservationAsync(command.ReservationId, cancellationToken) ?? throw new ReservationNotFoundException(command.ReservationId);
+		reservation.ChangeReservationDate(command.ReservationDate);
+
 		await _reservationDomainService.UpdateReservation(reservation, command.ReservationState, command.ReservationNote, cancellationToken);
 
 		_logger.Information(

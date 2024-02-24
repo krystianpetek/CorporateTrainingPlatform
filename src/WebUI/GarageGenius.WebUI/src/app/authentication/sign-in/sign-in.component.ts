@@ -40,12 +40,12 @@ export class SignInComponent implements OnInit {
     this.isSignedIn = false;
     this.isSignInFailed = false;
     this.error = '';
-    this._returnUrl = '';
+    this._returnUrl = '/dashboard';
   }
 
   ngOnInit(): void {
     this._returnUrl =
-      this._activatedRoute.snapshot.queryParams['returnUrl'] || '/';
+      this._activatedRoute.snapshot.queryParams['returnUrl'] || '/dashboard';
 
     this.signInForm = this._formBuilder.group({
       email: [
