@@ -77,4 +77,9 @@ internal sealed class Reservation : AuditableEntity
 				throw new InvalidReservationStateException(reservationState);
 		}
 	}
+
+	internal void ChangeReservationDate(ReservationDate reservationDate)
+	{
+		ReservationDate = reservationDate;
+	}
 }

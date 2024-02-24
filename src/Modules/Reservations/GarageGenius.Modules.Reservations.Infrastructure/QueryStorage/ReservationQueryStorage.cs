@@ -60,6 +60,7 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.AsNoTracking()
 		.AsQueryable()
 		.Where(reservation => reservation.CustomerId == getCustomerReservationsQuery.CustomerId)
+		.OrderByDescending(reservation => reservation.ReservationDate)
 		.Select(reservation => new CustomerReservationsDto(reservation.ReservationId, reservation.VehicleId, reservation.ReservationState, reservation.ReservationDate.Value, reservation.ReservationNote))
 		.PaginateAsync(getCustomerReservationsQuery.PageNumber, getCustomerReservationsQuery.PageSize, cancellationToken)
 		.ConfigureAwait(false);
