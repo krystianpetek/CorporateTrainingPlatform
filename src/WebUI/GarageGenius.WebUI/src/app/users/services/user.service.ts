@@ -21,6 +21,12 @@ export class UserService extends BaseUserService {
       .pipe(catchError(this.handleError))
   }
 
+  override getLoggedUser(): Observable<any> { // todo - define the type
+      return this._httpClient
+      .get<any>(environment.getLoggedUserUrl)
+      .pipe(catchError(this.handleError));
+  }
+
   postUser(user: UserRequestModel): Observable<UserResponseModel> {
     return this._httpClient
       .post<UserResponseModel>(environment.postUserUrl, user)

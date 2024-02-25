@@ -6,6 +6,7 @@ export const environment = {
   // users
   usersApiUrl: `users-module/`,
   getUsersUrl: `users-module/users/users`,
+  getLoggedUserUrl: `users-module/users/me`,
   postUserUrl: `users-module/users/users`,
 
   signUpUrl: `users-module/users/sign-up`,
@@ -17,6 +18,7 @@ export const environment = {
 
   // customers
   customersApiUrl: `customers-module/`,
+  getCustomerUrl: `customers-module/customers/`,
 
   // reservations
   reservationsApiUrl: `reservations-module/`,

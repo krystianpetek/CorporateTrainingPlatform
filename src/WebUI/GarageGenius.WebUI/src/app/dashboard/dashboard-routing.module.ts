@@ -19,6 +19,10 @@ const reservationsModule = () =>
   import('../reservations/reservations.module').then(
     (m) => m.ReservationsModule
   );
+const accountModule = () =>
+  import('../account/account.module').then(
+    (m) => m.AccountModule
+  );
 const routes: Routes = [
   {
     path: '',
@@ -50,6 +54,11 @@ const routes: Routes = [
       {
         path: 'reservations',
         loadChildren: reservationsModule,
+        canActivate: [authenticationGuard],
+      },
+      {
+        path: 'account',
+        loadChildren: accountModule,
         canActivate: [authenticationGuard],
       },
       {

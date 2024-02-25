@@ -26,6 +26,12 @@
           <mat-icon>directions_car</mat-icon>Vehicles
         </div>
       </button>
+
+      <button mat-flat-button [routerLink]="['account']" routerLinkActive="active" class="foreground-color">
+        <div class="button-inner-container">
+          <mat-icon>person</mat-icon>Account
+        </div>
+      </button>
     </div>
 
     <p [hidden]="!isAuthenticated" class="userNameBar">All clients</p>
