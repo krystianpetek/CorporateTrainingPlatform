@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GarageGenius.Modules.Users.Infrastructure.Persistance.Configurations;
+namespace GarageGenius.Modules.Users.Infrastructure.Persistence.Configurations;
 internal class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
 	public void Configure(EntityTypeBuilder<Role> builder)

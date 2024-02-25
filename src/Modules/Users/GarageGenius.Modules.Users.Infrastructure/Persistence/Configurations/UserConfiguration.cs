@@ -3,7 +3,7 @@ using GarageGenius.Modules.Users.Core.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GarageGenius.Modules.Users.Infrastructure.Persistance.Configurations;
+namespace GarageGenius.Modules.Users.Infrastructure.Persistence.Configurations;
 internal class UserConfiguration : IEntityTypeConfiguration<User>
 {
 	public void Configure(EntityTypeBuilder<User> builder)

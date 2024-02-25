@@ -1,9 +1,9 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.Repositories;
-using GarageGenius.Modules.Users.Infrastructure.Persistance.DbContexts;
+using GarageGenius.Modules.Users.Infrastructure.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarageGenius.Modules.Users.Infrastructure.Persistance.Repositories;
+namespace GarageGenius.Modules.Users.Infrastructure.Persistence.Repositories;
 internal class UserRepository : IUserRepository
 {
 	private readonly UsersDbContext _usersDbContext;

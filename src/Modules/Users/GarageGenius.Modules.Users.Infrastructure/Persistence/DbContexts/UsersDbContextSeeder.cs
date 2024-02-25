@@ -4,13 +4,10 @@ using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
 using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarageGenius.Modules.Users.Infrastructure.Persistance.DbContexts;
+namespace GarageGenius.Modules.Users.Infrastructure.Persistence.DbContexts;
 internal class UsersDbContextSeeder : IDbContextSeeder
 {
-	private readonly HashSet<string> _permissions = new()
-	{
-		"users","vehicles","notifications,customers"
-	};
+	private readonly HashSet<string> _permissions = ["users", "vehicles", "notifications,customers"];
 
 	private readonly UsersDbContext _usersDbContext;
 	private readonly IPasswordManager _passwordManager;
@@ -49,10 +46,17 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 		await _usersDbContext.SaveChangesAsync();
 	}
 
-	private List<User> _users => new List<User>()
-	{
-		new User(new EmailAddress("admin@garagegenius.com"), _passwordManager.Generate("garageGenius"), "administrator")
-	};
+	private IEnumerable<User> _users =>
+	[
+		new User(new EmailAddress("administrator@garagegenius.com"), _passwordManager.Generate("garageGenius"),
+			Roles.Administrator),
+		new User(new EmailAddress("manager@garagegenius.com"), _passwordManager.Generate("garageGenius"),
+			Roles.Manager),
+		new User(new EmailAddress("employee@garagegenius.com"), _passwordManager.Generate("garageGenius"),
+			Roles.Employee),
+		new User(new EmailAddress("customer@garagegenius.com"), _passwordManager.Generate("garageGenius"),
+			Roles.Customer)
+	];
 
 	private async Task AddRolesAsync()
 	{
@@ -62,10 +66,10 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
 	private List<Role> _roles => new List<Role>()
 	{
-		new Role("administrator", _permissions),
-		new Role("manager", _permissions),
-		new Role("employee", _permissions),
-		new Role("customer", new List<string>())
+		new Role(Roles.Administrator, _permissions),
+		new Role(Roles.Manager, _permissions),
+		new Role(Roles.Employee, _permissions),
+		new Role(Roles.Customer, new List<string>())
 	};
 
 	// TODO : Move to config file ?

@@ -2,7 +2,7 @@
 using GarageGenius.Shared.Infrastructure.Persistance.Interceptors;
 using Microsoft.EntityFrameworkCore;
 
-namespace GarageGenius.Modules.Users.Infrastructure.Persistance.DbContexts;
+namespace GarageGenius.Modules.Users.Infrastructure.Persistence.DbContexts;
 internal class UsersDbContext : DbContext
 {
 	private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;

@@ -1,6 +1,6 @@
 ﻿using GarageGenius.Modules.Users.Core.Repositories;
-using GarageGenius.Modules.Users.Infrastructure.Persistance.DbContexts;
-using GarageGenius.Modules.Users.Infrastructure.Persistance.Repositories;
+using GarageGenius.Modules.Users.Infrastructure.Persistence.DbContexts;
+using GarageGenius.Modules.Users.Infrastructure.Persistence.Repositories;
 using GarageGenius.Shared.Abstractions.Persistance;
 using GarageGenius.Shared.Infrastructure.Persistance.MsSqlServer;
 using GarageGenius.Shared.Infrastructure.Persistance.PostgreSql;
