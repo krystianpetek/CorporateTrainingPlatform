@@ -71,6 +71,7 @@
 </ng-template> -->
 
 <div class="responsive-table">
+  @if (this.dataSource.data.length){
   <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="vehicle-list">
     <ng-container *ngIf="true" matColumnDef="id">
       <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Id </th>
@@ -123,4 +124,8 @@
     <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
   </table>
+  }
+  @else{
+  <h2 align="center">No vehicles found</h2>
+  }
 </div>
