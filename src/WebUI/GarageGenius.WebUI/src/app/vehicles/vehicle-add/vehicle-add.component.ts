@@ -50,35 +50,35 @@ export class VehicleAddComponent implements OnInit {
         },
       ],
       manufacturer: [
-        'Volvo',
+        'Alfa Romeo',
         {
           validators: [Validators.required],
           nonNullable: false,
         },
       ],
       model: [
-        'C70',
+        '159',
         {
           validators: [Validators.required],
           nonNullable: false,
         },
       ],
       licensePlate: [
-        'K1TEK',
+        'KWA77578',
         {
           validators: [Validators.required],
           nonNullable: false,
         },
       ],
       year: [
-        new Date().getFullYear(),
+        new Date('2008').getFullYear(),
         {
           validators: [],
           nonNullable: false,
         },
       ],
       vin: [
-        '1HGBH41JXMN109186',
+        'ZAR93900007228201',
         {
           validators: [],
           nonNullable: false,

@@ -47,14 +47,14 @@
 
 .vehicle-property {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
 
   &-name {
-    grid-column: 2/3;
+    grid-column: 1/2;
   }
 
   &-value {
-    grid-column: 3/4;
+    grid-column: 2/3;
   }
 
 }

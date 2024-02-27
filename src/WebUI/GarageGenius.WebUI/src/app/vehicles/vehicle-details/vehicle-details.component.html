@@ -47,10 +47,12 @@
     </div>
     <ng-template #manufacturerTemplate>
       <mat-form-field class="vehicle-property-edit" appearance="outline">
-        <mat-label>Manufacturer</mat-label>
+<!--        <mat-label>Manufacturer</mat-label>-->
+        <mat-label>Producent</mat-label>
         <input class="vehicle-property-value" [value]="vehicleResponse!.manufacturer" matInput />
         <mat-icon matSuffix>info</mat-icon>
-        <mat-hint>Change vehicle manufacturer</mat-hint>
+        <mat-hint>Zmień producenta pojazdu</mat-hint>
+        <!--        <mat-hint>Change vehicle manufacturer</mat-hint>-->
       </mat-form-field>
     </ng-template>
 
@@ -63,7 +65,8 @@
         <mat-label>Model</mat-label>
         <input class="vehicle-property-value" [value]="vehicleResponse!.model" matInput />
         <mat-icon matSuffix>assessment</mat-icon>
-        <mat-hint>Change vehicle model</mat-hint>
+<!--        <mat-hint>Change vehicle model</mat-hint>-->
+        <mat-hint>Zmień model pojazdu</mat-hint>
       </mat-form-field>
     </ng-template>
 
@@ -74,10 +77,12 @@
     </div>
     <ng-template #yearTemplate>
       <mat-form-field class="vehicle-property-edit" appearance="outline">
-        <mat-label>Year</mat-label>
+<!--        <mat-label>Year</mat-label>-->
+        <mat-label>Rok produkcji</mat-label>
         <input class="vehicle-property-value" [value]="vehicleResponse!.year" matInput />
         <mat-icon matSuffix>date_range</mat-icon>
-        <mat-hint>Change vehicle year</mat-hint>
+        <mat-hint>Zmień rok produkcji pojazdu</mat-hint>
+<!--        <mat-hint>Change vehicle year</mat-hint>-->
       </mat-form-field>
     </ng-template>
 
@@ -88,10 +93,12 @@
     </div>
     <ng-template #plateTemplate>
       <mat-form-field class="vehicle-property-edit" appearance="outline">
-        <mat-label>Licence plate</mat-label>
+<!--        <mat-label>Licence plate</mat-label>-->
+        <mat-label>Tablica rejestracyjna</mat-label>
         <input class="vehicle-property-value" [value]="vehicleResponse!.licensePlate" matInput />
         <mat-icon matSuffix>directions_car</mat-icon>
-        <mat-hint>Change vehicle licence plate</mat-hint>
+<!--        <mat-hint>Change vehicle licence plate</mat-hint>-->
+        <mat-hint>Zmień tablice rejestracyjną pojazdu</mat-hint>
       </mat-form-field>
     </ng-template>
 
@@ -111,7 +118,7 @@
       </mat-form-field>
     </ng-template>
 
-    <div class="communicate" *ngIf="this.editMode">I don't know how to change input outline color in Material</div>
+<!--    <div class="communicate" *ngIf="this.editMode">I don't know how to change input outline color in Material</div>-->
 
   </div>
 
