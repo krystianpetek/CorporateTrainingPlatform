@@ -15,14 +15,14 @@ import {
 } from "../../reservations/models/vehicle-reservation-history.model";
 import {AppMaterialModule} from "../../shared/app-material.module";
 import {UpdateReservationRequestModel} from "../../reservations/models/update-reservation-request.model";
-import {MatSelectModule} from "@angular/material/select";
+
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UpdateReservationFormModel} from "../models/update-reservation-form.model";
 
 @Component({
   selector: 'app-pending-reservation-details',
   standalone: true,
-  imports: [CommonModule, TableGgComponent, AppMaterialModule, MatSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, TableGgComponent, AppMaterialModule, ReactiveFormsModule],
   templateUrl: './pending-reservation-details.component.html',
   styleUrl: './pending-reservation-details.component.scss'
 })

@@ -1,8 +1,9 @@
 <!-- TODO - more communicates when validation, maybe after first submitted? -->
-<h1 mat-dialog-title class="mat-dialog-title">Adding a new reservation</h1>
+<!--<h1 mat-dialog-title class="mat-dialog-title">Adding a new reservation</h1>-->
+<h1 mat-dialog-title class="mat-dialog-title">Dodawanie nowej rezerwacji</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <form [formGroup]="this.reservationAddForm" (ngSubmit)="this.reservationAddSubmitForm()">
-    <div>
+    <div [hidden]='true'>
       <mat-form-field appearance="outline">
         <mat-label>customerId</mat-label>
         <input type="text" id="customerId" matInput placeholder="CustomerId" formControlName="customerId" />
@@ -12,7 +13,7 @@
       </div>
     </div>
 
-    <div>
+    <div [hidden]='this.matDialogData.vehicleId'>
       <mat-form-field appearance="outline">
         <mat-label>vehicleId</mat-label>
         <input type="text" id="vehicleId" matInput placeholder="VehicleId" formControlName="vehicleId">
@@ -22,11 +23,20 @@
         Your vehicleId ...
       </span>
     </div>
-
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>reservationState</mat-label>
-        <input type="text" id="reservationState" matInput placeholder="Reservation State" formControlName="reservationState">
+<!--        <mat-label>reservationState</mat-label>-->
+        <mat-label>Status rezerwacji</mat-label>
+        <mat-select [disabled]="true" class="reservation-property-value" formControlName="reservationState">
+          @for (state of this.reservationStates; track state)
+          {
+            <mat-option [disabled]="state !== 'Pending'" [value]="state">
+              {{ state }}
+            </mat-option>
+          }
+
+        </mat-select>
+<!--        <input type="text" id="reservationState" matInput placeholder="Reservation State" formControlName="reservationState">-->
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.reservationState.touched && this.reservationState.invalid">
         reservationState model
@@ -35,8 +45,9 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>comment</mat-label>
-        <input type="text" id="comment" matInput placeholder="Comment" formControlName="comment">
+<!--        <mat-label>comment</mat-label>-->
+        <mat-label>Opis</mat-label>
+        <textarea type="textarea" id="comment" matInput placeholder="Comment" formControlName="comment"></textarea>
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.comment.touched && this.comment.invalid">
         comment model
@@ -45,7 +56,8 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>reservationDate</mat-label>
+<!--        <mat-label>reservationDate</mat-label>-->
+        <mat-label>Sugerowana data rezerwacji</mat-label>
         <input [matDatepicker]="picker" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

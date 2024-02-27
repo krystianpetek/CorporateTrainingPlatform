@@ -22,6 +22,7 @@ export class ReservationAddComponent implements OnInit {
   private _vehicleId = "";
   public error: string;
   public isSuccess: boolean;
+  public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
 
   constructor(
     private snackbar: SnackBarMessageService,
@@ -56,13 +57,17 @@ export class ReservationAddComponent implements OnInit {
         }
       ],
       comment:[
-        ""
+        "Samochód nie odpala"
       ],
       reservationDate:[
         new Date()
       ],
       reservationState:[
-        "s"
+        "Pending",
+        {
+          validators: [Validators.required],
+          nonNullable: false
+        }
       ],
     })
   }
