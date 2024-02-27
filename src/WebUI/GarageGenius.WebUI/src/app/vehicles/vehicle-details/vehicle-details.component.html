@@ -41,7 +41,8 @@
     </div>
 
     <div class="vehicle-property" *ngIf="!this.editMode; else manufacturerTemplate">
-      <span class="vehicle-property-name">Manufacturer:</span>
+      <span class="vehicle-property-name">Producent: </span>
+<!--      <span class="vehicle-property-name">Manufacturer:</span>-->
       <h4 class="vehicle-property-value">{{ vehicleResponse!.manufacturer }}</h4>
     </div>
     <ng-template #manufacturerTemplate>
@@ -67,7 +68,8 @@
     </ng-template>
 
     <div class="vehicle-property" *ngIf="!this.editMode; else yearTemplate">
-      <span class="vehicle-property-name">Year:</span>
+      <span class="vehicle-property-name">Rok produkcji:</span>
+<!--      <span class="vehicle-property-name">Year:</span>-->
       <h4 class="vehicle-property-value">{{ vehicleResponse.year }}</h4>
     </div>
     <ng-template #yearTemplate>
@@ -80,7 +82,8 @@
     </ng-template>
 
     <div class="vehicle-property" *ngIf="!this.editMode; else plateTemplate">
-      <span class="vehicle-property-name">License plate:</span>
+<!--      <span class="vehicle-property-name">License plate:</span>-->
+      <span class="vehicle-property-name">Tablica rejestracyjna:</span>
       <h4 class="vehicle-property-value">{{ vehicleResponse.licensePlate }}</h4>
     </div>
     <ng-template #plateTemplate>
@@ -93,15 +96,18 @@
     </ng-template>
 
     <div class="vehicle-property" *ngIf="!this.editMode; else vinTemplate">
-      <span class="vehicle-property-name">VIN number:</span>
+<!--      <span class="vehicle-property-name">VIN number:</span>-->
+      <span class="vehicle-property-name">Numer VIN:</span>
       <h4 class="vehicle-property-value">{{ vehicleResponse.vin }}</h4>
     </div>
     <ng-template #vinTemplate>
       <mat-form-field class="vehicle-property-edit" appearance="outline">
-        <mat-label>VIN number</mat-label>
+<!--        <mat-label>VIN number</mat-label>-->
+        <mat-label>Numer VIN</mat-label>
         <input class="vehicle-property-value" [value]="vehicleResponse!.vin" matInput />
         <mat-icon matSuffix>confirmation_number</mat-icon>
-        <mat-hint>Change vehicle vin number</mat-hint>
+        <mat-hint>Zmień numer VIN pojazdu</mat-hint>
+<!--        <mat-hint>Change vehicle vin number</mat-hint>-->
       </mat-form-field>
     </ng-template>
 

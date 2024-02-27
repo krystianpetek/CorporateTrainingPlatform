@@ -1,6 +1,7 @@
 <div>
   <div class="title-bar">
-    <h2>Reservation list</h2>
+<!--    <h2>Reservation list</h2>-->
+    <h2>Lista rezerwacji</h2>
     <div>
       <button mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
     </div>
@@ -9,13 +10,16 @@
 
 <div class="responsive-table">
   <section class="example-section">
-  <label class="example-margin">Show mode:</label>
+<!--    <label class="example-margin">Show mode:</label>-->
+    <label class="example-margin">Tryb wyświetlania rezerwacji:</label>
   <mat-radio-group [(ngModel)]="showMode" (ngModelChange)="changedValue($event)">
     <mat-radio-button color="warn" class="example-margin" value="all">
-      <span>All</span>
+<!--      <span>All</span>-->
+      <span>Wszystkie</span>
     </mat-radio-button>
     <mat-radio-button color="warn" class="example-margin" value="pending">
-      <span>Pending</span>
+<!--      <span>Pending</span>-->
+      <span>Oczekujące</span>
     </mat-radio-button>
   </mat-radio-group>
   </section>
@@ -62,6 +66,7 @@
   </table>
   }
   @else{
-    <h2 align="center">No reservations found</h2>
+<!--    <h2 align="center">No reservations found</h2>-->
+    <h2 align="center">Nie znaleziono żadnych rezerwacji</h2>
   }
 </div>

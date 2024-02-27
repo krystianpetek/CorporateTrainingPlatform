@@ -1,10 +1,11 @@
 <!-- TODO - more communicates when validation, maybe after first submitted? -->
-<h1 mat-dialog-title class="mat-dialog-title">Adding a new vehicle</h1>
+<!--<h1 mat-dialog-title class="mat-dialog-title">Adding a new vehicle</h1>-->
+<h1 mat-dialog-title class="mat-dialog-title">Dodawanie nowego pojazdu</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <form [formGroup]="this.vehicleAddForm" (ngSubmit)="this.vehicleAddSubmitForm()">
-    <div>
+    <div [hidden]="true">
       <mat-form-field appearance="outline">
-        <mat-label>customerId</mat-label>
+        <mat-label>Customer ID</mat-label>
         <input type="text" id="customerId" matInput placeholder="CustomerId" formControlName="customerId" />
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.customerId.touched && this.customerId.invalid">
@@ -14,7 +15,8 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>manufacturer</mat-label>
+        <mat-label>Producent</mat-label>
+<!--        <mat-label>Manufacturer</mat-label>-->
         <input type="text" id="manufacturer" matInput placeholder="manufacturer" formControlName="manufacturer">
       </mat-form-field>
       <span class="error-validation-message" *ngIf="this.manufacturer.touched && this.manufacturer.invalid ">
@@ -25,7 +27,7 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>model</mat-label>
+        <mat-label>Model</mat-label>
         <input type="text" id="model" matInput placeholder="model" formControlName="model">
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.model.touched && this.model.invalid">
@@ -35,7 +37,8 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>licensePlate</mat-label>
+        <mat-label>Tablica rejestracyjny</mat-label>
+<!--        <mat-label>License plate</mat-label>-->
         <input type="text" id="licensePlate" matInput placeholder="licensePlate" formControlName="licensePlate">
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.licensePlate.touched && this.licensePlate.invalid">
@@ -45,7 +48,8 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>year</mat-label>
+<!--        <mat-label>Year</mat-label>-->
+        <mat-label>Rok produkcji</mat-label>
         <input type="number" id="year" matInput placeholder="year" formControlName="year">
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.year.touched && this.year.invalid">
@@ -55,7 +59,8 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>vin</mat-label>
+<!--        <mat-label>Vin</mat-label>-->
+        <mat-label>Numer VIN</mat-label>
         <input type="text" id="vin" matInput placeholder="vin" formControlName="vin">
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.vin.touched && this.vin.invalid">

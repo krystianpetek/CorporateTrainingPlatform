@@ -17,40 +17,47 @@
     <div class="inner-navbar">
       <button mat-flat-button [routerLink]="['reservations']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>schedule</mat-icon>Reservations
+<!--          <mat-icon>schedule</mat-icon>Reservations-->
+          <mat-icon>schedule</mat-icon>Rezerwacje
         </div>
       </button>
 
       <button mat-flat-button [routerLink]="['vehicles']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>directions_car</mat-icon>Vehicles
+<!--          <mat-icon>directions_car</mat-icon>Vehicles-->
+          <mat-icon>directions_car</mat-icon>Pojazdy
         </div>
       </button>
 
       <button mat-flat-button [routerLink]="['account']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>person</mat-icon>Account
+<!--          <mat-icon>person</mat-icon>Account-->
+          <mat-icon>person</mat-icon>Konto
         </div>
       </button>
     </div>
 
-    <p [hidden]="!isAuthenticated" class="userNameBar">All clients</p>
+<!--    <p [hidden]="!isAuthenticated" class="userNameBar">All clients</p>-->
+    <p [hidden]="!isAuthenticated" class="userNameBar">Klienci</p>
     <div [hidden]="!isAuthenticated" class="inner-navbar">
       <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['users']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>person</mat-icon>Users
+<!--          <mat-icon>person</mat-icon>Users-->
+          <mat-icon>person</mat-icon>Użytkownicy
         </div>
       </button>
 
       <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['customers']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>person_pin_circle</mat-icon>Customers
+<!--          <mat-icon>person_pin_circle</mat-icon>Customers-->
+          <mat-icon>person_pin_circle</mat-icon>Klienci
         </div>
       </button>
 
       <button [hidden]="!isAuthenticated" mat-flat-button [routerLink]="['pending-reservations']" routerLinkActive="active" class="foreground-color">
         <div class="button-inner-container">
-          <mat-icon>work</mat-icon>Pending reservations
+<!--          <mat-icon>work</mat-icon>Pending reservations-->
+          <mat-icon>work</mat-icon>Oczekujące rezerwacje
         </div>
       </button>
     </div>

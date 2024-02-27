@@ -1,6 +1,7 @@
 <div>
   <div class="title-bar">
-    <h2>Vehicle list</h2>
+<!--    <h2>Vehicle list</h2>-->
+    <h2>Lista pojazdów</h2>
     <!-- <button color="primary" mat-mini-fab [routerLink]="['add']"><mat-icon fontIcon="add"></mat-icon></button> -->
     <button mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
   </div>
@@ -78,7 +79,8 @@
       <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.id}}</td>
     </ng-container>
     <ng-container matColumnDef="details">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Szczegóły </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>-->
       <td class="text-secondary-color" mat-cell *matCellDef="let element">
         <button mat-icon-button (click)="this.redirectToDetails(element.id)">
           <mat-icon>reorder</mat-icon>
@@ -86,7 +88,8 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="manufacturer">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Manufacturer </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Manufacturer </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Producent </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.manufacturer}}</td>
     </ng-container>
     <ng-container matColumnDef="model">
@@ -94,15 +97,18 @@
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.model}}</td>
     </ng-container>
     <ng-container matColumnDef="year">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Year </th>
+      <!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Year </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Rok produkcji </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.year}}</td>
     </ng-container>
     <ng-container matColumnDef="vin">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> VIN number</th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> VIN number</th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Numer VIN </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.vin}}</td>
     </ng-container>
     <ng-container matColumnDef="licensePlate">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> License plate </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> License plate </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Tablica rejestracyjny </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.licensePlate}}</td>
     </ng-container>
     <!-- <ng-container matColumnDef="update">
@@ -126,6 +132,7 @@
   </table>
   }
   @else{
-  <h2 align="center">No vehicles found</h2>
+<!--    <h2 align="center">No vehicles found</h2>-->
+    <h2 align="center">Nie znaleziono żadnego pojazdu</h2>
   }
 </div>
