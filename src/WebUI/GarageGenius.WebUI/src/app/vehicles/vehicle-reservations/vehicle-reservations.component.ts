@@ -19,7 +19,15 @@ export class VehicleReservationsComponent implements OnInit {
   public vehicleReservationsResponse?: VehicleReservationsResponseModel;
   @Input() public vehicleId: string;
   private readonly matDialog: MatDialog;
-
+  private readonly reservationStatesMap: Map<string, string> = new Map([
+    ['Pending', 'Oczekująca'],
+    ['Canceled', 'Anulowana'],
+    ['Completed', 'Zakończona'],
+    ['WaitingForCustomer', 'Oczekująca na klienta'],
+    ['Rejected', 'Odrzucona'],
+    ['Accepted', 'Zaakceptowana'],
+    ['WorkInProgress', 'W trakcie realizacji'],
+  ]);
   constructor(
     reservationsService: ReservationService,
     authenticationService: AuthenticationService,
@@ -59,7 +67,10 @@ export class VehicleReservationsComponent implements OnInit {
     this._reservationsService
       .getVehicleReservations(vehicleId)
       .subscribe((reservations) => {
-        this.vehicleReservationsResponse = reservations;
+        this.vehicleReservationsResponse = reservations
+        this.vehicleReservationsResponse.vehicleReservationsDto.forEach((vehicleReservationDto) => {
+          vehicleReservationDto.reservationState = this.reservationStatesMap.get(vehicleReservationDto.reservationState)!;
+        });
       });
   }
 }

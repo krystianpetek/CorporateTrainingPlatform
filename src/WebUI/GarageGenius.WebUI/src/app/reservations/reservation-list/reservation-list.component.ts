@@ -33,6 +33,16 @@ export class ReservationListComponent implements OnInit {
     `comment`,
   ];
 
+  private readonly reservationStatesMap: Map<string, string> = new Map([
+    ['Pending', 'Oczekująca'],
+    ['Canceled', 'Anulowana'],
+    ['Completed', 'Zakończona'],
+    ['WaitingForCustomer', 'Oczekująca na klienta'],
+    ['Rejected', 'Odrzucona'],
+    ['Accepted', 'Zaakceptowana'],
+    ['WorkInProgress', 'W trakcie realizacji'],
+  ]);
+
   public constructor(
     router: Router,
     authenticationService: AuthenticationService,
@@ -51,17 +61,20 @@ export class ReservationListComponent implements OnInit {
       .getCustomerReservations(user.customerId, this.showMode === 'pending')
       .subscribe((reservations) => {
         this.dataSource.data = reservations.customerReservationsDto.items;
+
+        this.dataSource.data = this.dataSource.data.map((reservation) => {
+          reservation.reservationState = this.reservationStatesMap.get(
+            reservation.reservationState
+          )!;
+          return reservation;
+        });
       });
   }
 
   changedValue(event: Event): void {
     const user = this._authenticationService.getUserInfo();
 
-    this._reservationService
-      .getCustomerReservations(user.customerId, this.showMode === 'pending')
-      .subscribe((reservations) => {
-        this.dataSource.data = reservations.customerReservationsDto.items;
-      });
+    this.ngOnInit();
   }
 
   public redirectToDetails(reservationId: string): void {
