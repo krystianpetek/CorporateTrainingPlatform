@@ -15,8 +15,16 @@
 
     <div [hidden]='this.matDialogData.vehicleId'>
       <mat-form-field appearance="outline">
-        <mat-label>vehicleId</mat-label>
-        <input type="text" id="vehicleId" matInput placeholder="VehicleId" formControlName="vehicleId">
+<!--        <mat-label>Vehicle</mat-label>-->
+        <mat-label>Pojazd</mat-label>
+        <mat-select class="reservation-property-value" formControlName="vehicleId" placeholder="Pojazd">
+          @for (vehicle of this.customerVehicles; track vehicle)
+          {
+            <mat-option [value]="vehicle.id">
+              {{ vehicle.manufacturer }} {{ vehicle.model }} ({{ vehicle.licensePlate }})
+            </mat-option>
+          }
+        </mat-select>
       </mat-form-field>
       <span class="error-validation-message" *ngIf="this.vehicleId.touched && this.vehicleId.invalid ">
         <!-- && manufacturer.errors?.['manufacturerStrength'] -->
@@ -58,7 +66,7 @@
       <mat-form-field appearance="outline">
 <!--        <mat-label>reservationDate</mat-label>-->
         <mat-label>Sugerowana data rezerwacji</mat-label>
-        <input [matDatepicker]="picker" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate">
+        <input [matDatepicker]="picker" id="reservationDate" matInput placeholder="Reservation Date" formControlName="reservationDate" [min]="this.minDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

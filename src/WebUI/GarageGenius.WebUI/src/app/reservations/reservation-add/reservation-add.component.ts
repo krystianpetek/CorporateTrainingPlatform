@@ -9,6 +9,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import {IReservationService} from "../models/base-reservation.service";
 import {ReservationService} from "../services/reservation.service";
 import {SnackBarMessageService} from "../../shared/services/snack-bar-message/snack-bar-message.service";
+import {VehiclesService} from "../../vehicles/service/vehicles.service";
+import {VehicleResponseModel} from "../../vehicles/models/vehicle.model";
+import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
 
 @Component({
   selector: 'app-reservation-add',
@@ -23,12 +26,16 @@ export class ReservationAddComponent implements OnInit {
   public error: string;
   public isSuccess: boolean;
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
+  public customerVehicles: Array<VehicleResponseModel> = [];
+  public minDate = new Date(new Date().getTime() + 86400000);
 
   constructor(
     private snackbar: SnackBarMessageService,
     formBuilder: FormBuilder,
     reservationService: ReservationService,
     dialogRef: MatDialogRef<ReservationAddComponent>,
+    private _vehiclesService: VehiclesService,
+    private _authenticationService: AuthenticationService,
     @Inject(MAT_DIALOG_DATA) public matDialogData: ReservationAddModalProperties
   ) {
     this._formBuilder = formBuilder;
@@ -41,6 +48,14 @@ export class ReservationAddComponent implements OnInit {
   public reservationAddForm!: FormGroup<ReservationAddFormModel>;
 
   public ngOnInit(): void {
+    const user = this._authenticationService.getUserInfo();
+
+    this._vehiclesService
+      .getCustomerVehicles(user.customerId)
+      .subscribe((vehicles) => {
+        this.customerVehicles = vehicles;
+      });
+
     this.reservationAddForm = this._formBuilder.group({
       customerId: [
         this.matDialogData.customerId,
@@ -50,7 +65,7 @@ export class ReservationAddComponent implements OnInit {
         },
       ],
       vehicleId:[
-        this.matDialogData.vehicleId,
+        this.matDialogData.vehicleId ?? this.customerVehicles[0]?.id,
         {
           validators: [Validators.required],
           nonNullable: false
@@ -60,7 +75,7 @@ export class ReservationAddComponent implements OnInit {
         "Samochód nie odpala"
       ],
       reservationDate:[
-        new Date()
+        this.minDate,
       ],
       reservationState:[
         "Pending",
