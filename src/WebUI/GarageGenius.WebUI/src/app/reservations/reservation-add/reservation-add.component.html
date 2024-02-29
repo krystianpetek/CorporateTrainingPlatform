@@ -38,8 +38,9 @@
         <mat-select [disabled]="true" class="reservation-property-value" formControlName="reservationState">
           @for (state of this.reservationStates; track state)
           {
-            <mat-option [disabled]="state !== 'Pending'" [value]="state">
-              {{ state }}
+            <!--            <mat-option [disabled]="state !== 'Pending'" [value]="state">-->
+              <mat-option [disabled]="state !== 'Pending'" [value]="state">
+              {{ reservationStatesMap.get(state) }}
             </mat-option>
           }
 

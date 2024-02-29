@@ -28,6 +28,15 @@ export class ReservationAddComponent implements OnInit {
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
   public customerVehicles: Array<VehicleResponseModel> = [];
   public minDate = new Date(new Date().getTime() + 86400000);
+  public readonly reservationStatesMap: Map<string, string> = new Map([
+    ['Pending', 'Oczekująca'],
+    ['Canceled', 'Anulowana'],
+    ['Completed', 'Zakończona'],
+    ['WaitingForCustomer', 'Oczekująca na klienta'],
+    ['Rejected', 'Odrzucona'],
+    ['Accepted', 'Zaakceptowana'],
+    ['WorkInProgress', 'W trakcie realizacji'],
+  ]);
 
   constructor(
     private snackbar: SnackBarMessageService,
