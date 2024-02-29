@@ -90,7 +90,9 @@ export class ReservationAddComponent implements OnInit {
   public reservationAddSubmitForm(): void {
     this.error = ``;
     this.isSuccess = true;
-    const reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
+    let reservationAddModel: ReservationAddRequestModel = this.reservationAddForm.value as ReservationAddRequestModel;
+
+    reservationAddModel.reservationDate = new Date(reservationAddModel.reservationDate.getTime() + 3600000);
     // TODO request to add reservation
 
     this._reservationService.addReservation(reservationAddModel).subscribe(

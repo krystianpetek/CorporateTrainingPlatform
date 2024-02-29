@@ -10,4 +10,5 @@ export interface ReservationAddRequestModel{
   vehicleId: string,
   customerId: string,
   reservationNote: string,
+  reservationDate: Date,
 }

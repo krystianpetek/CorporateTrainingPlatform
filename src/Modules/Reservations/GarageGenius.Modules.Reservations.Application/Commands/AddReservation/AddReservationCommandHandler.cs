@@ -27,7 +27,7 @@ internal class AddReservationCommandHandler : ICommandHandler<AddReservationComm
 
 	public async Task HandleCommandAsync(AddReservationCommand command, CancellationToken cancellationToken = default)
 	{
-		Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.Comment, _systemDateService.GetCurrentDate());
+		Reservation reservation = new Reservation(command.VehicleId, command.CustomerId, command.Comment, command.ReservationDate);
 		await _reservationDomainService.AddReservation(reservation, cancellationToken);
 
 		_logger.Information(

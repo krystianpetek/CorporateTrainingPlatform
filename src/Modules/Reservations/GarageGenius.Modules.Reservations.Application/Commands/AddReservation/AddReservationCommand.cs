@@ -11,6 +11,9 @@ public record AddReservationCommand : ICommand
 	public Guid CustomerId { get; init; }
 
 	[Required]
+	public DateTime ReservationDate { get; init; }
+
+	[Required]
 	[MaxLength(2000)]
 	public string Comment { get; init; }
 }
