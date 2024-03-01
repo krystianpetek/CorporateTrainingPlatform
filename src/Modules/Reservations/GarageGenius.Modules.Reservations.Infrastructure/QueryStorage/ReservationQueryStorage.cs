@@ -94,26 +94,40 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 
 	public async Task<GetCurrentNotCompletedReservationsQueryDto> GetCurrentNotCompletedReservationsAsync(GetCurrentNotCompletedReservationsQuery getCurrentNotCompletedReservationsQuery, CancellationToken cancellationToken)
 	{
-		PaginatedList<CurrentNotCompletedReservationsDto> currentNotCompletedReservationsDtos =
-			await _reservationsDbContext.Reservations
+		var query =
+			_reservationsDbContext.Reservations
 				.AsNoTracking()
 				.AsQueryable()
-				.Where(reservation => reservation.ReservationDate < _systemDateService.GetCurrentDate())
-				.Where(reservation => !(reservation.ReservationDeleted))
+				// .Where(reservation => reservation.ReservationDate < _systemDateService.GetCurrentDate());
+				.Where(reservation => !reservation.ReservationDeleted);
+
+		if(getCurrentNotCompletedReservationsQuery.ToDecision)
+		{
+			query = query
+				.Where(reservation =>
+					reservation.ReservationState == ReservationState.Pending);
+		}
+		else
+		{
+			query = query
 				.Where(reservation =>
 					reservation.ReservationState != ReservationState.Completed &&
-					reservation.ReservationState != ReservationState.Canceled)
-				.Select<Reservation, CurrentNotCompletedReservationsDto>(reservation =>
-					new CurrentNotCompletedReservationsDto(
-						reservation.ReservationId,
-						reservation.VehicleId,
-						reservation.CustomerId,
-						reservation.ReservationState,
-						reservation.ReservationDate.Value,
-						reservation.ReservationNote))
-				.PaginateAsync(getCurrentNotCompletedReservationsQuery.PageNumber,
-					getCurrentNotCompletedReservationsQuery.PageSize, cancellationToken)
-				.ConfigureAwait(false);
+					reservation.ReservationState != ReservationState.Canceled &&
+					reservation.ReservationState != ReservationState.Pending);
+		}
+
+        var currentNotCompletedReservationsDtos = await query
+			.Select<Reservation, CurrentNotCompletedReservationsDto>(reservation =>
+				new CurrentNotCompletedReservationsDto(
+					reservation.ReservationId,
+					reservation.VehicleId,
+					reservation.CustomerId,
+					reservation.ReservationState,
+					reservation.ReservationDate.Value,
+					reservation.ReservationNote))
+			.PaginateAsync(getCurrentNotCompletedReservationsQuery.PageNumber,
+				getCurrentNotCompletedReservationsQuery.PageSize, cancellationToken)
+			.ConfigureAwait(false);
 
 		GetCurrentNotCompletedReservationsQueryDto getCurrentNotCompletedReservationsQueryDto = new GetCurrentNotCompletedReservationsQueryDto(currentNotCompletedReservationsDtos);
 

@@ -25,7 +25,7 @@ export abstract class BaseReservationService implements IReservationService {
   abstract addReservation(
     reservation: ReservationAddRequestModel
   ): Observable<void>;
-  abstract getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel>;
+  abstract getNotCompletedReservations(toDecision?: boolean): Observable<CurrentNotCompletedReservationsResponseModel>;
   abstract updateReservation(reservation: UpdateReservationRequestModel): Observable<void>;
 }
 
@@ -46,6 +46,6 @@ export interface IReservationService {
   addReservation(
     reservation: ReservationAddRequestModel
   ): Observable<void>;
-  getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel>;
+  getNotCompletedReservations(toDecision?: boolean): Observable<CurrentNotCompletedReservationsResponseModel>;
   updateReservation(reservation: UpdateReservationRequestModel): Observable<void>;
 }

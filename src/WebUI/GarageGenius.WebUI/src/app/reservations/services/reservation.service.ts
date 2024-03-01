@@ -77,8 +77,8 @@ export class ReservationService extends BaseReservationService {
       //.pipe(catchError(this.handleError));
   }
 
-  override getNotCompletedReservations(): Observable<CurrentNotCompletedReservationsResponseModel> {
-    return this._httpClient.get<CurrentNotCompletedReservationsResponseModel>(environment.reservationsApiUrl + `reservations/not-completed`)
+  override getNotCompletedReservations(toDecision?: boolean): Observable<CurrentNotCompletedReservationsResponseModel> {
+    return this._httpClient.get<CurrentNotCompletedReservationsResponseModel>(environment.reservationsApiUrl + `reservations/not-completed`, toDecision ? { params: { toDecision: 'true' } } : {})
   }
 
   override updateReservation(reservation: UpdateReservationRequestModel): Observable<void> {

@@ -1,5 +1,6 @@
 ﻿using GarageGenius.Shared.Abstractions.Queries.PagedQuery;
 using System.ComponentModel;
+using GarageGenius.Modules.Reservations.Core.Reservations.ValueObjects;
 
 namespace GarageGenius.Modules.Reservations.Application.Queries.GetCurrentNotCompletedReservations;
 public sealed record class GetCurrentNotCompletedReservationsQuery : IPagedQuery<GetCurrentNotCompletedReservationsQueryDto>
@@ -10,11 +11,16 @@ public sealed record class GetCurrentNotCompletedReservationsQuery : IPagedQuery
 	[DefaultValue(10)]
 	public int PageSize { get; init; }
 
-	public GetCurrentNotCompletedReservationsQuery() { }
+	[DefaultValue(false)]
+	public bool ToDecision { get; init; }
 
-	public GetCurrentNotCompletedReservationsQuery(int PageNumber, int PageSize)
+	public GetCurrentNotCompletedReservationsQuery()
+	{ }
+
+	public GetCurrentNotCompletedReservationsQuery(int PageNumber, int PageSize, bool ToDecision)
 	{
 		this.PageNumber = PageNumber;
 		this.PageSize = PageSize;
+		this.ToDecision = ToDecision;
 	}
 }
