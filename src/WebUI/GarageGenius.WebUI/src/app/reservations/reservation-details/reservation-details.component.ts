@@ -7,6 +7,9 @@ import { VehiclesService } from 'src/app/vehicles/service/vehicles.service';
 import { IVehiclesService } from 'src/app/vehicles/models/base-vehicle.service';
 import { VehicleResponseModel } from 'src/app/vehicles/models/vehicle.model';
 import {Column} from "../../shared/components/table-gg/table-gg.component";
+import {UpdateReservationRequestModel} from "../models/update-reservation-request.model";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {UpdateReservationFormModel} from "../../pending-reservations/models/update-reservation-form.model";
 
 @Component({
   selector: 'app-reservation-details',
@@ -21,6 +24,9 @@ export class ReservationDetailsComponent implements OnInit {
   public reservationDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
+  public editMode: boolean = false;
+  public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
+  public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
 
   tableColumns : Array<Column> = [
     {
@@ -52,6 +58,7 @@ export class ReservationDetailsComponent implements OnInit {
     activatedRoute: ActivatedRoute,
     vehicleService: VehiclesService,
     router: Router,
+    private _formBuilder: FormBuilder,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -76,6 +83,14 @@ export class ReservationDetailsComponent implements OnInit {
         this.reservationHistory = reservation;
         this.tableData = reservation.reservationHistoriesDtos;
       });
+
+    this.updateReservationForm = this._formBuilder.group({
+      reservationId: [''],
+      reservationState: [''],
+      reservationDate: [new Date()],
+      comment: [''],
+      vehicleId: [''],
+    });
   }
 
   public getVehicleDetails(vehicleId: string): void {
@@ -86,5 +101,32 @@ export class ReservationDetailsComponent implements OnInit {
 
   public goBack(): void {
     this._router.navigate(['dashboard/vehicles/' + this.reservationDetails?.vehicleId]);
+  }
+
+  public updateReservation(): void {
+    const updatedReservation: UpdateReservationRequestModel = {
+      reservationState : this.updateReservationForm.value.reservationState!,
+      reservationDate: this.updateReservationForm.value.reservationDate!,
+      reservationId: this.reservationDetails?.reservationId!,
+      reservationNote: this.updateReservationForm.value.comment!,
+    };
+
+
+    this._reservationsService.updateReservation(updatedReservation)
+      .subscribe((reservation) => {
+        window.location.reload();
+      });
+  }
+
+  public editReservation(): void {
+    this.editMode = !this.editMode;
+
+    // this.updateReservationForm = this._formBuilder.group({
+    //   reservationId: [this.reservationDetails!.reservationId],
+    //   reservationState: [this.reservationDetails!.reservationState],
+    //   reservationDate: [this.reservationDetails!.reservationDate],
+    //   comment: [this.reservationDetails!.comment],
+    //   vehicleId: [this.reservationDetails!.vehicleId],
+    // });
   }
 }

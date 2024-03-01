@@ -1,8 +1,28 @@
-<div class="container" *ngIf="this.reservationDetails">
+<div class="container-title" *ngIf="this.reservationDetails">
   <div class="title-bar">
-    <button (click)="goBack()" mat-icon-button><mat-icon>undo</mat-icon></button>
-    <h2 class="title-bar_model">{{ this.reservationDetails.reservationId }}</h2>
+    <div>
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <h2 class="title-bar_model">{{ reservationDetails!.reservationId }}</h2>
+    </div>
+    <div>
+      <!-- <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
+        <mat-icon>event_note</mat-icon>
+      </button> -->
+      <button *ngIf="!this.editMode" mat-icon-button type="button" matTooltip="Edit vehicle"
+              (click)="this.editReservation()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editReservation()" matTooltip="Cancel">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.updateReservation()" matTooltip="Save">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
   </div>
+  <div class="line"></div>
 
   <div class="reservation-details">
     <div class="reservation-details_item">
@@ -24,8 +44,55 @@
       </div>
     </div>
 
+    <div class="responsive-table">
+
     <div *ngIf="this.reservationHistory">
       <app-table-gg [tableColumns]="this.tableColumns" [tableData]="tableData"> </app-table-gg>
     </div>
-  </div>
+    </div>
+
+    <div class="line"></div>
+    <div class="container-content">
+      <form [formGroup]="updateReservationForm">
+        <div class="reservation-property" *ngIf="this.editMode">
+          <mat-form-field class="reservation-property-edit" appearance="outline">
+            <mat-label>Reservation state</mat-label>
+            <mat-select class="reservation-property-value" formControlName="reservationState">
+              @for (state of this.reservationStates; track state)
+              {
+                <mat-option [value]="state">
+                  {{ state }}
+                </mat-option>
+              }
+
+            </mat-select>
+            <mat-icon matSuffix>info</mat-icon>
+            <mat-hint>Change vehicle manufacturer</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="reservation-property" *ngIf="this.editMode">
+          <mat-form-field class="reservation-property-edit" appearance="outline">
+            <mat-label>Reservation date</mat-label>
+            <input class="reservation-property-value" matInput [matDatepicker]="picker2"
+                   formControlName="reservationDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="reservation-property" *ngIf="this.editMode">
+          <mat-form-field class="reservation-property-edit" appearance="outline">
+            <mat-label>Reservation comment</mat-label>
+            <input class="reservation-property-value" matInput
+                   formControlName="comment">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </div>
+
+</div>
 </div>
