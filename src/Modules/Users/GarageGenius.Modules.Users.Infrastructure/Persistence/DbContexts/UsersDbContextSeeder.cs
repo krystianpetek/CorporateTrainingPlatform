@@ -1,6 +1,7 @@
 ﻿using GarageGenius.Modules.Users.Core.Entities;
 using GarageGenius.Modules.Users.Core.ValueObjects;
 using GarageGenius.Shared.Abstractions.Authentication.PasswordManager;
+using GarageGenius.Shared.Abstractions.MessageBroker;
 using GarageGenius.Shared.Abstractions.Persistance;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,14 +49,8 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 
 	private IEnumerable<User> _users =>
 	[
-		new User(new EmailAddress("administrator@garagegenius.com"), _passwordManager.Generate("garageGenius"),
-			Roles.Administrator),
-		new User(new EmailAddress("manager@garagegenius.com"), _passwordManager.Generate("garageGenius"),
-			Roles.Manager),
-		new User(new EmailAddress("employee@garagegenius.com"), _passwordManager.Generate("garageGenius"),
-			Roles.Employee),
-		new User(new EmailAddress("customer@garagegenius.com"), _passwordManager.Generate("garageGenius"),
-			Roles.Customer)
+		new User(new EmailAddress("service-account@garagegenius.com"), _passwordManager.Generate("garageGenius"),
+			Roles.Administrator)
 	];
 
 	private async Task AddRolesAsync()
@@ -64,7 +59,7 @@ internal class UsersDbContextSeeder : IDbContextSeeder
 		await _usersDbContext.SaveChangesAsync();
 	}
 
-	private List<Role> _roles => new List<Role>()
+	private IEnumerable<Role> _roles => new List<Role>()
 	{
 		new Role(Roles.Administrator, _permissions),
 		new Role(Roles.Manager, _permissions),
