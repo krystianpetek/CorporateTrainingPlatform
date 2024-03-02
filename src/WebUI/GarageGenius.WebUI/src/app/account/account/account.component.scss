@@ -1,11 +1,72 @@
-.title-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem 1rem 0 0.5rem;
-}
-
 .example-margin {
   color: white !important;
   margin: 0 10px;
+}
+
+.line {
+  width: 100%;
+  height: 0.5px;
+  background-color: lightgray;
+}
+
+.container-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  &_model {
+    margin: 0;
+    padding-left: 10px;
+  }
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.account-property-edit {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-property {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+
+  &-name {
+    grid-column: 1/2;
+  }
+
+  &-value {
+    grid-column: 2/3;
+  }
+
+}
+
+mat-form-field {
+
+  mat-label,
+  input {
+    color: white !important;
+  }
 }

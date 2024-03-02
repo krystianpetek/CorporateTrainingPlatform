@@ -1,15 +1,70 @@
-<div>
+<div class="container-title">
   <div class="title-bar">
-    <h1>Account details</h1>
+    <div>
+      <!--    <h1>Account details</h1>-->
+      <h2 class="title-bar_model">Szczegóły konta</h2>
+    </div>
+    <div>
+      <button *ngIf="!this.editMode" mat-icon-button type="button" matTooltip="Edit account details"
+              (click)="this.editAccount()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.editAccount()" matTooltip="Cancel">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button *ngIf="this.editMode" mat-icon-button type="button" (click)="this.saveAccountChanges()" matTooltip="Save">
+        <mat-icon>check</mat-icon>
+      </button>
+    </div>
   </div>
-</div>
+  <div class="line"></div>
 
-<div class="example-margin">
-  <p><strong>Email address:</strong> {{ this.user?.email }}</p>
-  <p><strong>Role:</strong> {{ this.user?.role }}</p>
-  <p><strong>State:</strong> {{ this.user?.state }}</p>
-  <p><strong>Created:</strong> {{ this.user?.created | date }}</p>
-  <p *ngIf="this.customer?.firstName"><strong>First name:</strong> {{ this.customer?.firstName }}</p>
-  <p *ngIf="this.customer?.lastName"><strong>Last name:</strong> {{ this.customer?.lastName }}</p>
-  <p *ngIf="this.customer?.phoneNumber"><strong>Phone:</strong> {{ this.customer?.phoneNumber }}</p>
+<div class="container-content example-margin">
+  <p><strong>Email:</strong> {{ this.user?.email }}</p>
+<!--  <p><strong>Email address:</strong> {{ this.user?.email }}</p>-->
+  <p><strong>Rola:</strong> {{ this.user?.role }}</p>
+<!--  <p><strong>Role:</strong> {{ this.user?.role }}</p>-->
+  <p><strong>Status:</strong> {{ this.user?.state }}</p>
+<!--  <p><strong>State:</strong> {{ this.user?.state }}</p>-->
+  <p><strong>Data utworzenia:</strong> {{ this.user?.created | date }}</p>
+<!--  <p><strong>Created:</strong> {{ this.user?.created | date }}</p>-->
+
+  @if(!this.editMode){
+  <p *ngIf="this.customer?.firstName"><strong>Imię:</strong> {{ this.customer?.firstName }}</p>
+<!--  <p *ngIf="this.customer?.firstName"><strong>First name:</strong> {{ this.customer?.firstName }}</p>-->
+  <p *ngIf="this.customer?.lastName"><strong>Nazwisko:</strong> {{ this.customer?.lastName }}</p>
+<!--  <p *ngIf="this.customer?.lastName"><strong>Last name:</strong> {{ this.customer?.lastName }}</p>-->
+  <p *ngIf="this.customer?.phoneNumber"><strong>Numer telefonu:</strong> {{ this.customer?.phoneNumber }}</p>
+<!--  <p *ngIf="this.customer?.phoneNumber"><strong>Phone:</strong> {{ this.customer?.phoneNumber }}</p>-->
+  }
+  @else{
+    <form [formGroup]="updateAccountForm">
+      <div class="account-property" *ngIf="this.editMode">
+        <mat-form-field class="account-property-edit" appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input class="account-property-value" matInput
+                 formControlName="firstName">
+          <mat-hint>Zmień swoję imie</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="account-property" *ngIf="this.editMode">
+        <mat-form-field class="account-property-edit" appearance="outline">
+          <mat-label>Nazwisko</mat-label>
+          <input class="account-property-value" matInput
+                 formControlName="lastName">
+          <mat-hint>Zmień swoję nazwisko</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="account-property" *ngIf="this.editMode">
+        <mat-form-field class="account-property-edit" appearance="outline">
+          <mat-label>Numer telefonu</mat-label>
+          <input class="account-property-value" matInput
+                 formControlName="phoneNumber">
+          <mat-hint>Zmień swoj numer telefonu</mat-hint>
+        </mat-form-field>
+      </div>
+    </form>
+  }
+
+</div>
 </div>
