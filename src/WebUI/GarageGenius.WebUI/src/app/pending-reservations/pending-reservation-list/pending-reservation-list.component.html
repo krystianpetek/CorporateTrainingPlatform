@@ -1,17 +1,33 @@
 <div>
   <div class="title-bar">
-    <h2>Pending reservations</h2>
+<!--    <h2>Pending reservations</h2>-->
+    <h2>Oczekujące rezerwacje</h2>
   </div>
 </div>
 
 <div class="responsive-table">
+  <section class="example-section">
+    <!--    <label class="example-margin">Show mode:</label>-->
+    <label class="example-margin">Tryb oczekujących rezerwacji:</label>
+    <mat-radio-group [(ngModel)]="showMode" (ngModelChange)="changedValue($event)">
+      <mat-radio-button color="warn" class="example-margin" value="toDecision">
+        <!--      <span>All</span>-->
+        <span>Oczekujące na akceptację</span>
+      </mat-radio-button>
+      <mat-radio-button color="warn" class="example-margin" value="pending">
+        <!--      <span>Pending</span>-->
+        <span>W trakcie realizacji</span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+
   <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="customer-reservation-list">
     <ng-container matColumnDef="reservationId">
       <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation ID </th>
       <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationId}}</td>
     </ng-container>
     <ng-container matColumnDef="details">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Szczegóły </th>
       <td class="text-secondary-color" mat-cell *matCellDef="let element">
         <button mat-icon-button (click)="this.redirectToDetails(element.reservationId)">
           <mat-icon>reorder</mat-icon>
@@ -27,17 +43,17 @@
 <!--      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.vehicleName}}</td>-->
 <!--    </ng-container>-->
     <ng-container matColumnDef="reservationState">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation state </th>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Status rezerwacji </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationState}}</td>
     </ng-container>
     <ng-container matColumnDef="reservationDate">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation date
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Data rezerwacji
       </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationDate | date:'shortDate' }}
       </td>
     </ng-container>
     <ng-container matColumnDef="comment">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Comment </th>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Opis </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.comment}}</td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>

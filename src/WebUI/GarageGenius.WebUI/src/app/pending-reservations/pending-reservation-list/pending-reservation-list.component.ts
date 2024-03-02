@@ -12,12 +12,13 @@ import {IReservationService} from "../../reservations/models/base-reservation.se
 import {CustomerReservationsItem} from "../../reservations/models/customer-reservations-response.model";
 import {ReservationService} from "../../reservations/services/reservation.service";
 import {MatDialog} from "@angular/material/dialog";
-import {ReservationAddComponent} from "../../reservations/reservation-add/reservation-add.component";
+import {MatRadioModule} from "@angular/material/radio";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-pending-reservation-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTableModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatTableModule, MatRadioModule, FormsModule],
   templateUrl: './pending-reservation-list.component.html',
   styleUrl: './pending-reservation-list.component.scss'
 })
@@ -25,6 +26,7 @@ export class PendingReservationListComponent implements OnInit {
   private _router: Router;
   private _authenticationService: IAuthenticationService;
   private _reservationService: IReservationService;
+  showMode: 'toDecision' | 'pending' = 'pending';
 
   public dataSource = new MatTableDataSource<CustomerReservationsItem>();
   public displayedColumns: string[] = [
@@ -49,10 +51,16 @@ export class PendingReservationListComponent implements OnInit {
 
   ngOnInit(): void {
     this._reservationService
-      .getNotCompletedReservations()
+      .getNotCompletedReservations(this.showMode === 'toDecision')
       .subscribe((reservations) => {
         this.dataSource.data = reservations.currentNotCompletedReservationsDtos.items;
       });
+  }
+
+  changedValue(event: Event): void {
+    const user = this._authenticationService.getUserInfo();
+
+    this.ngOnInit();
   }
 
   public redirectToDetails(reservationId: string): void {
