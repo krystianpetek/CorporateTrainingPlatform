@@ -19,6 +19,7 @@ export const environment = {
   // customers
   customersApiUrl: `customers-module/`,
   getCustomerUrl: `customers-module/customers/`,
+  updateCustomerUrl: `customers-module/customers/`,
 
   // reservations
   reservationsApiUrl: `reservations-module/`,
