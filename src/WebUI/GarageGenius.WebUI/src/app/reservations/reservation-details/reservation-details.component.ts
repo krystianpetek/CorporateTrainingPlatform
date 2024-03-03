@@ -11,6 +11,7 @@ import {UpdateReservationRequestModel} from "../models/update-reservation-reques
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UpdateReservationFormModel} from "../../pending-reservations/models/update-reservation-form.model";
 import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
+import {UserService} from "../../users/services/user.service";
 
 @Component({
   selector: 'app-reservation-details',
@@ -79,7 +80,8 @@ export class ReservationDetailsComponent implements OnInit {
     vehicleService: VehiclesService,
     router: Router,
     private _formBuilder: FormBuilder,
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private userService: UserService,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -105,11 +107,15 @@ export class ReservationDetailsComponent implements OnInit {
         this.reservationHistory = reservation;
         this.tableData = reservation.reservationHistoriesDtos.map(
           (reservationHistory) => {
+
+            this.userService.getUserById(reservationHistory.userId).subscribe((user) => {
+              reservationHistory.userId = user.email ?? "GarageGenius";
+            });
+
             reservationHistory.reservationHistoryId = reservationHistory.reservationHistoryId;
             reservationHistory.updateDate = reservationHistory.updateDate;
             reservationHistory.reservationState = reservationHistory.reservationState;
             reservationHistory.comment = reservationHistory.comment;
-            reservationHistory.userId == userInfo.userId ? reservationHistory.userId = userInfo.email : reservationHistory.userId = "GarageGenius"
             return reservationHistory;
           }
         );
