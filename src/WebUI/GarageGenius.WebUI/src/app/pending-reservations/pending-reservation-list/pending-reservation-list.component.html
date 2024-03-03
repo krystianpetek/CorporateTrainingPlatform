@@ -21,6 +21,8 @@
     </mat-radio-group>
   </section>
 
+  @if(this.dataSource.data.length)
+    {
   <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="customer-reservation-list">
     <ng-container matColumnDef="reservationId">
       <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation ID </th>
@@ -59,4 +61,9 @@
     <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
   </table>
+    }
+  @else{
+    <!--    <h2 align="center">No reservations found</h2>-->
+    <h2 align="center">Nie znaleziono żadnych rezerwacji</h2>
+  }
 </div>
