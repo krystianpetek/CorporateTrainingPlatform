@@ -5,6 +5,7 @@ export const environment = {
 
   // users
   usersApiUrl: `users-module/`,
+  getUserByIdUrl: `users-module/users/`,
   getUsersUrl: `users-module/users/users`,
   getLoggedUserUrl: `users-module/users/me`,
   postUserUrl: `users-module/users/users`,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BaseUserService} from "../models/base-user-service";
 import {catchError, Observable, throwError} from "rxjs";
-import {GetUsersResponseModel} from "../models/get-users-response-model";
+import {GetUserResponseModel, GetUsersResponseModel} from "../models/get-users-response-model";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import { environment } from '../../../environments/environment';
 import {UserRequestModel, UserResponseModel} from "../models/user.model";
@@ -18,6 +18,12 @@ export class UserService extends BaseUserService {
   override getUsers(): Observable<GetUsersResponseModel> {
     return this._httpClient
       .get<GetUsersResponseModel>(environment.getUsersUrl)
+      .pipe(catchError(this.handleError))
+  }
+
+  override getUserById(userId: string): Observable<GetUserResponseModel> {
+    return this._httpClient
+      .get<GetUserResponseModel>(environment.getUserByIdUrl + userId)
       .pipe(catchError(this.handleError))
   }
 
