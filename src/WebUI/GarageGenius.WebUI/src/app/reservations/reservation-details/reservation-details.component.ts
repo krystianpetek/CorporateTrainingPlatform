@@ -10,6 +10,7 @@ import {Column} from "../../shared/components/table-gg/table-gg.component";
 import {UpdateReservationRequestModel} from "../models/update-reservation-request.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UpdateReservationFormModel} from "../../pending-reservations/models/update-reservation-form.model";
+import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
 
 @Component({
   selector: 'app-reservation-details',
@@ -27,27 +28,46 @@ export class ReservationDetailsComponent implements OnInit {
   public editMode: boolean = false;
   public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
+  public reservationStatesMap: Map<string, string> = new Map([
+    ["Pending", "Oczekująca na przyjęcie"],
+    ["Canceled", "Anulowana"],
+    ["Completed", "Zakończona"],
+    ["WaitingForCustomer", "Oczekująca na decyzję klienta"],
+    ["Rejected", "Odrzucona"],
+    ["Accepted", "Zaakceptowana"],
+    ["WorkInProgress", "W trakcie realizacji"],
+  ]);
 
   tableColumns : Array<Column> = [
-    {
-      columnDef: 'reservationHistoryId',
-      header: 'ID',
-      cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId}`,
-    },
+    // {
+    //   columnDef: 'reservationHistoryId',
+    //   header: 'ID',
+    //   cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId}`,
+    // },
     {
       columnDef: 'updateDate',
-      header: 'Date',
-      cell: (element: ReservationHistoryDto) => `${element.updateDate}`,
+      header: 'Data aktualizacji',
+      // header: 'Date',
+      cell: (element: ReservationHistoryDto) => `${element.updateDate ? new Date(element.updateDate).toLocaleDateString() : ''}`,
     },
     {
       columnDef: 'reservationState',
-      header: 'State',
-      cell: (element: ReservationHistoryDto) => `${element.reservationState}`,
+      // header: 'State',
+      header: 'Status rezerwacji',
+      cell: (element: ReservationHistoryDto) => `${this.reservationStatesMap.get(element.reservationState)}`,
     },
     {
       columnDef: 'comment',
-      header: 'Comment',
+      // header: 'Comment',
+      header: 'Komentarz',
       cell: (element: ReservationHistoryDto) => `${element.comment}`,
+    },
+
+    {
+      columnDef: 'changerId',
+      // header: 'Comment',
+      header: 'Zaktualizowane przez',
+      cell: (element: ReservationHistoryDto) => `${element.userId}`,
     }
   ]
 
@@ -59,6 +79,7 @@ export class ReservationDetailsComponent implements OnInit {
     vehicleService: VehiclesService,
     router: Router,
     private _formBuilder: FormBuilder,
+    private _authenticationService: AuthenticationService
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -77,11 +98,21 @@ export class ReservationDetailsComponent implements OnInit {
         this.reservationDetails = reservation;
       });
 
+    const userInfo = this._authenticationService.getUserInfo();
     this._reservationsService
       .getReservationHistory(reservationId)
       .subscribe((reservation) => {
         this.reservationHistory = reservation;
-        this.tableData = reservation.reservationHistoriesDtos;
+        this.tableData = reservation.reservationHistoriesDtos.map(
+          (reservationHistory) => {
+            reservationHistory.reservationHistoryId = reservationHistory.reservationHistoryId;
+            reservationHistory.updateDate = reservationHistory.updateDate;
+            reservationHistory.reservationState = reservationHistory.reservationState;
+            reservationHistory.comment = reservationHistory.comment;
+            reservationHistory.userId == userInfo.userId ? reservationHistory.userId = userInfo.email : reservationHistory.userId = "GarageGenius"
+            return reservationHistory;
+          }
+        );
       });
 
     this.updateReservationForm = this._formBuilder.group({

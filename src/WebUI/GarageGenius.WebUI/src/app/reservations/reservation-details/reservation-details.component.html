@@ -4,7 +4,8 @@
       <button mat-icon-button (click)="goBack()">
         <mat-icon>undo</mat-icon>
       </button>
-      <h2 class="title-bar_model">{{ reservationDetails!.reservationId }}</h2>
+<!--      <h2 class="title-bar_model">{{ reservationDetails!.reservationId }}</h2>-->
+      <h2 class="title-bar_model">Status rezerwacji</h2>
     </div>
     <div>
       <!-- <button mat-icon-button type="button" (click)="this.openDialog()" matTooltip="Repair reservations">
@@ -22,77 +23,86 @@
       </button>
     </div>
   </div>
-  <div class="line"></div>
 
-  <div class="reservation-details">
-    <div class="reservation-details_item">
-      <div class="reservation-details_item__id">
+    <div class="reservation-details_items">
+      <div [hidden]="true" class="reservation-details_item__id">
         <span>Reservation ID:</span>
         <i>{{ this.reservationDetails.reservationId }}</i>
       </div>
       <div class="reservation-details_item__date">
-        <span>Reservation date:</span>
-        <i>{{ this.reservationDetails.reservationDate }}</i>
+<!--        <span>Reservation date:</span>-->
+        <span>Data rezerwacji: </span>
+        <b><i>{{ this.reservationDetails.reservationDate | date }}</i></b>
       </div>
       <div class="reservation-details_item__state">
-        <span>Reservation state:</span>
-        <i>{{ this.reservationDetails.reservationState }}</i>
+<!--        <span>Reservation state:</span>-->
+        <span>Status rezerwacji: </span>
+        <b><i>{{ this.reservationStatesMap.get(this.reservationDetails.reservationState) }}</i></b>
       </div>
       <div class="reservation-details_item__comment">
-        <span>Comment:</span>
-        <i>{{ this.reservationDetails.comment }}</i>
+<!--        <span>Comment:</span>-->
+        <span>Opis: </span>
+        <b><i>{{ this.reservationDetails.comment }}</i></b>
       </div>
     </div>
 
-    <div class="responsive-table">
+  <div *ngIf="this.editMode" class="container-content">
+    <h2 >Edytuj rezerwację</h2>
+    <form [formGroup]="updateReservationForm">
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+<!--          <mat-label>Reservation state</mat-label>-->
+          <mat-label>Status rezerwacji</mat-label>
+          <mat-select class="reservation-property-value" formControlName="reservationState">
+            @for (state of this.reservationStates; track state)
+            {
+              <mat-option [value]="state">
+                {{ this.reservationStatesMap.get(state) }}
+              </mat-option>
+            }
 
-    <div *ngIf="this.reservationHistory">
-      <app-table-gg [tableColumns]="this.tableColumns" [tableData]="tableData"> </app-table-gg>
-    </div>
-    </div>
+          </mat-select>
+          <mat-icon matSuffix>info</mat-icon>
+<!--          <mat-hint>Change vehicle manufacturer</mat-hint>-->
+          <mat-hint>Zmień status rezerwacji</mat-hint>
+        </mat-form-field>
+      </div>
 
-    <div class="line"></div>
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+<!--          <mat-label>Reservation date</mat-label>-->
+          <mat-label>Data rezerwacji</mat-label>
+          <input class="reservation-property-value" matInput [matDatepicker]="picker2"
+                 formControlName="reservationDate">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="reservation-property" *ngIf="this.editMode">
+        <mat-form-field class="reservation-property-edit" appearance="outline">
+          <!--          <mat-label>Reservation comment</mat-label>-->
+          <mat-label>Opis</mat-label>
+          <input class="reservation-property-value" matInput
+                 formControlName="comment">
+          <mat-hint>Dodaj opis zmiany rezerwacji</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+
+  <!--    <div class="line"></div>-->
     <div class="container-content">
-      <form [formGroup]="updateReservationForm">
-        <div class="reservation-property" *ngIf="this.editMode">
-          <mat-form-field class="reservation-property-edit" appearance="outline">
-            <mat-label>Reservation state</mat-label>
-            <mat-select class="reservation-property-value" formControlName="reservationState">
-              @for (state of this.reservationStates; track state)
-              {
-                <mat-option [value]="state">
-                  {{ state }}
-                </mat-option>
-              }
-
-            </mat-select>
-            <mat-icon matSuffix>info</mat-icon>
-            <mat-hint>Change vehicle manufacturer</mat-hint>
-          </mat-form-field>
+      <h2>Historia rezerwacji</h2>
+      <div class="responsive-table">
+        <div *ngIf="this.reservationHistory">
+          <app-table-gg [tableColumns]="this.tableColumns" [tableData]="tableData"> </app-table-gg>
         </div>
-
-        <div class="reservation-property" *ngIf="this.editMode">
-          <mat-form-field class="reservation-property-edit" appearance="outline">
-            <mat-label>Reservation date</mat-label>
-            <input class="reservation-property-value" matInput [matDatepicker]="picker2"
-                   formControlName="reservationDate">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
-
-        <div class="reservation-property" *ngIf="this.editMode">
-          <mat-form-field class="reservation-property-edit" appearance="outline">
-            <mat-label>Reservation comment</mat-label>
-            <input class="reservation-property-value" matInput
-                   formControlName="comment">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-          </mat-form-field>
-        </div>
-
-      </form>
+      </div>
     </div>
 
-</div>
+
+
 </div>
