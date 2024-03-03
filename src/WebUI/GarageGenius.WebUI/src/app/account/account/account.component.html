@@ -20,22 +20,22 @@
 <!--  <div class="line"></div>-->
 
 <div class="container-content example-margin">
-  <p><strong>Email:</strong> {{ this.user?.email }}</p>
-<!--  <p><strong>Email address:</strong> {{ this.user?.email }}</p>-->
-  <p><strong>Rola:</strong> {{ this.user?.role }}</p>
-<!--  <p><strong>Role:</strong> {{ this.user?.role }}</p>-->
-  <p><strong>Status:</strong> {{ this.user?.state }}</p>
-<!--  <p><strong>State:</strong> {{ this.user?.state }}</p>-->
-  <p><strong>Data utworzenia:</strong> {{ this.user?.created | date }}</p>
-<!--  <p><strong>Created:</strong> {{ this.user?.created | date }}</p>-->
+  <p>Email: <b> {{ this.user?.email }} </b></p>
+<!--  <p>Email address: <b> {{ this.user?.email }} </b></p>-->
+  <p>Rola: <b> {{ this.user?.role }} </b></p>
+<!--  <p>Role: <b> {{ this.user?.role }} </b></p>-->
+  <p>Status: <b> {{ this.user?.state }} </b></p>
+<!--  <p>State: <b> {{ this.user?.state }} </b></p>-->
+  <p>Data utworzenia: <b> {{ this.user?.created | date }} </b></p>
+<!--  <p>Created: <b> {{ this.user?.created | date }} </b></p>-->
 
   @if(!this.editMode){
-  <p *ngIf="this.customer?.firstName"><strong>Imię:</strong> {{ this.customer?.firstName }}</p>
-<!--  <p *ngIf="this.customer?.firstName"><strong>First name:</strong> {{ this.customer?.firstName }}</p>-->
-  <p *ngIf="this.customer?.lastName"><strong>Nazwisko:</strong> {{ this.customer?.lastName }}</p>
-<!--  <p *ngIf="this.customer?.lastName"><strong>Last name:</strong> {{ this.customer?.lastName }}</p>-->
-  <p *ngIf="this.customer?.phoneNumber"><strong>Numer telefonu:</strong> {{ this.customer?.phoneNumber }}</p>
-<!--  <p *ngIf="this.customer?.phoneNumber"><strong>Phone:</strong> {{ this.customer?.phoneNumber }}</p>-->
+  <p *ngIf="this.customer?.firstName">Imię: <b> {{ this.customer?.firstName }} </b></p>
+<!--  <p *ngIf="this.customer?.firstName">First name: <b> {{ this.customer?.firstName }} </b></p>-->
+  <p *ngIf="this.customer?.lastName">Nazwisko: <b> {{ this.customer?.lastName }} </b></p>
+<!--  <p *ngIf="this.customer?.lastName">Last name: <b> {{ this.customer?.lastName }} </b></p>-->
+  <p *ngIf="this.customer?.phoneNumber">Numer telefonu: <b> {{ this.customer?.phoneNumber }} </b></p>
+<!--  <p *ngIf="this.customer?.phoneNumber">Phone: <b> {{ this.customer?.phoneNumber }} </b></p>-->
   }
   @else{
     <form [formGroup]="updateAccountForm">

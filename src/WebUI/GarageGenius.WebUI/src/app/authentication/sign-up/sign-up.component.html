@@ -1,6 +1,7 @@
 <!-- TODO - more communicates when validation, maybe after first submitted? -->
 <mat-card>
-  <mat-card-title>Sign Up</mat-card-title>
+<!--  <mat-card-title>Sign Up</mat-card-title>-->
+  <mat-card-title>Zarejestruj się</mat-card-title>
   <mat-card-content>
     <form [formGroup]="signUpForm" (ngSubmit)="signUpSubmitForm()">
       <div>
@@ -9,35 +10,41 @@
           <input type="text" id="email" matInput placeholder="Email" formControlName="email" />
         </mat-form-field>
         <div class="error-validation-message" *ngIf="this.email.touched && this.email.invalid">
-          The email is not valid
+<!--          The email is not valid-->
+          Email nie jest poprawny
         </div>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input type="password" id="password" matInput placeholder="Password" formControlName="password">
+<!--          <mat-label>Password</mat-label>-->
+          <mat-label>Hasło</mat-label>
+          <input type="password" id="password" matInput placeholder="Hasło" formControlName="password">
         </mat-form-field>
         <span class="error-validation-message" *ngIf="this.password.touched && this.password.invalid ">
           <!-- && password.errors?.['passwordStrength'] -->
-          Your password must have lower case, upper case and numeric characters.
+<!--          Your password must have lower case, upper case and numeric characters.-->
+          Twoje hasło musi mieć małą listerę, duża literę i znak alfa numeryczny.
         </span>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
-          <mat-label>Confirm password</mat-label>
-          <input type="password" id="confirmPassword" matInput placeholder="Confirm password"
+<!--          <mat-label>Confirm password</mat-label>-->
+          <mat-label>Powtórz hasło</mat-label>
+          <input type="password" id="confirmPassword" matInput placeholder="Powtórz hasło"
             formControlName="confirmPassword">
         </mat-form-field>
         <div class="error-validation-message" *ngIf="this.confirmPassword.touched && this.confirmPassword.invalid">
-          The passwords are not the same
+<!--          The passwords are not the same-->
+          Hasła nie są takie same
         </div>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
-          <mat-label>Role</mat-label>
+<!--          <mat-label>Role</mat-label>-->
+          <mat-label>Rola</mat-label>
           <input type="text" id="role" readonly="true" matInput placeholder="Role" formControlName="role">
         </mat-form-field>
       </div>
@@ -45,10 +52,12 @@
       <p *ngIf="error" class="error-block">
         {{error}}
       </p>
-      <p>Already have an account? <a [routerLink]="['/authentication/sign-in']">Sign in</a></p>
+<!--      <p>Already have an account? <a [routerLink]="['/authentication/sign-in']">Sign in</a></p>-->
+      <p>Masz już konto klienta? <a [routerLink]="['/authentication/sign-in']">Zaloguj się teraz</a></p>
       <div class="button-container">
         <button type="button" (click)="signUpResetForm()" mat-button>Reset</button>
-        <button type="submit" mat-raised-button color="primary">Sign up</button>
+<!--        <button type="submit" mat-raised-button color="primary">Sign up</button>-->
+        <button type="submit" mat-raised-button color="primary">Zarejestruj się</button>
       </div>
     </form>
   </mat-card-content>
