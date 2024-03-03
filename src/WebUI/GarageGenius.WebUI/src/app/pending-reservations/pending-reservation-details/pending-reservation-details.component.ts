@@ -18,6 +18,7 @@ import {UpdateReservationRequestModel} from "../../reservations/models/update-re
 
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UpdateReservationFormModel} from "../models/update-reservation-form.model";
+import {UserService} from "../../users/services/user.service";
 
 @Component({
   selector: 'app-pending-reservation-details',
@@ -37,31 +38,45 @@ export class PendingReservationDetailsComponent implements OnInit {
   public vehicleDetails?: VehicleResponseModel;
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
   public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
+  public reservationStatesMap: Map<string, string> = new Map([
+    ["Pending", "Oczekująca na przyjęcie"],
+    ["Canceled", "Anulowana"],
+    ["Completed", "Zakończona"],
+    ["WaitingForCustomer", "Oczekująca na decyzję klienta"],
+    ["Rejected", "Odrzucona"],
+    ["Accepted", "Zaakceptowana"],
+    ["WorkInProgress", "W trakcie realizacji"],
+  ]);
 
   tableColumns : Array<Column> = [
     {
       columnDef: 'reservationHistoryId',
-      header: 'ID',
+      header: 'Identyfikator',
       cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId}`,
     },
     {
       columnDef: 'updateDate',
-      header: 'Date',
-      cell: (element: ReservationHistoryDto) => `${element.updateDate}`,
+      header: 'Data aktualizacji',
+      // header: 'Date',
+      cell: (element: ReservationHistoryDto) => `${element.updateDate ? new Date(element.updateDate).toLocaleDateString() : ''}`,
     },
     {
       columnDef: 'reservationState',
-      header: 'State',
-      cell: (element: ReservationHistoryDto) => `${element.reservationState}`,
+      // header: 'State',
+      header: 'Status rezerwacji',
+      cell: (element: ReservationHistoryDto) => `${this.reservationStatesMap.get(element.reservationState)}`,
     },
     {
       columnDef: 'comment',
-      header: 'Comment',
+      // header: 'Comment',
+      header: 'Komentarz',
       cell: (element: ReservationHistoryDto) => `${element.comment}`,
     },
+
     {
-      columnDef: 'user',
-      header: 'User',
+      columnDef: 'changerId',
+      // header: 'Comment',
+      header: 'Zaktualizowane przez',
       cell: (element: ReservationHistoryDto) => `${element.userId}`,
     }
   ]
@@ -73,6 +88,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     activatedRoute: ActivatedRoute,
     vehicleService: VehiclesService,
     router: Router,
+    private userService: UserService,
     private _formBuilder: FormBuilder,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
@@ -97,7 +113,20 @@ export class PendingReservationDetailsComponent implements OnInit {
       .getReservationHistory(reservationId)
       .subscribe((reservation) => {
         this.reservationHistory = reservation;
-        this.tableData = reservation.reservationHistoriesDtos;
+        this.tableData = reservation.reservationHistoriesDtos.map(
+          (reservationHistory) => {
+
+            this.userService.getUserById(reservationHistory.userId).subscribe((user) => {
+              reservationHistory.userId = user.email ?? "GarageGenius";
+            });
+
+            reservationHistory.reservationHistoryId = reservationHistory.reservationHistoryId;
+            reservationHistory.updateDate = reservationHistory.updateDate;
+            reservationHistory.reservationState = reservationHistory.reservationState;
+            reservationHistory.comment = reservationHistory.comment;
+            return reservationHistory;
+          }
+        );
       });
 
     this.updateReservationForm = this._formBuilder.group({
@@ -144,6 +173,6 @@ export class PendingReservationDetailsComponent implements OnInit {
   }
 
   public goBack(): void {
-    this._router.navigate(['dashboard/vehicles/' + this.reservationDetails?.vehicleId]);
+    this._router.navigate(['dashboard/pending-reservations/']);
   }
 }
