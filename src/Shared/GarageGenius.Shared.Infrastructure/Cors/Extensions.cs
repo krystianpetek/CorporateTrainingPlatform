@@ -14,7 +14,7 @@ public static class Extensions
 			corsOptions.AddPolicy(corsPolicyName, (CorsPolicyBuilder corsPolicyBuilder) =>
 			{
 				corsPolicyBuilder
-				.WithOrigins("https://localhost:4200")
+				.WithOrigins("https://localhost:6857")
 				.AllowAnyMethod()
 				.AllowAnyHeader()
 				.AllowCredentials();
