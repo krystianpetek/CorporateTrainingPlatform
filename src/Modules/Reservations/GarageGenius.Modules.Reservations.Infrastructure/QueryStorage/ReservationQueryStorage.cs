@@ -49,7 +49,11 @@ internal class ReservationQueryStorage : IReservationQueryStorage
 		.ToListAsync(cancellationToken)
 		.ConfigureAwait(false);
 
-		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = new GetReservationHistoryQueryDtos(reservationId, reservationHistoriesDto);
+		var orderedReservationHistoriesDto = reservationHistoriesDto
+			.OrderByDescending(reservationHistory => reservationHistory.UpdateDate)
+			.ToList();
+
+		GetReservationHistoryQueryDtos getReservationHistoryQueryDto = new GetReservationHistoryQueryDtos(reservationId, orderedReservationHistoriesDto);
 
 		return getReservationHistoryQueryDto;
 	}
