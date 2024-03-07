@@ -14,7 +14,7 @@ export class CustomersService {
 
   getCustomer(customerId: string): Observable<GetCustomerResponseModel> {
     return this._httpClient
-      .get<GetCustomerResponseModel>(environment.getCustomerUrl + `/${customerId}`)
+      .get<GetCustomerResponseModel>(environment.getCustomerUrl + `${customerId}`)
       .pipe(catchError(this.handleError))
   }
 
