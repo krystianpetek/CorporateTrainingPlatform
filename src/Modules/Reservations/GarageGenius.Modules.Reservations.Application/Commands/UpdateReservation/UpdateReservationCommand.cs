@@ -14,4 +14,6 @@ public record UpdateReservationCommand : ICommand
 	public string ReservationNote { get; init; }
 
 	public DateTime ReservationDate { get; init; }
+	
+	public Guid ChangerId { get; init; }
 }

@@ -6,6 +6,6 @@ namespace GarageGenius.Modules.Reservations.Core.Reservations.Services;
 internal interface IReservationDomainService
 {
 	Task AddReservation(Reservation reservation, CancellationToken cancellationToken = default);
-	Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, CancellationToken cancellationToken = default);
+	Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, Guid changerId, CancellationToken cancellationToken = default);
 	Task CompleteReservation(Reservation reservation, string ReservationResultNote, CancellationToken cancellationToken = default);
 }

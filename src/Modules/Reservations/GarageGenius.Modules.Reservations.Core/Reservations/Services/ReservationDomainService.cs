@@ -33,9 +33,12 @@ internal class ReservationDomainService : IReservationDomainService
 		await AddReservationHistory(reservation.ReservationId, ReservationState.Pending, reservation.ReservationNote.Value, cancellationToken);
 	}
 
-	public async Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, CancellationToken cancellationToken = default)
+	public async Task UpdateReservation(Reservation reservation, ReservationState reservationState, Comment comment, Guid changerId, CancellationToken cancellationToken = default)
 	{
 		reservation.ChangeState(reservationState);
+		if (reservation.CustomerId == changerId)
+			reservation.ChangeClientReservationNote(comment);
+
 		await _reservationRepository.UpdateReservationAsync(reservation, cancellationToken);
 
 		_logger.Information(

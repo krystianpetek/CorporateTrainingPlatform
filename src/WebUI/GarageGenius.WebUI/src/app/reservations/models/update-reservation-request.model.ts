@@ -3,4 +3,5 @@ export interface UpdateReservationRequestModel {
   reservationState: string;
   reservationDate: Date;
   reservationNote: string;
+  changerId: string;
 }

@@ -32,7 +32,7 @@ internal class UpdateReservationCommandHandler : ICommandHandler<UpdateReservati
 		Reservation reservation = await _reservationRepository.GetReservationAsync(command.ReservationId, cancellationToken) ?? throw new ReservationNotFoundException(command.ReservationId);
 		reservation.ChangeReservationDate(command.ReservationDate);
 
-		await _reservationDomainService.UpdateReservation(reservation, command.ReservationState, command.ReservationNote, cancellationToken);
+		await _reservationDomainService.UpdateReservation(reservation, command.ReservationState, command.ReservationNote, command.ChangerId, cancellationToken);
 
 		_logger.Information(
 			messageTemplate: "Command {CommandName} handled by {ModuleName} module, updated reservation with ID: {ReservationId}",
@@ -40,7 +40,7 @@ internal class UpdateReservationCommandHandler : ICommandHandler<UpdateReservati
 			nameof(Reservations),
 			command.ReservationId);
 
-		await _messageBroker.PublishAsync(new ReservationUpdatedEvent(reservation.ReservationId, reservation.ReservationNote), cancellationToken);
+		await _messageBroker.PublishAsync(new ReservationUpdatedEvent(reservation.ReservationId, command.ReservationNote), cancellationToken);
 
 		_logger.Information(
 			messageTemplate: "Event {EventName} published by {ModuleName} module, reservation with ID: {ReservationId} updated",

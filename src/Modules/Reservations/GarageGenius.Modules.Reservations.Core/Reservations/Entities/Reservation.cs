@@ -36,19 +36,20 @@ internal sealed class Reservation : AuditableEntity
 		ReservationDeleted = false;
 	}
 
-	internal void ChangeStateAccepted() { ReservationState = ReservationState.Accepted; }
-	internal void ChangeStateRejected() { ReservationState = ReservationState.Rejected; }
-	internal void ChangeStateCanceled() { ReservationState = ReservationState.Canceled; }
-	internal void ChangeStateCompleted() { ReservationState = ReservationState.Completed; }
-	internal void ChangeStateWaitingForCustomer() { ReservationState = ReservationState.WaitingForCustomer; }
-	internal void ChangeStateWorkInProgress() { ReservationState = ReservationState.WorkInProgress; }
+	private void ChangeStateAccepted() { ReservationState = ReservationState.Accepted; }
+	private void ChangeStateRejected() { ReservationState = ReservationState.Rejected; }
+	private void ChangeStateCanceled() { ReservationState = ReservationState.Canceled; }
+	private void ChangeStateCompleted() { ReservationState = ReservationState.Completed; }
+	private void ChangeStateWaitingForCustomer() { ReservationState = ReservationState.WaitingForCustomer; }
+	private void ChangeStateWorkInProgress() { ReservationState = ReservationState.WorkInProgress; }
+	private void ChangeStatePending() { ReservationState = ReservationState.Pending; }
 
 	internal void ReservationDeactivate() { ReservationDeleted = true; }
 
 	internal void ChangeState(string reservationState)
 	{
-		if (this.ReservationState == ReservationState.Completed ||
-			this.ReservationState == ReservationState.Canceled)
+		if (ReservationState.Equals(ReservationState.Completed) ||
+			ReservationState.Equals(ReservationState.Canceled))
 		{
 			throw new UnableChangeReservationStateException(this.ReservationId);
 		}
@@ -73,9 +74,17 @@ internal sealed class Reservation : AuditableEntity
 			case "WorkInProgress":
 				ChangeStateWorkInProgress();
 				break;
+			case "Pending":
+				ChangeStatePending();
+				break;
 			default:
 				throw new InvalidReservationStateException(reservationState);
 		}
+	}
+
+	internal void ChangeClientReservationNote(string reservationNote)
+	{
+		ReservationNote = reservationNote;
 	}
 
 	internal void ChangeReservationDate(ReservationDate reservationDate)
