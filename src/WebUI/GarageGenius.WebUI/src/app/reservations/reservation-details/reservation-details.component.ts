@@ -84,6 +84,7 @@ export class ReservationDetailsComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _authenticationService: AuthenticationService,
     private userService: UserService,
+    private _snackbarService: SnackBarMessageService
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -154,7 +155,11 @@ export class ReservationDetailsComponent implements OnInit {
 
     this._reservationsService.updateReservation(updatedReservation)
       .subscribe((reservation) => {
-        window.location.reload();
+        this._snackbarService.success('Zaktualizowano rezerwację', 3);
+        // angular refresh component
+        this._router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {
+          this._router.navigate(['dashboard/reservations/' + this.reservationDetails?.reservationId]);
+        });
       });
   }
 

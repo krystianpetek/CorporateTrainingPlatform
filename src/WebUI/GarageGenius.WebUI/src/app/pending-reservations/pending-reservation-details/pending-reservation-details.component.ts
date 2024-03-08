@@ -20,6 +20,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UpdateReservationFormModel} from "../models/update-reservation-form.model";
 import {UserService} from "../../users/services/user.service";
 import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
+import {SnackBarMessageService} from "../../shared/services/snack-bar-message/snack-bar-message.service";
 
 @Component({
   selector: 'app-pending-reservation-details',
@@ -93,6 +94,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     private userService: UserService,
     private _formBuilder: FormBuilder,
     private _authenticationService: AuthenticationService,
+    private _snackbarService: SnackBarMessageService
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -161,19 +163,26 @@ export class PendingReservationDetailsComponent implements OnInit {
     this._reservationsService.updateReservation(updatedReservation)
       .subscribe((reservation) => {
         window.location.reload();
+        this._snackbarService.success('Zaktualizowano rezerwację', 3);
+        // angular refresh component
+        this._router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {
+          this._router.navigate(['dashboard/reservations/' + this.reservationDetails?.reservationId]);
+        });
     });
   }
 
   public editReservation(): void {
     this.editMode = !this.editMode;
 
-    // this.updateReservationForm = this._formBuilder.group({
-    //   reservationId: [this.reservationDetails!.reservationId],
-    //   reservationState: [this.reservationDetails!.reservationState],
-    //   reservationDate: [this.reservationDetails!.reservationDate],
-    //   comment: [this.reservationDetails!.comment],
-    //   vehicleId: [this.reservationDetails!.vehicleId],
-    // });
+    this.updateReservationForm = this._formBuilder.group({
+      reservationId: [this.reservationDetails!.reservationId],
+      reservationState: [this.reservationDetails!.reservationState],
+      reservationDate: [this.reservationDetails!.reservationDate],
+      comment: [this.reservationDetails!.comment],
+      vehicleId: [this.reservationDetails!.vehicleId],
+
+      // todo - change
+    });
   }
 
   public goBack(): void {
