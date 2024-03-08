@@ -19,6 +19,7 @@ import {UpdateReservationRequestModel} from "../../reservations/models/update-re
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UpdateReservationFormModel} from "../models/update-reservation-form.model";
 import {UserService} from "../../users/services/user.service";
+import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
 
 @Component({
   selector: 'app-pending-reservation-details',
@@ -36,6 +37,7 @@ export class PendingReservationDetailsComponent implements OnInit {
   public reservationDetails?: VehicleReservationResponseModel;
   public reservationHistory?: VehicleReservationHistoryModel;
   public vehicleDetails?: VehicleResponseModel;
+  public _userInfo = this._authenticationService.getUserInfo();
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
   public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
   public reservationStatesMap: Map<string, string> = new Map([
@@ -90,6 +92,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     router: Router,
     private userService: UserService,
     private _formBuilder: FormBuilder,
+    private _authenticationService: AuthenticationService,
   ) {this._reservationsService = reservationsService;
     this._activatedRoute = activatedRoute;
     this._vehicleService = vehicleService;
@@ -151,6 +154,7 @@ export class PendingReservationDetailsComponent implements OnInit {
       reservationDate: this.updateReservationForm.value.reservationDate!,
       reservationId: this.reservationDetails?.reservationId!,
       reservationNote: this.updateReservationForm.value.comment!,
+      changerId: this._userInfo?.customerId!,
     };
 
 

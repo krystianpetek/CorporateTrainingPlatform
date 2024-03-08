@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {UpdateReservationFormModel} from "../../pending-reservations/models/update-reservation-form.model";
 import {AuthenticationService} from "../../shared/services/authentication/authentication.service";
 import {UserService} from "../../users/services/user.service";
+import {SnackBarMessageService} from "../../shared/services/snack-bar-message/snack-bar-message.service";
 
 @Component({
   selector: 'app-reservation-details',
@@ -28,6 +29,7 @@ export class ReservationDetailsComponent implements OnInit {
   public vehicleDetails?: VehicleResponseModel;
   public editMode: boolean = false;
   public updateReservationForm!: FormGroup<UpdateReservationFormModel>;
+  public _userInfo = this._authenticationService.getUserInfo();
   public reservationStates: Array<string> = [	"Pending", "Canceled", "Completed", "WaitingForCustomer", "Rejected", "Accepted", "WorkInProgress"];
   public reservationStatesMap: Map<string, string> = new Map([
     ["Pending", "Oczekująca na przyjęcie"],
@@ -49,7 +51,7 @@ export class ReservationDetailsComponent implements OnInit {
       columnDef: 'updateDate',
       header: 'Data aktualizacji',
       // header: 'Date',
-      cell: (element: ReservationHistoryDto) => `${element.updateDate ? new Date(element.updateDate).toLocaleDateString() : ''}`,
+      cell: (element: ReservationHistoryDto) => `${element.updateDate ? new Date(element.updateDate).toLocaleString() : ''}`,
     },
     {
       columnDef: 'reservationState',
@@ -146,6 +148,7 @@ export class ReservationDetailsComponent implements OnInit {
       reservationDate: this.updateReservationForm.value.reservationDate!,
       reservationId: this.reservationDetails?.reservationId!,
       reservationNote: this.updateReservationForm.value.comment!,
+      changerId: this._userInfo?.customerId!,
     };
 
 
@@ -158,12 +161,12 @@ export class ReservationDetailsComponent implements OnInit {
   public editReservation(): void {
     this.editMode = !this.editMode;
 
-    // this.updateReservationForm = this._formBuilder.group({
-    //   reservationId: [this.reservationDetails!.reservationId],
-    //   reservationState: [this.reservationDetails!.reservationState],
-    //   reservationDate: [this.reservationDetails!.reservationDate],
-    //   comment: [this.reservationDetails!.comment],
-    //   vehicleId: [this.reservationDetails!.vehicleId],
-    // });
+    this.updateReservationForm = this._formBuilder.group({
+      reservationId: [this.reservationDetails!.reservationId],
+      reservationState: [this.reservationDetails!.reservationState],
+      reservationDate: [this.reservationDetails!.reservationDate],
+      comment: [this.reservationDetails!.comment],
+      vehicleId: [this.reservationDetails!.vehicleId]
+    });
   }
 }
