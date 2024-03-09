@@ -11,9 +11,11 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatTooltip} from "@angular/material/tooltip";
+import {MatOption} from "@angular/material/autocomplete";
+import {MatSelect} from "@angular/material/select";
 
 @NgModule({
   declarations: [UserListComponent, UserAddComponent],
-    imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatTooltip],
+  imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatTooltip, MatOption, MatSelect],
 })
 export class UsersModule {}

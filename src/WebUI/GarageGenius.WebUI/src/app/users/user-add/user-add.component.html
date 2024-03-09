@@ -1,5 +1,6 @@
 <!-- TODO - more communicates when validation, maybe after first submitted? -->
-<h1 mat-dialog-title class="mat-dialog-title">Adding a new user</h1>
+<!--<h1 mat-dialog-title class="mat-dialog-title">Adding a new user</h1>-->
+<h1 mat-dialog-title class="mat-dialog-title">Dodawanie nowego użytkownika</h1>
 <div mat-dialog-content class="mat-dialog-content">
   <form [formGroup]="this.userAddForm" (ngSubmit)="this.userAddSubmitForm()">
 
@@ -16,8 +17,19 @@
 
     <div>
       <mat-form-field appearance="outline">
-        <mat-label>Role</mat-label>
-        <input type="text" id="role" matInput placeholder="Role" formControlName="role">
+<!--        <mat-label>Role</mat-label>-->
+        <mat-label>Rola</mat-label>
+
+        <mat-select class="reservation-property-value" formControlName="role" placeholder="Rola">
+          @for (state of this.userRoles; track state)
+          {
+            <mat-option [value]="state">
+              {{ state }}
+            </mat-option>
+          }
+
+        </mat-select>
+
       </mat-form-field>
       <div class="error-validation-message" *ngIf="this.role.touched && this.role.invalid">
         invalid role
@@ -29,8 +41,8 @@
     </p>
     <mat-dialog-actions [align]="'end'">
       <button type="button" (click)="userAddResetForm()" mat-button>Reset</button>
-      <button type="button" mat-dialog-close mat-raised-button color="warn">Close</button>
-      <button type="submit" mat-raised-button color="custom">Sign up</button>
+      <button type="button" mat-dialog-close mat-raised-button color="warn">Zamknij</button>
+      <button type="submit" mat-raised-button color="custom">Dodaj</button>
     </mat-dialog-actions>
   </form>
 </div>

@@ -25,6 +25,14 @@ export class UserAddComponent implements OnInit {
   public userAddForm!: FormGroup<UserAddFormModel>;
   public error: string;
 
+  readonly userRoles: Array<string> = ['Klient', 'Pracownik'];
+
+  readonly userRolesMap: Map<string, string> = new Map([
+    ['Administrator', 'administrator'],
+    ['Klient','customer'],
+    ['Pracownik', 'employee'],
+    ['Kierownik','manager'],
+  ]);
 
   constructor(
     formBuilder: FormBuilder,
@@ -50,7 +58,7 @@ export class UserAddComponent implements OnInit {
         },
       ],
       role: [
-        'employee',
+        'Klient',
         {
           validators: [],
           nonNullable: false,

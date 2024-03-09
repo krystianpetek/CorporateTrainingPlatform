@@ -175,8 +175,6 @@ export class PendingReservationDetailsComponent implements OnInit {
       reservationDate: [this.reservationDetails!.reservationDate],
       comment: [''],
       vehicleId: [this.reservationDetails!.vehicleId],
-
-      // todo - change or improve it
     });
   }
 
