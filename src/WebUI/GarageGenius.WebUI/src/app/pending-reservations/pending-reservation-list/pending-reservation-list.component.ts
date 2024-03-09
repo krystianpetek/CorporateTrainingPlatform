@@ -38,6 +38,16 @@ export class PendingReservationListComponent implements OnInit {
     `comment`,
   ];
 
+  private readonly reservationStatesMap: Map<string, string> = new Map([
+    ['Pending', 'Oczekująca'],
+    ['Canceled', 'Anulowana'],
+    ['Completed', 'Zakończona'],
+    ['WaitingForCustomer', 'Oczekująca na klienta'],
+    ['Rejected', 'Odrzucona'],
+    ['Accepted', 'Zaakceptowana'],
+    ['WorkInProgress', 'W trakcie realizacji'],
+  ]);
+
   public constructor(
     router: Router,
     authenticationService: AuthenticationService,
@@ -54,6 +64,13 @@ export class PendingReservationListComponent implements OnInit {
       .getNotCompletedReservations(this.showMode === 'toDecision')
       .subscribe((reservations) => {
         this.dataSource.data = reservations.currentNotCompletedReservationsDtos.items;
+
+        this.dataSource.data = this.dataSource.data.map((reservation) => {
+          reservation.reservationState = this.reservationStatesMap.get(
+            reservation.reservationState
+          )!;
+          return reservation;
+        });
       });
   }
 

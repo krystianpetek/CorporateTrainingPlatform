@@ -14,6 +14,7 @@ export class UserListComponent implements OnInit {
 
   public dataSource = new MatTableDataSource();
   public displayedColumns: string[] = [
+    'details',
     `id`,
     'email',
     `customerId`,
@@ -21,6 +22,18 @@ export class UserListComponent implements OnInit {
     `state`,
     `created`,
   ];
+
+  readonly userStatesMap: Map<string, string> = new Map([
+    ['Active', 'Aktywny'],
+    ['Inactive', 'Nieaktywny'],
+  ]);
+
+  readonly userRolesMap: Map<string, string> = new Map([
+    ['administrator', 'Administrator'],
+    ['customer', 'Klient'],
+    ['employee', 'Pracownik'],
+    ['manager', 'Kierownik'],
+  ]);
 
   constructor(
     private _userService: UserService,

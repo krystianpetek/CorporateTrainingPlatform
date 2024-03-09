@@ -55,7 +55,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     {
       columnDef: 'reservationHistoryId',
       header: 'Identyfikator',
-      cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId}`,
+      cell: (element: ReservationHistoryDto) => `${element.reservationHistoryId.slice(0,8)}`,
     },
     {
       columnDef: 'updateDate',
@@ -125,10 +125,6 @@ export class PendingReservationDetailsComponent implements OnInit {
               reservationHistory.userId = user.email ?? "GarageGenius";
             });
 
-            reservationHistory.reservationHistoryId = reservationHistory.reservationHistoryId;
-            reservationHistory.updateDate = reservationHistory.updateDate;
-            reservationHistory.reservationState = reservationHistory.reservationState;
-            reservationHistory.comment = reservationHistory.comment;
             return reservationHistory;
           }
         );
@@ -147,7 +143,7 @@ export class PendingReservationDetailsComponent implements OnInit {
     this._vehicleService.getVehicleById(vehicleId)
       .subscribe((vehicle) => {
         this.vehicleDetails = vehicle;
-    });
+      });
   }
 
   public updateReservation(): void {
@@ -162,13 +158,12 @@ export class PendingReservationDetailsComponent implements OnInit {
 
     this._reservationsService.updateReservation(updatedReservation)
       .subscribe((reservation) => {
-        window.location.reload();
         this._snackbarService.success('Zaktualizowano rezerwację', 3);
         // angular refresh component
         this._router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {
           this._router.navigate(['dashboard/reservations/' + this.reservationDetails?.reservationId]);
         });
-    });
+      });
   }
 
   public editReservation(): void {
@@ -178,10 +173,10 @@ export class PendingReservationDetailsComponent implements OnInit {
       reservationId: [this.reservationDetails!.reservationId],
       reservationState: [this.reservationDetails!.reservationState],
       reservationDate: [this.reservationDetails!.reservationDate],
-      comment: [this.reservationDetails!.comment],
+      comment: [''],
       vehicleId: [this.reservationDetails!.vehicleId],
 
-      // todo - change
+      // todo - change or improve it
     });
   }
 

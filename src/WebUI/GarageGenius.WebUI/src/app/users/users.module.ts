@@ -10,9 +10,10 @@ import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [UserListComponent, UserAddComponent],
-    imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+    imports: [CommonModule, UsersRoutingModule, MatButtonModule, MatIconModule, MatTableModule, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatTooltip],
 })
 export class UsersModule {}

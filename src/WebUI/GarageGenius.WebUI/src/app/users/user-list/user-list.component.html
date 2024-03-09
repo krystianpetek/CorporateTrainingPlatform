@@ -1,18 +1,16 @@
 <div>
   <div class="title-bar">
-    <h2>User list</h2>
+<!--    <h2>User list</h2>-->
+    <h2>Użytkownicy</h2>
     <button mat-mini-fab (click)="this.openDialog()"><mat-icon fontIcon="add"></mat-icon></button>
   </div>
 </div>
 
 <div class="responsive-table">
   <table class="foreground-color" mat-table [dataSource]="this.dataSource" aria-label="customer-reservation-list">
-    <ng-container matColumnDef="reservationId">
-      <th hidden class="text-primary-color" mat-header-cell *matHeaderCellDef> Reservation ID </th>
-      <td hidden class="text-primary-color" mat-cell *matCellDef="let element">{{element.reservationId}}</td>
-    </ng-container>
     <ng-container matColumnDef="details">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Details </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Szczegóły </th>
       <td class="text-secondary-color" mat-cell *matCellDef="let element">
         <button mat-icon-button>
 <!--(click)="this.redirectToDetails(element.reservationId)"-->
@@ -21,29 +19,34 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="id">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> UserId </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.id}}</td>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> UserId </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Identyfikator </th>
+      <td [matTooltip]="element.id" class="text-primary-color" mat-cell *matCellDef="let element">{{element.id.slice(0,8)}}</td>
     </ng-container>
     <ng-container hidden matColumnDef="email">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Email </th>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Adres email </th>
       <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.email}}</td>
     </ng-container>
     <ng-container matColumnDef="customerId">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> CustomerId </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.customerId}}</td>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> ID klienta </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> CustomerId </th>-->
+      <td [matTooltip]="element.customerId" class="text-primary-color" mat-cell *matCellDef="let element">{{element.customerId.slice(0,8)}}</td>
     </ng-container>
     <ng-container matColumnDef="role">
-      <th class="text-primary-color" class="text-primary-color" mat-header-cell *matHeaderCellDef> Role </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.role }}
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Role </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Rola </th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{ this.userRolesMap.get(element.role) }}
       </td>
     </ng-container>
     <ng-container matColumnDef="state">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> State </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.state}}</td>
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Status </th>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> State </th>-->
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{ this.userStatesMap.get(element.state)}}</td>
     </ng-container>
     <ng-container matColumnDef="created">
-      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Creation date </th>
-      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.created}}</td>
+<!--      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Creation date </th>-->
+      <th class="text-primary-color" mat-header-cell *matHeaderCellDef> Data utworzenia</th>
+      <td class="text-primary-color" mat-cell *matCellDef="let element">{{element.created | date }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>

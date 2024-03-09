@@ -115,10 +115,6 @@ export class ReservationDetailsComponent implements OnInit {
               reservationHistory.userId = user.email ?? "GarageGenius";
             });
 
-            reservationHistory.reservationHistoryId = reservationHistory.reservationHistoryId;
-            reservationHistory.updateDate = reservationHistory.updateDate;
-            reservationHistory.reservationState = reservationHistory.reservationState;
-            reservationHistory.comment = reservationHistory.comment;
             return reservationHistory;
           }
         );
