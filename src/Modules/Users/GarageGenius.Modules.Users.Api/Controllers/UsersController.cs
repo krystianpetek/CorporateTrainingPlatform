@@ -8,6 +8,7 @@ using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken;
 using GarageGenius.Shared.Abstractions.Authentication.JsonWebToken.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -19,6 +20,7 @@ public class UsersController(
 	[HttpPost("sign-up")]
 	[AllowAnonymous]
 	[SwaggerOperation("Sign up user")]
+	[SwaggerResponse(StatusCodes.Status202Accepted, "User signed up")]
 	public async Task<ActionResult> SignUpAsync(SignUpCommand signUpCommand)
 	{
 		await dispatcher.DispatchCommandAsync<SignUpCommand>(signUpCommand);
@@ -28,6 +30,7 @@ public class UsersController(
 	[HttpPost("sign-in")]
 	[AllowAnonymous]
 	[SwaggerOperation("Sign in user")]
+	[SwaggerResponse(StatusCodes.Status200OK, "User signed in", typeof(JsonWebTokenResponse))]
 	public async Task<ActionResult<JsonWebTokenResponse>> SignInAsync(SignInCommand signInCommand)
 	{
 		await dispatcher.DispatchCommandAsync<SignInCommand>(signInCommand);
@@ -39,6 +42,7 @@ public class UsersController(
 	[Authorize]
 	[HttpGet("me")]
 	[SwaggerOperation("Get current logged user")]
+	[SwaggerResponse(StatusCodes.Status200OK, "User found", typeof(GetUserQueryDto))]
 	public async Task<ActionResult<GetUserQueryDto>> GetCurrentUserAsync()
 	{
 		Guid.TryParse(HttpContext?.User?.Identity?.Name, out Guid userId);
@@ -49,6 +53,7 @@ public class UsersController(
 	[Authorize]
 	[HttpGet("{id:guid}")]
 	[SwaggerOperation("Get user by ID")]
+	[SwaggerResponse(StatusCodes.Status200OK, "User found", typeof(GetUserQueryDto))]
 	public async Task<ActionResult<GetUserQueryDto>> GetUserAsync(Guid id)
 	{
 		var user = await dispatcher.DispatchQueryAsync<GetUserQueryDto>(new GetUserQuery(id));
@@ -58,6 +63,7 @@ public class UsersController(
 	[Authorize]
 	[HttpPost("sign-out")]
 	[SwaggerOperation("Sign out user")]
+	[SwaggerResponse(StatusCodes.Status200OK, "User signed out")]
 	public new IActionResult SignOut()
 	{
 		jsonWebTokenStorage.RemoveToken();
@@ -67,6 +73,7 @@ public class UsersController(
 	[Authorize]
 	[HttpPost("deactivate")]
 	[SwaggerOperation("Deactivate user")]
+	[SwaggerResponse(StatusCodes.Status204NoContent, "User deactivated")]
 	public async Task<ActionResult> DeactivateUserAsync(DeactivateUserCommand deactivateUserCommand)
 	{
 		await dispatcher.DispatchCommandAsync<DeactivateUserCommand>(deactivateUserCommand);
@@ -76,6 +83,7 @@ public class UsersController(
 	[Authorize]
 	[HttpGet("users")]
 	[SwaggerOperation("Get all users")]
+	[SwaggerResponse(StatusCodes.Status200OK, "Users found", typeof(GetUsersQueryDto))]
 	public async Task<ActionResult<GetUsersQueryDto>> GetUsersAsync()
 	{
 		var users = await dispatcher.DispatchQueryAsync<GetUsersQueryDto>(new GetUsersQuery());
@@ -85,14 +93,13 @@ public class UsersController(
 	[Authorize]
 	[HttpPost("users")]
 	[SwaggerOperation("Create new user")]
+	[SwaggerResponse(StatusCodes.Status200OK, "User created")]
 	public async Task<ActionResult> CreateUserAsync(CreateUserCommand createUserCommand)
 	{
 		await dispatcher.DispatchCommandAsync<CreateUserCommand>(createUserCommand);
 		return Ok();
 	}
 
-	//[ProducesResponseType(StatusCodes.Status200OK)] // TODO response types
-	//[SwaggerResponse(StatusCodes.Status200OK, "ok" , typeof(GetUserDto))] // TODO or import from xml?
 	// TODO change user password 
 	// TODO activate user ?
 }
