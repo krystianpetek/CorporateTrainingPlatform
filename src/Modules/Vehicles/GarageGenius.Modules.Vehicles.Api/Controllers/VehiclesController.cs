@@ -6,6 +6,7 @@ using GarageGenius.Modules.Vehicles.Application.Queries.SearchVehicles;
 using GarageGenius.Modules.Vehicles.Core.Models;
 using GarageGenius.Shared.Abstractions.Dispatcher;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -22,6 +23,7 @@ public class VehiclesController : BaseController
 	[HttpGet("{vehicleId:guid}")]
 	[Authorize]
 	[SwaggerOperation("Get vehicle")]
+	[SwaggerResponse(StatusCodes.Status200OK, "Vehicle details", typeof(GetVehicleQueryDto))]
 	public async Task<ActionResult> GetVehicleAsync(Guid vehicleId)
 	{
 		GetVehicleQuery getVehicleQuery = new GetVehicleQuery(vehicleId);
@@ -32,6 +34,7 @@ public class VehiclesController : BaseController
 	[HttpGet("{customerId:guid}/vehicles")]
 	[Authorize]
 	[SwaggerOperation("Get customer vehicles")]
+	[SwaggerResponse(StatusCodes.Status200OK, "Customer vehicles", typeof(IReadOnlyList<GetCustomerVehiclesQueryDto>))]
 	public async Task<ActionResult> GetCustomerVehiclesAsync(Guid customerId)
 	{
 		GetCustomerVehiclesQuery getCustomerVehiclesQuery = new GetCustomerVehiclesQuery(customerId);
@@ -42,6 +45,7 @@ public class VehiclesController : BaseController
 	[HttpGet("search")]
 	[Authorize]
 	[SwaggerOperation("Search vehicles by VIN number and license plate")]
+	[SwaggerResponse(StatusCodes.Status200OK, "Vehicles", typeof(IReadOnlyList<SearchVehiclesQueryDto>))]
 	public async Task<ActionResult> SearchVehiclesAsync([FromQuery] SearchVehiclesParameters searchVehiclesParameters)
 	{
 		SearchVehiclesQuery searchVehiclesQuery = new SearchVehiclesQuery(searchVehiclesParameters);
@@ -53,6 +57,7 @@ public class VehiclesController : BaseController
 	[HttpPost("customers/{customerId:guid}/vehicle")]
 	[Authorize]
 	[SwaggerOperation("Add customer vehicle")]
+	[SwaggerResponse(StatusCodes.Status202Accepted, "Vehicle added")]
 	public async Task<ActionResult> AddVehicleAsync(Guid customerId, AddVehicleCommand addVehicleCommand)
 	{
 		addVehicleCommand.CustomerId = customerId;
@@ -63,12 +68,11 @@ public class VehiclesController : BaseController
 	[HttpPatch("{vehicleId:guid}/customer")]
 	[Authorize]
 	[SwaggerOperation("Update vehicle owner")]
+	[SwaggerResponse(StatusCodes.Status200OK, "Vehicle owner updated")]
 	public async Task<ActionResult> UpdateVehicleOwner(Guid vehicleId, UpdateVehicleOwnerCommand updateVehicleOwnerCommand)
 	{
 		updateVehicleOwnerCommand.VehicleId = vehicleId;
 		await _dispatcher.DispatchCommandAsync<UpdateVehicleOwnerCommand>(updateVehicleOwnerCommand);
 		return Ok();
 	}
-
-	// TODO Controllers response types, produces types
 }
