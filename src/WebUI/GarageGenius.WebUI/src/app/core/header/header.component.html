@@ -33,5 +33,11 @@
         </ng-template>
       </li>
     </ul>
+    <ng-container *ngIf="this.isUserLoggedIn()">
+      <button class="notification-button" (click)="this.getNotifications()">
+        <mat-icon>notifications</mat-icon>
+      </button>
+    </ng-container>
+
   </div>
 </mat-toolbar>

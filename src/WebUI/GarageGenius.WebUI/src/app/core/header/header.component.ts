@@ -5,6 +5,8 @@ import {
   IAuthenticationService,
 } from 'src/app/shared/services/authentication/authentication.service';
 import {Role} from "../../shared/services/authentication/models/role.model";
+import { NotificationsService } from 'src/app/shared/notifications/notifications.service';
+import {Notification} from "../../shared/notifications/notifications/models/notification.model";
 
 @Component({
   selector: 'app-header',
@@ -14,12 +16,14 @@ import {Role} from "../../shared/services/authentication/models/role.model";
 export class HeaderComponent {
   private readonly _authenticationService: IAuthenticationService;
   private readonly _router: Router;
+  public notifications: Notification[] = [];
 
   @Output() public sideNavigationToggle = new EventEmitter();
 
   constructor(
     authenticationService: AuthenticationServiceBase,
-    router: Router
+    router: Router,
+    private notificationsService: NotificationsService
   ) {
     this._authenticationService = authenticationService;
     this._router = router;
@@ -48,5 +52,14 @@ export class HeaderComponent {
   public signOut(): void {
     this._authenticationService.signOutUser();
     this._router.navigate(['/home']);
+  }
+
+  public getNotifications(): void {
+    this.notificationsService.getNotifications().subscribe({
+      next: (notifications) => {
+        this.notifications = notifications;
+      }
+    });
+    console.log(this.notifications);
   }
 }

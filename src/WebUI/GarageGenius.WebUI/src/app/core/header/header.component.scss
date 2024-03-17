@@ -67,3 +67,14 @@ mat-toolbar {
 .navigation-items .current a:after {
   max-width: 100%;
 }
+
+.notification-button{
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: $theme-text;
+}
+
+.notification-button:hover{
+  color: $theme-selected-hover-foreground;
+}
