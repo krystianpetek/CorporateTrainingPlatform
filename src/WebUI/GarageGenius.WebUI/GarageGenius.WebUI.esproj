@@ -16,4 +16,7 @@
   <ItemGroup>
     <None Remove="src\app\shared\components\navigation\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\shared\notifications\" />
+  </ItemGroup>
 </Project>

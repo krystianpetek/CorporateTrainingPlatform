@@ -3,6 +3,10 @@ export const environment = {
   // SignalR
   notificationHubUrl: '/notifications',
 
+  // notifications
+  notificationsApiUrl: `notifications-module/`,
+  getNotificationsUrl: `notifications-module/notifications`,
+
   // users
   usersApiUrl: `users-module/`,
   getUserByIdUrl: `users-module/users/`,

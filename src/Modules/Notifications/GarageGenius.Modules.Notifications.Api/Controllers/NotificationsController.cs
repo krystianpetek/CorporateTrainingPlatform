@@ -19,7 +19,7 @@ public class NotificationsController : BaseController
 	}
 
 	[Authorize]
-	[HttpGet("notifications")]
+	[HttpGet]
 	[SwaggerOperation("Get logged user notifications")]
 	[SwaggerResponse(StatusCodes.Status200OK, "User notifications found", typeof(GetUserNotificationsQuery))]
 	public async Task<ActionResult> GetNotificationsForUserAsync(CancellationToken cancellationToken)
