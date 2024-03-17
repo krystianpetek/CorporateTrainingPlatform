@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GarageGenius.Modules.Notifications.Core\GarageGenius.Modules.Notifications.Core.csproj" />
+    <ProjectReference Include="..\GarageGenius.Modules.Notifications.Infrastructure\GarageGenius.Modules.Notifications.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,6 @@
-﻿using GarageGenius.Modules.Notifications.Core;
+﻿using GarageGenius.Modules.Notifications.Application;
+using GarageGenius.Modules.Notifications.Core;
+using GarageGenius.Modules.Notifications.Infrastructure;
 using GarageGenius.Shared.Abstractions.Modules;
 using GarageGenius.Shared.Infrastructure.HealthCheck;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +14,9 @@ internal class NotificationsModule : IModule
 
 	public void Register(WebApplicationBuilder webApplicationBuilder)
 	{
-		webApplicationBuilder.Services.AddNotificationsCore();
+		webApplicationBuilder.Services
+			.AddNotificationsApplication()
+			.AddNotificationsInfrastructure(webApplicationBuilder.Environment);
 	}
 
 	public void Use(WebApplication app)
