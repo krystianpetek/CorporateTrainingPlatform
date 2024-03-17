@@ -1,4 +1,5 @@
 ﻿namespace GarageGenius.Shared.Abstractions.Common;
+
 public abstract class AuditableEntity
 {
 	public DateTime Created { get; set; }
