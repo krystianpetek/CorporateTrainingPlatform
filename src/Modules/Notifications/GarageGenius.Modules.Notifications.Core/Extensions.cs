@@ -10,6 +10,7 @@ internal static class Extensions
 	public static IServiceCollection AddNotificationsCore(this IServiceCollection services)
 	{
 		services.AddScoped<IEmailSenderService, EmailSenderService>();
+		services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
 		return services;
 	}
 

@@ -31,6 +31,7 @@
     <PackageReference Update="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0" />
     <PackageReference Update="Roslynator.Formatting.Analyzers" Version="4.5.0" />
     <PackageReference Update="SonarAnalyzer.CSharp" Version="9.8.0.76515" />
+    <PackageReference Include="QuestPDF" Version="2023.12.6" />
   </ItemGroup>
   
 </Project>
