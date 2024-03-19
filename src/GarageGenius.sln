@@ -92,6 +92,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Notifi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Notifications.Application", "Modules\Notifications\GarageGenius.Modules.Notifications.Application\GarageGenius.Modules.Notifications.Application.csproj", "{8DA288AE-00D2-4A11-B31E-E1B32FE0BB17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageGenius.Modules.Reservations.Shared", "Modules\Reservations\GarageGenius.Modules.Reservations.Shared\GarageGenius.Modules.Reservations.Shared.csproj", "{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +226,10 @@ Global
 		{8DA288AE-00D2-4A11-B31E-E1B32FE0BB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DA288AE-00D2-4A11-B31E-E1B32FE0BB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DA288AE-00D2-4A11-B31E-E1B32FE0BB17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,6 +273,7 @@ Global
 		{50459F0F-A73B-4726-85BB-38DD545DC0AB} = {0F3A7E4B-4DAF-4201-9721-8651EA358315}
 		{4975E802-1703-476D-9111-D9AA2AD3B055} = {F850B2AA-A60A-4C00-B917-997C62810C08}
 		{8DA288AE-00D2-4A11-B31E-E1B32FE0BB17} = {F850B2AA-A60A-4C00-B917-997C62810C08}
+		{AFFA2345-9D43-4EEC-B86C-DD5D66287A3B} = {33DA4406-21AB-4E8B-B34F-052D3C48BC4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {189A71AE-347A-4505-BF66-B684A21B9A4B}

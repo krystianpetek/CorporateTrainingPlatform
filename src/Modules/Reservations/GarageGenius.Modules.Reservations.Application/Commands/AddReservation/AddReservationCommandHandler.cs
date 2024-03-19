@@ -1,6 +1,7 @@
-﻿using GarageGenius.Modules.Reservations.Application.Events.ReservationAdded;
+﻿// using GarageGenius.Modules.Reservations.Application.Events.ReservationAdded;
 using GarageGenius.Modules.Reservations.Core.Reservations.Entities;
 using GarageGenius.Modules.Reservations.Core.Reservations.Services;
+using GarageGenius.Modules.Reservations.Shared.Events;
 using GarageGenius.Shared.Abstractions.Commands;
 using GarageGenius.Shared.Abstractions.MessageBroker;
 using GarageGenius.Shared.Abstractions.Services;
@@ -36,7 +37,8 @@ internal class AddReservationCommandHandler : ICommandHandler<AddReservationComm
 			nameof(Reservations),
 			reservation.ReservationId);
 
-		await _messageBroker.PublishAsync(new ReservationAddedEvent(reservation.ReservationId, command.Comment), cancellationToken);
+		// await _messageBroker.PublishAsync(new ReservationAddedEvent(reservation.ReservationId, command.Comment), cancellationToken);
+		await _messageBroker.PublishAsync(new ReservationAddedEvent(reservation.CustomerId, reservation.ReservationId, reservation.VehicleId), cancellationToken);
 
 		_logger.Information(
 			messageTemplate: "Event {EventName} published by {ModuleName} module, reservation with ID: {ReservationId} added",
