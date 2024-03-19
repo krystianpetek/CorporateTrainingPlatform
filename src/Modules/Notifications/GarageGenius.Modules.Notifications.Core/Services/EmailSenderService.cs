@@ -12,10 +12,10 @@ internal class EmailSenderService : IEmailSenderService
 		_logger = logger;
 	}
 
-	public Task SendEmailAsync(string receiver, string subject, string message)
+	public Task SendEmailAsync(string receiver, string subject, string message, byte[]? content = default)
 	{
         const string fromMail = "sa.garagegenius@gmail.com";
-        const string fromAppPassword = "";
+        const string fromAppPassword = "kltcrhxqrkukmmmh";
 
         var mail = new MailMessage();
         mail.From = new MailAddress(fromMail);
@@ -23,6 +23,11 @@ internal class EmailSenderService : IEmailSenderService
         mail.Body = $"<html><body>{message}<body><html>";
         mail.IsBodyHtml = true;
         mail.To.Add(new MailAddress(receiver));
+
+        if (content is not null)
+        {
+	        mail.Attachments.Add(new Attachment(new MemoryStream(content), "reservation.pdf"));
+        }
 
         var smtpClient = new SmtpClient("smtp.gmail.com")
         {
