@@ -63,6 +63,22 @@
       </div>
     </div>
 
+    <fieldset class="form-files">
+
+      <legend class="form-files-legend">Pliki</legend>
+
+      @for(file of this.files; track file)
+      {
+        <div class="file-name">
+          <span>{{this.file?.name}}</span>
+          <button mat-icon-button (click)="onFileRemove(this.file.name)"><mat-icon>delete</mat-icon></button>
+        </div>
+
+      }
+      <button *ngIf="files.length < 3" type="button" mat-raised-button (click)="fileInput.click()">Dodaj plik</button>
+      <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+    </fieldset>
+
     <div>
       <mat-form-field appearance="outline">
 <!--        <mat-label>reservationDate</mat-label>-->

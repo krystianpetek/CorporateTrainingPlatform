@@ -37,6 +37,7 @@ export class ReservationAddComponent implements OnInit {
     ['Accepted', 'Zaakceptowana'],
     ['WorkInProgress', 'W trakcie realizacji'],
   ]);
+  public files: {name : string, file: File}[] = [] = [];
 
   constructor(
     private snackbar: SnackBarMessageService,
@@ -94,6 +95,29 @@ export class ReservationAddComponent implements OnInit {
         }
       ],
     })
+  }
+
+  // onFileSelected() {
+  //   const inputNode: any = document.querySelector('#file');
+  //
+  //   if (typeof (FileReader) !== 'undefined') {
+  //     const reader = new FileReader();
+  //
+  //     reader.onload = (e: any) => {
+  //       this.srcResult.push(e.target.result);
+  //     };
+  //
+  //     reader.readAsArrayBuffer(inputNode.files[0]);
+  //   }
+  // }
+
+  onFileSelected(event: any): void {
+    let file = event.target.files[0] ?? null;
+    this.files.push({name: file.name, file: file});
+  }
+
+  onFileRemove(name: string): void {
+    this.files = this.files.filter((file) => file.name !== name);
   }
 
   public reservationAddSubmitForm(): void {
